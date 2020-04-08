@@ -1,0 +1,13 @@
+//elementos de login Principal
+	/*Botones de barra de menu*/
+jButton2
+jButton3
+jButton1
+jButton5
+jButton6
+jButton4
+jButton8
+
+		/* Campos de login*/
+txtUserLogin
+txtContraseña
