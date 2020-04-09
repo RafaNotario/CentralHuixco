@@ -8,7 +8,12 @@ package Interfaz;
 import javax.swing.JOptionPane;
 import Controller.controlInserts;
 import Controller.funciones;
+
 import Interfaz.internos.jpanels.internoCaja;
+import Interfaz.internos.jpanels.areas;
+import Interfaz.internos.jpanels.cargadores;
+import Interfaz.internos.jpanels.ambulantes;
+
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
@@ -19,6 +24,9 @@ import java.awt.event.KeyEvent;
 public class login extends javax.swing.JFrame {
 
     internoCaja iCaj = null;
+    areas Ar = null;
+    cargadores cargA = null;
+    ambulantes ambA = null;
     
 funciones func1 = new funciones();
     public login() {
@@ -108,6 +116,11 @@ funciones func1 = new funciones();
         jButton1.setAlignmentY(0.0F);
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/registradora.png"))); // NOI18N
@@ -116,6 +129,11 @@ funciones func1 = new funciones();
         jButton2.setAlignmentY(0.0F);
         jButton2.setBorder(null);
         jButton2.setBorderPainted(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/almacen.png"))); // NOI18N
@@ -124,6 +142,11 @@ funciones func1 = new funciones();
         jButton3.setAlignmentY(0.0F);
         jButton3.setBorder(null);
         jButton3.setBorderPainted(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reportes.png"))); // NOI18N
@@ -140,6 +163,11 @@ funciones func1 = new funciones();
         jButton5.setAlignmentY(0.0F);
         jButton5.setBorder(null);
         jButton5.setBorderPainted(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nomina.png"))); // NOI18N
         jButton6.setText("Nomina");
@@ -567,7 +595,9 @@ funciones func1 = new funciones();
             jPanLogin.setVisible(false);
             jPanMontApert.setVisible(true);
             jPanMontApert.setEnabled(true);
-            txtMontoaper1.setFocusable(true);
+            txtMontoaper2.requestFocus();
+            txtMontoaper2.selectAll();
+            
             /*   
             jPanel1.setLayout(new GridLayout(1,1));
             jPanel1.add(AP);
@@ -626,16 +656,57 @@ funciones func1 = new funciones();
     }//GEN-LAST:event_txtMontoaper2KeyPressed
 
     private void txtMontoaper1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMontoaper1FocusGained
-        txtMontoaper1.setText("");
+        txtMontoaper1.selectAll();
+        
     }//GEN-LAST:event_txtMontoaper1FocusGained
 
     private void txtMontoaper2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMontoaper2FocusGained
-        txtMontoaper2.setText("");
+        txtMontoaper2.selectAll();
     }//GEN-LAST:event_txtMontoaper2FocusGained
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+            func1.limpiar(jPanTrabajo);
+            Ar = new areas();
+            jPanTrabajo.setLayout(new GridLayout(1,1));
+            jPanTrabajo.add(Ar);
+            jPanTrabajo.validate();
+            jPanTrabajo.setVisible(true);
+            jPanTrabajo.setEnabled(true);     
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+            func1.limpiar(jPanTrabajo);
+            iCaj = new internoCaja();
+            jPanTrabajo.setLayout(new GridLayout(1,1));
+            jPanTrabajo.add(iCaj);
+            jPanTrabajo.validate();
+            jPanTrabajo.setVisible(true);
+            jPanTrabajo.setEnabled(true);     
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            func1.limpiar(jPanTrabajo);
+            cargA = new cargadores();
+            jPanTrabajo.setLayout(new GridLayout(1,1));
+            jPanTrabajo.add(cargA);
+            jPanTrabajo.validate();
+            jPanTrabajo.setVisible(true);
+            jPanTrabajo.setEnabled(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+            func1.limpiar(jPanTrabajo);
+            ambA = new ambulantes();
+            jPanTrabajo.setLayout(new GridLayout(1,1));
+            jPanTrabajo.add(ambA);
+            jPanTrabajo.validate();
+            jPanTrabajo.setVisible(true);
+            jPanTrabajo.setEnabled(true);    
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
