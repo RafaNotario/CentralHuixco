@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 /**
@@ -53,6 +54,12 @@ public class funciones {
     }//validaloginUsers
     
     public void limpiar(JPanel Pn)
+    {
+        Pn.removeAll();
+        Pn.validate();
+        Pn.repaint();
+    }
+    public void limpiarLayer(JLayeredPane Pn)
     {
         Pn.removeAll();
         Pn.validate();
