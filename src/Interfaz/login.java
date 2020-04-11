@@ -19,7 +19,7 @@ import java.awt.event.KeyEvent;
 
 /**
  *
- * @author monit
+ * @author Antonio R. Notario
  */
 public class login extends javax.swing.JFrame {
 

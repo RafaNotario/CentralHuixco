@@ -11,3 +11,22 @@ jButton8
 		/* Campos de login*/
 txtUserLogin
 txtContraseña
+
+
+		/*  elemnetos de vista internocaja*/
+ 	//>jPanDataambView
+jLabNombre
+jLabDirecc
+jLabGiro
+jLabObserva
+
+//PANELES
+jPanambulantes
+jPanCargadores
+	jPanCargadorInscr
+	jPanSemCargad
+	jPanRentCargador
+
+jPanVarios
+jPanTransitoInfraccion
+jPanAreascobros
