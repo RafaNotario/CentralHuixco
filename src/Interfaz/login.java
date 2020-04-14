@@ -8,11 +8,12 @@ package Interfaz;
 import javax.swing.JOptionPane;
 import Controller.controlInserts;
 import Controller.funciones;
-
+import Controller.datesControl;
 import Interfaz.internos.jpanels.internoCaja;
 import Interfaz.internos.jpanels.areas;
 import Interfaz.internos.jpanels.cargadores;
 import Interfaz.internos.jpanels.ambulantes;
+import Controller.datesControl;
 
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
@@ -23,19 +24,22 @@ import java.awt.event.KeyEvent;
  */
 public class login extends javax.swing.JFrame {
 
+    datesControl dCon = new datesControl();
+    
     internoCaja iCaj = null;
     areas Ar = null;
     cargadores cargA = null;
     ambulantes ambA = null;
     
 funciones func1 = new funciones();
+
     public login() {
         initComponents();
         
        inicioButton(false);//deshabilitar botones de menu
         jPanMontApert.setVisible(false);
-        
-        
+         jLabNsem.setText(dCon.numSemanaLocal());
+        jLabLapsoSemana.setText(dCon.getWeekStartDate("")+" - "+dCon.getWeekEndDate(""));
     }
 
     /**
@@ -47,8 +51,8 @@ funciones func1 = new funciones();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabNsem = new javax.swing.JLabel();
+        jLabLapsoSemana = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
@@ -89,13 +93,13 @@ funciones func1 = new funciones();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Central");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel1.setText("Semana 14");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabNsem.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jLabNsem.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabNsem.setAutoscrolls(true);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("5 abr. al 11 abr. 2020");
-        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabLapsoSemana.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabLapsoSemana.setText("5 abr. al 11 abr. 2020");
+        jLabLapsoSemana.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel3.setText("Central de Abastos Huixcolotla Pue.");
@@ -558,8 +562,8 @@ funciones func1 = new funciones();
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabNsem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabLapsoSemana, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
             .addComponent(jLayeredPane1)
         );
@@ -567,12 +571,12 @@ funciones func1 = new funciones();
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabNsem, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabLapsoSemana))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane1))
         );
@@ -766,13 +770,13 @@ funciones func1 = new funciones();
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabLapsoSemana;
+    private javax.swing.JLabel jLabNsem;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
