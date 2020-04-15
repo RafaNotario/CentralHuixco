@@ -17,6 +17,7 @@ import Controller.datesControl;
 
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -40,6 +41,7 @@ funciones func1 = new funciones();
         jPanMontApert.setVisible(false);
          jLabNsem.setText(dCon.numSemanaLocal());
         jLabLapsoSemana.setText(dCon.getWeekStartDate("")+" - "+dCon.getWeekEndDate(""));
+        
     }
 
     /**
@@ -622,7 +624,7 @@ funciones func1 = new funciones();
     int var = evt.getKeyCode();
     if(var == KeyEvent.VK_ENTER){
         jButton7.doClick();
-    }        // TODO add your handling code here:
+    }
     }//GEN-LAST:event_txtContraseñaKeyPressed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -633,7 +635,7 @@ funciones func1 = new funciones();
         {
             JOptionPane.showMessageDialog(null, "Monto vacio ó desigual, Verifique porfavor.");
         }else{
-            JOptionPane.showMessageDialog(null, "si cumple");
+           // JOptionPane.showMessageDialog(null, "si cumple");
          
            func1.limpiar(jPanTrabajo);
             inicioButton(true);
