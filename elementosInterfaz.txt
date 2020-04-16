@@ -21,12 +21,19 @@ jLabGiro
 jLabObserva
 
 //PANELES
-jPanambulantes
-jPanCargadores
+@jPanambulantes
+	txtBuscAmbulante
+	jTabDatosAmbulante
+
+
+@jPanCargadores
 	jPanCargadorInscr
 	jPanSemCargad
 	jPanRentCargador
 
-jPanVarios
-jPanTransitoInfraccion
-jPanAreascobros
+@jPanVarios
+
+@jPanTransitoInfraccion
+
+@jPanAreascobros
+	jCmBxgetAreas

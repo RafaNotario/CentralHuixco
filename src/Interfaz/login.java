@@ -593,31 +593,15 @@ funciones func1 = new funciones();
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         String user = txtUserLogin.getText(),
             pass=txtContraseña.getText();
-          
            if(func1.validaLoginUsers(user,pass)){
-               
-//            func1.limpiar(jPanTrabajo);
-            //inicioButton(true);
             jPanLogin.setVisible(false);
             jPanMontApert.setVisible(true);
             jPanMontApert.setEnabled(true);
             txtMontoaper2.requestFocus();
-            txtMontoaper2.selectAll();
-            
-            /*   
-            jPanel1.setLayout(new GridLayout(1,1));
-            jPanel1.add(AP);
-            jPanel1.validate();
-            jPanel1.setVisible(true);
-            jPanel1.setEnabled(true);     
-       
-               */
-//               JOptionPane.showMessageDialog(null, "Login corrceto");
+            txtMontoaper2.selectAll();            
            }else{
                JOptionPane.showMessageDialog(null, "Login incorrecto");               
            }
-           
-           
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void txtContraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaKeyPressed
