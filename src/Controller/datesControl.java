@@ -181,8 +181,8 @@ public String lapsoSem(String fech,int numSem){
     System.out.printf("Semana del mes (%tB %<tY): %d%n", c.getTime(), c.get(Calendar.WEEK_OF_MONTH));
 */
     c.clear();
-    c.set(Calendar.YEAR, 2020);
-    c.set(Calendar.WEEK_OF_YEAR, 13);
+    c.set(Calendar.YEAR, 2049);
+    c.set(Calendar.WEEK_OF_YEAR, 40);
     mes =c.get(Calendar.MONTH);
     mes+=1;
     if(Integer.toString(mes).length() ==1){
@@ -207,9 +207,9 @@ public String lapsoSem(String fech,int numSem){
           
     //    dC.jLocalFechas("2020/04/13");
         System.out.println("PRUEBAS DE STACKOVERFLOW");
-        System.out.println("Semana ini"+dC.getWeekStartDate("2020/03/23"));
-        System.out.println("Semana fin"+dC.getWeekEndDate("2020/03/23"));
-        System.out.println("Prue"+dC.numSemanaLocal());
+        System.out.println("Semana ini: "+dC.getWeekStartDate("2020/03/23"));
+        System.out.println("Semana fin: "+dC.getWeekEndDate("2020/03/23"));
+        //System.out.println("Lapso"+dC.lapsoSem("",1));
        // dC.lapsoSem("",0);
         
     }//finMain

@@ -5,17 +5,30 @@
  */
 package Interfaz.internos.jpanels;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
+import conexion.ConexionDBOriginal;
+
+
 /**
  *
  * @author monit
  */
 public class areas extends javax.swing.JPanel {
 
-    /**
-     * Creates new form areas
-     */
-    public areas() {
+ConexionDBOriginal con2 = new ConexionDBOriginal();
+
+public areas() {
         initComponents();
+        
+        mostrarTablaCargadores();
     }
 
     /**
@@ -28,15 +41,15 @@ public class areas extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        jPanAreasView = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTabViewInfoareas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabBodegasEn = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -46,49 +59,44 @@ public class areas extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
+        jPanSociosView = new javax.swing.JPanel();
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(51, 255, 102));
-
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTabViewInfoareas.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jTabViewInfoareas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"CAJAS VACIAS", "No registrado", "0", null, null, null, null},
-                {"CASETEROS", "No registrado", "0", null, null, null, null},
-                {"CEBOLLAS", "No registrado", "0", null, null, null, null},
-                {"CHILES SECOS", "No registrado", "0", null, null, null, null},
-                {"CHILES VERDES", "No registrado", "0", null, null, null, null},
-                {"DESAYUNOS", "No registrado", "0", null, null, null, null},
-                {"DETALLE1", "No registrado", "0", null, null, null, null},
-                {"DETALLE2", "No registrado", "0", null, null, null, null}
+
             },
             new String [] {
                 "Área (giro)", "Representante", "Total Bodegas", "Bodegas en Uso", "Sup. Bodegas", "Sup. Estac.", "Sup. Total"
             }
         ));
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jTable1.setColumnSelectionAllowed(false);
-        jTable1.setRowHeight(22);
-        jTable1.setRowMargin(2);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(2).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(120);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(180);
-            jTable1.getColumnModel().getColumn(3).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(120);
-            jTable1.getColumnModel().getColumn(3).setMaxWidth(180);
-            jTable1.getColumnModel().getColumn(4).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(120);
-            jTable1.getColumnModel().getColumn(4).setMaxWidth(180);
-            jTable1.getColumnModel().getColumn(5).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(120);
-            jTable1.getColumnModel().getColumn(5).setMaxWidth(180);
-            jTable1.getColumnModel().getColumn(6).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(6).setPreferredWidth(120);
-            jTable1.getColumnModel().getColumn(6).setMaxWidth(180);
+        jTabViewInfoareas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTabViewInfoareas.setRowHeight(22);
+        jTabViewInfoareas.setRowMargin(2);
+        jTabViewInfoareas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabViewInfoareasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTabViewInfoareas);
+        if (jTabViewInfoareas.getColumnModel().getColumnCount() > 0) {
+            jTabViewInfoareas.getColumnModel().getColumn(2).setMinWidth(80);
+            jTabViewInfoareas.getColumnModel().getColumn(2).setPreferredWidth(120);
+            jTabViewInfoareas.getColumnModel().getColumn(2).setMaxWidth(180);
+            jTabViewInfoareas.getColumnModel().getColumn(3).setMinWidth(80);
+            jTabViewInfoareas.getColumnModel().getColumn(3).setPreferredWidth(120);
+            jTabViewInfoareas.getColumnModel().getColumn(3).setMaxWidth(180);
+            jTabViewInfoareas.getColumnModel().getColumn(4).setMinWidth(80);
+            jTabViewInfoareas.getColumnModel().getColumn(4).setPreferredWidth(120);
+            jTabViewInfoareas.getColumnModel().getColumn(4).setMaxWidth(180);
+            jTabViewInfoareas.getColumnModel().getColumn(5).setMinWidth(80);
+            jTabViewInfoareas.getColumnModel().getColumn(5).setPreferredWidth(120);
+            jTabViewInfoareas.getColumnModel().getColumn(5).setMaxWidth(180);
+            jTabViewInfoareas.getColumnModel().getColumn(6).setMinWidth(80);
+            jTabViewInfoareas.getColumnModel().getColumn(6).setPreferredWidth(120);
+            jTabViewInfoareas.getColumnModel().getColumn(6).setMaxWidth(180);
         }
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/informacion.png"))); // NOI18N
@@ -116,8 +124,8 @@ public class areas extends javax.swing.JPanel {
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excelicon.png"))); // NOI18N
         jButton5.setText("Excel");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel1.setText("Bodegas en CEBOLLAS");
+        jLabBodegasEn.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabBodegasEn.setText("Bodegas en CEBOLLAS");
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/informacion.png"))); // NOI18N
         jButton6.setText("Informacion");
@@ -175,15 +183,15 @@ public class areas extends javax.swing.JPanel {
             jTable2.getColumnModel().getColumn(6).setMaxWidth(120);
         }
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanAreasViewLayout = new javax.swing.GroupLayout(jPanAreasView);
+        jPanAreasView.setLayout(jPanAreasViewLayout);
+        jPanAreasViewLayout.setHorizontalGroup(
+            jPanAreasViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanAreasViewLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanAreasViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanAreasViewLayout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,8 +201,8 @@ public class areas extends javax.swing.JPanel {
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanAreasViewLayout.createSequentialGroup()
+                        .addComponent(jLabBodegasEn, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -212,11 +220,11 @@ public class areas extends javax.swing.JPanel {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1120, Short.MAX_VALUE))
                 .addGap(220, 220, 220))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanAreasViewLayout.setVerticalGroup(
+            jPanAreasViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanAreasViewLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanAreasViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -225,16 +233,16 @@ public class areas extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanAreasViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabBodegasEn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanAreasViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanAreasViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanAreasViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboBox1)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
@@ -242,22 +250,22 @@ public class areas extends javax.swing.JPanel {
                 .addGap(140, 140, 140))
         );
 
-        jTabbedPane1.addTab("Areas", jPanel1);
+        jTabbedPane1.addTab("Areas", jPanAreasView);
 
-        jPanel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanSociosView.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanSociosViewLayout = new javax.swing.GroupLayout(jPanSociosView);
+        jPanSociosView.setLayout(jPanSociosViewLayout);
+        jPanSociosViewLayout.setHorizontalGroup(
+            jPanSociosViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1361, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanSociosViewLayout.setVerticalGroup(
+            jPanSociosViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 863, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Socios", jPanel2);
+        jTabbedPane1.addTab("Socios", jPanSociosView);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -289,7 +297,87 @@ public class areas extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jTabViewInfoareasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabViewInfoareasMouseClicked
+        int sel = jTabViewInfoareas.getSelectedRow();
+        if(sel > -1){
+            String nomA = jTabViewInfoareas.getValueAt(sel, 1).toString();
+            jLabBodegasEn.setText("Bodegas en "+nomA);
+        }
+    }//GEN-LAST:event_jTabViewInfoareasMouseClicked
 
+               //funcion para busqueda automatica ambulantes
+        void mostrarTablaCargadores(){
+        int band = 0;
+        Connection cn = con2.conexion();
+        DefaultTableModel modelo = new DefaultTableModel()
+        { 
+            @Override
+            public boolean isCellEditable (int fila, int columna) {
+                return false;
+            }
+        };
+        String consul="";
+         //   if(atributo.equals("nombre") || atributo.equals("")){
+                consul = "SELECT areas.id,areas.nombre, socios.nombre,areas.idSecre,areas.idTesorero\n" +
+                                "FROM central.areas\n" +
+                                "INNER JOIN central.socios\n" +
+                                "ON areas.idPresi = socios.id;";
+                
+                modelo.addColumn("ID");
+                modelo.addColumn("Área (giro)");
+                modelo.addColumn("Representante");
+                modelo.addColumn("Total Bodegas");
+                modelo.addColumn("Bodegas en Uso");
+                modelo.addColumn("Sup. Bodegas");
+                modelo.addColumn("Sup. Estac.");
+                modelo.addColumn("Sup. Total");
+        // (CONCAT(id,' ',nombre))
+      
+        jTabViewInfoareas.setModel(modelo);
+        TableColumnModel columnModel = jTabViewInfoareas.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(35);
+        columnModel.getColumn(0).setMaxWidth(200);
+        columnModel.getColumn(0).setMinWidth(20);
+        
+        columnModel.getColumn(1).setPreferredWidth(180);
+        columnModel.getColumn(1).setMaxWidth(250);
+        columnModel.getColumn(1).setMinWidth(180);
+        /*
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
+*/
+        String datos[] =  new String[5];//tenia 4
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery(consul);
+
+            while(rs.next()){
+                datos[0] =rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                datos[4] = rs.getString(5);
+
+                modelo.addRow(datos);
+ 
+            }
+            jTabViewInfoareas.setModel(modelo);
+        } catch (SQLException ex) {
+            Logger.getLogger(internoCaja.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+             try {
+                    if(rs != null) rs.close();              
+                    if(st != null) st.close();                
+                    if(cn !=null) cn.close();
+             } catch (SQLException ex) {
+             }
+         }
+    }    //busqueda cargadores
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -302,13 +390,13 @@ public class areas extends javax.swing.JPanel {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabBodegasEn;
+    private javax.swing.JPanel jPanAreasView;
+    private javax.swing.JPanel jPanSociosView;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTabViewInfoareas;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables

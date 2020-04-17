@@ -20,16 +20,21 @@ jLabDirecc
 jLabGiro
 jLabObserva
 
-//PANELES
+//PANELES DE internoCaja.java
 @jPanambulantes
 	txtBuscAmbulante
 	jTabDatosAmbulante
-
+	jLabNomAmb
 
 @jPanCargadores
 	jPanCargadorInscr
 	jPanSemCargad
 	jPanRentCargador
+
+	txtBuscCargadores
+	jTabCargadoresView
+
+	jLabNombreCargadores
 
 @jPanVarios
 
@@ -37,3 +42,14 @@ jLabObserva
 
 @jPanAreascobros
 	jCmBxgetAreas
+
+//PANEL DE areas.java
+
+	jTabViewInfoareas
+@jPanAreasView
+	jTabViewInfoareas
+	jLabBodegasEn	
+
+
+@jPanSociosView
+
