@@ -112,7 +112,17 @@ ON pagos_areas.id=pagos_areasdet.idTicket
 INNER JOIN rubrospago
 ON rubrospago.id = pagos_areasdet.idRubroPago;
 
-
+/*OBTENER ULTIMA SEMANA PAGADA DE AREA*/
+SELECT  pagos_areas.id,pagos_areasdet.idSemana,rubrospago.descripcion, areas.nombre,pagos_areas.fecha
+FROM areas
+INNER JOIN pagos_areas
+ON areas.id = pagos_areas.idArea AND pagos_areas.idarea = 10
+INNER JOIN pagos_areasdet
+ON pagos_areasdet.idTicket=pagos_areas.id
+INNER JOIN rubrospago
+ON rubrospago.id = pagos_areasdet.idRubroPago 
+group by pagos_areasdet.idRubroPago
+ORDER BY pagos_areas.fecha desc;
 
 
 
