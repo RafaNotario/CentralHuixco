@@ -43,6 +43,11 @@ jLabObserva
 @jPanAreascobros
 	jCmBxgetAreas
 
+	jChecMantSem
+	jChecBasura
+	jChecPolicia
+	jChecResguardo
+
 	jLabLastMantenim
 	jLabLastBasura
 	jLabLastPolicia
@@ -52,6 +57,37 @@ jLabObserva
 	txtIniBasura
 	txtIniPolic
 	txtIniResg
+
+	jLaFechIniManten
+	jLaFechIniBasura
+	jLaFechIniPolicia
+	jLaFechIniResguardos
+
+	txtFinManten
+	txtFinBasura
+	txtFinPolicia
+	txtFinResguard
+	
+	jLaFechFinManten
+	jLaFechFinBasura
+	jLaFechFinPolicia
+	jLaFechFinResguard
+
+	jLabSemsPaysManten
+	jLabSemsPaysBasura
+	jLabSemsPaysPolis
+	jLabSemsPaysResg
+
+	jLabTarifaMantenim
+	jLabTarifaBasura
+	jLabTarifPolicia
+	jLabTarifResguard
+	
+	jlabImportMantenim
+	jlabImportBasura
+	jlabImportPolicia
+	jlabImportResguard
+
 //PANEL DE areas.java
 
 	jTabViewInfoareas

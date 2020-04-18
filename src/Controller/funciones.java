@@ -6,6 +6,7 @@
 package Controller;
 
 import conexion.ConexionDBOriginal;
+import java.math.BigDecimal;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,6 +22,12 @@ import javax.swing.JPanel;
  * @author monit
  */
 public class funciones {
+    
+      //VARIABLES PARA CALCULO DE DINERO  
+  private static int DECIMALS = 1;
+  private static int ROUNDING_MODE = BigDecimal.ROUND_HALF_EVEN;
+  private BigDecimal fAmountOne;
+  private BigDecimal fAmountTwo;
     
      ConexionDBOriginal con2 = new ConexionDBOriginal();  
             public boolean validaLoginUsers(String user, String pass){
@@ -65,6 +72,29 @@ public class funciones {
         Pn.validate();
         Pn.repaint();
     }
+    
+                 //CALCULO DE DINERO $$ ***
+     private BigDecimal rounded(BigDecimal aNumber){
+            return aNumber.setScale(DECIMALS, ROUNDING_MODE);
+     }
+     
+     public BigDecimal multiplicaAmount(BigDecimal aAmountOne, BigDecimal aAmountTwo){
+            fAmountOne = rounded(aAmountOne);
+            fAmountTwo = rounded(aAmountTwo);
+            System.out.println(fAmountOne+" -> "+fAmountTwo);
+        return fAmountOne.multiply(fAmountTwo);
+    }
+     
+      public BigDecimal getDifference(BigDecimal aAmountOne, BigDecimal aAmountTwo){
+            fAmountOne = rounded(aAmountOne);
+            fAmountTwo = rounded(aAmountTwo);
+        return fAmountOne.subtract(fAmountTwo);
+    }
+      public BigDecimal getSum(BigDecimal aAmountOne, BigDecimal aAmountTwo){
+          fAmountOne = rounded(aAmountOne);
+            fAmountTwo = rounded(aAmountTwo);
+          return fAmountOne.add(fAmountTwo);
+      }
             
            public static void main(String args[]){
              //  funciones fn =  new funciones();

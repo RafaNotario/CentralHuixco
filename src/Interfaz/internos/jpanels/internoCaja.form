@@ -725,7 +725,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel46" min="-2" pref="95" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField9" min="-2" pref="133" max="-2" attributes="0"/>
+                              <Component id="txtResultSum" min="-2" pref="133" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButton15" min="-2" pref="140" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
@@ -760,7 +760,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jButton15" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="jTextField9" max="32767" attributes="0"/>
+                          <Component id="txtResultSum" max="32767" attributes="0"/>
                           <Component id="jLabel46" max="32767" attributes="0"/>
                           <Component id="jDateChooser11" max="32767" attributes="0"/>
                       </Group>
@@ -836,13 +836,13 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jButton7" min="-2" pref="40" max="-2" attributes="0"/>
+                                          <Component id="jButMantenSubstract" min="-2" pref="40" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                                           <Component id="txtFinManten" min="-2" pref="43" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           <Component id="jLaFechFinManten" min="-2" pref="125" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                          <Component id="jButton8" min="-2" pref="40" max="-2" attributes="0"/>
+                                          <Component id="jButMantenMoore" min="-2" pref="40" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -866,11 +866,11 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jButton7" pref="0" max="32767" attributes="0"/>
+                                      <Component id="jButMantenSubstract" pref="0" max="32767" attributes="0"/>
                                       <Component id="txtIniManten" max="32767" attributes="0"/>
                                       <Component id="jLaFechFinManten" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtFinManten" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jButton8" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Component id="jButMantenMoore" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
                                       <Component id="jLaFechIniManten" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -900,7 +900,7 @@
                               <Component id="jLabel2" min="-2" pref="99" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabLastMantenim" min="-2" pref="99" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="118" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -939,6 +939,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Mantenimiento Semanal"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jChecMantSemActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel2">
                       <Properties>
@@ -984,7 +987,7 @@
                     <Property name="text" type="java.lang.String" value="Semana Final"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton7">
+                <Component class="javax.swing.JButton" name="jButMantenSubstract">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="1"/>
@@ -993,6 +996,9 @@
                       <Image iconType="3" name="/images/menos.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButMantenSubstractActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtFinManten">
                   <Properties>
@@ -1022,7 +1028,7 @@
                     <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLaFechFinMantenMousePressed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton8">
+                <Component class="javax.swing.JButton" name="jButMantenMoore">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="1"/>
@@ -1031,6 +1037,9 @@
                       <Image iconType="3" name="/images/mas.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButMantenMooreActionPerformed"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JPanel" name="jPanel9">
                   <Properties>
@@ -1057,8 +1066,8 @@
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jLabel11" max="32767" attributes="0"/>
-                                          <Component id="jLabel10" max="32767" attributes="0"/>
+                                          <Component id="jlabImportMantenim" max="32767" attributes="0"/>
+                                          <Component id="jLabTarifaMantenim" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1071,9 +1080,9 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel10" min="-2" pref="14" max="-2" attributes="0"/>
+                                      <Component id="jLabTarifaMantenim" min="-2" pref="14" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlabImportMantenim" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -1116,7 +1125,7 @@
                         <Property name="text" type="java.lang.String" value="Importe"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel10">
+                    <Component class="javax.swing.JLabel" name="jLabTarifaMantenim">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
@@ -1127,7 +1136,7 @@
                         <Property name="verticalTextPosition" type="int" value="3"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel11">
+                    <Component class="javax.swing.JLabel" name="jlabImportMantenim">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
@@ -1199,13 +1208,13 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jButton20" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="jButBasuraSubstract" min="-2" pref="40" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   <Component id="txtFinBasura" min="-2" pref="43" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   <Component id="jLaFechFinBasura" min="-2" pref="125" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                  <Component id="jButton21" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="jButBasuraMoore" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -1232,10 +1241,10 @@
                                           <Component id="jLaFechIniBasura" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jButton20" alignment="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="jButBasuraSubstract" alignment="0" pref="0" max="32767" attributes="0"/>
                                           <Component id="jLaFechFinBasura" alignment="0" max="32767" attributes="0"/>
                                           <Component id="txtFinBasura" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
-                                          <Component id="jButton21" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
+                                          <Component id="jButBasuraMoore" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1308,6 +1317,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Basura"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jChecBasuraActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel13">
                       <Properties>
@@ -1381,8 +1393,8 @@
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jLabel22" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jLabel21" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jlabImportBasura" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jLabTarifaBasura" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1394,9 +1406,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel21" min="-2" pref="14" max="-2" attributes="0"/>
+                                      <Component id="jLabTarifaBasura" min="-2" pref="14" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlabImportBasura" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -1439,7 +1451,7 @@
                         <Property name="text" type="java.lang.String" value="Importe"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel21">
+                    <Component class="javax.swing.JLabel" name="jLabTarifaBasura">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
@@ -1450,7 +1462,7 @@
                         <Property name="verticalTextPosition" type="int" value="3"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel22">
+                    <Component class="javax.swing.JLabel" name="jlabImportBasura">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
@@ -1484,7 +1496,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton21">
+                <Component class="javax.swing.JButton" name="jButBasuraMoore">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="1"/>
@@ -1493,6 +1505,9 @@
                       <Image iconType="3" name="/images/mas.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButBasuraMooreActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtFinBasura">
                   <Properties>
@@ -1503,7 +1518,7 @@
                     <Property name="text" type="java.lang.String" value="0"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton20">
+                <Component class="javax.swing.JButton" name="jButBasuraSubstract">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="1"/>
@@ -1512,6 +1527,9 @@
                       <Image iconType="3" name="/images/menos.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButBasuraSubstractActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLaFechIniBasura">
                   <Properties>
@@ -1565,13 +1583,13 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jButton11" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="jButPolicSubstract" min="-2" pref="40" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   <Component id="txtFinPolicia" min="-2" pref="43" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   <Component id="jLaFechFinPolicia" min="-2" pref="125" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                  <Component id="jButton12" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="jButPolicMoore" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -1591,12 +1609,12 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jButton11" alignment="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="jButPolicSubstract" alignment="0" pref="0" max="32767" attributes="0"/>
                                       <Component id="txtIniPolic" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLaFechIniPolicia" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLaFechFinPolicia" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtFinPolicia" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
-                                      <Component id="jButton12" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Component id="jButPolicMoore" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jPanel13" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
@@ -1625,7 +1643,7 @@
                               <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabLastPolicia" min="-2" pref="99" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="126" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1664,6 +1682,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Policia"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jChecPoliciaActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel24">
                       <Properties>
@@ -1724,7 +1745,7 @@
                     <Property name="text" type="java.lang.String" value="Semana Final"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton11">
+                <Component class="javax.swing.JButton" name="jButPolicSubstract">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="1"/>
@@ -1733,6 +1754,9 @@
                       <Image iconType="3" name="/images/menos.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButPolicSubstractActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtFinPolicia">
                   <Properties>
@@ -1758,7 +1782,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton12">
+                <Component class="javax.swing.JButton" name="jButPolicMoore">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="1"/>
@@ -1767,6 +1791,9 @@
                       <Image iconType="3" name="/images/mas.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButPolicMooreActionPerformed"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JPanel" name="jPanel13">
                   <Properties>
@@ -1793,8 +1820,8 @@
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jLabel33" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jLabel32" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jlabImportPolicia" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jLabTarifPolicia" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1806,9 +1833,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel32" min="-2" pref="14" max="-2" attributes="0"/>
+                                      <Component id="jLabTarifPolicia" min="-2" pref="14" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlabImportPolicia" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -1851,7 +1878,7 @@
                         <Property name="text" type="java.lang.String" value="Importe"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel32">
+                    <Component class="javax.swing.JLabel" name="jLabTarifPolicia">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
@@ -1862,7 +1889,7 @@
                         <Property name="verticalTextPosition" type="int" value="3"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel33">
+                    <Component class="javax.swing.JLabel" name="jlabImportPolicia">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
@@ -1919,13 +1946,13 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jButton13" min="-2" pref="40" max="-2" attributes="0"/>
+                                          <Component id="jButResguardSubstarct" min="-2" pref="40" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           <Component id="txtFinResguard" min="-2" pref="43" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           <Component id="jLaFechFinResguard" min="-2" pref="125" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                          <Component id="jButton14" min="-2" pref="40" max="-2" attributes="0"/>
+                                          <Component id="jButResguardMoore" min="-2" pref="40" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
@@ -1949,12 +1976,12 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jButton13" alignment="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="jButResguardSubstarct" alignment="0" pref="0" max="32767" attributes="0"/>
                                       <Component id="txtIniResg" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLaFechIniResguardos" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLaFechFinResguard" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtFinResguard" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
-                                      <Component id="jButton14" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Component id="jButResguardMoore" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jPanel15" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
@@ -2023,6 +2050,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Resguardos"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jChecResguardoActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel35">
                       <Properties>
@@ -2083,7 +2113,7 @@
                     <Property name="text" type="java.lang.String" value="Semana Final"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton13">
+                <Component class="javax.swing.JButton" name="jButResguardSubstarct">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="1"/>
@@ -2092,6 +2122,9 @@
                       <Image iconType="3" name="/images/menos.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButResguardSubstarctActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtFinResguard">
                   <Properties>
@@ -2142,8 +2175,8 @@
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jLabel44" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jLabel43" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jlabImportResguard" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jLabTarifResguard" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -2156,9 +2189,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel43" min="-2" pref="14" max="-2" attributes="0"/>
+                                      <Component id="jLabTarifResguard" min="-2" pref="14" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel44" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jlabImportResguard" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -2201,7 +2234,7 @@
                         <Property name="text" type="java.lang.String" value="Importe"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel43">
+                    <Component class="javax.swing.JLabel" name="jLabTarifResguard">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
@@ -2212,7 +2245,7 @@
                         <Property name="verticalTextPosition" type="int" value="3"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel44">
+                    <Component class="javax.swing.JLabel" name="jlabImportResguard">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
@@ -2231,7 +2264,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="jButton14">
+                <Component class="javax.swing.JButton" name="jButResguardMoore">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="14" style="1"/>
@@ -2240,6 +2273,9 @@
                       <Image iconType="3" name="/images/mas.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButResguardMooreActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -2251,7 +2287,7 @@
                 <Property name="text" type="java.lang.String" value="Cobrar"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField9">
+            <Component class="javax.swing.JTextField" name="txtResultSum">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="16" style="1"/>
