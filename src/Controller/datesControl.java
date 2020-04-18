@@ -133,14 +133,15 @@ public int semanYear(String dat,int band){
         }
     
     public String getWeekStartDate(String fech) {
+        String fec = fech.replace('-', '/');
          Locale l = new Locale("es","MX");//"es","MX" 
         Calendar calendar = Calendar.getInstance();
-       // calendar.setTime(StringDate(fech));
-        while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
-            calendar.add(Calendar.DATE, -1);
-        }
+        calendar.setTime(StringDate(fec));
+      //  while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+          //  calendar.add(Calendar.DATE, -1);
+        //}
     //return calendar.getTime();
-        return calendar.get(Calendar.DAY_OF_MONTH)+ ". "+calendar.getDisplayName(Calendar.MONTH,Calendar.SHORT, l) ;
+        return calendar.get(Calendar.DAY_OF_MONTH)+ " "+calendar.getDisplayName(Calendar.MONTH,Calendar.SHORT, l)+"." ;
     }
 
 public String getWeekEndDate(String fech) {
@@ -207,8 +208,8 @@ public String lapsoSem(String fech,int numSem){
           
     //    dC.jLocalFechas("2020/04/13");
         System.out.println("PRUEBAS DE STACKOVERFLOW");
-        System.out.println("Semana ini: "+dC.getWeekStartDate("2020/03/23"));
-        System.out.println("Semana fin: "+dC.getWeekEndDate("2020/03/23"));
+        System.out.println("Semana ini: "+dC.getWeekStartDate("2050-12-05"));
+       // System.out.println("Semana fin: "+dC.getWeekEndDate("2020/03/23"));
         //System.out.println("Lapso"+dC.lapsoSem("",1));
        // dC.lapsoSem("",0);
         

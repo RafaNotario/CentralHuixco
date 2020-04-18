@@ -12,7 +12,9 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import conexion.ConexionDBOriginal;
+import Controller.datesControl;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -21,7 +23,7 @@ import javax.swing.JOptionPane;
 public class controlInserts {
 
     ConexionDBOriginal con2 = new ConexionDBOriginal();
-
+    static datesControl datCtrl = new datesControl();
 
 /*Metodo que devuelve el ultimo ticket pagado*/
 public int regLastTicket(int idT){
@@ -111,16 +113,155 @@ public String[][] regLastSemanasType(int ticket){
 return mat;  
 }//Fin ulimos pagos
 
+/*Metodo que devuelve el ultimo ticket pagado*/
+public String[] regSemanas(int idS){
+    int tic =0;
+    Connection cn = con2.conexion();
+       
+        String[] arr = new String[5];
+       
+        String sql = "SELECT * FROM semanas WHERE id = '"+idS+"';";
+        Statement st = null;
+        ResultSet rs= null;
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            rs.beforeFirst();
+            while(rs.next())
+            {
+                arr[0] = rs.getString(1);
+                arr[1] = rs.getString(2);
+                arr[2] = rs.getString(3);
+                arr[3] = rs.getString(4);
+                arr[4] = rs.getString(5);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                    try {
+                        if(cn != null) cn.close();
+                    } catch (SQLException ex) {
+                        System.err.println( ex.getMessage() );    
+                    }
+                }
+    return arr;
+}//FinRegSemanas
+
+/*---***  SEGUNDA FORMA PARA CARGAR ULTIMO PAGO AUNQUESEA DISTINTO TICKET*/
+/*Metodo que devuelve el ultimo ticket pagado y segun campo devuelto mostramos el jpanel*/
+public String[] regOpsareas(int idA){
+    int tic =0;
+    Connection cn = con2.conexion();
+        String[] arr = new String[4];
+        String sql = "SELECT areas.mantSem,areas.basura,areas.policia,areas.otros FROM areas WHERE id = '"+idA+"';";
+        Statement st = null;
+        ResultSet rs= null;
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            rs.beforeFirst();
+            while(rs.next())
+            {
+                arr[0] = rs.getString(1);
+                arr[1] = rs.getString(2);
+                arr[2] = rs.getString(3);
+                arr[3] = rs.getString(4);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                    try {
+                        if(cn != null) cn.close();
+                    } catch (SQLException ex) {
+                        System.err.println( ex.getMessage() );    
+                    }
+                }
+    return arr;
+}//FinRegOpsareas
+
+public int regLastTicket2(int idA,int idcuo){
+    int tic =0;
+    Connection cn = con2.conexion();    
+        String ultimo="",consul="";
+        int num=0,i=1;
+        String sql = "SELECT  pagos_areas.id\n" +
+                            "FROM pagos_areas\n" +
+                            "INNER JOIN areas\n" +
+                            "ON areas.id = pagos_areas.idArea AND pagos_areas.idarea = '"+idA+"'\n" +
+                            "INNER JOIN\n" +
+                            "pagos_areasdet\n" +
+                            "ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areasdet.idRubroPago = '"+idcuo+"'\n" +
+                            "ORDER BY pagos_areas.fecha desc limit 1;";
+        Statement st = null;
+        ResultSet rs= null;
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            rs.beforeFirst();
+            while(rs.next())
+            {
+                tic = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                    try {
+                        if(cn != null) cn.close();
+                    } catch (SQLException ex) {
+                        System.err.println( ex.getMessage() );    
+                    }
+                }
+    return tic;
+}//FinLastTicket
+
+public String[] regPaysAreasdet(int idT, int idrub){
+    int tic =0;
+    Connection cn = con2.conexion();
+       
+        String[] arr = new String[5];
+       
+        String sql = "SELECT * FROM pagos_areasdet WHERE pagos_areasdet.idTicket = '"+idT+"' AND idRubroPago = '"+idrub+"'; ";
+        Statement st = null;
+        ResultSet rs= null;
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            rs.beforeFirst();
+            while(rs.next())
+            {
+                arr[0] = rs.getString(1);
+                arr[1] = rs.getString(2);
+                arr[2] = rs.getString(3);
+                arr[3] = rs.getString(4);
+                arr[4] = rs.getString(5);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                    try {
+                        if(cn != null) cn.close();
+                    } catch (SQLException ex) {
+                        System.err.println( ex.getMessage() );    
+                    }
+                }
+    return arr;
+}//FinRegpagosAreasdet
+
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();
          System.out.println("Ultimo pagado: "+contrl.regLastTicket(19));
          
         String[][] mat = contrl.regLastSemanasType(contrl.regLastTicket(19));
-        for (int i = 0; i < mat.length; i++) {
-            for (int j = 0; j < mat[0].length; j++) {
+        String[] arr = contrl.regPaysAreasdet(1,3);
+        
+        for (int i = 0; i < arr.length; i++) {
+           /* for (int j = 0; j < mat[0].length; j++) {
                       System.out.print("["+mat[i][j]+"] ");
-            }
-            System.err.println();
+            if(i >2)
+                    System.out.println(datCtrl.getWeekStartDate(arr[i]));
+                else
+            }*/
+                System.out.println(arr[i]);
         }
        
         

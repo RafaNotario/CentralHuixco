@@ -43,6 +43,15 @@ jLabObserva
 @jPanAreascobros
 	jCmBxgetAreas
 
+	jLabLastMantenim
+	jLabLastBasura
+	jLabLastPolicia
+	jLabLastResguardo
+
+	txtIniManten
+	txtIniBasura
+	txtIniPolic
+	txtIniResg
 //PANEL DE areas.java
 
 	jTabViewInfoareas

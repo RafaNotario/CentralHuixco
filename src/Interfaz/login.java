@@ -40,8 +40,7 @@ funciones func1 = new funciones();
        inicioButton(false);//deshabilitar botones de menu
         jPanMontApert.setVisible(false);
          jLabNsem.setText(dCon.numSemanaLocal());
-        jLabLapsoSemana.setText(dCon.getWeekStartDate("")+" - "+dCon.getWeekEndDate(""));
-        
+       // jLabLapsoSemana.setText(dCon.getWeekStartDate("")+" - "+dCon.getWeekEndDate(""));
     }
 
     /**

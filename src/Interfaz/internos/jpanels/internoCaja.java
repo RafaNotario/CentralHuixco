@@ -66,7 +66,7 @@ public class internoCaja extends javax.swing.JPanel {
         public void keyPressed (java.awt.event.KeyEvent e){         
             int var = e.getKeyCode();
                if(var == KeyEvent.VK_ENTER ){
-                    mostrarJpan();
+                    mostrarJpanNew();
                     
                     bandC =0;
            }
@@ -115,15 +115,15 @@ public class internoCaja extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jChecMantSem = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
         jLabLastMantenim = new javax.swing.JLabel();
         txtIniManten = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        txtFinManten = new javax.swing.JTextField();
+        jLaFechFinManten = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -131,12 +131,12 @@ public class internoCaja extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabSemsPaysManten = new javax.swing.JLabel();
+        jLaFechIniManten = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        jChecBasura = new javax.swing.JCheckBox();
         jLabel13 = new javax.swing.JLabel();
         jLabLastBasura = new javax.swing.JLabel();
         txtIniBasura = new javax.swing.JTextField();
@@ -148,25 +148,25 @@ public class internoCaja extends javax.swing.JPanel {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
+        jLabSemsPaysBasura = new javax.swing.JLabel();
+        jLaFechFinBasura = new javax.swing.JLabel();
         jButton21 = new javax.swing.JButton();
-        jTextField11 = new javax.swing.JTextField();
+        txtFinBasura = new javax.swing.JTextField();
         jButton20 = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
+        jLaFechIniBasura = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jSeparator3 = new javax.swing.JSeparator();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        jChecPolicia = new javax.swing.JCheckBox();
         jLabel24 = new javax.swing.JLabel();
         jLabLastPolicia = new javax.swing.JLabel();
         txtIniPolic = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
+        jLaFechIniPolicia = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel28 = new javax.swing.JLabel();
+        txtFinPolicia = new javax.swing.JTextField();
+        jLaFechFinPolicia = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
@@ -174,27 +174,27 @@ public class internoCaja extends javax.swing.JPanel {
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
+        jLabSemsPaysPolis = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jSeparator4 = new javax.swing.JSeparator();
-        jCheckBox4 = new javax.swing.JCheckBox();
+        jChecResguardo = new javax.swing.JCheckBox();
         jLabel35 = new javax.swing.JLabel();
         jLabLastResguardo = new javax.swing.JLabel();
         txtIniResg = new javax.swing.JTextField();
-        jLabel36 = new javax.swing.JLabel();
+        jLaFechIniResguardos = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jButton13 = new javax.swing.JButton();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel39 = new javax.swing.JLabel();
+        txtFinResguard = new javax.swing.JTextField();
+        jLaFechFinResguard = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
+        jLabSemsPaysResg = new javax.swing.JLabel();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
         jTextField9 = new javax.swing.JTextField();
@@ -470,7 +470,7 @@ public class internoCaja extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jDialog1.getAccessibleContext().setAccessibleParent(jLabel6);
+        jDialog1.getAccessibleContext().setAccessibleParent(jLaFechFinManten);
 
         setPreferredSize(new java.awt.Dimension(1329, 921));
 
@@ -738,9 +738,9 @@ public class internoCaja extends javax.swing.JPanel {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jCheckBox1.setBackground(new java.awt.Color(204, 204, 204));
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jCheckBox1.setText("Mantenimiento Semanal");
+        jChecMantSem.setBackground(new java.awt.Color(204, 204, 204));
+        jChecMantSem.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jChecMantSem.setText("Mantenimiento Semanal");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Ultimo Pago: -");
@@ -754,21 +754,21 @@ public class internoCaja extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jChecMantSem, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabLastMantenim, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 118, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox1)
+                .addComponent(jChecMantSem)
                 .addContainerGap())
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
@@ -792,19 +792,19 @@ public class internoCaja extends javax.swing.JPanel {
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menos.png"))); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setText("0");
+        txtFinManten.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtFinManten.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFinManten.setText("0");
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("jLabel3");
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLaFechFinManten.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLaFechFinManten.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLaFechFinManten.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jLaFechFinManten.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                jLaFechFinMantenMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel6MousePressed(evt);
+                jLaFechFinMantenMousePressed(evt);
             }
         });
 
@@ -831,10 +831,10 @@ public class internoCaja extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("0.00");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel12.setText("0");
-        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabSemsPaysManten.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabSemsPaysManten.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabSemsPaysManten.setText("0");
+        jLabSemsPaysManten.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -846,7 +846,7 @@ public class internoCaja extends javax.swing.JPanel {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabSemsPaysManten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -868,7 +868,7 @@ public class internoCaja extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabSemsPaysManten))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -876,9 +876,9 @@ public class internoCaja extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("jLabel3");
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jLaFechIniManten.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLaFechIniManten.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLaFechIniManten.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -887,26 +887,29 @@ public class internoCaja extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(txtIniManten, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)))
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
+                                .addGap(13, 13, 13))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(txtIniManten, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLaFechIniManten, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(70, 70, 70)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFinManten, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLaFechFinManten, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -925,10 +928,10 @@ public class internoCaja extends javax.swing.JPanel {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(txtIniManten)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField2)
+                            .addComponent(jLaFechFinManten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtFinManten)
                             .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLaFechIniManten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -938,9 +941,9 @@ public class internoCaja extends javax.swing.JPanel {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jCheckBox2.setBackground(new java.awt.Color(204, 204, 204));
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jCheckBox2.setText("Basura");
+        jChecBasura.setBackground(new java.awt.Color(204, 204, 204));
+        jChecBasura.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jChecBasura.setText("Basura");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Ultimo Pago: -");
@@ -954,7 +957,7 @@ public class internoCaja extends javax.swing.JPanel {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jChecBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -968,7 +971,7 @@ public class internoCaja extends javax.swing.JPanel {
             .addComponent(jSeparator2)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox2)
+                .addComponent(jChecBasura)
                 .addContainerGap())
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
@@ -1010,9 +1013,9 @@ public class internoCaja extends javax.swing.JPanel {
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setText("0.00");
 
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel23.setText("0");
+        jLabSemsPaysBasura.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabSemsPaysBasura.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabSemsPaysBasura.setText("0");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -1024,7 +1027,7 @@ public class internoCaja extends javax.swing.JPanel {
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+                        .addComponent(jLabSemsPaysBasura, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel19)
@@ -1045,7 +1048,7 @@ public class internoCaja extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel23))
+                            .addComponent(jLabSemsPaysBasura))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1053,36 +1056,39 @@ public class internoCaja extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel48.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel48.setText("jLabel3");
-        jLabel48.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jLaFechFinBasura.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLaFechFinBasura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLaFechFinBasura.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jButton21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mas.png"))); // NOI18N
 
-        jTextField11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField11.setText("0");
+        txtFinBasura.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtFinBasura.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFinBasura.setText("0");
 
         jButton20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menos.png"))); // NOI18N
 
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("jLabel3");
-        jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jLaFechIniBasura.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLaFechIniBasura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLaFechIniBasura.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(txtIniBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtIniBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLaFechIniBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(83, 83, 83)
@@ -1091,9 +1097,9 @@ public class internoCaja extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFinBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLaFechFinBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1114,11 +1120,11 @@ public class internoCaja extends javax.swing.JPanel {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtIniBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLaFechIniBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel48, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLaFechFinBasura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtFinBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButton21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
@@ -1132,9 +1138,9 @@ public class internoCaja extends javax.swing.JPanel {
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jCheckBox3.setBackground(new java.awt.Color(204, 204, 204));
-        jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jCheckBox3.setText("Policia");
+        jChecPolicia.setBackground(new java.awt.Color(204, 204, 204));
+        jChecPolicia.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jChecPolicia.setText("Policia");
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel24.setText("Ultimo Pago: -");
@@ -1148,21 +1154,21 @@ public class internoCaja extends javax.swing.JPanel {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jChecPolicia, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabLastPolicia, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 126, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator3)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox3)
+                .addComponent(jChecPolicia)
                 .addContainerGap())
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
@@ -1176,9 +1182,9 @@ public class internoCaja extends javax.swing.JPanel {
         txtIniPolic.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtIniPolic.setText("0");
 
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel25.setText("jLabel3");
-        jLabel25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jLaFechIniPolicia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLaFechIniPolicia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLaFechIniPolicia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1190,13 +1196,13 @@ public class internoCaja extends javax.swing.JPanel {
         jButton11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menos.png"))); // NOI18N
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField6.setText("0");
+        txtFinPolicia.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtFinPolicia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFinPolicia.setText("0");
 
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel28.setText("jLabel3");
-        jLabel28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jLaFechFinPolicia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLaFechFinPolicia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLaFechFinPolicia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jButton12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mas.png"))); // NOI18N
@@ -1221,9 +1227,9 @@ public class internoCaja extends javax.swing.JPanel {
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel33.setText("0.00");
 
-        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel34.setText("0");
+        jLabSemsPaysPolis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabSemsPaysPolis.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabSemsPaysPolis.setText("0");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -1235,7 +1241,7 @@ public class internoCaja extends javax.swing.JPanel {
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabSemsPaysPolis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel30)
@@ -1256,7 +1262,7 @@ public class internoCaja extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel34))
+                            .addComponent(jLabSemsPaysPolis))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1270,27 +1276,29 @@ public class internoCaja extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(txtIniPolic, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtIniPolic, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLaFechIniPolicia, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFinPolicia, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLaFechFinPolicia, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -1306,9 +1314,9 @@ public class internoCaja extends javax.swing.JPanel {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(txtIniPolic)
-                            .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLaFechIniPolicia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLaFechFinPolicia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtFinPolicia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
@@ -1319,9 +1327,9 @@ public class internoCaja extends javax.swing.JPanel {
 
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jCheckBox4.setBackground(new java.awt.Color(204, 204, 204));
-        jCheckBox4.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jCheckBox4.setText("Resguardos");
+        jChecResguardo.setBackground(new java.awt.Color(204, 204, 204));
+        jChecResguardo.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jChecResguardo.setText("Resguardos");
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel35.setText("Ultimo Pago: -");
@@ -1335,7 +1343,7 @@ public class internoCaja extends javax.swing.JPanel {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jChecResguardo, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1349,7 +1357,7 @@ public class internoCaja extends javax.swing.JPanel {
             .addComponent(jSeparator4)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox4)
+                .addComponent(jChecResguardo)
                 .addContainerGap())
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
@@ -1363,9 +1371,9 @@ public class internoCaja extends javax.swing.JPanel {
         txtIniResg.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtIniResg.setText("0");
 
-        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel36.setText("jLabel3");
-        jLabel36.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jLaFechIniResguardos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLaFechIniResguardos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLaFechIniResguardos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1377,13 +1385,13 @@ public class internoCaja extends javax.swing.JPanel {
         jButton13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menos.png"))); // NOI18N
 
-        jTextField8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField8.setText("0");
+        txtFinResguard.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtFinResguard.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFinResguard.setText("0");
 
-        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel39.setText("jLabel3");
-        jLabel39.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jLaFechFinResguard.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLaFechFinResguard.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLaFechFinResguard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1405,9 +1413,9 @@ public class internoCaja extends javax.swing.JPanel {
         jLabel44.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel44.setText("0.00");
 
-        jLabel45.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel45.setText("0");
+        jLabSemsPaysResg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabSemsPaysResg.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabSemsPaysResg.setText("0");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -1419,7 +1427,7 @@ public class internoCaja extends javax.swing.JPanel {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                        .addComponent(jLabSemsPaysResg, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel41)
@@ -1441,7 +1449,7 @@ public class internoCaja extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel45))
+                            .addComponent(jLabSemsPaysResg))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1459,13 +1467,15 @@ public class internoCaja extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(txtIniResg, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(txtIniResg, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLaFechIniResguardos, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGap(83, 83, 83)
@@ -1474,9 +1484,9 @@ public class internoCaja extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFinResguard, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLaFechFinResguard, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1497,9 +1507,9 @@ public class internoCaja extends javax.swing.JPanel {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(txtIniResg)
-                            .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLaFechIniResguardos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLaFechFinResguard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtFinResguard, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 1, Short.MAX_VALUE))
@@ -3802,24 +3812,24 @@ public class internoCaja extends javax.swing.JPanel {
      jPanSemCargad.setVisible(false);
     }//GEN-LAST:event_jButton41ActionPerformed
 
-    private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
+    private void jLaFechFinMantenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLaFechFinMantenMousePressed
         jDialog1.setLocationRelativeTo(this);
         jDialog1.setVisible(true);
         jDialog1.setEnabled(true);
-    }//GEN-LAST:event_jLabel6MousePressed
+    }//GEN-LAST:event_jLaFechFinMantenMousePressed
 
     private void jCalendar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCalendar1MouseClicked
 
         
     }//GEN-LAST:event_jCalendar1MouseClicked
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void jLaFechFinMantenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLaFechFinMantenMouseClicked
          
-    }//GEN-LAST:event_jLabel6MouseClicked
+    }//GEN-LAST:event_jLaFechFinMantenMouseClicked
 
     private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
         String var = datCtrl.getFechaCal(jCalendar1);
-        jLabel6.setText(var);
+        jLaFechFinManten.setText(var);
         jDialog1.dispose();       
     }//GEN-LAST:event_jButton42ActionPerformed
 
@@ -4036,12 +4046,95 @@ int oprime = evt.getKeyCode();
          }
     }    //busqueda cargadores
 
+        /*** METODO PARA CARGAR DINAMICAMENTE DATOS EN JPANELES*/
+          protected void mostrarJpanNew(){
+            jPanel4.setVisible(false);
+            jPanel5.setVisible(false);
+            jPanel6.setVisible(false);
+            jPanel7.setVisible(false);   
+              int idA=Integer.parseInt(conten.get(jCmBxgetAreas.getSelectedIndex())),
+                      numtic=0,numoriginal=0;
+            String[] arr = contrl.regOpsareas(idA);
+          String aux ="";
+            if(!arr[0].equals("0.00")){
+               jPanel4.setVisible(true); 
+               jChecMantSem.setSelected(true);
+               jLabSemsPaysManten.setText("1");
+               numtic=contrl.regLastTicket2(idA,2);
+               String[] arr1 = contrl.regPaysAreasdet(numtic,2);
+               numoriginal = Integer.parseInt(arr1[2]);//obtenemos id de semana pagada con #ticket y #rubro
+               String[] arr2 = contrl.regSemanas(numoriginal);//datos de semana id
+              jLabLastMantenim.setText("Semana "+arr2[2]);
+              arr2 =null;
+              arr2 = contrl.regSemanas(numoriginal+1);
+                aux = datCtrl.getWeekStartDate(arr2[3]) + " - "+ datCtrl.getWeekStartDate(arr2[4]);
+                txtIniManten.setText(arr2[2]);
+                                      jLaFechIniManten.setText(aux);
+                                      txtFinManten.setText(arr2[2]);
+                                      jLaFechFinManten.setText(aux);
+                                      
+            }  
+            if(!arr[1].equals("0.00")){
+                jPanel5.setVisible(true);
+                jChecBasura.setSelected(true);
+                jLabSemsPaysBasura.setText("1");
+                 numtic=contrl.regLastTicket2(idA,3);
+                 String[] arr1 = contrl.regPaysAreasdet(numtic,3);
+               numoriginal = Integer.parseInt(arr1[2]);//obtenemos id de semana pagada con #ticket y #rubro
+               String[] arr2 = contrl.regSemanas(numoriginal);//datos de semana id
+             jLabLastBasura.setText("Semana "+arr2[2]);
+              arr2 =null;
+              arr2 = contrl.regSemanas(numoriginal+1);
+                aux = datCtrl.getWeekStartDate(arr2[3]) + " - "+ datCtrl.getWeekStartDate(arr2[4]);
+                 
+                   txtIniBasura.setText(arr2[2]);
+                   jLaFechIniBasura.setText(aux);
+                   txtFinBasura.setText(arr2[2]);
+                   jLaFechFinBasura.setText(aux);
+            }  
+            if(!arr[2].equals("0.00")){
+                jPanel6.setVisible(true);
+                jChecPolicia.setSelected(true);
+                jLabSemsPaysPolis.setText("1");
+                 numtic=contrl.regLastTicket2(idA,4);
+                 String[] arr1 = contrl.regPaysAreasdet(numtic,4);
+               numoriginal = Integer.parseInt(arr1[2]);//obtenemos id de semana pagada con #ticket y #rubro
+               String[] arr2 = contrl.regSemanas(numoriginal);//datos de semana id
+           jLabLastPolicia.setText("Semana "+arr2[2]);//mostramos #semana NO el id
+              arr2 =null;
+              arr2 = contrl.regSemanas(numoriginal+1);
+                aux = datCtrl.getWeekStartDate(arr2[3]) + " - "+ datCtrl.getWeekStartDate(arr2[4]);
+                txtIniPolic.setText(arr2[2]);
+                                      jLaFechIniPolicia.setText(aux);
+                                      txtFinPolicia.setText(arr2[2]);
+                                      jLaFechFinPolicia.setText(aux);
+            }  
+            if(!arr[3].equals("0.00")){
+              jPanel7.setVisible(true);     
+              jChecResguardo.setSelected(true);
+              jLabSemsPaysResg.setText("1");
+               numtic=contrl.regLastTicket2(idA,5);
+               String[] arr1 = contrl.regPaysAreasdet(numtic,5);
+               numoriginal = Integer.parseInt(arr1[2]);//obtenemos id de semana pagada con #ticket y #rubro
+               String[] arr2 = contrl.regSemanas(numoriginal);//datos de semana id
+             jLabLastResguardo.setText("Semana "+arr2[2]);//mostramos #semana NO el id
+              arr2 =null;
+              arr2 = contrl.regSemanas(numoriginal+1);
+                aux = datCtrl.getWeekStartDate(arr2[3]) + " - "+ datCtrl.getWeekStartDate(arr2[4]);
+                    txtIniResg.setText(arr2[2]);
+                                      jLaFechIniResguardos.setText(aux);
+                                      txtFinResguard.setText(arr2[2]);
+                                      jLaFechFinResguard.setText(aux);
+            }
+            
+          }//mostrarJpanNew
         protected void mostrarJpan(){
             jPanel4.setVisible(false);
             jPanel5.setVisible(false);
             jPanel6.setVisible(false);
             jPanel7.setVisible(false);   
-            int numeraSem=0;
+            int numeraSem=0,numoriginal =0;
+            String aux ="";
           String mat[][] = contrl.regLastSemanasType(contrl.regLastTicket(Integer.parseInt(conten.get(jCmBxgetAreas.getSelectedIndex()))));
             if(mat.length >1){
                 for (int i = 0; i < mat.length; i++) {
@@ -4049,27 +4142,60 @@ int oprime = evt.getKeyCode();
                               if(j==0){
                                   if(mat[i][j].equals("2")){
                                       jPanel4.setVisible(true);
-                                      jLabLastMantenim.setText(mat[i][j+2]);
+                                     numoriginal = Integer.parseInt(mat[i][j+2]);
+                                     String[] arr1 = contrl.regSemanas(numoriginal);
                                       numeraSem = Integer.parseInt(mat[i][j+2])+1;
-                                      txtIniManten.setText(Integer.toString(numeraSem));
+                                      String[] arr = contrl.regSemanas(numeraSem);
+                                      aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
+                                      jChecMantSem.setSelected(true);
+                                      jLabLastMantenim.setText("Semana "+arr1[2]); 
+                                      txtIniManten.setText(arr[2]);
+                                      jLaFechIniManten.setText(aux);
+                                      txtFinManten.setText(arr[2]);
+                                      jLaFechFinManten.setText(aux);
+                                      
                                   }
                                    if(mat[i][j].equals("3")){
                                       jPanel5.setVisible(true);
-                                      jLabLastBasura.setText(mat[i][j+2]);
+                                      numoriginal = Integer.parseInt(mat[i][j+2]);//obtenemos semanas.id
+                                      String[] arr1 = contrl.regSemanas(numoriginal);//Obtener arreglo de ultimasemana pagada
                                       numeraSem = Integer.parseInt(mat[i][j+2])+1;
-                                      txtIniBasura.setText(Integer.toString(numeraSem));
+                                      String[] arr = contrl.regSemanas(numeraSem);//Obtener arreglo de ultimasemana pagada+1
+                                      aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
+                                      jChecBasura.setSelected(true);
+                                      jLabLastBasura.setText("Semana "+arr1[2]);
+                                      txtIniBasura.setText(arr[2]);
+                                      jLaFechIniBasura.setText(aux);
+                                      txtFinBasura.setText(arr[2]);
+                                      jLaFechFinBasura.setText(aux);
                                   }
                                   if(mat[i][j].equals("4")){
                                       jPanel6.setVisible(true);
-                                      jLabLastPolicia.setText(mat[i][j+2]);
+                                      numoriginal = Integer.parseInt(mat[i][j+2]);//obtenemos semanas.id
+                                      String[] arr1 = contrl.regSemanas(numoriginal);//Obtener arreglo de ultimasemana pagada
                                       numeraSem = Integer.parseInt(mat[i][j+2])+1;
-                                      txtIniPolic.setText(Integer.toString(numeraSem));
+                                      String[] arr = contrl.regSemanas(numeraSem);//Obtener arreglo de ultimasemana pagada+1
+                                      aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
+                                      jChecPolicia.setSelected(true);
+                                      jLabLastPolicia.setText("Semana "+arr1[2]);//mostramos #semana NO el id
+                                      txtIniPolic.setText(arr[2]);
+                                      jLaFechIniPolicia.setText(aux);
+                                      txtFinPolicia.setText(arr[2]);
+                                      jLaFechFinPolicia.setText(aux);
                                   }
                                   if(mat[i][j].equals("5")){
                                       jPanel7.setVisible(true);
-                                      jLabLastResguardo.setText(mat[i][j+2]);
-                                      numeraSem = Integer.parseInt(mat[i][j+2])+1;
-                                      txtIniResg.setText(Integer.toString(numeraSem));
+                                       numoriginal = Integer.parseInt(mat[i][j+2]);//obtenemos semanas.id
+                                       String[] arr1 = contrl.regSemanas(numoriginal);//Obtener arreglo de ultimasemana pagada
+                                       numeraSem = Integer.parseInt(mat[i][j+2])+1;
+                                       String[] arr = contrl.regSemanas(numeraSem);//Obtener arreglo de ultimasemana pagada+1
+                                       aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
+                                       jChecResguardo.setSelected(true);
+                                      jLabLastResguardo.setText("Semana "+arr1[2]);//mostramos #semana NO el id
+                                      txtIniResg.setText(arr[2]);
+                                      jLaFechIniResguardos.setText(aux);
+                                      txtFinResguard.setText(arr[2]);
+                                      jLaFechFinResguard.setText(aux);
                                   }
 
                               }
@@ -4130,10 +4256,10 @@ int oprime = evt.getKeyCode();
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jChecBasura;
+    private javax.swing.JCheckBox jChecMantSem;
+    private javax.swing.JCheckBox jChecPolicia;
+    private javax.swing.JCheckBox jChecResguardo;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
@@ -4157,6 +4283,14 @@ int oprime = evt.getKeyCode();
     private com.toedter.calendar.JDateChooser jDateChooser8;
     private com.toedter.calendar.JDateChooser jDateChooser9;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLaFechFinBasura;
+    private javax.swing.JLabel jLaFechFinManten;
+    private javax.swing.JLabel jLaFechFinPolicia;
+    private javax.swing.JLabel jLaFechFinResguard;
+    private javax.swing.JLabel jLaFechIniBasura;
+    private javax.swing.JLabel jLaFechIniManten;
+    private javax.swing.JLabel jLaFechIniPolicia;
+    private javax.swing.JLabel jLaFechIniResguardos;
     private javax.swing.JLabel jLabDirecc1;
     private javax.swing.JLabel jLabDirecc2;
     private javax.swing.JLabel jLabDirecc3;
@@ -4172,6 +4306,10 @@ int oprime = evt.getKeyCode();
     private javax.swing.JLabel jLabObserva1;
     private javax.swing.JLabel jLabObserva2;
     private javax.swing.JLabel jLabObserva3;
+    private javax.swing.JLabel jLabSemsPaysBasura;
+    private javax.swing.JLabel jLabSemsPaysManten;
+    private javax.swing.JLabel jLabSemsPaysPolis;
+    private javax.swing.JLabel jLabSemsPaysResg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
@@ -4195,7 +4333,6 @@ int oprime = evt.getKeyCode();
     private javax.swing.JLabel jLabel117;
     private javax.swing.JLabel jLabel118;
     private javax.swing.JLabel jLabel119;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel120;
     private javax.swing.JLabel jLabel121;
     private javax.swing.JLabel jLabel122;
@@ -4219,41 +4356,31 @@ int oprime = evt.getKeyCode();
     private javax.swing.JLabel jLabel164;
     private javax.swing.JLabel jLabel165;
     private javax.swing.JLabel jLabel166;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
@@ -4266,7 +4393,6 @@ int oprime = evt.getKeyCode();
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
@@ -4396,24 +4522,24 @@ int oprime = evt.getKeyCode();
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField23;
     private javax.swing.JTextField jTextField26;
     private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JTextField txtBuscAmbulante;
     private javax.swing.JTextField txtBuscCargadores;
+    private javax.swing.JTextField txtFinBasura;
+    private javax.swing.JTextField txtFinManten;
+    private javax.swing.JTextField txtFinPolicia;
+    private javax.swing.JTextField txtFinResguard;
     private javax.swing.JTextField txtIniBasura;
     private javax.swing.JTextField txtIniManten;
     private javax.swing.JTextField txtIniPolic;
