@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="134" pageHeight="198" whenNoDataType="AllSectionsNoDetail" columnWidth="134" leftMargin="0" rightMargin="0" topMargin="15" bottomMargin="10" whenResourceMissingType="Key" isIgnorePagination="true" uuid="6c75079d-14c5-432e-b62a-e153a4e09b68">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1">
+		<pen lineWidth="1.0" lineStyle="Dashed"/>
+	</style>
+	<queryString>
+		<![CDATA[SELECT * FROM pagos_areasdet WHERE idTicket = 252; 
+
+]]>
+	</queryString>
+	<field name="idTicket" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="item" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idSemana" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idRubroPago" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="importe" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<title>
+		<band height="116" splitType="Stretch">
+			<image>
+				<reportElement x="11" y="-11" width="123" height="90" uuid="ef92f00a-bf7a-4f23-bd36-28328d9ef1f9"/>
+				<imageExpression><![CDATA["C:\\central\\src\\images\\logoTicket.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="100" width="38" height="10" uuid="c4708886-ad66-43c4-b79f-a0e463270372"/>
+				<textElement>
+					<font size="7" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[idTicket: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="72" y="100" width="59" height="10" uuid="ed462828-4f83-41f1-b7e0-105859f54d0a"/>
+				<textElement>
+					<font size="7" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idTicket}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="122" height="20" uuid="756dee5f-97a1-4b96-bfb7-572a08e51928"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="9" isBold="true" isUnderline="false"/>
+					<paragraph lineSpacing="AtLeast"/>
+				</textElement>
+				<text><![CDATA[Pago Semanal de Area]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="57" height="14" uuid="c9727c64-ec5e-47e5-a8fa-675bf1749387"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[idSemana]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="68" y="0" width="62" height="14" uuid="16ed43c8-fd4a-44c7-bbae-47fe09ca82b3"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="8"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idSemana}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="14" width="57" height="14" uuid="332a6e89-1672-442a-8b8e-bbeb5e6d0a57"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[idRubroPago]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="68" y="14" width="63" height="14" uuid="1e9935d0-e91b-4568-9dfd-9359894e2439"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idRubroPago}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="28" width="57" height="14" uuid="4a87118e-af5b-4579-af87-ff3e7d60994f"/>
+				<textElement>
+					<font size="8" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[importe]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="68" y="28" width="63" height="14" uuid="8c62fc6d-7cd6-4d06-888a-e1f53c5bf412"/>
+				<textElement textAlignment="Right">
+					<font size="8" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="65">
+			<staticText>
+				<reportElement x="0" y="47" width="130" height="18" uuid="067db815-e90c-41f2-bf39-893293a56002"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[CONSERVE ESTE COMPROBANTE PARA CUALQUIER DUDA O ACALARACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="0" y="8" width="57" height="13" uuid="7d970c6b-2c3e-4045-991b-1a8d6061e494"/>
+				<textElement rotation="None">
+					<font size="8" isBold="true" isItalic="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="0" y="21" width="57" height="13" uuid="6b2dd566-b41b-45f3-ba7d-edae289bb8d2"/>
+				<textElement rotation="None">
+					<font size="8" isBold="true" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<text><![CDATA[EFECTIVO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="0" y="34" width="57" height="13" uuid="824deb1f-aff3-48dc-a409-2eae18dd636c"/>
+				<textElement rotation="None">
+					<font size="8" isBold="true" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<text><![CDATA[CAMBIO:]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

@@ -7,21 +7,28 @@ package Controller;
 
 import conexion.ConexionDBOriginal;
 import java.math.BigDecimal;
-
+import Controller.datesControl;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
  *
  * @author monit
  */
+
+
 public class funciones {
+
     
       //VARIABLES PARA CALCULO DE DINERO  
   private static int DECIMALS = 1;
@@ -29,13 +36,16 @@ public class funciones {
   private BigDecimal fAmountOne;
   private BigDecimal fAmountTwo;
     
-     ConexionDBOriginal con2 = new ConexionDBOriginal();  
-            public boolean validaLoginUsers(String user, String pass){
+     ConexionDBOriginal con2 = new ConexionDBOriginal();
+     datesControl datC = new datesControl();
+     
+            public int validaLoginUsers(String user, String pass){
             Connection cn = con2.conexion();
             boolean existe =false;
+            int idUser= -1;
             int num=0,i=1;
             String sql = "";
-            sql = "SELECT '1' FROM usuarios WHERE usuario = '"+user+"' AND password = '"+pass+"'";
+            sql = "SELECT id FROM usuarios WHERE usuario = '"+user+"' AND password = '"+pass+"'";
             Statement st = null;
             ResultSet rs= null;
             try {
@@ -45,7 +55,7 @@ public class funciones {
                 if(rs.next())
                 {
                     if(rs.getRow() > 0){
-                        existe =true;
+                        idUser=rs.getInt(1);
                     }
                 }
             } catch (SQLException ex) {
@@ -57,9 +67,42 @@ public class funciones {
                             System.err.println( ex.getMessage() );    
                         }
                     }
-           return existe;
+           return idUser;
     }//validaloginUsers
     
+        public void GuardaTurno(List<String> param){
+             java.util.Date date = new Date();
+             String timeDate = new java.sql.Timestamp(date.getTime()).toString();
+            Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";     
+          SQL="INSERT INTO turnos (idusuario,saldo,finicial) VALUES (?,?,?)";                           
+          try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param.get(0));
+                pps.setString(2, param.get(1));
+                pps.setString(3,timeDate);
+               System.out.println("Guardare en TIMESTAMP: "+timeDate);
+               
+                pps.executeUpdate();
+                System.out.println("Turno creado correctamente.");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error durante creacion de Turno.");
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);               
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                      JOptionPane.showMessageDialog(null, ex.getMessage() );    
+                    }                
+            }//finally catch  
+                      
+          }//@endGuardaTurno
+            
+            
+            
     public void limpiar(JPanel Pn)
     {
         Pn.removeAll();
@@ -97,8 +140,9 @@ public class funciones {
       }
             
            public static void main(String args[]){
-             //  funciones fn =  new funciones();
-              
-            //System.out.println(fn.validaLoginUsers("root", "priia08"));
+               funciones fn =  new funciones();
+              java.util.Date date = new Date();
+               System.out.println("Guardare en TIMESTAMP: "+new java.sql.Timestamp(date.getTime() ) );
+          
            }
 }

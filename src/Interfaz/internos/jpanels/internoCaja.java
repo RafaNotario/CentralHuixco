@@ -32,6 +32,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
+
 /**
  *
  * @author monit
@@ -43,8 +44,8 @@ public class internoCaja extends javax.swing.JPanel {
     datesControl datCtrl = new datesControl();
     ConexionDBOriginal con2 = new ConexionDBOriginal();
     controlInserts contrl = new controlInserts();
-     funciones func = new funciones();
-     
+    funciones func = new funciones();
+    
      List<String> conten = new ArrayList<String>();//lista para guardar el id de cada area cobro de areas
      
      int bandC = 0,
@@ -94,9 +95,18 @@ public class internoCaja extends javax.swing.JPanel {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jDialog1 = new javax.swing.JDialog();
+        jDialCalendarMantenim = new javax.swing.JDialog();
         jCalendar1 = new com.toedter.calendar.JCalendar();
         jButton42 = new javax.swing.JButton();
+        jFramePays = new javax.swing.JFrame();
+        jPanel27 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jButton7 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -432,11 +442,11 @@ public class internoCaja extends javax.swing.JPanel {
         jMenuItem1.setText("jMenuItem1");
         jPopupMenu1.add(jMenuItem1);
 
-        jDialog1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jDialog1.setTitle("Elija semana");
-        jDialog1.setResizable(false);
-        jDialog1.setSize(new java.awt.Dimension(450, 280));
-        jDialog1.setType(java.awt.Window.Type.UTILITY);
+        jDialCalendarMantenim.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jDialCalendarMantenim.setTitle("Elija semana");
+        jDialCalendarMantenim.setResizable(false);
+        jDialCalendarMantenim.setSize(new java.awt.Dimension(450, 280));
+        jDialCalendarMantenim.setType(java.awt.Window.Type.UTILITY);
 
         jCalendar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jCalendar1.setDecorationBordersVisible(true);
@@ -455,23 +465,23 @@ public class internoCaja extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog1Layout.createSequentialGroup()
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialog1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jDialCalendarMantenimLayout = new javax.swing.GroupLayout(jDialCalendarMantenim.getContentPane());
+        jDialCalendarMantenim.getContentPane().setLayout(jDialCalendarMantenimLayout);
+        jDialCalendarMantenimLayout.setHorizontalGroup(
+            jDialCalendarMantenimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialCalendarMantenimLayout.createSequentialGroup()
+                .addGroup(jDialCalendarMantenimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialCalendarMantenimLayout.createSequentialGroup()
                         .addGap(144, 144, 144)
                         .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDialog1Layout.createSequentialGroup()
+                    .addGroup(jDialCalendarMantenimLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog1Layout.createSequentialGroup()
+        jDialCalendarMantenimLayout.setVerticalGroup(
+            jDialCalendarMantenimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialCalendarMantenimLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
@@ -479,7 +489,112 @@ public class internoCaja extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jDialog1.getAccessibleContext().setAccessibleParent(jLaFechFinManten);
+        jDialCalendarMantenim.getAccessibleContext().setAccessibleParent(jLaFechFinManten);
+
+        jFramePays.setTitle("Cobrar");
+        jFramePays.setMinimumSize(new java.awt.Dimension(400, 300));
+        jFramePays.setPreferredSize(new java.awt.Dimension(400, 300));
+        jFramePays.setType(java.awt.Window.Type.POPUP);
+
+        jLabel3.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Total");
+        jLabel3.setOpaque(true);
+
+        jLabel6.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Efectivo");
+        jLabel6.setOpaque(true);
+
+        jLabel10.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Cambio");
+        jLabel10.setOpaque(true);
+
+        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        jTextField2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jTextField2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jTextField3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
+        jPanel27.setLayout(jPanel27Layout);
+        jPanel27Layout.setHorizontalGroup(
+            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel27Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1))
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField3))
+                    .addGroup(jPanel27Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField2)))
+                .addContainerGap())
+        );
+        jPanel27Layout.setVerticalGroup(
+            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel27Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jButton7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nomina.png"))); // NOI18N
+        jButton7.setText("COBRAR");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jFramePaysLayout = new javax.swing.GroupLayout(jFramePays.getContentPane());
+        jFramePays.getContentPane().setLayout(jFramePaysLayout);
+        jFramePaysLayout.setHorizontalGroup(
+            jFramePaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFramePaysLayout.createSequentialGroup()
+                .addComponent(jPanel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFramePaysLayout.createSequentialGroup()
+                .addGap(0, 216, Short.MAX_VALUE)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+        jFramePaysLayout.setVerticalGroup(
+            jFramePaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFramePaysLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         setPreferredSize(new java.awt.Dimension(1329, 921));
 
@@ -1586,6 +1701,11 @@ public class internoCaja extends javax.swing.JPanel {
 
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cash.png"))); // NOI18N
         jButton15.setText("Cobrar");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         txtResultSum.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         txtResultSum.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -3882,9 +4002,9 @@ public class internoCaja extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton41ActionPerformed
 
     private void jLaFechFinMantenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLaFechFinMantenMousePressed
-        jDialog1.setLocationRelativeTo(this);
-        jDialog1.setVisible(true);
-        jDialog1.setEnabled(true);
+        jDialCalendarMantenim.setLocationRelativeTo(this);
+        jDialCalendarMantenim.setVisible(true);
+        jDialCalendarMantenim.setEnabled(true);
     }//GEN-LAST:event_jLaFechFinMantenMousePressed
 
     private void jCalendar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCalendar1MouseClicked
@@ -3899,7 +4019,7 @@ public class internoCaja extends javax.swing.JPanel {
     private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
         String var = datCtrl.getFechaCal(jCalendar1);
         jLaFechFinManten.setText(var);
-        jDialog1.dispose();       
+        jDialCalendarMantenim.dispose();       
     }//GEN-LAST:event_jButton42ActionPerformed
 
     private void txtBuscAmbulanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscAmbulanteKeyPressed
@@ -3975,7 +4095,8 @@ int oprime = evt.getKeyCode();
         String ini = txtIniManten.getText(),
                 fin = txtFinManten.getText(),
                 multi1 ="",
-                multi2 = "";
+                multi2 = "",
+                tot="";
         String[] arr = null;
         String aux="";
         int numeradorSem=Integer.parseInt(jLabSemsPaysManten.getText());
@@ -3992,10 +4113,13 @@ int oprime = evt.getKeyCode();
           /*obtenemos el producto del numero de tickets por semana que pagara*/
                    multi1 = jLabSemsPaysManten.getText();
                     multi2 = jLabTarifaMantenim.getText();
+                     tot = txtResultSum.getText();
                    BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
                     BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                    BigDecimal amountBasuraMenos = new BigDecimal(tot);//cantidad recivida
+                    
                    jlabImportMantenim.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
-                    jlabImportMantenim.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
+                   txtResultSum.setText(func.getDifference(amountBasuraMenos,amountTwo).toString());
                    System.out.println("Inicio Semana--: "+arr[0]);
              }else{
                  JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
@@ -4031,14 +4155,15 @@ int oprime = evt.getKeyCode();
                    jlabImportMantenim.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
                    txtResultSum.setText(func.getSum(amountTres,amountTwo).toString());
                    System.out.println("Inicio Semana++: "+arr[0]);
-                 // TODO add your handling code here:
+
     }//GEN-LAST:event_jButMantenMooreActionPerformed
 
     private void jButBasuraSubstractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButBasuraSubstractActionPerformed
                 String ini = txtIniBasura.getText(),
                 fin = txtFinBasura.getText(),
                 multi1 ="",
-                multi2 = "";
+                multi2 = "",
+                tot="";
         String[] arr = null;
         String aux="";
         int numeradorSem=Integer.parseInt(jLabSemsPaysBasura.getText());
@@ -4055,9 +4180,13 @@ int oprime = evt.getKeyCode();
           /*obtenemos el producto del numero de tickets por semana que pagara*/
                    multi1 = jLabSemsPaysBasura.getText();
                     multi2 = jLabTarifaBasura.getText();
+                    tot = txtResultSum.getText();
                    BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
                     BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                    BigDecimal amountTresBasurMenos = new BigDecimal(tot);//cantidad recivida
+                    
                    jlabImportBasura.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
+                   txtResultSum.setText(func.getDifference(amountTresBasurMenos,amountTwo).toString());
                    System.out.println("Inicio Semana Basura--: "+arr[0]);
              }else{
                  JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
@@ -4065,14 +4194,15 @@ int oprime = evt.getKeyCode();
     }//GEN-LAST:event_jButBasuraSubstractActionPerformed
 
     private void jButBasuraMooreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButBasuraMooreActionPerformed
-                        String ini = txtIniBasura.getText(),
+                String ini = txtIniBasura.getText(),
                 fin = txtFinBasura.getText(),
                 multi1 ="",
-                multi2 = "";
-        String[] arr = null;
-        String aux="";
-        int numeradorSem=Integer.parseInt(jLabSemsPaysBasura.getText());
-           //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
+                multi2 = "",
+                tot="";
+                String[] arr = null;
+                String aux="";
+                int numeradorSem=Integer.parseInt(jLabSemsPaysBasura.getText());
+                   //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
                     System.out.println("Inicio Semana Basura var-: "+idSemBasura);
                     idSemBasura++;
                     arr = contrl.regSemanas(idSemBasura);
@@ -4084,17 +4214,20 @@ int oprime = evt.getKeyCode();
           /*obtenemos el producto del numero de tickets por semana que pagara*/
                    multi1 = jLabSemsPaysBasura.getText();
                     multi2 = jLabTarifaBasura.getText();
+                     tot = txtResultSum.getText();
                    BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
                     BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                    BigDecimal amountTresBasur = new BigDecimal(tot);//cantidad recivida
                    jlabImportBasura.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
+                       txtResultSum.setText(func.getSum(amountTresBasur,amountTwo).toString());
                    System.out.println("Inicio Semana Basura--: "+arr[0]);
 
     }//GEN-LAST:event_jButBasuraMooreActionPerformed
 
     private void jButPolicSubstractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButPolicSubstractActionPerformed
-                 String ini = txtIniPolic.getText(),
+        String ini = txtIniPolic.getText(),
                 fin = txtFinPolicia.getText(),
-                multi1 ="",
+                multi1 = "",
                 multi2 = "";
         String[] arr = null;
         String aux="";
@@ -4279,6 +4412,24 @@ int oprime = evt.getKeyCode();
                 jlabImportResguard.setText("0.00");
             }
     }//GEN-LAST:event_jChecResguardoActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        if( !jChecMantSem.isSelected() && !jChecBasura.isSelected() &&
+        !jChecPolicia.isSelected() && !jChecResguardo.isSelected()){
+                        JOptionPane.showMessageDialog(null, "Debe elegir almenos un pago.");
+        }else{
+             jFramePays.setLocationRelativeTo(this);
+        jFramePays.setVisible(true);
+        jFramePays.setEnabled(true);
+            
+
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -4663,6 +4814,7 @@ int oprime = evt.getKeyCode();
     private javax.swing.JButton jButton50;
     private javax.swing.JButton jButton51;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton9;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JCheckBox jChecBasura;
@@ -4691,7 +4843,8 @@ int oprime = evt.getKeyCode();
     private com.toedter.calendar.JDateChooser jDateChooser7;
     private com.toedter.calendar.JDateChooser jDateChooser8;
     private com.toedter.calendar.JDateChooser jDateChooser9;
-    private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialCalendarMantenim;
+    private javax.swing.JFrame jFramePays;
     private javax.swing.JLabel jLaFechFinBasura;
     private javax.swing.JLabel jLaFechFinManten;
     private javax.swing.JLabel jLaFechFinPolicia;
@@ -4724,6 +4877,7 @@ int oprime = evt.getKeyCode();
     private javax.swing.JLabel jLabTarifaBasura;
     private javax.swing.JLabel jLabTarifaMantenim;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
     private javax.swing.JLabel jLabel101;
     private javax.swing.JLabel jLabel102;
@@ -4775,6 +4929,7 @@ int oprime = evt.getKeyCode();
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel35;
@@ -4798,6 +4953,7 @@ int oprime = evt.getKeyCode();
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
@@ -4882,6 +5038,7 @@ int oprime = evt.getKeyCode();
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
@@ -4926,6 +5083,7 @@ int oprime = evt.getKeyCode();
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
@@ -4933,10 +5091,12 @@ int oprime = evt.getKeyCode();
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField23;
     private javax.swing.JTextField jTextField26;
     private javax.swing.JTextField jTextField27;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel jlabImportBasura;
     private javax.swing.JLabel jlabImportMantenim;
