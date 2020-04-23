@@ -28,7 +28,6 @@ import javax.swing.JPanel;
 
 
 public class funciones {
-
     
       //VARIABLES PARA CALCULO DE DINERO  
   private static int DECIMALS = 1;
@@ -70,6 +69,45 @@ public class funciones {
            return idUser;
     }//validaloginUsers
     
+     public String[] getnombreUsuario(int id){
+            Connection cn = con2.conexion();
+            String[] idUser = new String[7];
+            String sql = "";
+            sql = "SELECT * FROM usuarios WHERE id = '"+id+"'";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idUser[0]=rs.getString(1);
+                        idUser[1]=rs.getString(2);
+                        idUser[2]=rs.getString(3);
+                        idUser[3]=rs.getString(4);
+                        idUser[4]=rs.getString(5);
+                        idUser[5]=rs.getString(6);
+                        idUser[6]=rs.getString(7);
+                    }else{
+                        for (int j = 0; j < idUser.length; j++) {
+                            idUser[j] = "NO-DATA";
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idUser;
+    }//@endgetnombreUsuario
+            
         public void GuardaTurno(List<String> param){
              java.util.Date date = new Date();
              String timeDate = new java.sql.Timestamp(date.getTime()).toString();
@@ -101,7 +139,43 @@ public class funciones {
                       
           }//@endGuardaTurno
             
-            
+       public String[] lapsoSemanasIni(String fech){
+            Connection cn = con2.conexion();
+           String[] lapso = new String[5];
+            String sql = "";
+            sql = "SELECT * FROM semanas WHERE '"+fech+"' BETWEEN finicial AND ffinal;  ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        lapso[0] = rs.getString(1);
+                        lapso[1]= rs.getString(2);
+                        lapso[2] = rs.getString(3);
+                        lapso[3] = rs.getString(4);
+                        lapso[4] = rs.getString(5);
+                    }else{
+                        for (int i = 0; i < lapso.length; i++) {
+                            lapso[i] = "NO-DATA";
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return lapso;
+    }//validaloginUsers
+
             
     public void limpiar(JPanel Pn)
     {

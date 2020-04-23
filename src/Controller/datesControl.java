@@ -8,6 +8,10 @@ package Controller;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import conexion.ConexionDBOriginal;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +24,8 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
  
 /**
@@ -33,6 +39,7 @@ public class datesControl {
     SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
     
     SimpleDateFormat formatoPrueba = new SimpleDateFormat("yyyy/MM/dd");
+    
     
     public Date StringDate(String fecha){//tenia: java.util.Date
     //    SimpleDateFormat formato_texto = new SimpleDateFormat("dd/MM/yyyy");
@@ -133,7 +140,7 @@ public int semanYear(String dat,int band){
         }
     
     public String getWeekStartDate(String fech) {
-        String fec = fech.replace('-', '/');
+       String fec = fech.replace('-', '/');
          Locale l = new Locale("es","MX");//"es","MX" 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(StringDate(fec));

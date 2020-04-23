@@ -35,15 +35,18 @@ public class login extends javax.swing.JFrame {
     ambulantes ambA = null;
     
 funciones func1 = new funciones();
- int idReturn = 5000;
+ int idReturn = 5000;//Variable para obtener id de usuario del sistema
+ String[] datosUserSys = null;//arreglo para obtener todos los datos de usuario del sistema
+
  
     public login() {
         initComponents();
         
        inicioButton(false);//deshabilitar botones de menu
         jPanMontApert.setVisible(false);
-         jLabNsem.setText(dCon.numSemanaLocal());
-       // jLabLapsoSemana.setText(dCon.getWeekStartDate("")+" - "+dCon.getWeekEndDate(""));
+      
+         letreroSems();
+  
     }
 
     /**
@@ -93,16 +96,18 @@ funciones func1 = new funciones();
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabUserNombre = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Central");
 
         jLabNsem.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jLabNsem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabNsem.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabNsem.setAutoscrolls(true);
 
         jLabLapsoSemana.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabLapsoSemana.setText("5 abr. al 11 abr. 2020");
+        jLabLapsoSemana.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabLapsoSemana.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
@@ -414,7 +419,7 @@ funciones func1 = new funciones();
             .addGroup(jPanTrabajoLayout.createSequentialGroup()
                 .addGap(217, 217, 217)
                 .addComponent(jLaylogInt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         jPanMenuPrincipal.setBackground(new java.awt.Color(255, 255, 255));
@@ -555,6 +560,11 @@ funciones func1 = new funciones();
                 .addComponent(jPanTrabajo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabUserNombre.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabUserNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabUserNombre.setText("--");
+        jLabUserNombre.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -563,7 +573,10 @@ funciones func1 = new funciones();
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabUserNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabNsem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -580,7 +593,8 @@ funciones func1 = new funciones();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabLapsoSemana))
+                    .addComponent(jLabLapsoSemana)
+                    .addComponent(jLabUserNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane1))
         );
@@ -596,8 +610,10 @@ funciones func1 = new funciones();
         String user = txtUserLogin.getText(),
             pass=txtContraseña.getText();
             idReturn = func1.validaLoginUsers(user,pass);
+            datosUserSys= func1.getnombreUsuario(idReturn);
           System.out.println("Regreso"+idReturn);
-            if(idReturn > -1 && idReturn < 5000){
+            if(idReturn > -1 && idReturn < 5000 && !datosUserSys[0].equals("NO-DATA")){
+                jLabUserNombre.setText(datosUserSys[2]);
                 jPanLogin.setVisible(false);
                 jPanMontApert.setVisible(true);
                 jPanMontApert.setEnabled(true);
@@ -618,7 +634,6 @@ funciones func1 = new funciones();
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
          List<String> contentL = new ArrayList<String>();
-        
         String monto1 = txtMontoaper1.getText(),
                 monto2 = txtMontoaper2.getText();
         
@@ -633,7 +648,7 @@ funciones func1 = new funciones();
             func1.GuardaTurno(contentL);
             
            func1.limpiar(jPanTrabajo);
-            inicioButton(true);
+            inicioButton(true);//habilitar todos los botones del menucontent
             
             iCaj = new internoCaja();
             
@@ -744,6 +759,16 @@ funciones func1 = new funciones();
         });
     } 
     
+    private void letreroSems(){
+        String arr[] = func1.lapsoSemanasIni(dCon.setDateActual());
+        jLabNsem.setText("Semana "+arr[2]);
+        jLabLapsoSemana.setText(dCon.getWeekStartDate(arr[3])+" - "+dCon.getWeekStartDate(arr[4]));
+        
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+    }
+    
     private void inicioButton(boolean act){
         jButton2.setEnabled(act);
         jButton3.setEnabled(act);
@@ -768,6 +793,7 @@ funciones func1 = new funciones();
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabLapsoSemana;
     private javax.swing.JLabel jLabNsem;
+    private javax.swing.JLabel jLabUserNombre;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
