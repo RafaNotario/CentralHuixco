@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  
 /**
  *
- * @author monit
+ * @author Antonio R. Notario Rodriguez
  */
 public class datesControl {
     
@@ -119,25 +119,16 @@ public int semanYear(String dat,int band){
       System.out.println("first dayWeek:" + cF.getFirstDayOfWeek());
        cF.setFirstDayOfWeek(Calendar.MONDAY);
       System.out.println("first dayWeek2:" + cF.getMinimalDaysInFirstWeek());
-       
        cF.setTime(StringDate(fech));
-        // 
-        //
-        
        System.out.println("TextStyle.FULL:" + cF.getDisplayName(Calendar.MONTH,Calendar.SHORT, l) + " "+cF.get(Calendar.DAY_OF_MONTH)); 
       // System.out.println("TextStyle.NARROW:" + lunes.getDisplayName(TextStyle.NARROW, l)); 
        //System.out.println("TextStyle.SHORT:" + lunes.getDisplayName(TextStyle.SHORT, l)); 
-       
        System.out.println("FORMATOTE: "+dfE.format(StringDate(fech)));//new Date()
-       
        System.out.println("DayWeek: "+ cF.get(Calendar.DAY_OF_WEEK) );
-       
        System.out.println("WeekofYear : "+ cF.get(Calendar.WEEK_OF_YEAR)+" Calendar"+Calendar.SUNDAY);
-       
        cF.add(Calendar.WEEK_OF_YEAR, 1);
-       
        System.out.println("WeekofYear +1: "+ cF.get(Calendar.WEEK_OF_YEAR));
-        }
+}
     
     public String getWeekStartDate(String fech) {
        String fec = fech.replace('-', '/');
@@ -178,16 +169,6 @@ public String lapsoSem(String fech,int numSem){
     String var = "";
     int mes =0;
     String mesU ="";
-/*
-    c.clear();
-    c.set(Calendar.YEAR, 2014);
-    c.set(Calendar.WEEK_OF_YEAR, 1);
-    System.out.printf("Fecha del Lunes: %te-%<tm-%<ty%n", c.getTime());
-    System.out.printf("Semana del mes (%tB %<tY): %d%n", c.getTime(), c.get(Calendar.WEEK_OF_MONTH));
-    c.add(Calendar.DAY_OF_YEAR, 6);
-    System.out.printf("Fecha del Domingo: %te-%<tm-%<ty%n", c.getTime());
-    System.out.printf("Semana del mes (%tB %<tY): %d%n", c.getTime(), c.get(Calendar.WEEK_OF_MONTH));
-*/
     c.clear();
     c.set(Calendar.YEAR, 2049);
     c.set(Calendar.WEEK_OF_YEAR, 40);
@@ -207,7 +188,19 @@ public String lapsoSem(String fech,int numSem){
     //System.out.printf("Semana del mes (%tB %<tY): %d%n", c.getTime(), c.get(Calendar.WEEK_OF_YEAR));
     return var;
 }
+
+public String getHour(){
+    Calendar calendario = Calendar.getInstance();    
+    int hora, minutos, segundos;
+    hora =calendario.get(Calendar.HOUR_OF_DAY);
+    minutos = calendario.get(Calendar.MINUTE);
+    segundos = calendario.get(Calendar.SECOND);
+    String hor = Integer.toString(hora)+":"+Integer.toString(minutos)+":"+Integer.toString(segundos);
+    return hor;
+}
     
+
+
     public static void main(String argv[]){
         datesControl dC = new datesControl();
         
@@ -215,7 +208,9 @@ public String lapsoSem(String fech,int numSem){
           
     //    dC.jLocalFechas("2020/04/13");
         System.out.println("PRUEBAS DE STACKOVERFLOW");
-        System.out.println("Semana ini: "+dC.getWeekStartDate("2050-12-05"));
+        
+        System.out.println("La hora es : "+dC.getHour());
+       System.out.println("La fecha es : "+dC.setDateActual());
        // System.out.println("Semana fin: "+dC.getWeekEndDate("2020/03/23"));
         //System.out.println("Lapso"+dC.lapsoSem("",1));
        // dC.lapsoSem("",0);

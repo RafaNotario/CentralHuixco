@@ -103,9 +103,9 @@ public class internoCaja extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtTotCobro = new javax.swing.JTextField();
+        txtEfect = new javax.swing.JTextField();
+        txtCambio = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -218,7 +218,6 @@ public class internoCaja extends javax.swing.JPanel {
         jButton15 = new javax.swing.JButton();
         txtResultSum = new javax.swing.JTextField();
         jLabel46 = new javax.swing.JLabel();
-        jDateChooser11 = new com.toedter.calendar.JDateChooser();
         jPanCargadores = new javax.swing.JPanel();
         jLayeredPane4 = new javax.swing.JLayeredPane();
         jPanCargadorInscr = new javax.swing.JPanel();
@@ -517,14 +516,27 @@ public class internoCaja extends javax.swing.JPanel {
         jLabel10.setText("Cambio");
         jLabel10.setOpaque(true);
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTotCobro.setEditable(false);
+        txtTotCobro.setBackground(new java.awt.Color(255, 255, 255));
+        txtTotCobro.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        txtTotCobro.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTotCobro.setText("0.00");
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtEfect.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        txtEfect.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtEfect.setText("0.00");
+        txtEfect.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEfectKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEfectKeyReleased(evt);
+            }
+        });
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtCambio.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        txtCambio.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtCambio.setText("0.00");
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
@@ -536,15 +548,15 @@ public class internoCaja extends javax.swing.JPanel {
                     .addGroup(jPanel27Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1))
+                        .addComponent(txtTotCobro))
                     .addGroup(jPanel27Layout.createSequentialGroup()
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3))
+                        .addComponent(txtCambio))
                     .addGroup(jPanel27Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2)))
+                        .addComponent(txtEfect)))
                 .addContainerGap())
         );
         jPanel27Layout.setVerticalGroup(
@@ -552,16 +564,16 @@ public class internoCaja extends javax.swing.JPanel {
             .addGroup(jPanel27Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                    .addComponent(txtTotCobro, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+                    .addComponent(txtEfect, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+                    .addComponent(txtCambio, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -592,7 +604,7 @@ public class internoCaja extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1168,18 +1180,18 @@ public class internoCaja extends javax.swing.JPanel {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabSemsPaysBasura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabSemsPaysBasura, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel19)
-                            .addComponent(jLabel20))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(9, 9, 9)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jlabImportBasura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabTarifaBasura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(jLabTarifaBasura))))
+                .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1407,18 +1419,18 @@ public class internoCaja extends javax.swing.JPanel {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel29)
+                    .addComponent(jLabel30)
+                    .addComponent(jLabel31))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabSemsPaysPolis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabSemsPaysPolis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel30)
-                            .addComponent(jLabel31))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(11, 11, 11)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jlabImportPolicia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabTarifPolicia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(jLabTarifPolicia))))
+                .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1730,8 +1742,7 @@ public class internoCaja extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanAreascobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanAreascobrosLayout.createSequentialGroup()
-                        .addComponent(jDateChooser11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtResultSum, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1764,8 +1775,7 @@ public class internoCaja extends javax.swing.JPanel {
                 .addGroup(jPanAreascobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtResultSum)
-                    .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateChooser11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(155, Short.MAX_VALUE))
         );
 
@@ -4111,14 +4121,14 @@ int oprime = evt.getKeyCode();
                    jLaFechFinManten.setText(aux);       
                    jLabSemsPaysManten.setText(Integer.toString(numeradorSem-1));
           /*obtenemos el producto del numero de tickets por semana que pagara*/
-                   multi1 = jLabSemsPaysManten.getText();
+                   multi1 = jlabImportMantenim.getText();
                     multi2 = jLabTarifaMantenim.getText();
                      tot = txtResultSum.getText();
                    BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
                     BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
                     BigDecimal amountBasuraMenos = new BigDecimal(tot);//cantidad recivida
                     
-                   jlabImportMantenim.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
+                   jlabImportMantenim.setText(func.getDifference(amountOne, amountTwo).toString());
                    txtResultSum.setText(func.getDifference(amountBasuraMenos,amountTwo).toString());
                    System.out.println("Inicio Semana--: "+arr[0]);
              }else{
@@ -4178,16 +4188,17 @@ int oprime = evt.getKeyCode();
                    jLaFechFinBasura.setText(aux);       
                    jLabSemsPaysBasura.setText(Integer.toString(numeradorSem-1));
           /*obtenemos el producto del numero de tickets por semana que pagara*/
-                   multi1 = jLabSemsPaysBasura.getText();
-                    multi2 = jLabTarifaBasura.getText();
-                    tot = txtResultSum.getText();
+                   multi1 = jlabImportBasura.getText();
+                   multi2 = jLabTarifaBasura.getText();
+                   tot = txtResultSum.getText();
                    BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
-                    BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
-                    BigDecimal amountTresBasurMenos = new BigDecimal(tot);//cantidad recivida
+                   BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                   BigDecimal amountTresBasurMenos = new BigDecimal(tot);//cantidad recivida
                     
-                   jlabImportBasura.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
+                   jlabImportBasura.setText(func.getDifference(amountOne, amountTwo).toString());
                    txtResultSum.setText(func.getDifference(amountTresBasurMenos,amountTwo).toString());
                    System.out.println("Inicio Semana Basura--: "+arr[0]);
+
              }else{
                  JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
              }
@@ -4228,7 +4239,8 @@ int oprime = evt.getKeyCode();
         String ini = txtIniPolic.getText(),
                 fin = txtFinPolicia.getText(),
                 multi1 = "",
-                multi2 = "";
+                multi2 = "",
+                tot="";
         String[] arr = null;
         String aux="";
         int numeradorSem=Integer.parseInt(jLabSemsPaysPolis.getText());
@@ -4243,11 +4255,16 @@ int oprime = evt.getKeyCode();
                    jLaFechFinPolicia.setText(aux);       
                    jLabSemsPaysPolis.setText(Integer.toString(numeradorSem-1));
           /*obtenemos el producto del numero de tickets por semana que pagara*/
-                   multi1 = jLabSemsPaysPolis.getText();
+                   multi1 = jlabImportPolicia.getText();
                     multi2 = jLabTarifPolicia.getText();
+                    tot = txtResultSum.getText();
                    BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
                     BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
-                   jlabImportPolicia.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
+                    BigDecimal amountPoliceMenos = new BigDecimal(tot);//cantidad recivida
+                    
+                   jlabImportPolicia.setText(func.getDifference(amountOne, amountTwo).toString());
+                   txtResultSum.setText(func.getDifference(amountPoliceMenos,amountTwo).toString());
+                   
                    System.out.println("Inicio Semana Policia--: "+arr[0]);
              }else{
                  JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
@@ -4258,7 +4275,8 @@ int oprime = evt.getKeyCode();
                  String ini = txtIniPolic.getText(),
                 fin = txtFinPolicia.getText(),
                 multi1 ="",
-                multi2 = "";
+                multi2 = "",
+                tot="";
         String[] arr = null;
         String aux="";
         int numeradorSem=Integer.parseInt(jLabSemsPaysPolis.getText());
@@ -4273,11 +4291,14 @@ int oprime = evt.getKeyCode();
                    jLaFechFinPolicia.setText(aux);       
                    jLabSemsPaysPolis.setText(Integer.toString(numeradorSem+1));
           /*obtenemos el producto del numero de tickets por semana que pagara*/
-                   multi1 = jLabSemsPaysPolis.getText();
+                   multi1 = jlabImportPolicia.getText();
                     multi2 = jLabTarifPolicia.getText();
+                    tot = txtResultSum.getText();
                    BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
                     BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
-                   jlabImportPolicia.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
+                    BigDecimal amountTresPolice = new BigDecimal(tot);//cantidad total
+                   jlabImportPolicia.setText(func.getSum(amountOne, amountTwo).toString());
+                   txtResultSum.setText(func.getSum(amountTresPolice,amountTwo).toString());
                    System.out.println("Inicio Semana Policia--: "+arr[0]);
            
              
@@ -4287,7 +4308,8 @@ int oprime = evt.getKeyCode();
                 String ini = txtIniResg.getText(),
                 fin = txtFinResguard.getText(),
                 multi1 ="",
-                multi2 = "";
+                multi2 = "",multi3="",
+                tot ="";
         String[] arr = null;
         String aux="";
         int numeradorSem=Integer.parseInt(jLabSemsPaysResg.getText());
@@ -4299,15 +4321,24 @@ int oprime = evt.getKeyCode();
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
                   
                    txtFinResguard.setText(arr[2]);
-                   jLaFechFinResguard.setText(aux);       
+                   jLaFechFinResguard.setText(aux);//ponemos el formato 3 may. - 11 may.   
                    jLabSemsPaysResg.setText(Integer.toString(numeradorSem-1));
           /*obtenemos el producto del numero de tickets por semana que pagara*/
-                    multi1 = jLabSemsPaysResg.getText();
+                    multi1 = jlabImportResguard.getText();
                     multi2 = jLabTarifResguard.getText();
-                    BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
-                    BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
-                   jlabImportResguard.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
-                   System.out.println("Inicio Semana Policia--: "+arr[0]);
+                    multi3 = jLabSemsPaysResg.getText();
+                    if(multi3.equals("0")){
+                        JOptionPane.showMessageDialog(null, "Semanas a pagar = 0, \n Verifique por favor");
+                    }else{
+                        tot = txtResultSum.getText();//obtenemos el total a cobrar
+                        BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
+                        BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                        BigDecimal amountTresResg = new BigDecimal(tot);//cantidad recivida
+                        
+                        jlabImportResguard.setText(func.getDifference(amountOne, amountTwo).toString());
+                         txtResultSum.setText(func.getDifference(amountTresResg,amountTwo).toString());
+                        System.out.println("Inicio Semana Resguardo--: "+arr[0]);
+                    }
              }else{
                  JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
              }
@@ -4318,7 +4349,8 @@ int oprime = evt.getKeyCode();
          String ini = txtIniResg.getText(),
                 fin = txtFinResguard.getText(),
                 multi1 ="",
-                multi2 = "";
+                multi2 = "",
+                 tot="";
         String[] arr = null;
         String aux="";
         int numeradorSem=Integer.parseInt(jLabSemsPaysResg.getText());
@@ -4334,50 +4366,65 @@ int oprime = evt.getKeyCode();
           /*obtenemos el producto del numero de tickets por semana que pagara*/
                     multi1 = jLabSemsPaysResg.getText();
                     multi2 = jLabTarifResguard.getText();
+                    tot = txtResultSum.getText();
                     BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
                     BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                    BigDecimal amountTresResg = new BigDecimal(tot);//cantidad recivida
                    jlabImportResguard.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
+                   txtResultSum.setText(func.getSum(amountTresResg,amountTwo).toString());
                    System.out.println("Inicio Semana Resguard--: "+arr[0]);
     }//GEN-LAST:event_jButResguardMooreActionPerformed
 
     private void jChecMantSemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChecMantSemActionPerformed
             String tot = txtResultSum.getText(),
-                    costMant = jLabTarifaMantenim.getText();/*Hacer suma de total Total*/
+                    costMant = jLabTarifaMantenim.getText(),
+                    numSemanas = "";/*Hacer suma de total Total*/
+            
             BigDecimal amountOne = new BigDecimal(tot);
             BigDecimal amountTwo = new BigDecimal(costMant);//cantidad recivida
-
+ 
+            
             if(jChecMantSem.isSelected()){
-                txtResultSum.setText(func.getSum(amountOne, amountTwo).toString());
                 jButMantenSubstract.setEnabled(true);
                 jButMantenMoore.setEnabled(true);
                  jLabSemsPaysManten.setText("1");
+                numSemanas = jLabSemsPaysManten.getText();
+                BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
+                txtResultSum.setText(func.getSum(amountOne, func.multiplicaAmount(amountTwo, amountTres)).toString());
                  jlabImportMantenim.setText(jLabTarifaMantenim.getText());
             }else{
                 jButMantenSubstract.setEnabled(false);
                 jButMantenMoore.setEnabled(false);
-                txtResultSum.setText(func.getDifference(amountOne, amountTwo).toString());
+                numSemanas = jLabSemsPaysManten.getText();
+                BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
+                txtResultSum.setText(func.getDifference(amountOne, func.multiplicaAmount(amountTwo, amountTres)).toString());
                 jLabSemsPaysManten.setText("1");
                 jlabImportMantenim.setText("0.00");
           }
     }//GEN-LAST:event_jChecMantSemActionPerformed
 
     private void jChecBasuraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChecBasuraActionPerformed
-            
          String tot = txtResultSum.getText(),
-                    costMant = jLabTarifaBasura.getText();/*Hacer suma de total Total*/
-            BigDecimal amountOne = new BigDecimal(tot);
+                    costMant = jLabTarifaBasura.getText(),
+                 numSemanas = "";/*Hacer suma de total Total*/
+
+         BigDecimal amountOne = new BigDecimal(tot);
             BigDecimal amountTwo = new BigDecimal(costMant);//cantidad recivida
+ 
          if(jChecBasura.isSelected()){
-            txtResultSum.setText(func.getSum(amountOne, amountTwo).toString());
-                
                 jButBasuraSubstract.setEnabled(true);
                 jButBasuraMoore.setEnabled(true);
                  jLabSemsPaysBasura.setText("1");
+                 numSemanas = jLabSemsPaysBasura.getText();
+                 BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad totalonas
+                 txtResultSum.setText(func.getSum(amountOne, func.multiplicaAmount(amountTwo, amountTres)).toString());
                  jlabImportBasura.setText(jLabTarifaBasura.getText());
             }else{
                 jButBasuraSubstract.setEnabled(false);
                 jButBasuraMoore.setEnabled(false);
-                txtResultSum.setText(func.getDifference(amountOne, amountTwo).toString());
+                numSemanas = jLabSemsPaysBasura.getText();
+                BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad totalonas
+                txtResultSum.setText(func.getDifference(amountOne, func.multiplicaAmount(amountTwo, amountTres)).toString());
                 jLabSemsPaysBasura.setText("0");
                 jlabImportBasura.setText("0.00");
             }
@@ -4385,29 +4432,58 @@ int oprime = evt.getKeyCode();
     }//GEN-LAST:event_jChecBasuraActionPerformed
 
     private void jChecPoliciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChecPoliciaActionPerformed
-              if(jChecPolicia.isSelected()){
-                jButPolicSubstract.setEnabled(true);
-                jButPolicMoore.setEnabled(true);
+            String tot = txtResultSum.getText(),
+            costMant = jLabTarifPolicia.getText(),
+            numSemanas = "";/*Hacer suma de total Total*/
+            
+            BigDecimal amountOne = new BigDecimal(tot);
+            BigDecimal amountTwo = new BigDecimal(costMant);//cantidad recivida
+
+        if(jChecPolicia.isSelected()){
+                 jButPolicSubstract.setEnabled(true);
+                 jButPolicMoore.setEnabled(true);
                  jLabSemsPaysPolis.setText("1");
+                 
+                 numSemanas = jLabSemsPaysPolis.getText();
+                 BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
+                 txtResultSum.setText(func.getSum(amountOne, func.multiplicaAmount(amountTwo, amountTres)).toString());
                  jlabImportPolicia.setText(jLabTarifPolicia.getText());
-            }else{
+        }else{
                 jButPolicSubstract.setEnabled(false);
                 jButPolicMoore.setEnabled(false);
+                
+                 numSemanas = jLabSemsPaysPolis.getText();
+                 BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
+                txtResultSum.setText(func.getDifference(amountOne, func.multiplicaAmount(amountTwo, amountTres)).toString());
                 jLabSemsPaysPolis.setText("0");
                 jlabImportPolicia.setText("0.00");
             }
     }//GEN-LAST:event_jChecPoliciaActionPerformed
 
     private void jChecResguardoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChecResguardoActionPerformed
-        
+          String tot = txtResultSum.getText(),
+                    costMant = jLabTarifResguard.getText(),
+                    numSemanas = "";/*Hacer suma de total Total*/
+          
+            BigDecimal amountOne = new BigDecimal(tot);
+            BigDecimal amountTwo = new BigDecimal(costMant);//cantidad recivida
+  
          if(jChecResguardo.isSelected()){
+              
                 jButResguardSubstarct.setEnabled(true);
                 jButResguardMoore.setEnabled(true);
                  jLabSemsPaysResg.setText("1");
-                 jlabImportResguard.setText(jLabTarifResguard.getText());
+                 
+                  numSemanas = jLabSemsPaysResg.getText();
+                  BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
+                  txtResultSum.setText(func.getSum(amountOne, func.multiplicaAmount(amountTwo, amountTres)).toString());
+                  jlabImportResguard.setText(jLabTarifResguard.getText());
             }else{
                 jButResguardSubstarct.setEnabled(false);
                 jButResguardMoore.setEnabled(false);
+                  numSemanas = jLabSemsPaysResg.getText();
+                  BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
+                txtResultSum.setText(func.getDifference(amountOne, func.multiplicaAmount(amountTwo, amountTres)).toString());
                 jLabSemsPaysResg.setText("0");
                 jlabImportResguard.setText("0.00");
             }
@@ -4416,20 +4492,85 @@ int oprime = evt.getKeyCode();
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         if( !jChecMantSem.isSelected() && !jChecBasura.isSelected() &&
         !jChecPolicia.isSelected() && !jChecResguardo.isSelected()){
-                        JOptionPane.showMessageDialog(null, "Debe elegir almenos un pago.");
+            JOptionPane.showMessageDialog(null, "Debe elegir almenos un pago.");
         }else{
-             jFramePays.setLocationRelativeTo(this);
-        jFramePays.setVisible(true);
-        jFramePays.setEnabled(true);
-            
-
+            jFramePays.setLocationRelativeTo(this);
+            jFramePays.setVisible(true);
+            jFramePays.setEnabled(true);
+            String total = txtResultSum.getText();//es el total
+            txtTotCobro.setText(total);
+            txtEfect.setText(total);
+            txtEfect.requestFocus(true);
+            txtEfect.selectAll();
+            jButton7.setEnabled(false);
         }
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        String[] arr = new String[7]; 
+        int isUltimTick = func.getUltimPagoarea(),//Se aumenta porq la columna no es increment
+                   isTurnoUlt = func.getenTurno();
+          String fech = datCtrl.setDateActual(),
+                   ora = datCtrl.getHour(),
+                   total = txtResultSum.getText(),
+                   idAr = conten.get(jCmBxgetAreas.getSelectedIndex()),
+                  efectiv = txtEfect.getText();
+          arr[0] = Integer.toString(isUltimTick);
+          arr[1] = Integer.toString(isTurnoUlt);
+          arr[2] = fech;
+          arr[3] = ora;
+          arr[4] = idAr;
+          arr[5] = total;
+          arr[6] = efectiv;
+          for (int i = 0; i < arr.length; i++) {
+              System.out.println(arr[i]);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void txtEfectKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEfectKeyPressed
+ 
+    }//GEN-LAST:event_txtEfectKeyPressed
+
+    private void txtEfectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEfectKeyReleased
+            int var = evt.getKeyCode();
+             System.out.println("Oprimio #"+ var);
+            if ( (var > 47 && var < 58) || (var > 95 && var < 106) || var == 10 || var ==8 || var ==127 || var == 37 || var == 39
+                    || var == 46 || var == 110) {//si oprime numero o Enter
+                String difer = txtEfect.getText(),
+                        total = txtTotCobro.getText();
+                BigDecimal amountOne = new BigDecimal(total);
+                BigDecimal amountTwo = new BigDecimal(difer);
+/*CompareTo: 
+                0 : Si amountOne == parametro
+                1: Si amountOne > parametro 
+                -1: Si amountOne < parametro
+*/
+                if(amountOne.compareTo(amountTwo) <= 0){
+                    jButton7.setEnabled(true);
+                    txtCambio.setText(func.getDifference(amountTwo, amountOne).toString());
+                    if(var == KeyEvent.VK_ENTER ){
+                       jButton7.doClick();
+                    }  
+                }else{
+                     txtCambio.setText(func.getDifference(amountTwo, amountOne).toString());
+                     jButton7.setEnabled(false);
+                }
+                
+                             
+
+            }else{
+                     JOptionPane.showMessageDialog(null, "Solo acepta numeros");
+                     txtEfect.setText(txtTotCobro.getText());
+             }
+             
+             
+  /*           if(var == KeyEvent.VK_ENTER ){
+                 
+                 JOptionPane.showMessageDialog(null, "Guardar");
+           }
+*/
+  
+    }//GEN-LAST:event_txtEfectKeyReleased
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -4834,7 +4975,6 @@ int oprime = evt.getKeyCode();
     private javax.swing.JComboBox<String> jComboBox6;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser10;
-    private com.toedter.calendar.JDateChooser jDateChooser11;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
@@ -5083,7 +5223,6 @@ int oprime = evt.getKeyCode();
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
@@ -5091,12 +5230,10 @@ int oprime = evt.getKeyCode();
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField23;
     private javax.swing.JTextField jTextField26;
     private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel jlabImportBasura;
     private javax.swing.JLabel jlabImportMantenim;
@@ -5104,6 +5241,8 @@ int oprime = evt.getKeyCode();
     private javax.swing.JLabel jlabImportResguard;
     private javax.swing.JTextField txtBuscAmbulante;
     private javax.swing.JTextField txtBuscCargadores;
+    private javax.swing.JTextField txtCambio;
+    private javax.swing.JTextField txtEfect;
     private javax.swing.JTextField txtFinBasura;
     private javax.swing.JTextField txtFinManten;
     private javax.swing.JTextField txtFinPolicia;
@@ -5113,5 +5252,6 @@ int oprime = evt.getKeyCode();
     private javax.swing.JTextField txtIniPolic;
     private javax.swing.JTextField txtIniResg;
     private javax.swing.JTextField txtResultSum;
+    private javax.swing.JTextField txtTotCobro;
     // End of variables declaration//GEN-END:variables
 }

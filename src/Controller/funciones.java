@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author monit
+ * @author Antonio R. Notario Rodriguez
  */
 
 
@@ -136,7 +136,6 @@ public class funciones {
                       JOptionPane.showMessageDialog(null, ex.getMessage() );    
                     }                
             }//finally catch  
-                      
           }//@endGuardaTurno
             
        public String[] lapsoSemanasIni(String fech){
@@ -176,7 +175,70 @@ public class funciones {
            return lapso;
     }//validaloginUsers
 
-            
+       
+       ///*** Obtener ultimo turno creado
+     public int getenTurno(){
+            Connection cn = con2.conexion();
+            int idTurno = -1;
+            String sql = "";
+            sql = "SELECT id FROM turnos ORDER BY id DESC LIMIT 1; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idTurno = rs.getInt(1);
+                    }else{
+                         idTurno = -1;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idTurno;
+    }//@endgetenTurno
+     
+          public int getUltimPagoarea(){
+            Connection cn = con2.conexion();
+            int idTurno = -1;
+            String sql = "";
+            sql = "SELECT id FROM pagos_areas ORDER BY id DESC LIMIT 1; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idTurno = rs.getInt(1);
+                    }else{
+                         idTurno = -1;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idTurno;
+    }//@endgetUltimPagoarea
+     
     public void limpiar(JPanel Pn)
     {
         Pn.removeAll();
@@ -216,7 +278,10 @@ public class funciones {
            public static void main(String args[]){
                funciones fn =  new funciones();
               java.util.Date date = new Date();
-               System.out.println("Guardare en TIMESTAMP: "+new java.sql.Timestamp(date.getTime() ) );
-          
+              
+              System.out.println("Guardare en TIMESTAMP: "+new java.sql.Timestamp(date.getTime() ) );
+              System.out.println("en turno #:"+ fn.getenTurno());
+              System.out.println("Ultimo pago area: #"+fn.getUltimPagoarea());
+
            }
 }
