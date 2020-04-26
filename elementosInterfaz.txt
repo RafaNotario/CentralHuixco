@@ -88,12 +88,27 @@ jLabObserva
 	jlabImportPolicia
 	jlabImportResguard
 
+	jButMantenSubstract
+	jButMantenMoore
+	jButBasuraSubstract
+	jButBasuraMoore
+	jButPolicSubstract
+	jButPolicMoore
+	jButResguardSubstarct
+	jButResguardMoore
+
 	txtResultSum   Total a cobrar de areas semanal
 
-	// ***** interno pago areas semanal
+// ***** interno pago areas semanal
 	txtTotCobro
 	txtEfect
 	txtCambio
+
+// ***** txts para guradra is semana ocultos
+	txtMantenIdSem
+	txtBasurIdSem
+	txtPoliciaIdSem
+	txtResguardIdSem
 
 //PANEL DE areas.java
 
@@ -105,36 +120,3 @@ jLabObserva
 
 @jPanSociosView
 
-	       String ini = txtIniPolic.getText(),
-                fin = txtFinPolicia.getText(),
-                multi1 = "",
-                multi2 = "",
-                tot="";
-        String[] arr = null;
-        String aux="";
-        int numeradorSem=Integer.parseInt(jLabSemsPaysPolis.getText());
-           //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
-             if(Integer.parseInt(ini) < Integer.parseInt(fin)){
-                    System.out.println("Inicio Semana policia var-: "+idSemPolicia);
-                    idSemPolicia--;
-                    arr = contrl.regSemanas(idSemPolicia);
-                    aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
-                  
-                   txtFinPolicia.setText(arr[2]);
-                   jLaFechFinPolicia.setText(aux);       
-                   jLabSemsPaysPolis.setText(Integer.toString(numeradorSem-1));
-          /*obtenemos el producto del numero de tickets por semana que pagara*/
-                   multi1 = jlabImportPolicia.getText();
-                    multi2 = jLabTarifPolicia.getText();
-                    tot = txtResultSum.getText();
-                   BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
-                    BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
-                    BigDecimal amountPoliceMenos = new BigDecimal(tot);//cantidad recivida
-                    
-                   jlabImportPolicia.setText(func.getDifference(amountOne, amountTwo).toString());
-                   txtResultSum.setText(func.getDifference(amountPoliceMenos,amountTwo).toString());
-                   
-                   System.out.println("Inicio Semana Policia--: "+arr[0]);
-             }else{
-                 JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
-             }

@@ -13,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import conexion.ConexionDBOriginal;
 import Controller.datesControl;
+import java.sql.PreparedStatement;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -42,7 +44,7 @@ public int regLastTicket(int idT){
         try {
             st = cn.createStatement();
             rs = st.executeQuery(sql);
-            rs.beforeFirst();
+            //rs.beforeFirst();
             while(rs.next())
             {
                 tic = rs.getInt(1);
@@ -117,16 +119,14 @@ return mat;
 public String[] regSemanas(int idS){
     int tic =0;
     Connection cn = con2.conexion();
-       
         String[] arr = new String[5];
-       
         String sql = "SELECT * FROM semanas WHERE id = '"+idS+"';";
         Statement st = null;
         ResultSet rs= null;
         try {
             st = cn.createStatement();
             rs = st.executeQuery(sql);
-            rs.beforeFirst();
+            //rs.beforeFirst();
             while(rs.next())
             {
                 arr[0] = rs.getString(1);
@@ -159,7 +159,7 @@ public String[] regOpsareas(int idA){
         try {
             st = cn.createStatement();
             rs = st.executeQuery(sql);
-            rs.beforeFirst();
+           // rs.beforeFirst();
             while(rs.next())
             {
                 arr[0] = rs.getString(1);
@@ -191,13 +191,13 @@ public int regLastTicket2(int idA,int idcuo){
                             "INNER JOIN\n" +
                             "pagos_areasdet\n" +
                             "ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areasdet.idRubroPago = '"+idcuo+"'\n" +
-                            "ORDER BY pagos_areas.fecha desc limit 1;";
+                            "ORDER BY pagos_areas.id desc limit 1;";
         Statement st = null;
         ResultSet rs= null;
         try {
             st = cn.createStatement();
             rs = st.executeQuery(sql);
-            rs.beforeFirst();
+          //  rs.beforeFirst();
             while(rs.next())
             {
                 tic = rs.getInt(1);
@@ -207,6 +207,7 @@ public int regLastTicket2(int idA,int idcuo){
         }finally{
                     try {
                         if(cn != null) cn.close();
+                        
                     } catch (SQLException ex) {
                         System.err.println( ex.getMessage() );    
                     }
@@ -226,7 +227,7 @@ public String[] regPaysAreasdet(int idT, int idrub){
         try {
             st = cn.createStatement();
             rs = st.executeQuery(sql);
-            rs.beforeFirst();
+           // rs.beforeFirst();
             while(rs.next())
             {
                 arr[0] = rs.getString(1);
@@ -239,6 +240,7 @@ public String[] regPaysAreasdet(int idT, int idrub){
             Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
                     try {
+                        
                         if(cn != null) cn.close();
                     } catch (SQLException ex) {
                         System.err.println( ex.getMessage() );    
@@ -246,6 +248,67 @@ public String[] regPaysAreasdet(int idT, int idrub){
                 }
     return arr;
 }//FinRegpagosAreasdet
+
+public void guardaTicketArea(String[] param){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";        
+
+                SQL="INSERT INTO pagos_areas (id,idTurno,fecha,hora,idArea,total,efectivo) VALUES (?,?,?,?,?,?,?)";                           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param[0]);
+                pps.setString(2, param[1]);
+                pps.setString(3, param[2]);
+                pps.setString(4, param[3]);
+                pps.setString(5, param[4]);
+                pps.setString(6, param[5]);
+                pps.setString(7, param[6]);
+                
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Pedido guardado correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+    
+} //guardaTicketArea
+
+public void guardadetailTicketArea(String[] param){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";        
+                SQL="INSERT INTO pagos_areasdet (idTicket,item,idSemana,idRubroPago,importe) VALUES (?,?,?,?,?)";                           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param[0]);
+                pps.setString(2, param[1]);
+                pps.setString(3, param[2]);
+                pps.setString(4, param[3]);
+                pps.setString(5, param[4]);
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Pedido guardado correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+} //@endguardadetailTicketArea
 
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();

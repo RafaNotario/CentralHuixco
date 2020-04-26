@@ -122,7 +122,7 @@ public class internoCaja extends javax.swing.JPanel {
         jTextField10 = new javax.swing.JTextField();
         jButton16 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTabviewPays = new javax.swing.JTable();
         jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
@@ -131,12 +131,13 @@ public class internoCaja extends javax.swing.JPanel {
         jPanAreascobros = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jCmBxgetAreas = new javax.swing.JComboBox<>();
-        jPanel4 = new javax.swing.JPanel();
+        jPanMantenPay = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jChecMantSem = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
         jLabLastMantenim = new javax.swing.JLabel();
+        txtMantenIdSem = new javax.swing.JTextField();
         txtIniManten = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -152,7 +153,7 @@ public class internoCaja extends javax.swing.JPanel {
         jlabImportMantenim = new javax.swing.JLabel();
         jLabSemsPaysManten = new javax.swing.JLabel();
         jLaFechIniManten = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        jPanBasuraContenPays = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
         jChecBasura = new javax.swing.JCheckBox();
@@ -173,7 +174,8 @@ public class internoCaja extends javax.swing.JPanel {
         txtFinBasura = new javax.swing.JTextField();
         jButBasuraSubstract = new javax.swing.JButton();
         jLaFechIniBasura = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        txtBasurIdSem = new javax.swing.JTextField();
+        jPanPiliceContenPays = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jSeparator3 = new javax.swing.JSeparator();
         jChecPolicia = new javax.swing.JCheckBox();
@@ -194,12 +196,14 @@ public class internoCaja extends javax.swing.JPanel {
         jLabTarifPolicia = new javax.swing.JLabel();
         jlabImportPolicia = new javax.swing.JLabel();
         jLabSemsPaysPolis = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        txtPoliciaIdSem = new javax.swing.JTextField();
+        jPanResguardContenPays = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jSeparator4 = new javax.swing.JSeparator();
         jChecResguardo = new javax.swing.JCheckBox();
         jLabel35 = new javax.swing.JLabel();
         jLabLastResguardo = new javax.swing.JLabel();
+        txtResguardIdSem = new javax.swing.JTextField();
         txtIniResg = new javax.swing.JTextField();
         jLaFechIniResguardos = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
@@ -537,6 +541,11 @@ public class internoCaja extends javax.swing.JPanel {
         txtCambio.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         txtCambio.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtCambio.setText("0.00");
+        txtCambio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCambioKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
@@ -757,29 +766,26 @@ public class internoCaja extends javax.swing.JPanel {
 
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/goma-de-borrar.png"))); // NOI18N
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTabviewPays.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTabviewPays.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"11520", null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "# Ticket", "Hora", "Concepto", "Nombre", "Monto"
             }
         ));
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jTable1.setRowHeight(25);
-        jTable1.setRowMargin(2);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(70);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(70);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(70);
-            jTable1.getColumnModel().getColumn(4).setMinWidth(70);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(70);
-            jTable1.getColumnModel().getColumn(4).setMaxWidth(70);
+        jTabviewPays.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTabviewPays.setRowHeight(25);
+        jTabviewPays.setRowMargin(2);
+        jScrollPane1.setViewportView(jTabviewPays);
+        if (jTabviewPays.getColumnModel().getColumnCount() > 0) {
+            jTabviewPays.getColumnModel().getColumn(0).setMinWidth(70);
+            jTabviewPays.getColumnModel().getColumn(0).setPreferredWidth(70);
+            jTabviewPays.getColumnModel().getColumn(0).setMaxWidth(70);
+            jTabviewPays.getColumnModel().getColumn(4).setMinWidth(70);
+            jTabviewPays.getColumnModel().getColumn(4).setPreferredWidth(70);
+            jTabviewPays.getColumnModel().getColumn(4).setMaxWidth(70);
         }
 
         jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/print32x32.png"))); // NOI18N
@@ -868,7 +874,7 @@ public class internoCaja extends javax.swing.JPanel {
             }
         });
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jPanMantenPay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jPanel8.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -887,7 +893,6 @@ public class internoCaja extends javax.swing.JPanel {
         jLabel2.setText("Ultimo Pago: -");
 
         jLabLastMantenim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabLastMantenim.setText("Ultimo Pago: -");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -901,22 +906,26 @@ public class internoCaja extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabLastMantenim, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabLastMantenim, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtMantenIdSem, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jChecMantSem)
-                .addContainerGap())
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabLastMantenim))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jChecMantSem))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabLastMantenim, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtMantenIdSem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         txtIniManten.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -997,7 +1006,7 @@ public class internoCaja extends javax.swing.JPanel {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabSemsPaysManten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabSemsPaysManten, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -1031,28 +1040,28 @@ public class internoCaja extends javax.swing.JPanel {
         jLaFechIniManten.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLaFechIniManten.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanMantenPayLayout = new javax.swing.GroupLayout(jPanMantenPay);
+        jPanMantenPay.setLayout(jPanMantenPayLayout);
+        jPanMantenPayLayout.setHorizontalGroup(
+            jPanMantenPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanMantenPayLayout.createSequentialGroup()
+                .addGroup(jPanMantenPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanMantenPayLayout.createSequentialGroup()
+                        .addGroup(jPanMantenPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanMantenPayLayout.createSequentialGroup()
                                 .addGap(28, 28, 28)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(13, 13, 13))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanMantenPayLayout.createSequentialGroup()
                                 .addGap(9, 9, 9)
                                 .addComponent(txtIniManten, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLaFechIniManten, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanMantenPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanMantenPayLayout.createSequentialGroup()
                                 .addGap(70, 70, 70)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGroup(jPanMantenPayLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButMantenSubstract, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
@@ -1061,22 +1070,22 @@ public class internoCaja extends javax.swing.JPanel {
                                 .addComponent(jLaFechFinManten, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(jButMantenMoore, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        jPanMantenPayLayout.setVerticalGroup(
+            jPanMantenPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanMantenPayLayout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanMantenPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanMantenPayLayout.createSequentialGroup()
+                        .addGroup(jPanMantenPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanMantenPayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButMantenSubstract, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(txtIniManten)
                             .addComponent(jLaFechFinManten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1086,7 +1095,7 @@ public class internoCaja extends javax.swing.JPanel {
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jPanBasuraContenPays.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jPanel10.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -1105,7 +1114,6 @@ public class internoCaja extends javax.swing.JPanel {
         jLabel13.setText("Ultimo Pago: -");
 
         jLabLastBasura.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabLastBasura.setText("Ultimo Pago: -");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1119,22 +1127,24 @@ public class internoCaja extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabLastBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabLastBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator2)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jChecBasura)
-                .addContainerGap())
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabLastBasura))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabLastBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jChecBasura)
+                        .addGap(0, 0, 0))))
         );
 
         txtIniBasura.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -1240,26 +1250,26 @@ public class internoCaja extends javax.swing.JPanel {
         jLaFechIniBasura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLaFechIniBasura.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanBasuraContenPaysLayout = new javax.swing.GroupLayout(jPanBasuraContenPays);
+        jPanBasuraContenPays.setLayout(jPanBasuraContenPaysLayout);
+        jPanBasuraContenPaysLayout.setHorizontalGroup(
+            jPanBasuraContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanBasuraContenPaysLayout.createSequentialGroup()
+                .addGroup(jPanBasuraContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanBasuraContenPaysLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanBasuraContenPaysLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(txtIniBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLaFechIniBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)))
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanBasuraContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanBasuraContenPaysLayout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(jPanBasuraContenPaysLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButBasuraSubstract, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -1270,35 +1280,40 @@ public class internoCaja extends javax.swing.JPanel {
                         .addComponent(jButBasuraMoore, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanBasuraContenPaysLayout.createSequentialGroup()
+                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBasurIdSem, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+        jPanBasuraContenPaysLayout.setVerticalGroup(
+            jPanBasuraContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanBasuraContenPaysLayout.createSequentialGroup()
+                .addGroup(jPanBasuraContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBasurIdSem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanBasuraContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanBasuraContenPaysLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanBasuraContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanBasuraContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanBasuraContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtIniBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLaFechIniBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanBasuraContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jButBasuraSubstract, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addComponent(jLaFechFinBasura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtFinBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButBasuraMoore, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(jPanBasuraContenPaysLayout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jPanPiliceContenPays.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jPanel12.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -1317,7 +1332,6 @@ public class internoCaja extends javax.swing.JPanel {
         jLabel24.setText("Ultimo Pago: -");
 
         jLabLastPolicia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabLastPolicia.setText("Ultimo Pago: -");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -1331,22 +1345,22 @@ public class internoCaja extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabLastPolicia, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabLastPolicia, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator3)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jChecPolicia)
-                .addContainerGap())
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(jLabLastPolicia))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabLastPolicia, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jChecPolicia)
+                .addGap(0, 0, 0))
         );
 
         txtIniPolic.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -1451,26 +1465,29 @@ public class internoCaja extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanPiliceContenPaysLayout = new javax.swing.GroupLayout(jPanPiliceContenPays);
+        jPanPiliceContenPays.setLayout(jPanPiliceContenPaysLayout);
+        jPanPiliceContenPaysLayout.setHorizontalGroup(
+            jPanPiliceContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanPiliceContenPaysLayout.createSequentialGroup()
+                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPoliciaIdSem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanPiliceContenPaysLayout.createSequentialGroup()
+                .addGroup(jPanPiliceContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanPiliceContenPaysLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGroup(jPanPiliceContenPaysLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(txtIniPolic, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLaFechIniPolicia, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanPiliceContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanPiliceContenPaysLayout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGroup(jPanPiliceContenPaysLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButPolicSubstract, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -1480,19 +1497,21 @@ public class internoCaja extends javax.swing.JPanel {
                         .addGap(0, 0, 0)
                         .addComponent(jButPolicMoore, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanPiliceContenPaysLayout.setVerticalGroup(
+            jPanPiliceContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanPiliceContenPaysLayout.createSequentialGroup()
+                .addGroup(jPanPiliceContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPoliciaIdSem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanPiliceContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanPiliceContenPaysLayout.createSequentialGroup()
+                        .addGroup(jPanPiliceContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel26)
                             .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanPiliceContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButPolicSubstract, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(txtIniPolic)
                             .addComponent(jLaFechIniPolicia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1502,7 +1521,7 @@ public class internoCaja extends javax.swing.JPanel {
                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jPanResguardContenPays.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jPanel14.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -1521,7 +1540,6 @@ public class internoCaja extends javax.swing.JPanel {
         jLabel35.setText("Ultimo Pago: -");
 
         jLabLastResguardo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabLastResguardo.setText("Ultimo Pago: -");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -1535,22 +1553,28 @@ public class internoCaja extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel35)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabLastResguardo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabLastResguardo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(txtResguardIdSem, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator4)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jChecResguardo)
-                .addContainerGap())
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel35)
-                    .addComponent(jLabLastResguardo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel35)
+                            .addComponent(jLabLastResguardo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jChecResguardo)
+                        .addGap(0, 0, 0))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtResguardIdSem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         txtIniResg.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -1656,27 +1680,27 @@ public class internoCaja extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanResguardContenPaysLayout = new javax.swing.GroupLayout(jPanResguardContenPays);
+        jPanResguardContenPays.setLayout(jPanResguardContenPaysLayout);
+        jPanResguardContenPaysLayout.setHorizontalGroup(
+            jPanResguardContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanResguardContenPaysLayout.createSequentialGroup()
+                .addGroup(jPanResguardContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanResguardContenPaysLayout.createSequentialGroup()
+                        .addGroup(jPanResguardContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanResguardContenPaysLayout.createSequentialGroup()
                                 .addGap(39, 39, 39)
                                 .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addGroup(jPanResguardContenPaysLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(txtIniResg, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLaFechIniResguardos, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanResguardContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanResguardContenPaysLayout.createSequentialGroup()
                                 .addGap(83, 83, 83)
                                 .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addGroup(jPanResguardContenPaysLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButResguardSubstarct, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
@@ -1690,17 +1714,17 @@ public class internoCaja extends javax.swing.JPanel {
                     .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(1, 1, 1))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        jPanResguardContenPaysLayout.setVerticalGroup(
+            jPanResguardContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanResguardContenPaysLayout.createSequentialGroup()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanResguardContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanResguardContenPaysLayout.createSequentialGroup()
+                        .addGroup(jPanResguardContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel37)
                             .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanResguardContenPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButResguardSubstarct, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(txtIniResg)
                             .addComponent(jLaFechIniResguardos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1751,10 +1775,10 @@ public class internoCaja extends javax.swing.JPanel {
                         .addGap(209, 209, 209))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanAreascobrosLayout.createSequentialGroup()
                         .addGroup(jPanAreascobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanResguardContenPays, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanPiliceContenPays, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanBasuraContenPays, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanMantenPay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(181, 181, 181))))
         );
         jPanAreascobrosLayout.setVerticalGroup(
@@ -1764,19 +1788,19 @@ public class internoCaja extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCmBxgetAreas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanMantenPay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanBasuraContenPays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanPiliceContenPays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanResguardContenPays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanAreascobrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtResultSum)
                     .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         jPanCargadores.setBackground(new java.awt.Color(255, 255, 255));
@@ -4034,9 +4058,7 @@ public class internoCaja extends javax.swing.JPanel {
 
     private void txtBuscAmbulanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscAmbulanteKeyPressed
     int oprime = evt.getKeyCode();
-
     String var = txtBuscAmbulante.getText();     
-          
        mostrarTabla1(var);
        jPanTableBusqView.setVisible(true);
        jPanDataambView1.setVisible(false);
@@ -4048,16 +4070,13 @@ public class internoCaja extends javax.swing.JPanel {
     private void jTabDatosAmbulanteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTabDatosAmbulanteKeyPressed
         int oprime = evt.getKeyCode(),
                 fila=jTabDatosAmbulante.getSelectedRow();
-        
          if(oprime == KeyEvent.VK_ENTER){
             jLabNomAmb.setText(jTabDatosAmbulante.getValueAt(fila, 0).toString()+" "+jTabDatosAmbulante.getValueAt(fila, 1).toString() );
              jPanTableBusqView.setVisible(false);
             jPanDataambView1.setVisible(true);
             txtBuscAmbulante.setText("");
             txtBuscAmbulante.requestFocus(true);
-            
     }
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTabDatosAmbulanteKeyPressed
 
     private void txtBuscCargadoresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscCargadoresKeyPressed
@@ -4089,7 +4108,6 @@ int oprime = evt.getKeyCode();
     }//GEN-LAST:event_jTabCargadoresViewKeyPressed
 
     private void jCmBxgetAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmBxgetAreasActionPerformed
-       
         bandC++;
         if(bandC == 1){
            //METER CONSULTA ACA
@@ -4098,7 +4116,6 @@ int oprime = evt.getKeyCode();
        }else{
            bandC=0;
        }
-
     }//GEN-LAST:event_jCmBxgetAreasActionPerformed
 
     private void jButMantenSubstractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButMantenSubstractActionPerformed
@@ -4507,24 +4524,118 @@ int oprime = evt.getKeyCode();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        String[] arr = new String[7]; 
+       String[] arr = new String[7]; 
         int isUltimTick = func.getUltimPagoarea(),//Se aumenta porq la columna no es increment
-                   isTurnoUlt = func.getenTurno();
+                   isTurnoUlt = func.getenTurno(),
+                contadorGuard =0;
           String fech = datCtrl.setDateActual(),
                    ora = datCtrl.getHour(),
                    total = txtResultSum.getText(),
                    idAr = conten.get(jCmBxgetAreas.getSelectedIndex()),
                   efectiv = txtEfect.getText();
-          arr[0] = Integer.toString(isUltimTick);
+          arr[0] = Integer.toString(isUltimTick+1);
           arr[1] = Integer.toString(isTurnoUlt);
           arr[2] = fech;
           arr[3] = ora;
           arr[4] = idAr;
           arr[5] = total;
           arr[6] = efectiv;
-          for (int i = 0; i < arr.length; i++) {
-              System.out.println(arr[i]);
-        }
+          contrl.guardaTicketArea(arr);//despues de guardar hay que refrescar todo y mostar el ultimo ticket
+       
+ if(jChecMantSem.isSelected())
+         contadorGuard+= Integer.parseInt(jLabSemsPaysManten.getText());
+  if(jChecBasura.isSelected())
+        contadorGuard+= Integer.parseInt(jLabSemsPaysBasura.getText());
+if(jChecPolicia.isSelected())
+        contadorGuard+= Integer.parseInt(jLabSemsPaysPolis.getText());
+ if(jChecResguardo.isSelected())
+        contadorGuard+= Integer.parseInt(jLabSemsPaysResg.getText());     
+ System.out.println("Ini Guardara #"+contadorGuard);
+ int j=1;//incializar contador para igualar al contador de arriba    
+ do {
+      
+    if(jChecMantSem.isSelected()){
+        String[] guard = new String[5];
+        int idS = Integer.parseInt(txtMantenIdSem.getText());
+        int numVM = Integer.parseInt(jLabSemsPaysManten.getText());//#Semanas a pagar
+        int i=1;
+        do{
+        guard[0] = arr[0];
+        guard[1] = Integer.toString(j);
+        guard[2] = Integer.toString(idS+1);
+        guard[3] = "2";
+        guard[4] = jLabTarifaMantenim.getText();
+        contrl.guardadetailTicketArea(guard); 
+        System.out.println("j = "+j);
+        i++;
+        j++;
+        idS++;
+        }while(i <= numVM);
+    }
+    if(jChecBasura.isSelected()){
+        int iB = 1;
+        String[] guardB = new String[5];
+        int idSB = Integer.parseInt(txtBasurIdSem.getText());
+        int numVB = Integer.parseInt(jLabSemsPaysBasura.getText());
+        do{
+            guardB[0] = arr[0];
+            guardB[1] = Integer.toString(j);
+            guardB[2] = Integer.toString(idSB+1);
+            guardB[3] = "3";
+            guardB[4] = jLabTarifaBasura.getText();
+            contrl.guardadetailTicketArea(guardB); 
+            System.out.println("j = "+j);
+            iB++;
+            j++;
+            idSB++;
+        }while(iB <= numVB);
+    }
+    if(jChecPolicia.isSelected()){
+        int iP = 1;
+        String[] guardP = new String[5];
+        int idSP = Integer.parseInt(txtPoliciaIdSem.getText());
+        int numVP = Integer.parseInt(jLabSemsPaysPolis.getText());
+        do{
+            guardP[0] = arr[0];
+            guardP[1] = Integer.toString(j);
+            guardP[2] = Integer.toString(idSP+1);
+            guardP[3] = "4";
+            guardP[4] = jLabTarifPolicia.getText();
+            contrl.guardadetailTicketArea(guardP);
+            System.out.println("j = "+j);
+            iP++;
+            idSP++;
+            j++;
+        }while(iP <= numVP);
+    }
+    if(jChecResguardo.isSelected()){
+        int iR = 1;
+        String[] guardR = new String[5];
+        int idSR = Integer.parseInt(txtResguardIdSem.getText());
+        int numVR = Integer.parseInt(jLabSemsPaysResg.getText());
+        do{
+            guardR[0] = arr[0];
+            guardR[1] = Integer.toString(j);
+            guardR[2] = Integer.toString(idSR+1);
+            guardR[3] = "5";
+            guardR[4] = jLabTarifResguard.getText();
+            contrl.guardadetailTicketArea(guardR);
+            System.out.println("j = "+j);
+            iR++;
+            idSR++;
+            j++;
+        }while(iR <= numVR);
+    }
+  
+     System.out.println("final j = "+j);
+     System.out.println("final contadorGuard #"+contadorGuard);
+ }while( j <= contadorGuard);
+ 
+        
+
+             
+             
+    inhabilitaAreas();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void txtEfectKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEfectKeyPressed
@@ -4548,29 +4659,26 @@ int oprime = evt.getKeyCode();
                 if(amountOne.compareTo(amountTwo) <= 0){
                     jButton7.setEnabled(true);
                     txtCambio.setText(func.getDifference(amountTwo, amountOne).toString());
-                    if(var == KeyEvent.VK_ENTER ){
-                       jButton7.doClick();
-                    }  
+   if(var == KeyEvent.VK_ENTER ){
+                    jButton7.doClick();
+                    jFramePays.dispose();
+            }  
                 }else{
                      txtCambio.setText(func.getDifference(amountTwo, amountOne).toString());
                      jButton7.setEnabled(false);
                 }
-                
-                             
-
             }else{
                      JOptionPane.showMessageDialog(null, "Solo acepta numeros");
                      txtEfect.setText(txtTotCobro.getText());
              }
-             
-             
-  /*           if(var == KeyEvent.VK_ENTER ){
-                 
-                 JOptionPane.showMessageDialog(null, "Guardar");
-           }
-*/
-  
     }//GEN-LAST:event_txtEfectKeyReleased
+
+    private void txtCambioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCambioKeyReleased
+  
+            int var = evt.getKeyCode();
+         
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCambioKeyReleased
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -4720,11 +4828,11 @@ int oprime = evt.getKeyCode();
 
         /*** METODO PARA CARGAR DINAMICAMENTE DATOS EN JPANELES*/
           protected void mostrarJpanNew(){
-            jPanel4.setVisible(false);
-            jPanel5.setVisible(false);
-            jPanel6.setVisible(false);
-            jPanel7.setVisible(false);   
-            System.out.print("\t***** contenSize: "+conten.size());
+            jPanMantenPay.setVisible(false);
+            jPanBasuraContenPays.setVisible(false);
+            jPanPiliceContenPays.setVisible(false);
+            jPanResguardContenPays.setVisible(false);   
+      //      System.out.print("\t***** contenSize: "+conten.size());
             int idA=Integer.parseInt(conten.get(jCmBxgetAreas.getSelectedIndex())),
                       numtic=0,numoriginal=0;
             String[] arr = contrl.regOpsareas(idA);//array para obtener cuotas a cobrar segun area seleccionada
@@ -4733,94 +4841,105 @@ int oprime = evt.getKeyCode();
             
           String aux ="";
             if(!arr[0].equals("0.00")){//cobrar Mantenimiento Semanal
-               jPanel4.setVisible(true); 
+               jPanMantenPay.setVisible(true); 
                jChecMantSem.setSelected(false);
                jLabSemsPaysManten.setText("1");
                numtic=contrl.regLastTicket2(idA,2);//Obtener #ticket ultimo con pago de mantenimiento
-               String[] arr1 = contrl.regPaysAreasdet(numtic,2);
-               numoriginal = Integer.parseInt(arr1[2]);//obtenemos id de semana pagada con #ticket y #rubro
-               String[] arr2 = contrl.regSemanas(numoriginal);//datos de semana id
-               System.out.println("Inicio Semana: "+arr2[0]);
-              jLabLastMantenim.setText("Semana "+arr2[2]);
-              arr2 =null;
-              arr2 = contrl.regSemanas(numoriginal+1);
-              idSemMantini = Integer.parseInt(arr2[0]);  
-               System.out.println("Inicio Semana Manten: "+arr2[0]);
-               aux = datCtrl.getWeekStartDate(arr2[3]) + " - "+ datCtrl.getWeekStartDate(arr2[4]);
+               String[] arr1M = contrl.regPaysAreasdet(numtic,2);
+               numoriginal = Integer.parseInt(arr1M[2]);//obtenemos id de semana pagada con #ticket y #rubro
+               String[] arr2M = contrl.regSemanas(numoriginal);//datos de semana id
                 
-                txtIniManten.setText(arr2[2]);
+         
+               txtMantenIdSem.setText(arr2M[0]);//idSemana Oculto
+               
+              jLabLastMantenim.setText("Semana "+arr2M[2]);
+              arr2M =null;
+              arr2M = contrl.regSemanas(numoriginal+1);
+              idSemMantini = Integer.parseInt(arr2M[0]);  
+              
+               aux = datCtrl.getWeekStartDate(arr2M[3]) + " - "+ datCtrl.getWeekStartDate(arr2M[4]);
+                
+                txtIniManten.setText(arr2M[2]);
                 jLaFechIniManten.setText(aux);
-                txtFinManten.setText(arr2[2]);
+                txtFinManten.setText(arr2M[2]);
                 jLaFechFinManten.setText(aux);
                 
                 jLabTarifaMantenim.setText(arr[0]);
                 jlabImportMantenim.setText(arr[0]);                    
             }  
             if(!arr[1].equals("0.00")){//cobrar Basura Semanal
-                jPanel5.setVisible(true);
+                jPanBasuraContenPays.setVisible(true);
                 jChecBasura.setSelected(false);
                 jLabSemsPaysBasura.setText("1");
                  numtic=contrl.regLastTicket2(idA,3);
-                 String[] arr1 = contrl.regPaysAreasdet(numtic,3);
-               numoriginal = Integer.parseInt(arr1[2]);//obtenemos id de semana pagada con #ticket y #rubro
-               String[] arr2 = contrl.regSemanas(numoriginal);//datos de semana id
-             jLabLastBasura.setText("Semana "+arr2[2]);
-              arr2 =null;
-              arr2 = contrl.regSemanas(numoriginal+1);
-              idSemBasura = Integer.parseInt(arr2[0]);
-               System.out.println("ID Ini Semana Basura: "+arr2[0]+" Eq"+arr2[2]);              
-                aux = datCtrl.getWeekStartDate(arr2[3]) + " - "+ datCtrl.getWeekStartDate(arr2[4]);
+                 String[] arr1B = contrl.regPaysAreasdet(numtic,3);
+               numoriginal = Integer.parseInt(arr1B[2]);//obtenemos id de semana pagada con #ticket y #rubro
+               String[] arr2B = contrl.regSemanas(numoriginal);//datos de semana id
+               
+               txtBasurIdSem.setText(arr2B[0]);//idSemana Oculto
+               
+             jLabLastBasura.setText("Semana "+arr2B[2]);
+              arr2B =null;
+              arr2B = contrl.regSemanas(numoriginal+1);
+              idSemBasura = Integer.parseInt(arr2B[0]);
+             
+                aux = datCtrl.getWeekStartDate(arr2B[3]) + " - "+ datCtrl.getWeekStartDate(arr2B[4]);
                  
-                   txtIniBasura.setText(arr2[2]);
+                   txtIniBasura.setText(arr2B[2]);
                    jLaFechIniBasura.setText(aux);
-                   txtFinBasura.setText(arr2[2]);
+                   txtFinBasura.setText(arr2B[2]);
                    jLaFechFinBasura.setText(aux);
                    
                    jLabTarifaBasura.setText(arr[1]);
                    jlabImportBasura.setText(arr[1]);
             }  
             if(!arr[2].equals("0.00")){//cobrar policia
-                jPanel6.setVisible(true);
+                jPanPiliceContenPays.setVisible(true);
                 jChecPolicia.setSelected(false);
                 jLabSemsPaysPolis.setText("1");
                  numtic=contrl.regLastTicket2(idA,4);
-                 String[] arr1 = contrl.regPaysAreasdet(numtic,4);
-               numoriginal = Integer.parseInt(arr1[2]);//obtenemos id de semana pagada con #ticket y #rubro
-               String[] arr2 = contrl.regSemanas(numoriginal);//datos de semana id
-           jLabLastPolicia.setText("Semana "+arr2[2]);//mostramos #semana NO el id
-              arr2 =null;
-              arr2 = contrl.regSemanas(numoriginal+1);
-              idSemPolicia= Integer.parseInt(arr2[0]);
-               System.out.println("ID Ini Semana policia: "+arr2[0]+" Eq"+arr2[2]);
+                 String[] arr1P = contrl.regPaysAreasdet(numtic,4);
+               numoriginal = Integer.parseInt(arr1P[2]);//obtenemos id de semana pagada con #ticket y #rubro
+               String[] arr2P = contrl.regSemanas(numoriginal);//datos de semana id
+               
+               txtPoliciaIdSem.setText(arr2P[0]);//idSemana Oculto
+               
+                 jLabLastPolicia.setText("Semana "+arr2P[2]);//mostramos #semana NO el id
+              arr2P =null;
+              arr2P = contrl.regSemanas(numoriginal+1);
+              idSemPolicia= Integer.parseInt(arr2P[0]);
+            
               
-                aux = datCtrl.getWeekStartDate(arr2[3]) + " - "+ datCtrl.getWeekStartDate(arr2[4]);
-                txtIniPolic.setText(arr2[2]);
+                aux = datCtrl.getWeekStartDate(arr2P[3]) + " - "+ datCtrl.getWeekStartDate(arr2P[4]);
+                txtIniPolic.setText(arr2P[2]);
                 jLaFechIniPolicia.setText(aux);
-                txtFinPolicia.setText(arr2[2]);
+                txtFinPolicia.setText(arr2P[2]);
                 jLaFechFinPolicia.setText(aux);
                 
                 jLabTarifPolicia.setText(arr[2]);
                 jlabImportPolicia.setText(arr[2]);
             }  
             if(!arr[3].equals("0.00")){//cobrar otros o resgurado
-              jPanel7.setVisible(true);     
+              jPanResguardContenPays.setVisible(true);     
               jChecResguardo.setSelected(false);
               jLabSemsPaysResg.setText("1");
                numtic=contrl.regLastTicket2(idA,5);
-               String[] arr1 = contrl.regPaysAreasdet(numtic,5);
-               numoriginal = Integer.parseInt(arr1[2]);//obtenemos id de semana pagada con #ticket y #rubro
-               String[] arr2 = contrl.regSemanas(numoriginal);//datos de semana id
-             jLabLastResguardo.setText("Semana "+arr2[2]);//mostramos #semana NO el id
-              arr2 =null;
-              arr2 = contrl.regSemanas(numoriginal+1);
-              
-              idSemResguard= Integer.parseInt(arr2[0]);//variable para tener semanaidUltima+1
-               System.out.println("ID Ini Semana OtrosResg: "+arr2[0]+" Eq"+arr2[2]);
+               String[] arr1R = contrl.regPaysAreasdet(numtic,5);
+               numoriginal = Integer.parseInt(arr1R[2]);//obtenemos id de semana pagada con #ticket y #rubro
+               String[] arr2R = contrl.regSemanas(numoriginal);//datos de semana id
                
-                aux = datCtrl.getWeekStartDate(arr2[3]) + " - " + datCtrl.getWeekStartDate(arr2[4]);
-                txtIniResg.setText(arr2[2]);
+               txtResguardIdSem.setText(arr2R[0]);//idSemana Oculto
+               
+             jLabLastResguardo.setText("Semana "+arr2R[2]);//mostramos #semana NO el id
+              arr2R =null;
+              arr2R = contrl.regSemanas(numoriginal+1);
+              
+              idSemResguard= Integer.parseInt(arr2R[0]);//variable para tener semanaidUltima+1
+           
+                aux = datCtrl.getWeekStartDate(arr2R[3]) + " - " + datCtrl.getWeekStartDate(arr2R[4]);
+                txtIniResg.setText(arr2R[2]);
                 jLaFechIniResguardos.setText(aux);
-                txtFinResguard.setText(arr2[2]);
+                txtFinResguard.setText(arr2R[2]);
                 jLaFechFinResguard.setText(aux);
                 
                 jLabTarifResguard.setText(arr[3]);
@@ -4828,11 +4947,12 @@ int oprime = evt.getKeyCode();
             }
             
           }//mostrarJpanNew
+          
         protected void mostrarJpan(){
-            jPanel4.setVisible(false);
-            jPanel5.setVisible(false);
-            jPanel6.setVisible(false);
-            jPanel7.setVisible(false);   
+            jPanMantenPay.setVisible(false);
+            jPanBasuraContenPays.setVisible(false);
+            jPanPiliceContenPays.setVisible(false);
+            jPanResguardContenPays.setVisible(false);   
             int numeraSem=0,numoriginal =0;
             String aux ="";
           String mat[][] = contrl.regLastSemanasType(contrl.regLastTicket(Integer.parseInt(conten.get(jCmBxgetAreas.getSelectedIndex()))));
@@ -4842,7 +4962,7 @@ int oprime = evt.getKeyCode();
                     for (int j = 0; j < mat[0].length; j++) {
                               if(j==0){
                                   if(mat[i][j].equals("2")){
-                                      jPanel4.setVisible(true);
+                                      jPanMantenPay.setVisible(true);
                                      numoriginal = Integer.parseInt(mat[i][j+2]);
                                      String[] arr1 = contrl.regSemanas(numoriginal);
                                       numeraSem = Integer.parseInt(mat[i][j+2])+1;
@@ -4857,7 +4977,7 @@ int oprime = evt.getKeyCode();
                                       
                                   }
                                    if(mat[i][j].equals("3")){
-                                      jPanel5.setVisible(true);
+                                      jPanBasuraContenPays.setVisible(true);
                                       numoriginal = Integer.parseInt(mat[i][j+2]);//obtenemos semanas.id
                                       String[] arr1 = contrl.regSemanas(numoriginal);//Obtener arreglo de ultimasemana pagada
                                       numeraSem = Integer.parseInt(mat[i][j+2])+1;
@@ -4871,7 +4991,7 @@ int oprime = evt.getKeyCode();
                                       jLaFechFinBasura.setText(aux);
                                   }
                                   if(mat[i][j].equals("4")){
-                                      jPanel6.setVisible(true);
+                                      jPanPiliceContenPays.setVisible(true);
                                       numoriginal = Integer.parseInt(mat[i][j+2]);//obtenemos semanas.id
                                       String[] arr1 = contrl.regSemanas(numoriginal);//Obtener arreglo de ultimasemana pagada
                                       numeraSem = Integer.parseInt(mat[i][j+2])+1;
@@ -4885,7 +5005,7 @@ int oprime = evt.getKeyCode();
                                       jLaFechFinPolicia.setText(aux);
                                   }
                                   if(mat[i][j].equals("5")){
-                                      jPanel7.setVisible(true);
+                                      jPanResguardContenPays.setVisible(true);
                                        numoriginal = Integer.parseInt(mat[i][j+2]);//obtenemos semanas.id
                                        String[] arr1 = contrl.regSemanas(numoriginal);//Obtener arreglo de ultimasemana pagada
                                        numeraSem = Integer.parseInt(mat[i][j+2])+1;
@@ -4898,14 +5018,30 @@ int oprime = evt.getKeyCode();
                                       txtFinResguard.setText(arr[2]);
                                       jLaFechFinResguard.setText(aux);
                                   }
-
                               }
                     }
-                   
                 }
             }else{
                 JOptionPane.showMessageDialog(null, "NO DATA");
             }
+        }
+        
+        public void inhabilitaAreas(){
+            jChecMantSem.setSelected(false);
+            jChecBasura.setSelected(false);
+            jChecPolicia.setSelected(false);
+            jChecResguardo.setSelected(false);
+	jButMantenSubstract.setEnabled(false);
+	jButMantenMoore.setEnabled(false);
+	jButBasuraSubstract.setEnabled(false);
+	jButBasuraMoore.setEnabled(false);
+	jButPolicSubstract.setEnabled(false);
+	jButPolicMoore.setEnabled(false);
+	jButResguardSubstarct.setEnabled(false);
+	jButResguardMoore.setEnabled(false);            
+            
+        txtResultSum.setText("0.00");
+//        llenacombogetAreas();
         }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -5145,12 +5281,16 @@ int oprime = evt.getKeyCode();
     private javax.swing.JLayeredPane jLayeredPanePerson;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanAreascobros;
+    private javax.swing.JPanel jPanBasuraContenPays;
     private javax.swing.JPanel jPanCargadorInscr;
     private javax.swing.JPanel jPanCargadores;
     private javax.swing.JPanel jPanDataambView1;
     private javax.swing.JPanel jPanDataambView2;
     private javax.swing.JPanel jPanDataambView3;
+    private javax.swing.JPanel jPanMantenPay;
+    private javax.swing.JPanel jPanPiliceContenPays;
     private javax.swing.JPanel jPanRentCargador;
+    private javax.swing.JPanel jPanResguardContenPays;
     private javax.swing.JPanel jPanSemCargad;
     private javax.swing.JPanel jPanTableBusqView;
     private javax.swing.JPanel jPanTableBusqView1;
@@ -5186,10 +5326,6 @@ int oprime = evt.getKeyCode();
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel35;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
@@ -5218,11 +5354,11 @@ int oprime = evt.getKeyCode();
     private javax.swing.JTable jTabCargadoresView;
     private javax.swing.JTable jTabDatosAmbulante;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
+    private javax.swing.JTable jTabviewPays;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
@@ -5239,6 +5375,7 @@ int oprime = evt.getKeyCode();
     private javax.swing.JLabel jlabImportMantenim;
     private javax.swing.JLabel jlabImportPolicia;
     private javax.swing.JLabel jlabImportResguard;
+    private javax.swing.JTextField txtBasurIdSem;
     private javax.swing.JTextField txtBuscAmbulante;
     private javax.swing.JTextField txtBuscCargadores;
     private javax.swing.JTextField txtCambio;
@@ -5251,6 +5388,9 @@ int oprime = evt.getKeyCode();
     private javax.swing.JTextField txtIniManten;
     private javax.swing.JTextField txtIniPolic;
     private javax.swing.JTextField txtIniResg;
+    private javax.swing.JTextField txtMantenIdSem;
+    private javax.swing.JTextField txtPoliciaIdSem;
+    private javax.swing.JTextField txtResguardIdSem;
     private javax.swing.JTextField txtResultSum;
     private javax.swing.JTextField txtTotCobro;
     // End of variables declaration//GEN-END:variables

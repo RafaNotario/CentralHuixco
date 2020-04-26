@@ -36,12 +36,9 @@ public class Reportes {
       JasperPrint jp = JasperFillManager.fillReport(reporte, null, cn);
 
          JasperPrintManager.printReport(jp, false);
-            PrinterJob pj = PrinterJob.getPrinterJob();
-        PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
-        System.out.print("Services PrinterJOb"+services.length);
-        for (int i = 0; i < services.length; i++) {
-             System.out.print("Services "+services[i]);
-        }
+        
+            
+ 
 
     }//@endimrpim
     
