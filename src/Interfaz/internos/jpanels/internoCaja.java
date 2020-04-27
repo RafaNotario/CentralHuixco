@@ -31,6 +31,8 @@ import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import renderTable.TModel;
+import tickets.Jasper.Reportes;
 
 
 /**
@@ -38,13 +40,14 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  * @author monit
  */
 public class internoCaja extends javax.swing.JPanel {
-
+    String User;
  
     String fech = "";
     datesControl datCtrl = new datesControl();
     ConexionDBOriginal con2 = new ConexionDBOriginal();
     controlInserts contrl = new controlInserts();
     funciones func = new funciones();
+    Reportes rP = new Reportes();
     
      List<String> conten = new ArrayList<String>();//lista para guardar el id de cada area cobro de areas
      
@@ -55,9 +58,11 @@ public class internoCaja extends javax.swing.JPanel {
            idSemResguard=0
            ;
      
-    public internoCaja() {
+String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
+
+    public internoCaja(String usuarioN) {
         initComponents();
-        
+        this.User = usuarioN;
      jButton2.doClick();
      jPanTableBusqView.setVisible(false);
      jPanRentCargador.setVisible(false);
@@ -65,7 +70,7 @@ public class internoCaja extends javax.swing.JPanel {
      jPanSemCargad.setVisible(true);
      
      llenacombogetAreas();
-     
+     inhabilitaAreas();
      AutoCompleteDecorator.decorate(jCmBxgetAreas);
      jCmBxgetAreas.setEditable(true);
     jCmBxgetAreas.requestFocus();
@@ -77,10 +82,8 @@ public class internoCaja extends javax.swing.JPanel {
             int var = e.getKeyCode();
                if(var == KeyEvent.VK_ENTER ){
                     mostrarJpanNew();
-                    
                     bandC =0;
            }
-
     }} );
  }
 
@@ -778,6 +781,11 @@ public class internoCaja extends javax.swing.JPanel {
         jTabviewPays.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jTabviewPays.setRowHeight(25);
         jTabviewPays.setRowMargin(2);
+        jTabviewPays.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabviewPaysMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTabviewPays);
         if (jTabviewPays.getColumnModel().getColumnCount() > 0) {
             jTabviewPays.getColumnModel().getColumn(0).setMinWidth(70);
@@ -790,12 +798,22 @@ public class internoCaja extends javax.swing.JPanel {
 
         jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/print32x32.png"))); // NOI18N
         jButton17.setText("Imprimir ticket");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
 
         jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         jButton18.setText("Cancelar ticket");
 
         jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Actualizar.png"))); // NOI18N
         jButton19.setText("Actualizar");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -1136,15 +1154,12 @@ public class internoCaja extends javax.swing.JPanel {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabLastBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0))
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel13)
+                        .addComponent(jLabLastBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jChecBasura)
-                        .addGap(0, 0, 0))))
+                        .addComponent(jChecBasura))))
         );
 
         txtIniBasura.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -1353,14 +1368,15 @@ public class internoCaja extends javax.swing.JPanel {
             .addComponent(jSeparator3)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabLastPolicia, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jChecPolicia)
-                .addGap(0, 0, 0))
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabLastPolicia, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jChecPolicia))))
         );
 
         txtIniPolic.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -1570,8 +1586,7 @@ public class internoCaja extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jChecResguardo)
-                        .addGap(0, 0, 0))))
+                        .addComponent(jChecResguardo))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(txtResguardIdSem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -3727,8 +3742,8 @@ public class internoCaja extends javax.swing.JPanel {
                                     .addComponent(jButton47, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jButton50, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLayeredPanePerson, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
-                                .addComponent(jLayeredPanConcept, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE))
+                                .addComponent(jLayeredPanePerson, javax.swing.GroupLayout.PREFERRED_SIZE, 613, Short.MAX_VALUE)
+                                .addComponent(jLayeredPanConcept, javax.swing.GroupLayout.PREFERRED_SIZE, 613, Short.MAX_VALUE))
                             .addGroup(jPanVariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanVariosLayout.createSequentialGroup()
                                     .addComponent(jButton49)
@@ -4112,7 +4127,7 @@ int oprime = evt.getKeyCode();
         if(bandC == 1){
            //METER CONSULTA ACA
           // mostrarJpanNew();
-           System.out.print("\t ActionPErfomed");
+     
        }else{
            bandC=0;
        }
@@ -4129,7 +4144,7 @@ int oprime = evt.getKeyCode();
         int numeradorSem=Integer.parseInt(jLabSemsPaysManten.getText());
            //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
              if(Integer.parseInt(ini) < Integer.parseInt(fin)){
-                    System.out.println("Inicio Semana var-: "+idSemMantini);
+                
                     idSemMantini--;
                     arr = contrl.regSemanas(idSemMantini);
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
@@ -4147,7 +4162,7 @@ int oprime = evt.getKeyCode();
                     
                    jlabImportMantenim.setText(func.getDifference(amountOne, amountTwo).toString());
                    txtResultSum.setText(func.getDifference(amountBasuraMenos,amountTwo).toString());
-                   System.out.println("Inicio Semana--: "+arr[0]);
+           
              }else{
                  JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
              }
@@ -4163,7 +4178,7 @@ int oprime = evt.getKeyCode();
         String aux="";
         int numeradorSem=Integer.parseInt(jLabSemsPaysManten.getText());
            //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
-                    System.out.println("Inicio Semana var+: "+idSemMantini);
+          
                     idSemMantini++;
                     arr = contrl.regSemanas(idSemMantini);
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
@@ -4181,7 +4196,7 @@ int oprime = evt.getKeyCode();
                     
                    jlabImportMantenim.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
                    txtResultSum.setText(func.getSum(amountTres,amountTwo).toString());
-                   System.out.println("Inicio Semana++: "+arr[0]);
+     
 
     }//GEN-LAST:event_jButMantenMooreActionPerformed
 
@@ -4196,7 +4211,7 @@ int oprime = evt.getKeyCode();
         int numeradorSem=Integer.parseInt(jLabSemsPaysBasura.getText());
            //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
              if(Integer.parseInt(ini) < Integer.parseInt(fin)){
-                    System.out.println("Inicio Semana Basura var-: "+idSemBasura);
+               
                     idSemBasura--;
                     arr = contrl.regSemanas(idSemBasura);
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
@@ -4214,7 +4229,7 @@ int oprime = evt.getKeyCode();
                     
                    jlabImportBasura.setText(func.getDifference(amountOne, amountTwo).toString());
                    txtResultSum.setText(func.getDifference(amountTresBasurMenos,amountTwo).toString());
-                   System.out.println("Inicio Semana Basura--: "+arr[0]);
+              
 
              }else{
                  JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
@@ -4231,7 +4246,7 @@ int oprime = evt.getKeyCode();
                 String aux="";
                 int numeradorSem=Integer.parseInt(jLabSemsPaysBasura.getText());
                    //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
-                    System.out.println("Inicio Semana Basura var-: "+idSemBasura);
+         
                     idSemBasura++;
                     arr = contrl.regSemanas(idSemBasura);
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
@@ -4248,7 +4263,7 @@ int oprime = evt.getKeyCode();
                     BigDecimal amountTresBasur = new BigDecimal(tot);//cantidad recivida
                    jlabImportBasura.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
                        txtResultSum.setText(func.getSum(amountTresBasur,amountTwo).toString());
-                   System.out.println("Inicio Semana Basura--: "+arr[0]);
+             
 
     }//GEN-LAST:event_jButBasuraMooreActionPerformed
 
@@ -4263,7 +4278,7 @@ int oprime = evt.getKeyCode();
         int numeradorSem=Integer.parseInt(jLabSemsPaysPolis.getText());
            //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
              if(Integer.parseInt(ini) < Integer.parseInt(fin)){
-                    System.out.println("Inicio Semana policia var-: "+idSemPolicia);
+         
                     idSemPolicia--;
                     arr = contrl.regSemanas(idSemPolicia);
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
@@ -4282,7 +4297,7 @@ int oprime = evt.getKeyCode();
                    jlabImportPolicia.setText(func.getDifference(amountOne, amountTwo).toString());
                    txtResultSum.setText(func.getDifference(amountPoliceMenos,amountTwo).toString());
                    
-                   System.out.println("Inicio Semana Policia--: "+arr[0]);
+      
              }else{
                  JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
              }
@@ -4299,7 +4314,7 @@ int oprime = evt.getKeyCode();
         int numeradorSem=Integer.parseInt(jLabSemsPaysPolis.getText());
            //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
     
-                    System.out.println("Inicio Semana policia var-: "+idSemPolicia);
+       
                     idSemPolicia++;
                     arr = contrl.regSemanas(idSemPolicia);
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
@@ -4316,9 +4331,6 @@ int oprime = evt.getKeyCode();
                     BigDecimal amountTresPolice = new BigDecimal(tot);//cantidad total
                    jlabImportPolicia.setText(func.getSum(amountOne, amountTwo).toString());
                    txtResultSum.setText(func.getSum(amountTresPolice,amountTwo).toString());
-                   System.out.println("Inicio Semana Policia--: "+arr[0]);
-           
-             
     }//GEN-LAST:event_jButPolicMooreActionPerformed
 
     private void jButResguardSubstarctActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButResguardSubstarctActionPerformed
@@ -4332,7 +4344,7 @@ int oprime = evt.getKeyCode();
         int numeradorSem=Integer.parseInt(jLabSemsPaysResg.getText());
            //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
              if(Integer.parseInt(ini) < Integer.parseInt(fin)){
-                    System.out.println("Inicio Semana Resguard var-: "+idSemResguard);
+              
                     idSemResguard--;
                     arr = contrl.regSemanas(idSemResguard);
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
@@ -4354,7 +4366,7 @@ int oprime = evt.getKeyCode();
                         
                         jlabImportResguard.setText(func.getDifference(amountOne, amountTwo).toString());
                          txtResultSum.setText(func.getDifference(amountTresResg,amountTwo).toString());
-                        System.out.println("Inicio Semana Resguardo--: "+arr[0]);
+            
                     }
              }else{
                  JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
@@ -4372,7 +4384,7 @@ int oprime = evt.getKeyCode();
         String aux="";
         int numeradorSem=Integer.parseInt(jLabSemsPaysResg.getText());
            //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
-                    System.out.println("Inicio Semana Resguard var-: "+idSemResguard);
+       
                     idSemResguard++;
                     arr = contrl.regSemanas(idSemResguard);
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
@@ -4389,7 +4401,7 @@ int oprime = evt.getKeyCode();
                     BigDecimal amountTresResg = new BigDecimal(tot);//cantidad recivida
                    jlabImportResguard.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
                    txtResultSum.setText(func.getSum(amountTresResg,amountTwo).toString());
-                   System.out.println("Inicio Semana Resguard--: "+arr[0]);
+ 
     }//GEN-LAST:event_jButResguardMooreActionPerformed
 
     private void jChecMantSemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChecMantSemActionPerformed
@@ -4550,7 +4562,7 @@ if(jChecPolicia.isSelected())
         contadorGuard+= Integer.parseInt(jLabSemsPaysPolis.getText());
  if(jChecResguardo.isSelected())
         contadorGuard+= Integer.parseInt(jLabSemsPaysResg.getText());     
- System.out.println("Ini Guardara #"+contadorGuard);
+ 
  int j=1;//incializar contador para igualar al contador de arriba    
  do {
       
@@ -4626,14 +4638,14 @@ if(jChecPolicia.isSelected())
             j++;
         }while(iR <= numVR);
     }
-  
-     System.out.println("final j = "+j);
-     System.out.println("final contadorGuard #"+contadorGuard);
- }while( j <= contadorGuard);
+   }while( j <= contadorGuard);
  
-        
+ 
+        String[] dat = rP.getUltimPagoarea(arr[0]);
+        rP.imprim80MM(arr[0], dat,true);   
 
-             
+     String[][] mat = contrl.matrizgetTicketsDia(fech);
+     jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
              
     inhabilitaAreas();
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -4674,11 +4686,39 @@ if(jChecPolicia.isSelected())
     }//GEN-LAST:event_txtEfectKeyReleased
 
     private void txtCambioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCambioKeyReleased
-  
             int var = evt.getKeyCode();
-         
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtCambioKeyReleased
+
+    private void jTabviewPaysMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabviewPaysMouseClicked
+        int fila = jTabviewPays.getSelectedRow();
+         if (evt.getClickCount() > 1) {
+                if(fila >= 0){
+                    String mostTic = jTabviewPays.getValueAt(fila, 0).toString();
+       
+                    String[] dat = rP.getUltimPagoarea(mostTic);
+                    rP.imprim80MM(mostTic, dat,false);
+
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe elegir que mostrar");
+                }
+         }
+    }//GEN-LAST:event_jTabviewPaysMouseClicked
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+     llenacombogetAreas();
+     inhabilitaAreas();
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        int fila = jTabviewPays.getSelectedRow();
+                if(fila > 0){
+                    String mostTic = jTabviewPays.getValueAt(fila, 0).toString();
+                    String[] dat = rP.getUltimPagoarea(mostTic);
+                    rP.imprim80MM(mostTic, dat,true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe elegir que mostrar");
+                }
+    }//GEN-LAST:event_jButton17ActionPerformed
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -5041,6 +5081,9 @@ if(jChecPolicia.isSelected())
 	jButResguardMoore.setEnabled(false);            
             
         txtResultSum.setText("0.00");
+        
+        String[][] mat = contrl.matrizgetTicketsDia(datCtrl.setDateActual());
+     jTabviewPays.setModel(new TModel(mat, cabAreasPays));
 //        llenacombogetAreas();
         }
 

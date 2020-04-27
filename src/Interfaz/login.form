@@ -221,7 +221,7 @@
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace pref="36" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jLabel6" min="-2" pref="212" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -274,7 +274,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel5">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/images/logo1 - copia.jpg"/>
+                          <Image iconType="3" name="/images/logo80MM.jpg"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -786,6 +786,9 @@
         <Property name="text" type="java.lang.String" value="--"/>
         <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

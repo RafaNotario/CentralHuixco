@@ -14,7 +14,6 @@ import Interfaz.internos.jpanels.areas;
 import Interfaz.internos.jpanels.cargadores;
 import Interfaz.internos.jpanels.ambulantes;
 import Controller.datesControl;
-
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -127,7 +126,7 @@ funciones func1 = new funciones();
 
         jPanLogin.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo1 - copia.jpg"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo80MM.jpg"))); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Iniciar Sesion");
@@ -192,7 +191,7 @@ funciones func1 = new funciones();
                 .addComponent(jLabel5)
                 .addGroup(jPanLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanLoginLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanLoginLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
@@ -650,7 +649,7 @@ funciones func1 = new funciones();
            func1.limpiar(jPanTrabajo);
             inicioButton(true);//habilitar todos los botones del menucontent
             
-            iCaj = new internoCaja();
+            iCaj = new internoCaja(jLabUserNombre.getText());
             
             jPanTrabajo.setLayout(new GridLayout(1,1));
             jPanTrabajo.add(iCaj);
@@ -696,7 +695,7 @@ funciones func1 = new funciones();
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
             func1.limpiar(jPanTrabajo);
-            iCaj = new internoCaja();
+            iCaj = new internoCaja(jLabUserNombre.getText());
             jPanTrabajo.setLayout(new GridLayout(1,1));
             jPanTrabajo.add(iCaj);
             jPanTrabajo.validate();
@@ -793,7 +792,7 @@ funciones func1 = new funciones();
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabLapsoSemana;
     private javax.swing.JLabel jLabNsem;
-    private javax.swing.JLabel jLabUserNombre;
+    public javax.swing.JLabel jLabUserNombre;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

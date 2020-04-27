@@ -310,6 +310,63 @@ public void guardadetailTicketArea(String[] param){
             }//finally catch
 } //@endguardadetailTicketArea
 
+//regresa matrizde vista tickets del dia
+        public String[][] matrizgetTicketsDia(String fech){
+        Connection cn = con2.conexion();
+          String sql ="",aux;
+              sql = "SELECT  pagos_areas.id,DATE_FORMAT(pagos_areas.hora, \"%H : %i\") AS hor,'Pago semanal de area',areas.nombre,pagos_areas.total\n" +
+                        "FROM pagos_areas\n" +
+                        "INNER JOIN areas\n" +
+                        "ON areas.id = pagos_areas.idArea AND pagos_areas.fecha = '"+fech+"'\n" +
+                        "ORDER BY pagos_areas.id DESC;";      
+              
+             int i =0,cantFilas=0, cont=1,cantColumnas=0;
+             String[][] mat=null, mat2=null;
+              int[] arrIdPedido = null;//int para usar hashMap
+            Statement st = null;
+            ResultSet rs = null;            
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                cantColumnas = rs.getMetaData().getColumnCount();
+               if(rs.last()){//Nos posicionamos al final
+                    cantFilas = rs.getRow();//sacamos la cantidad de filas/registros
+                    rs.beforeFirst();//nos posicionamos antes del inicio (como viene por defecto)
+                }
+               mat = new String[cantFilas][cantColumnas];
+               //aqui iria crear matriz
+                while(rs.next())
+                {//es necesario el for para llenar dinamicamente la lista, ya que varia el numero de columnas de las tablas
+                 
+                      for (int x=1;x<= rs.getMetaData().getColumnCount();x++) {
+                           // System.out.print("| "+rs.getString(x)+" |");
+                             mat[i][x-1]=rs.getString(x);
+                      //System.out.print(x+" -> "+rs.getString(x));                   
+                      }//for
+                       i++;
+                }//whilE
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{               
+//             System.out.println("cierra conexion a la base de datos");    
+             try {        
+                 if(st != null) st.close();                
+                 if(cn !=null) cn.close();
+             } catch (SQLException ex) {
+                 JOptionPane.showMessageDialog(null,ex.getMessage()); 
+             }
+         }//finally        
+           if (cantFilas == 0){
+                mat=null;
+                mat = new String[1][cantColumnas];
+                
+                for (int j = 0; j < mat[0].length; j++) {
+                     mat[0][j]="NO DATA";
+                }
+           }
+return mat;            
+}//@endmatrizgetTicketsDia
+
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();
          System.out.println("Ultimo pagado: "+contrl.regLastTicket(19));

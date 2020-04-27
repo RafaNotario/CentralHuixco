@@ -7,9 +7,7 @@
 		<pen lineWidth="1.0" lineStyle="Dashed"/>
 	</style>
 	<queryString>
-		<![CDATA[SELECT * FROM pagos_areasdet WHERE idTicket = 252; 
-
-]]>
+		<![CDATA[SELECT * FROM pagos_areasdet WHERE idTicket = 1133;]]>
 	</queryString>
 	<field name="idTicket" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
