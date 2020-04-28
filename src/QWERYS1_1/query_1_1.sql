@@ -16,20 +16,6 @@ mysql -u root -q -P 3310
 mysql -u usuario -p -h 192.168.x.x -P 3307   //-p <- Verificar
 
 
-/*Relacion ambulantes-giro YA*/
-ALTER TABLE centraldb.ambulantes
-ADD CONSTRAINT FK_ambulantes_giro FOREIGN KEY (idGiro)
-REFERENCES centraldb.giros (id)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
-
-/*Relacion ambulantes-tarifas YA*/
-ALTER TABLE centraldb.ambulantes
-ADD CONSTRAINT FK_ambulantes_tarifa FOREIGN KEY (idTarifa)
-REFERENCES centraldb.tarifas (id)
-ON DELETE CASCADE
-ON UPDATE CASCADE;
-
 /*Relacion AREAS-SOCIOS PENDIENTE error = AMBULANTES - SEMANAS YA*/
 /*SOLUCION = Verificar misma longitud y tipo de datos areas.idPresi Atributos = "" socios.is Atributos = UNSIGNED*/
 ALTER TABLE centraldb.areas
@@ -38,7 +24,7 @@ REFERENCES centraldb.socios (id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
-/*Relacion AMBULANTES - SEMANAS PENDIENTE marca error*/
+/*Relacion AMBULANTES - SEMANAS PENDIENTE marca error YA*/
 ALTER TABLE `centraldb`.`ambulantes`
 ADD CONSTRAINT FK_amb_semanas FOREIGN KEY (ultimaSem)
 REFERENCES centraldb.semanas (id)
@@ -88,6 +74,32 @@ ADD CONSTRAINT FK_turnos-usuario FOREIGN KEY (idusuario)
 REFERENCES central.usuarios (id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
+
+/*Relacion ambulantes-giro YA*/
+ALTER TABLE centraldb.ambulantes
+ADD CONSTRAINT FK_ambulantes_giro FOREIGN KEY (idGiro)
+REFERENCES centraldb.giros (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*Relacion ambulantes-tarifas YA*/
+ALTER TABLE centraldb.ambulantes
+ADD CONSTRAINT FK_ambulantes_tarifa FOREIGN KEY (idTarifa)
+REFERENCES centraldb.tarifas (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*Relacion AMBULANTES-PAGOS_AMB YA*/
+ALTER TABLE central.pagos_amb
+ADD CONSTRAINT FK_pag_ambs FOREIGN KEY (idAmb)
+REFERENCES central.ambulantes (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+
+
+
+
 
 
 

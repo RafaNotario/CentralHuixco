@@ -239,6 +239,45 @@ public class funciones {
            return idTurno;
     }//@endgetUltimPagoarea
      
+/*//// OBTENER DATOS DE AMBULANTE*/
+       public String[] getAmbus1(String idAmbu){
+            Connection cn = con2.conexion();
+           String[] lapso = new String[3];
+            String sql = "";
+            sql = "SELECT ambulantes.direccion, giros.giro, ambulantes.obs \n" +
+                    "FROM ambulantes\n" +
+                    "INNER JOIN giros\n" +
+                    "ON ambulantes.idGiro = giros.id AND ambulantes.id = '"+idAmbu+"'; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+              
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        lapso[0] = rs.getString(1);
+                        lapso[1]= rs.getString(2);
+                        lapso[2] = rs.getString(3);
+                    }else{
+                        for (int i = 0; i < lapso.length; i++) {
+                            lapso[i] = "NO-DATA";
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return lapso;
+    }//getAmbus1          
+          
     public void limpiar(JPanel Pn)
     {
         Pn.removeAll();
@@ -278,10 +317,11 @@ public class funciones {
            public static void main(String args[]){
                funciones fn =  new funciones();
               java.util.Date date = new Date();
-              
+                String[] prue = fn.getAmbus1("45");
               System.out.println("Guardare en TIMESTAMP: "+new java.sql.Timestamp(date.getTime() ) );
-              System.out.println("en turno #:"+ fn.getenTurno());
-              System.out.println("Ultimo pago area: #"+fn.getUltimPagoarea());
+               for (int i = 0; i < prue.length; i++) {
+                  System.out.println(prue[i] ); 
+               }
 
            }
 }

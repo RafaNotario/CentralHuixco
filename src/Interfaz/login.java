@@ -40,12 +40,9 @@ funciones func1 = new funciones();
  
     public login() {
         initComponents();
-        
        inicioButton(false);//deshabilitar botones de menu
         jPanMontApert.setVisible(false);
-      
          letreroSems();
-  
     }
 
     /**
@@ -610,7 +607,7 @@ funciones func1 = new funciones();
             pass=txtContraseña.getText();
             idReturn = func1.validaLoginUsers(user,pass);
             datosUserSys= func1.getnombreUsuario(idReturn);
-          System.out.println("Regreso"+idReturn);
+     //     System.out.println("Regreso"+idReturn);
             if(idReturn > -1 && idReturn < 5000 && !datosUserSys[0].equals("NO-DATA")){
                 jLabUserNombre.setText(datosUserSys[2]);
                 jPanLogin.setVisible(false);
@@ -644,7 +641,9 @@ funciones func1 = new funciones();
             System.out.println("guardar id user = "+idReturn);
             contentL.add(Integer.toString(idReturn));
             contentL.add(monto2);
-            func1.GuardaTurno(contentL);
+            
+            //comentar descomentar linea
+//func1.GuardaTurno(contentL); 
             
            func1.limpiar(jPanTrabajo);
             inicioButton(true);//habilitar todos los botones del menucontent
@@ -763,9 +762,10 @@ funciones func1 = new funciones();
         jLabNsem.setText("Semana "+arr[2]);
         jLabLapsoSemana.setText(dCon.getWeekStartDate(arr[3])+" - "+dCon.getWeekStartDate(arr[4]));
         
-        for (int i = 0; i < arr.length; i++) {
+  /*      for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);
         }
+*/
     }
     
     private void inicioButton(boolean act){
