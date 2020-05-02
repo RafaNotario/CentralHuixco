@@ -34,6 +34,9 @@ public class funciones {
   private static int ROUNDING_MODE = BigDecimal.ROUND_HALF_EVEN;
   private BigDecimal fAmountOne;
   private BigDecimal fAmountTwo;
+  public static final BigDecimal ONE_HUNDRED = new BigDecimal(100);
+
+
     
      ConexionDBOriginal con2 = new ConexionDBOriginal();
      datesControl datC = new datesControl();
@@ -239,7 +242,7 @@ public class funciones {
            return idTurno;
     }//@endgetUltimPagoarea
      
-/*//// OBTENER DATOS DE AMBULANTE*/
+/*//// OBTENER DATOS DE AMBULANTE para mostrar en panelInfo*/
        public String[] getAmbus1(String idAmbu){
             Connection cn = con2.conexion();
            String[] lapso = new String[3];
@@ -253,7 +256,6 @@ public class funciones {
             try {
                 st = cn.createStatement();
                 rs = st.executeQuery(sql);
-              
                 if(rs.next())
                 {
                     if(rs.getRow() > 0){
@@ -277,6 +279,46 @@ public class funciones {
                     }
            return lapso;
     }//getAmbus1          
+          
+//obtener la condonacion y cuotas por el idAmbulante
+          public String[] getAmbusCondonac(String idAmbu){ 
+           Connection cn = con2.conexion();
+           String[] lapso = new String[9];
+           String sql = "";
+           sql = "SELECT ambulantes.idResg, ambulantes.condMemb, ambulantes.condDerecho, ambulantes.condResg, ambulantes.vigMembresia, \n" +
+                    "tarifas.derechoSemanal, tarifas.membAnual,tarifas.membSemestral,tarifas.membTrimestral\n" +
+                    "FROM ambulantes\n" +
+                    "INNER JOIN tarifas\n" +
+                    "ON ambulantes.idTarifa = tarifas.id AND ambulantes.id = '"+idAmbu+"'; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+              while(rs.next())
+                {
+                    lapso[0] = rs.getString(1);
+                    lapso[1] = rs.getString(2);
+                    lapso[2] = rs.getString(3);
+                    lapso[3] = rs.getString(4);
+                    lapso[4] = rs.getString(5);
+                    lapso[5] = rs.getString(6);
+                    lapso[6] = rs.getString(7);
+                    lapso[7] = rs.getString(8);
+                    lapso[8] = rs.getString(9);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return lapso;
+    }//getAmbusCondonac      
+       
           
     public void limpiar(JPanel Pn)
     {
@@ -313,15 +355,26 @@ public class funciones {
             fAmountTwo = rounded(aAmountTwo);
           return fAmountOne.add(fAmountTwo);
       }
+      
+     public BigDecimal percentage(BigDecimal base, BigDecimal pct){
+         fAmountOne = rounded(base);
+            fAmountTwo = rounded(pct);
+       return fAmountOne.multiply(fAmountTwo).divide(ONE_HUNDRED);
+    }
             
-           public static void main(String args[]){
-               funciones fn =  new funciones();
+       public static void main(String args[]){
+           BigDecimal amountOne = new BigDecimal(250);//monto a cobrar
+           BigDecimal amountTwo = new BigDecimal(100);//cantidad recivida
+           
+           funciones fn =  new funciones();
               java.util.Date date = new Date();
                 String[] prue = fn.getAmbus1("45");
               System.out.println("Guardare en TIMESTAMP: "+new java.sql.Timestamp(date.getTime() ) );
                for (int i = 0; i < prue.length; i++) {
-                  System.out.println(prue[i] ); 
-               }
-
-           }
+                  // System.out.println(prue[i] ); 
+              }
+               
+         System.out.println("porcentaje: "+fn.percentage(amountOne, amountTwo));      
+       }
+           
 }

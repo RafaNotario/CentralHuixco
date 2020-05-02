@@ -68,7 +68,7 @@ public String getFecha(JDateChooser jd){
     }
 }
 
-    private Date cargafecha() {
+    public Date cargafecha() {
         Date fechaAct = new Date();
         return fechaAct;
     }

@@ -220,8 +220,10 @@ public String[] regPaysAreasdet(int idT, int idrub){
     Connection cn = con2.conexion();
        
         String[] arr = new String[5];
+        String sql ="";
        
-        String sql = "SELECT * FROM pagos_areasdet WHERE pagos_areasdet.idTicket = '"+idT+"' AND idRubroPago = '"+idrub+"'; ";
+        sql = "SELECT * FROM pagos_areasdet WHERE pagos_areasdet.idTicket = '"+idT+"' AND idRubroPago = '"+idrub+"'; ";
+        
         Statement st = null;
         ResultSet rs= null;
         try {
@@ -248,6 +250,43 @@ public String[] regPaysAreasdet(int idT, int idrub){
                 }
     return arr;
 }//FinRegpagosAreasdet
+
+public String[] regpagosambdet(int idT, int idrub){
+    int tic =0;
+    Connection cn = con2.conexion();
+        String[] arr = new String[8];
+        String sql ="";
+        sql = "SELECT * FROM pagos_ambdet WHERE pagos_ambdet.idTicket = '"+idT+"' AND idRubropago = '"+idrub+"' ;";
+        Statement st = null;
+        ResultSet rs= null;
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+           // rs.beforeFirst();
+            while(rs.next())
+            {
+                arr[0] = rs.getString(1);
+                arr[1] = rs.getString(2);
+                arr[2] = rs.getString(3);
+                arr[3] = rs.getString(4);
+                arr[4] = rs.getString(5);
+                arr[5] = rs.getString(6);
+                arr[6] = rs.getString(7);
+                arr[7] = rs.getString(8);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+            }
+                }
+    return arr;
+}//Finregpagosambdet
 
 public void guardaTicketArea(String[] param){
      Connection cn = con2.conexion();
@@ -319,6 +358,64 @@ public void guardadetailTicketArea(String[] param){
                         "INNER JOIN areas\n" +
                         "ON areas.id = pagos_areas.idArea AND pagos_areas.fecha = '"+fech+"'\n" +
                         "ORDER BY pagos_areas.id DESC;";      
+             int i =0,cantFilas=0, cont=1,cantColumnas=0;
+             String[][] mat=null, mat2=null;
+              int[] arrIdPedido = null;//int para usar hashMap
+            Statement st = null;
+            ResultSet rs = null;            
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                cantColumnas = rs.getMetaData().getColumnCount();
+               if(rs.last()){//Nos posicionamos al final
+                    cantFilas = rs.getRow();//sacamos la cantidad de filas/registros
+                    rs.beforeFirst();//nos posicionamos antes del inicio (como viene por defecto)
+                }
+               mat = new String[cantFilas][cantColumnas];
+               //aqui iria crear matriz
+                while(rs.next())
+                {//es necesario el for para llenar dinamicamente la lista, ya que varia el numero de columnas de las tablas
+                 
+                      for (int x=1;x<= rs.getMetaData().getColumnCount();x++) {
+                           // System.out.print("| "+rs.getString(x)+" |");
+                             mat[i][x-1]=rs.getString(x);
+                      //System.out.print(x+" -> "+rs.getString(x));                   
+                      }//for
+                       i++;
+                }//whilE
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{               
+//             System.out.println("cierra conexion a la base de datos");    
+             try {        
+                 if(st != null) st.close();                
+                 if(cn !=null) cn.close();
+             } catch (SQLException ex) {
+                 JOptionPane.showMessageDialog(null,ex.getMessage()); 
+             }
+         }//finally        
+           if (cantFilas == 0){
+                mat=null;
+                mat = new String[1][cantColumnas];
+                for (int j = 0; j < mat[0].length; j++) {
+                     mat[0][j]="NO DATA";
+                }
+           }
+return mat;            
+}//@endmatrizgetTicketsDia
+        
+/*Prueba obtener ultimos 10 pago de semana ambulante*/
+//regresa matrizde vista tickets del dia
+        public String[][] matrizgetAmbuSemana(String idAmbu, String idRubro){
+        Connection cn = con2.conexion();
+          String sql ="",aux;
+              sql = "SELECT pagos_amb.*\n" +//obtine todos los campos
+                        "FROM pagos_amb\n" +
+                        "INNER JOIN ambulantes\n" +
+                        "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idAmb = '"+idAmbu+"'\n" +
+                        "INNER JOIN pagos_ambdet\n" +
+                        "ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_ambdet.idRubroPago = '"+idRubro+"'\n" +
+                        "ORDER BY pagos_amb.id desc limit 10;";      
               
              int i =0,cantFilas=0, cont=1,cantColumnas=0;
              String[][] mat=null, mat2=null;
@@ -365,26 +462,48 @@ public void guardadetailTicketArea(String[] param){
                 }
            }
 return mat;            
-}//@endmatrizgetTicketsDia
-
+}//@endmatrizgetAmbuSemana
+        
+   public String getpagosAmbulante(String idAmbu, String idRubro){
+        Connection cn = con2.conexion();
+        String regresaTick = "";
+        String sql = "SELECT pagos_amb.id\n" +
+                        "FROM pagos_amb\n" +
+                        "INNER JOIN ambulantes\n" +
+                        "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idAmb = '"+idAmbu+"'\n" +
+                        "INNER JOIN pagos_ambdet\n" +
+                        "ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_ambdet.idRubroPago = '"+idRubro+"'\n" +
+                        "ORDER BY pagos_amb.id desc limit 1;";
+        Statement st = null;
+        ResultSet rs= null;
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            while(rs.next())
+            {
+                regresaTick = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                    try {
+                        if(cn != null) cn.close();
+                    } catch (SQLException ex) {
+                        System.err.println( ex.getMessage() );    
+                    }
+                }
+    return regresaTick;
+}//FinRegpagosAmbulante
+                
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();
          System.out.println("Ultimo pagado: "+contrl.regLastTicket(19));
-         
-        String[][] mat = contrl.regLastSemanasType(contrl.regLastTicket(19));
-        String[] arr = contrl.regPaysAreasdet(1,3);
-        
+        String[][] mat = contrl.matrizgetAmbuSemana("258","6");
+        String[] arr = contrl.regpagosambdet(16865,6);
         for (int i = 0; i < arr.length; i++) {
-           /* for (int j = 0; j < mat[0].length; j++) {
-                      System.out.print("["+mat[i][j]+"] ");
-            if(i >2)
-                    System.out.println(datCtrl.getWeekStartDate(arr[i]));
-                else
-            }*/
-                System.out.println(arr[i]);
-        }
-       
-        
+            System.out.println("["+arr[i]+"]");
     }
+    // System.out.println(contrl.getpagosAmbulante("258","6"));
+}
 
 }

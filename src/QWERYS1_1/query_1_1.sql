@@ -15,7 +15,6 @@ mysql -u root -q -P 3310
 /* entrar a mysql en puerto distinto a 3306 e IP remota*/
 mysql -u usuario -p -h 192.168.x.x -P 3307   //-p <- Verificar
 
-
 /*Relacion AREAS-SOCIOS PENDIENTE error = AMBULANTES - SEMANAS YA*/
 /*SOLUCION = Verificar misma longitud y tipo de datos areas.idPresi Atributos = "" socios.is Atributos = UNSIGNED*/
 ALTER TABLE centraldb.areas
@@ -75,29 +74,56 @@ REFERENCES central.usuarios (id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
-/*Relacion ambulantes-giro YA*/
+/***---------*********************************** AMBULANTES*/
+/*  Relacion ambulantes-giro YA*/
 ALTER TABLE centraldb.ambulantes
 ADD CONSTRAINT FK_ambulantes_giro FOREIGN KEY (idGiro)
 REFERENCES centraldb.giros (id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
-/*Relacion ambulantes-tarifas YA*/
+/*  Relacion ambulantes-tarifas     YA*/
 ALTER TABLE centraldb.ambulantes
 ADD CONSTRAINT FK_ambulantes_tarifa FOREIGN KEY (idTarifa)
 REFERENCES centraldb.tarifas (id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
-/*Relacion AMBULANTES-PAGOS_AMB YA*/
+/*  Relacion AMBULANTES-PAGOS_AMB YA    */
 ALTER TABLE central.pagos_amb
 ADD CONSTRAINT FK_pag_ambs FOREIGN KEY (idAmb)
 REFERENCES central.ambulantes (id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
+/*  Relacion PAGOS_AMB-PAGOS-AMBDET YA    */
+ALTER TABLE central.pagos_ambdet
+ADD CONSTRAINT FK_pagambs_pagsamb FOREIGN KEY (idTicket)
+REFERENCES central.pagos_amb (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
 
+/*  Relacion PAGOS_AMB-PAGOS-TURNOS YA    */
+/*oBS: CAMBIAR TIPO DE DATO en central.pagos_amb.idTurno a mediumint(5) ya que central.pagos_turno.id es mediumint(5)C6 */
+ALTER TABLE central.pagos_amb
+ADD CONSTRAINT FK_pagamb_turno FOREIGN KEY (idTurno)
+REFERENCES central.turnos (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
 
+/*  Relacion PAGOS_AMBDET-SEMANAS  YA    */
+ALTER TABLE central.pagos_ambdet
+ADD CONSTRAINT FK_pagambs_sems FOREIGN KEY (idSemana)
+REFERENCES central.semanas (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*  Relacion PAGOS_AMBDET- RUBROSPAGO YA    */
+ALTER TABLE central.pagos_ambdet
+ADD CONSTRAINT FK_pagambs_rubros FOREIGN KEY (idRubropago)
+REFERENCES central.rubrospago (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
 
 
 
@@ -136,9 +162,24 @@ ON rubrospago.id = pagos_areasdet.idRubroPago
 group by pagos_areasdet.idRubroPago
 ORDER BY pagos_areas.fecha desc;
 
+SELECT  pagos_amb.*
+FROM pagos_amb
+INNER JOIN ambulantes
+ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idAmb = 258
+INNER JOIN pagos_ambdet
+ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_ambdet.idRubroPago = 6
+ORDER BY pagos_amb.id desc limit 10;
 
+/*query para obrtener tarifas y descuentos de ambulante*/
+SELECT ambulantes.condMemb,ambulantes.condDerecho,ambulantes.condResg,ambulantes.vigMembresia,
+    tarifas.derechoSemanal, tarifas.membAnual,tarifas.membSemestral,tarifas.membTrimestral
+FROM ambulantes
+INNER JOIN tarifas
+ON ambulantes.idTarifa = tarifas.id AND ambulantes.id = 228;
 
-/*modificacione en respaldo de SIAN CENTRAL
+SELECT * from pagos_amb where idAmb = 258 order by id DESC LIMIT 10;
+
+/*modificaciones en respaldo de SIAN CENTRAL
 /*SOLUCION = Verificar misma longitud y tipo de datos areas.idPresi Atributos = "" socios.is Atributos = UNSIGNED*/
 /*SOLUCION = Verificar misma longitud y tipo de datos centraldb.id Atributos = "" pagos_areas.idArea Atributos = UNSIGNED*/
 

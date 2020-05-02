@@ -110,13 +110,92 @@ jLabObserva
 	txtPoliciaIdSem
 	txtResguardIdSem
 
+// ****** ----- panel jPanAmbulantes
+
+	txtResultAmbu
+//Panel semana vigencia
+	jCheckSemPaysAmb
+	jLabUltimaSemanaPay
+	txtIdSemOcultoAmb
+
+	txtSeminiAmb
+	jButMinusSemsPaysAmb	
+	txtSemFinAmb
+	jLaFechIniSemana
+	jLabAumentaSemanas
+	jButMostSemsPaysAmb
+
+	jLabContadorSemanas
+	jLabDtoSemanas
+	jLabDstoSemanas
+	jLabTarifaSemanas
+	jLabImporteSemanas
+	
+//Panel resguardo vigencia
+	jCheckResguardAmb
+	jLabUltimaResguardPay
+	txtIdResguardOcultoAmb
+
+	jLabContSemsResguard
+	jLabTarifaResguard
+	jLabDstoResguard
+	jLabImporteResguard
+
+	jLaFechIniResguard
+	jLabAumResguard
+	jButMinusResgPaysAmb
+	jButMinusResgSemfin
+	txtSemIniAmb1
+	jButMostSemsPaysAmb1
+	txtSemIniAmb2
+	jButMostSemsPaysAmb2
+	jCBoxResguardosOpc
+	
+
+//Panel inscripcion vigencia
+	jCheckInscripPaysAmb
+	jLabVigenciaView
+	jCBoxDuracInscripc
+	jLabTarifaInscripcion
+	jLabDstoInscripcion
+	jLabImporteInscripcion
+	jDateChoInscripcion
+	
+	
 //PANEL DE areas.java
 
 	jTabViewInfoareas
 @jPanAreasView
 	jTabViewInfoareas
 	jLabBodegasEn	
-
+	
+	
 
 @jPanSociosView
 
+
+           String tot = txtResultSum.getText(),
+                    costMant = jLabTarifaMantenim.getText(),
+                    numSemanas = "";/*Hacer suma de total Total*/
+            
+            BigDecimal amountOne = new BigDecimal(tot);
+            BigDecimal amountTwo = new BigDecimal(costMant);//cantidad recivida
+ 
+            
+            if(jChecMantSem.isSelected()){
+                jButMantenSubstract.setEnabled(true);
+                jButMantenMoore.setEnabled(true);
+                 jLabSemsPaysManten.setText("1");
+                numSemanas = jLabSemsPaysManten.getText();
+                BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
+                txtResultSum.setText(func.getSum(amountOne, func.multiplicaAmount(amountTwo, amountTres)).toString());
+                 jlabImportMantenim.setText(jLabTarifaMantenim.getText());
+            }else{
+                jButMantenSubstract.setEnabled(false);
+                jButMantenMoore.setEnabled(false);
+                numSemanas = jLabSemsPaysManten.getText();
+                BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
+                txtResultSum.setText(func.getDifference(amountOne, func.multiplicaAmount(amountTwo, amountTres)).toString());
+                jLabSemsPaysManten.setText("1");
+                jlabImportMantenim.setText("0.00");
+          }
