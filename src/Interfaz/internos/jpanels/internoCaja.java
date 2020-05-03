@@ -25,6 +25,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
@@ -57,12 +58,14 @@ public class internoCaja extends javax.swing.JPanel {
            idSemPolicia=0,
            idSemResguard=0,
            idSemambu=0,
-           idResguardAmbu=0
+           idResguardAmbu=0,idResguardAmbu2=0
            ;
      
 String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
 
-    public internoCaja(String usuarioN) {
+String[][] matResgVehiculo = null;//Matriz para cargar las tarifas a ambulantes
+
+public internoCaja(String usuarioN) {
         initComponents();
         this.User = usuarioN;
      jButton2.doClick();
@@ -144,11 +147,11 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
         jLabel49 = new javax.swing.JLabel();
         jLabUltimaResguardPay = new javax.swing.JLabel();
         txtIdResguardOcultoAmb = new javax.swing.JTextField();
-        txtSemIniAmb1 = new javax.swing.JTextField();
+        txtResgIniAmb = new javax.swing.JTextField();
         jLabel51 = new javax.swing.JLabel();
         jLabel52 = new javax.swing.JLabel();
         jButMinusResgSemfin = new javax.swing.JButton();
-        txtSemIniAmb2 = new javax.swing.JTextField();
+        txtResgFinAmb = new javax.swing.JTextField();
         jButMostSemsPaysAmb2 = new javax.swing.JButton();
         jPanel20 = new javax.swing.JPanel();
         jLabel54 = new javax.swing.JLabel();
@@ -161,10 +164,10 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
         jLabDstoResguard = new javax.swing.JLabel();
         jButMinusResgPaysAmb = new javax.swing.JButton();
         jButMostSemsPaysAmb1 = new javax.swing.JButton();
-        jLabel89 = new javax.swing.JLabel();
-        jCBoxResguardosOpc = new javax.swing.JComboBox<>();
         jLaFechIniResguard = new javax.swing.JLabel();
         jLabAumResguard = new javax.swing.JLabel();
+        jLabel89 = new javax.swing.JLabel();
+        jCBoxResguardosOpc = new javax.swing.JComboBox<>();
         jPanel21 = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
         jSeparator6 = new javax.swing.JSeparator();
@@ -907,10 +910,10 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
         });
 
         jLabel49.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel49.setText("Ultimo Pago: -");
+        jLabel49.setText("<html> Ultimo Pago: - <b> Semana</b>\n</html>");
 
         jLabUltimaResguardPay.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabUltimaResguardPay.setText("Semana n");
+        jLabUltimaResguardPay.setText("n");
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -922,10 +925,10 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabUltimaResguardPay, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabUltimaResguardPay, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(txtIdResguardOcultoAmb, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -934,7 +937,7 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel49)
+                    .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabUltimaResguardPay)
                     .addComponent(txtIdResguardOcultoAmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -947,9 +950,9 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
                 .addContainerGap())
         );
 
-        txtSemIniAmb1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtSemIniAmb1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtSemIniAmb1.setText("0");
+        txtResgIniAmb.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtResgIniAmb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtResgIniAmb.setText("0");
 
         jLabel51.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel51.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -960,13 +963,23 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
 
         jButMinusResgSemfin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButMinusResgSemfin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menos.png"))); // NOI18N
+        jButMinusResgSemfin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButMinusResgSemfinActionPerformed(evt);
+            }
+        });
 
-        txtSemIniAmb2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtSemIniAmb2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtSemIniAmb2.setText("0");
+        txtResgFinAmb.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtResgFinAmb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtResgFinAmb.setText("0");
 
         jButMostSemsPaysAmb2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButMostSemsPaysAmb2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mas.png"))); // NOI18N
+        jButMostSemsPaysAmb2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButMostSemsPaysAmb2ActionPerformed(evt);
+            }
+        });
 
         jPanel20.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1008,24 +1021,21 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
-                        .addComponent(jLabel72)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabDstoResguard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabTarifaResguard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabContSemsResguard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel20Layout.createSequentialGroup()
                         .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel55)
                             .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel20Layout.createSequentialGroup()
-                        .addComponent(jLabel56)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabImporteResguard, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                        .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel72)
+                            .addComponent(jLabel56))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabImporteResguard, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                            .addComponent(jLabDstoResguard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabTarifaResguard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabContSemsResguard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel20Layout.setVerticalGroup(
@@ -1054,15 +1064,19 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
 
         jButMinusResgPaysAmb.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButMinusResgPaysAmb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menos.png"))); // NOI18N
+        jButMinusResgPaysAmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButMinusResgPaysAmbActionPerformed(evt);
+            }
+        });
 
         jButMostSemsPaysAmb1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButMostSemsPaysAmb1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mas.png"))); // NOI18N
-
-        jLabel89.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel89.setText("Vehículo");
-
-        jCBoxResguardosOpc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCBoxResguardosOpc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Resguardo general" }));
+        jButMostSemsPaysAmb1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButMostSemsPaysAmb1ActionPerformed(evt);
+            }
+        });
 
         jLaFechIniResguard.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLaFechIniResguard.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1074,40 +1088,56 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
         jLabAumResguard.setText("Semana Inicial");
         jLabAumResguard.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jLabel89.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel89.setText("Vehículo");
+
+        jCBoxResguardosOpc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCBoxResguardosOpc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Resguardo general" }));
+        jCBoxResguardosOpc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBoxResguardosOpcActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel89, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButMinusResgSemfin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButMinusResgPaysAmb, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, 0)
                                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtSemIniAmb2)
-                                    .addComponent(txtSemIniAmb1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtResgFinAmb)
+                                    .addComponent(txtResgIniAmb, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, 0)
-                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLaFechIniResguard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabAumResguard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(1, 1, 1))
-                            .addComponent(jCBoxResguardosOpc, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButMostSemsPaysAmb2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButMostSemsPaysAmb1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11))
-                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabAumResguard))
+                                .addGap(1, 1, 1)
+                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButMostSemsPaysAmb2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButMostSemsPaysAmb1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addComponent(jLabel89, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCBoxResguardosOpc, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(48, 48, 48))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1115,28 +1145,31 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel89, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jCBoxResguardosOpc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel18Layout.createSequentialGroup()
                                 .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                                 .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(15, 15, 15)
-                                .addComponent(jLabel89, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(11, 11, 11))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
                                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButMinusResgPaysAmb, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addComponent(jButMostSemsPaysAmb1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtSemIniAmb1)
+                                    .addComponent(txtResgIniAmb)
                                     .addComponent(jLaFechIniResguard, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButMinusResgSemfin, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(txtSemIniAmb2)
+                                    .addComponent(txtResgFinAmb)
                                     .addComponent(jButMostSemsPaysAmb2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabAumResguard, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(7, 7, 7)
-                                .addComponent(jCBoxResguardosOpc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jLabAumResguard, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 3, Short.MAX_VALUE))
         );
@@ -1219,6 +1252,7 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
         jLabDstoInscripcion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jLabImporteInscripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabImporteInscripcion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabImporteInscripcion.setText("0.00");
 
         jLabTarifaInscripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1236,12 +1270,11 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
                     .addComponent(jLabel66)
                     .addComponent(jLabel67)
                     .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabImporteInscripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabDstoInscripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabTarifaInscripcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabDstoInscripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                    .addComponent(jLabTarifaInscripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabImporteInscripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel23Layout.setVerticalGroup(
@@ -1277,8 +1310,7 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                    .addGroup(jPanel21Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1287,8 +1319,10 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
                         .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCBoxDuracInscripc, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(3, 3, 3))
+                    .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1383,6 +1417,11 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
 
         jButMostSemsPaysAmb.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButMostSemsPaysAmb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mas.png"))); // NOI18N
+        jButMostSemsPaysAmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButMostSemsPaysAmbActionPerformed(evt);
+            }
+        });
 
         jPanel26.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1428,23 +1467,24 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
                         .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel77)
                             .addComponent(jLabel78))
-                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel26Layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jLabTarifaSemanas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel26Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabImporteSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabImporteSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel26Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabTarifaSemanas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel26Layout.createSequentialGroup()
                         .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel76, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel86, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel26Layout.createSequentialGroup()
+                            .addComponent(jLabDstoSemanas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabDstoSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabContadorSemanas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jLabContadorSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1503,7 +1543,8 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
                         .addComponent(jButMostSemsPaysAmb, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1711,9 +1752,9 @@ String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
                     .addGroup(jPanambulantesLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanambulantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel24, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanambulantesLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4806,42 +4847,75 @@ if(jChecPolicia.isSelected())
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jCheckResguardAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckResguardAmbActionPerformed
-        
+            
         if(jCheckResguardAmb.isSelected()){
-
+            jCBoxResguardosOpc.removeAllItems();
+            matResgVehiculo = getResgVehiculo();//obtenemos las cuotas de cada veiculo para ambulante
+            for (int i = 0; i < matResgVehiculo.length; i++) {
+                for (int j = 0; j < matResgVehiculo[0].length; j++) {
+                    if(j==1){
+                        jCBoxResguardosOpc.addItem(matResgVehiculo[i][j]);
+                    }
+                    System.out.print("["+matResgVehiculo[i][j]+"]");
+                }//foyCol
+                System.out.println("");  
+            }//forFil
+            jCBoxResguardosOpc.setSelectedIndex(0);
+            jLabTarifaResguard.setText(matResgVehiculo[0][2]);
+            
+                String  granTotal = txtResultAmbu.getText(),
+                importResguard = jLabImporteResguard.getText(),
+                tarif = jLabTarifaResguard.getText(),
+                dto = jLabDstoResguard.getText()
+                    ;
+            BigDecimal amountOne = new BigDecimal(importResguard);
+            BigDecimal amountTwo = new BigDecimal(granTotal);
+            BigDecimal amTarif = new BigDecimal(tarif);
+            BigDecimal amDto = new BigDecimal(dto);
+            
         String ultimaSem = jLabUltimaResguardPay.getText();
         
         if(ultimaSem.equals("N/A")){
             String[] semA = func.lapsoSemanasIni(datCtrl.setDateActual());
             jLabUltimaResguardPay.setText(semA[2]);
             txtIdResguardOcultoAmb.setText(semA[0]);
-            idResguardAmbu = Integer.parseInt(semA[0]);
             
-            txtSemIniAmb1.setText(semA[2]);
-            txtSemIniAmb2.setText(semA[2]);
+            idResguardAmbu = Integer.parseInt(semA[0]);//idSemana de ultimo pago si es N/A obtenemos semana actual
+            idResguardAmbu2=idResguardAmbu;
+            
+            System.err.println("idAmbu noData= "+idResguardAmbu);
+
+            txtResgIniAmb.setText(semA[2]);
+            txtResgFinAmb.setText(semA[2]);
             
             jLaFechIniResguard.setText(datCtrl.getWeekStartDate(semA[3]) +" - "+datCtrl.getWeekStartDate(semA[4]));
             jLabAumResguard.setText(datCtrl.getWeekStartDate(semA[3]) +" - "+datCtrl.getWeekStartDate(semA[4]));
-           
-            
-            
+       
+
+
         }else{
             
+
+        }
+  jLabImporteResguard.setText(func.getSum(amountTwo, func.getDifference(amTarif, amDto)).toString() );
+txtResultAmbu.setText( func.getSum(amountTwo,func.getDifference(amTarif, amDto) ).toString() );
+            
+            
+        }else{//ifjCheck
+             String  granTotal = txtResultAmbu.getText(),
+                importResguard = jLabImporteResguard.getText(),
+                tarif = jLabTarifaResguard.getText(),
+                dto = jLabDstoResguard.getText()
+                    ;
+             BigDecimal amountOne = new BigDecimal(importResguard);
+            BigDecimal amountTwo = new BigDecimal(granTotal);
+            BigDecimal amTarif = new BigDecimal(tarif);
+            BigDecimal amDto = new BigDecimal(dto);
+             
+          jLabImporteResguard.setText(func.getDifference(amountTwo, func.getDifference(amTarif, amDto)).toString() );
+          txtResultAmbu.setText( func.getDifference(amountTwo,func.getDifference(amTarif, amDto) ).toString() );
         }
 
-
-
-
-            jCBoxResguardosOpc.removeAllItems();
-            String[][] mat = getResgVehiculo();//obtenemos las cuotas de cada veiculo para ambulante
-            for (int i = 0; i < mat.length; i++) {
-                for (int j = 0; j < mat[0].length; j++) {
-                    if(j==1){
-                        jCBoxResguardosOpc.addItem(mat[i][j]);
-                    }
-                }//foyCol
-            }//forFil
-        }//ifjCheck
     }//GEN-LAST:event_jCheckResguardAmbActionPerformed
 
     private void jCheckInscripPaysAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckInscripPaysAmbActionPerformed
@@ -4857,23 +4931,19 @@ if(jChecPolicia.isSelected())
 
     private void jCheckSemPaysAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckSemPaysAmbActionPerformed
         String ultimaSem = jLabUltimaSemanaPay.getText(),
-                
                 tarif = jLabTarifaSemanas.getText(),
                 costMant = jLabTarifaMantenim.getText(),
                 dcto = jLabDstoSemanas.getText(),
                 numSemanas = jLabContadorSemanas.getText(),
                 totalAmbu = txtResultAmbu.getText(),
                 auxtot ="";/*Hacer suma de total Total*/
-    
         BigDecimal amountOne = new BigDecimal(totalAmbu);
         BigDecimal amountTwo = new BigDecimal(tarif);//cantidad recivida
-
         if(ultimaSem.equals("N/A")){
             String[] semA = func.lapsoSemanasIni(datCtrl.setDateActual());
             jLabUltimaSemanaPay.setText(semA[2]);
             txtIdSemOcultoAmb.setText(semA[0]);
             idSemambu = Integer.parseInt(semA[0]);
-            
             txtSeminiAmb.setText(semA[2]);
             txtSemFinAmb.setText(semA[2]);
             jLaFechIniSemana.setText(datCtrl.getWeekStartDate(semA[3]) +" - "+datCtrl.getWeekStartDate(semA[4]));            
@@ -4891,13 +4961,12 @@ txtResultAmbu.setText(func.getSum(amountOne, amountFive).toString());
                 }else{
                        jButMinusSemsPaysAmb.setEnabled(false);
                        jButMostSemsPaysAmb.setEnabled(false);
-                      
                        BigDecimal amountTres = new BigDecimal(jLabImporteSemanas.getText());//cantidad recivida
                        txtResultAmbu.setText(func.getDifference(amountOne, amountTres).toString());
                        jLabContadorSemanas.setText("1");
                        jLabImporteSemanas.setText("0.00");
                  }
-        }//else si no hay pago
+        }
     }//GEN-LAST:event_jCheckSemPaysAmbActionPerformed
 
     private void jButMinusSemsPaysAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButMinusSemsPaysAmbActionPerformed
@@ -4905,37 +4974,244 @@ txtResultAmbu.setText(func.getSum(amountOne, amountFive).toString());
                 fin = txtSemFinAmb.getText(),
                 multi1 ="",
                 multi2 = "",
+                resAmbu="",
                 tot="";
         String[] arr = null;
         String aux="";
         int numeradorSem=Integer.parseInt(jLabContadorSemanas.getText());
            //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
              if(Integer.parseInt(ini) < Integer.parseInt(fin)){
-                
                     idSemambu--;
                     arr = contrl.regSemanas(idSemambu);
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
                   
-                   txtSemFinAmb.setText(arr[2]);
+                   txtSemFinAmb.setText(arr[2]);//en #semana 1-52
                    jLabAumentaSemanas.setText(aux);       
                    jLabContadorSemanas.setText(Integer.toString(numeradorSem-1));
           /*obtenemos el producto del numero de tickets por semana que pagara*/
-                   multi1 = jLabImporteSemanas.getText();
-                    multi2 = jLabTarifaSemanas.getText();
-                     tot = txtResultAmbu.getText();
+                   multi1 = jLabDstoSemanas.getText();
+                   multi2 = jLabTarifaSemanas.getText();
+                   resAmbu = jLabImporteSemanas.getText();
+                   tot = txtResultAmbu.getText();
                    BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
-                    BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
-                    BigDecimal amountBasuraMenos = new BigDecimal(tot);//cantidad recivida
-                    
-                   jLabImporteSemanas.setText(func.getDifference(amountOne, amountTwo).toString());
-                   txtResultAmbu.setText(func.getDifference(amountBasuraMenos,amountTwo).toString());
-           
+                   BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                   BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
+                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida 
+jLabImporteSemanas.setText(func.getDifference(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString()  );
+txtResultAmbu.setText( func.getDifference(totalAll, func.getDifference(amountTwo, amountOne)).toString() );           
              }else{
                  JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
              }
 
-
     }//GEN-LAST:event_jButMinusSemsPaysAmbActionPerformed
+
+    private void jButMostSemsPaysAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButMostSemsPaysAmbActionPerformed
+        String ini = txtSeminiAmb.getText(),
+                fin = txtSemFinAmb.getText(),
+                multi1 ="",
+                multi2 = "",
+                resAmbu="",
+                tot="";
+        String[] arr = null;
+        String aux="";
+        int numeradorSem=Integer.parseInt(jLabContadorSemanas.getText());
+           //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
+   
+                    idSemambu++;
+                    arr = contrl.regSemanas(idSemambu);
+                    aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
+                  
+                   txtSemFinAmb.setText(arr[2]);//en #semana 1-52
+                   jLabAumentaSemanas.setText(aux);       
+                   jLabContadorSemanas.setText(Integer.toString(numeradorSem+1));
+          /*obtenemos el producto del numero de tickets por semana que pagara*/
+                   multi1 = jLabDstoSemanas.getText();
+                   multi2 = jLabTarifaSemanas.getText();
+                   resAmbu = jLabImporteSemanas.getText();
+                   tot = txtResultAmbu.getText();
+                   BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
+                   BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                   BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
+                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida 
+jLabImporteSemanas.setText(func.getSum(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString() );
+txtResultAmbu.setText( func.getSum(totalAll,func.getDifference(amountTwo, amountOne) ).toString() );
+           
+    
+
+    }//GEN-LAST:event_jButMostSemsPaysAmbActionPerformed
+
+    private void jCBoxResguardosOpcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBoxResguardosOpcActionPerformed
+        int var = jCBoxResguardosOpc.getSelectedIndex();
+        if(var > -1){
+            jLabTarifaResguard.setText(matResgVehiculo[var][2]);
+            String multi1 = jLabDstoResguard.getText(),
+                   multi2 = jLabTarifaResguard.getText(),
+                   resAmbu = jLabImporteResguard.getText(),
+                   tot = txtResultAmbu.getText();
+                   BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
+                   BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                   BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
+                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida 
+jLabImporteResguard.setText( func.getDifference(amountTwo, amountOne).toString() );
+//txtResultAmbu.setText(func.getDifference(amountTwo, amountOne) ).toString() );
+            
+            
+        }
+    }//GEN-LAST:event_jCBoxResguardosOpcActionPerformed
+
+    private void jButMinusResgPaysAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButMinusResgPaysAmbActionPerformed
+        String ini = txtResgIniAmb.getText(),
+                fin = txtResgFinAmb.getText(),
+                multi1 ="",
+                multi2 = "",
+                resAmbu="",
+                tot="";
+        String[] arr = null;
+        String aux="";
+        int numeradorSem=Integer.parseInt(jLabContSemsResguard.getText());
+           //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
+         
+                    idResguardAmbu--;
+                    idResguardAmbu2 = idResguardAmbu;
+                    arr = contrl.regSemanas(idResguardAmbu);
+                    aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
+                  
+                   txtResgIniAmb.setText(arr[2]);//en #semana 1-52
+                   txtResgFinAmb.setText(arr[2]);
+                   
+                   jLaFechIniResguard.setText(aux);
+                   jLabAumResguard.setText(aux);
+                   
+                   System.err.println("Valen--  ="+idResguardAmbu+" 2: "+idResguardAmbu2);
+                   jLabContSemsResguard.setText("1");
+          /*obtenemos el producto del numero de tickets por semana que pagara
+                   multi1 = jLabDstoResguard.getText();
+                   multi2 = jLabTarifaResguard.getText();
+                   resAmbu = jLabImporteResguard.getText();
+                   tot = txtResultAmbu.getText();
+                   
+                   BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
+                   BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                   BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
+                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida
+            */       
+        
+    }//GEN-LAST:event_jButMinusResgPaysAmbActionPerformed
+
+    private void jButMostSemsPaysAmb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButMostSemsPaysAmb1ActionPerformed
+        String ini = txtResgIniAmb.getText(),
+                fin = txtResgFinAmb.getText(),
+                multi1 ="",
+                multi2 = "",
+                resAmbu="",
+                tot="";
+        String[] arr = null;
+        String aux="";
+        int numeradorSem=Integer.parseInt(jLabContSemsResguard.getText());
+           //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
+                    idResguardAmbu++;
+                    idResguardAmbu2=idResguardAmbu;
+                    arr = contrl.regSemanas(idResguardAmbu);
+                    aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
+                  
+                   txtResgIniAmb.setText(arr[2]);//en #semana 1-52
+                   txtResgFinAmb.setText(arr[2]);
+                   
+                   jLaFechIniResguard.setText(aux); 
+                   jLabAumResguard.setText(aux);
+                   System.err.println("Valen++ ="+idResguardAmbu+" 2: "+idResguardAmbu2); 
+                  jLabContSemsResguard.setText("1");
+           /*
+                   obtenemos el producto del numero de tickets por semana que pagara
+                   multi1 = jLabDstoResguard.getText();
+                   multi2 = jLabTarifaResguard.getText();
+                   resAmbu = jLabImporteResguard.getText();
+                   tot = txtResultAmbu.getText();
+                   
+                   BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
+                   BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                   BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
+                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida
+           */     
+      
+
+    }//GEN-LAST:event_jButMostSemsPaysAmb1ActionPerformed
+
+    private void jButMinusResgSemfinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButMinusResgSemfinActionPerformed
+        String ini = txtResgIniAmb.getText(),
+                fin = txtResgFinAmb.getText(),
+                multi1 ="",
+                multi2 = "",
+                resAmbu="",
+                tot="";
+        String[] arr = null;
+        String aux="";
+        int numeradorSem=Integer.parseInt(jLabContSemsResguard.getText());
+           //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
+             if(Integer.parseInt(ini) < Integer.parseInt(fin)){
+                    idResguardAmbu2--;
+                    arr = contrl.regSemanas(idResguardAmbu2);
+                    aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
+                  
+                   txtResgFinAmb.setText(arr[2]);//en #semana 1-52
+                   jLabAumResguard.setText(aux);       
+                   jLabContSemsResguard.setText(Integer.toString(numeradorSem-1));
+          /*obtenemos el producto del numero de tickets por semana que pagara*/
+                   multi1 = jLabDstoResguard.getText();
+                   multi2 = jLabTarifaResguard.getText();
+                   resAmbu = jLabImporteResguard.getText();
+                   tot = txtResultAmbu.getText();
+                   
+                   BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
+                   BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                   BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
+                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida
+                   
+jLabImporteResguard.setText(func.getDifference(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString()  );
+txtResultAmbu.setText( func.getDifference(totalAll, func.getDifference(amountTwo, amountOne)).toString() );           
+           
+                System.err.println("ValeMinus ++ ="+idResguardAmbu+" 2: "+idResguardAmbu2); 
+             }else{
+                 JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
+             }
+
+    }//GEN-LAST:event_jButMinusResgSemfinActionPerformed
+
+    private void jButMostSemsPaysAmb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButMostSemsPaysAmb2ActionPerformed
+        String ini = txtResgIniAmb.getText(),
+                fin = txtResgFinAmb.getText(),
+                multi1 ="",
+                multi2 = "",
+                resAmbu="",
+                tot="";
+        String[] arr = null;
+        String aux="";
+        int numeradorSem=Integer.parseInt(jLabContSemsResguard.getText());
+           //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
+
+                    idResguardAmbu2++;
+                    arr = contrl.regSemanas(idResguardAmbu2);
+                    aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
+                  
+                   txtResgFinAmb.setText(arr[2]);//en #semana 1-52
+                   jLabAumResguard.setText(aux);       
+                   jLabContSemsResguard.setText(Integer.toString(numeradorSem+1));
+          /*obtenemos el producto del numero de tickets por semana que pagara*/
+                   multi1 = jLabDstoResguard.getText();
+                   multi2 = jLabTarifaResguard.getText();
+                   resAmbu = jLabImporteResguard.getText();
+                   tot = txtResultAmbu.getText();
+                   
+                   BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
+                   BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                   BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
+                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida
+                   
+jLabImporteResguard.setText(func.getSum(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString()  );
+txtResultAmbu.setText( func.getSum(totalAll, func.getDifference(amountTwo, amountOne)).toString() );           
+           
+   System.err.println("ValenMost ++ ="+idResguardAmbu+" 2: "+idResguardAmbu2); 
+    }//GEN-LAST:event_jButMostSemsPaysAmb2ActionPerformed
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -5279,6 +5555,9 @@ txtResultAmbu.setText(func.getSum(amountOne, amountFive).toString());
             String[] arrSemPlus =null;
             arrSemPlus = contrl.regSemanas(numSemanaOrigin+1);
             numSemanaOrigin  = Integer.parseInt(arrSemPlus[0]);  //guardamos idSemana mas uno que se va a ´pagar
+            
+            idSemambu = Integer.parseInt(arrSemPlus[0]);//idSemanaPagada+1
+            
             aux = datCtrl.getWeekStartDate(arrSemPlus[3]) + " - "+ datCtrl.getWeekStartDate(arrSemPlus[4]);
             
             txtSeminiAmb.setText(arrSemPlus[2]);
@@ -5306,12 +5585,17 @@ txtResultAmbu.setText(func.getSum(amountOne, amountFive).toString());
       jLabUltimaResguardPay.setText("Semana : "+arrSemResg[2]);//mostramos numero de semana original
       String[] arrSemPlusResg =null;
       arrSemPlusResg = contrl.regSemanas(numSemanaResguard+1);
-      numSemanaResguard  = Integer.parseInt(arrSemPlusResg[0]); 
+      numSemanaResguard  = Integer.parseInt(arrSemPlusResg[0]);
+      
+      idResguardAmbu = Integer.parseInt(arrSemPlusResg[0]);//idSemana ultimoPay +1
+      idResguardAmbu2 = idResguardAmbu;//variables para los dos campos incrementables
+      
+        System.err.println("idAmbu yesData= "+idResguardAmbu);
       aux = datCtrl.getWeekStartDate(arrSemPlusResg[3]) + " - "+ datCtrl.getWeekStartDate(arrSemPlusResg[4]);
       
-       txtSemIniAmb1.setText(arrSemPlusResg[2]);
+       txtResgIniAmb.setText(arrSemPlusResg[2]);
          jLaFechIniResguard.setText(aux);
-         txtSemIniAmb2.setText(arrSemPlusResg[2]);
+         txtResgFinAmb.setText(arrSemPlusResg[2]);
          jLabAumResguard.setText(aux);
     }
      jLabContSemsResguard.setText("1");
@@ -5720,12 +6004,12 @@ txtResultAmbu.setText(func.getSum(amountOne, amountFive).toString());
     private javax.swing.JTextField txtIniResg;
     private javax.swing.JTextField txtMantenIdSem;
     private javax.swing.JTextField txtPoliciaIdSem;
+    private javax.swing.JTextField txtResgFinAmb;
+    private javax.swing.JTextField txtResgIniAmb;
     private javax.swing.JTextField txtResguardIdSem;
     private javax.swing.JTextField txtResultAmbu;
     private javax.swing.JTextField txtResultSum;
     private javax.swing.JTextField txtSemFinAmb;
-    private javax.swing.JTextField txtSemIniAmb1;
-    private javax.swing.JTextField txtSemIniAmb2;
     private javax.swing.JTextField txtSeminiAmb;
     private javax.swing.JTextField txtTotCobro;
     // End of variables declaration//GEN-END:variables
