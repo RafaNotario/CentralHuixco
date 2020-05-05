@@ -182,7 +182,19 @@ SELECT * from pagos_amb where idAmb = 258 order by id DESC LIMIT 10;
 /*modificaciones en respaldo de SIAN CENTRAL
 /*SOLUCION = Verificar misma longitud y tipo de datos areas.idPresi Atributos = "" socios.is Atributos = UNSIGNED*/
 /*SOLUCION = Verificar misma longitud y tipo de datos centraldb.id Atributos = "" pagos_areas.idArea Atributos = UNSIGNED*/
+/*Obtener datos de la tabla de vistas pagos_AREAS del dias*/
+SELECT  pagos_areas.id,DATE_FORMAT(pagos_areas.hora, "%H : %i") AS hor,'Pago semanal de area',areas.nombre,pagos_areas.total
+FROM pagos_areas
+INNER JOIN areas
+ON areas.id = pagos_areas.idArea AND pagos_areas.fecha = '2020/04/26'
+ORDER BY pagos_areas.id DESC;
 
+/*Obtener datos de la tabla de vistas pagos_AMBULANTES del dias*/
+SELECT  pagos_amb.id,DATE_FORMAT(pagos_amb.hora, "%H : %i") AS hor,'Pago semanal Ambulante',ambulantes.nombre,pagos_amb.total
+FROM pagos_ambulantes
+INNER JOIN ambulantes
+ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.fecha = '2020/05/05'
+ORDER BY pagos_areas.id DESC;
 
 
 /***ANOTACIONES

@@ -61,7 +61,8 @@ public class internoCaja extends javax.swing.JPanel {
            idResguardAmbu=0,idResguardAmbu2=0
            ;
      
-String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"};
+String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"},
+        tarifas=null;
 
 String[][] matResgVehiculo = null;//Matriz para cargar las tarifas a ambulantes
 
@@ -77,11 +78,15 @@ public internoCaja(String usuarioN) {
      llenacombogetAreas();
      inhabilitaAreas();
      AutoCompleteDecorator.decorate(jCmBxgetAreas);
+     
      jCmBxgetAreas.setEditable(true);
     jCmBxgetAreas.requestFocus();
     
-    jDateChoInscripcion.getJCalendar().setMinSelectableDate(datCtrl.cargafecha());
+   // jDateChoInscripcion.getJCalendar().setMinSelectableDate(datCtrl.cargafecha());
 
+/*Ambulantes*/    
+    inicaComboAmbu();
+    
        jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         new KeyAdapter(){
         @Override
@@ -509,9 +514,10 @@ public internoCaja(String usuarioN) {
 
         jDialCalendarMantenim.getAccessibleContext().setAccessibleParent(jLaFechFinManten);
 
+        jFramePays.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jFramePays.setTitle("Cobrar");
         jFramePays.setMinimumSize(new java.awt.Dimension(400, 300));
-        jFramePays.setType(java.awt.Window.Type.POPUP);
+        jFramePays.setType(java.awt.Window.Type.UTILITY);
 
         jLabel3.setBackground(new java.awt.Color(153, 153, 153));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -1145,31 +1151,33 @@ public internoCaja(String usuarioN) {
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButMinusResgPaysAmb, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(jButMostSemsPaysAmb1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtResgIniAmb)
+                                .addComponent(jLaFechIniResguard, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                                .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButMinusResgSemfin, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(txtResgFinAmb)
+                                .addComponent(jButMostSemsPaysAmb2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabAumResguard, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel89, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
                                 .addComponent(jCBoxResguardosOpc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel18Layout.createSequentialGroup()
-                                .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                                .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(11, 11, 11))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButMinusResgPaysAmb, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(jButMostSemsPaysAmb1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtResgIniAmb)
-                                    .addComponent(jLaFechIniResguard, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButMinusResgSemfin, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(txtResgFinAmb)
-                                    .addComponent(jButMostSemsPaysAmb2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabAumResguard, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 6, Short.MAX_VALUE))
                     .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 3, Short.MAX_VALUE))
         );
@@ -1296,6 +1304,8 @@ public internoCaja(String usuarioN) {
                         .addComponent(jLabel67))))
         );
 
+        jDateChoInscripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
         jCBoxDuracInscripc.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jCBoxDuracInscripc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Anual", "Semestral", "Trimestral" }));
         jCBoxDuracInscripc.addActionListener(new java.awt.event.ActionListener() {
@@ -1309,13 +1319,13 @@ public internoCaja(String usuarioN) {
         jPanel21Layout.setHorizontalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel21Layout.createSequentialGroup()
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel21Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChoInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jDateChoInscripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCBoxDuracInscripc, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1733,6 +1743,11 @@ public internoCaja(String usuarioN) {
         jButton22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cash.png"))); // NOI18N
         jButton22.setText("COBRAR");
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanambulantesLayout = new javax.swing.GroupLayout(jPanambulantes);
         jPanambulantes.setLayout(jPanambulantesLayout);
@@ -1793,7 +1808,7 @@ public internoCaja(String usuarioN) {
                         .addComponent(txtResultAmbu)
                         .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         jPanAreascobros.setBackground(new java.awt.Color(255, 255, 255));
@@ -4108,7 +4123,40 @@ public internoCaja(String usuarioN) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBoxDuracInscripcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBoxDuracInscripcActionPerformed
-        // TODO add your handling code here:
+       int var = jCBoxDuracInscripc.getSelectedIndex();
+        if(var > -1){
+            jLabTarifaInscripcion.setText(tarifas[var+6]);
+
+           String multi1 = jLabDstoInscripcion.getText(),
+                   multi2 = jLabTarifaInscripcion.getText(),
+                   resAmbu = jLabImporteInscripcion.getText(),
+                   tot = txtResultAmbu.getText(),
+                    aux="",auxSems="",auxInsc="";
+                   BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
+                   BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                   BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
+                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida
+              //     BigDecimal amountNumSems = new BigDecimal(numSems);//cantidad recivida
+aux = func.getDifference(amountTwo, amountOne).toString();
+
+jLabImporteInscripcion.setText(aux);
+
+if(jCheckSemPaysAmb.isSelected()){
+    auxSems = jLabImporteSemanas.getText();
+   aux = func.getSum(new BigDecimal(auxSems), new BigDecimal(aux)).toString();
+}
+    
+if(jCheckResguardAmb.isSelected()){
+    auxInsc = jLabImporteResguard.getText();
+   aux = func.getSum(new BigDecimal(auxInsc), new BigDecimal(aux)).toString();
+}
+
+txtResultAmbu.setText(aux);
+
+        }      
+        
+        
+        System.err.println("Performed tarifas isncripcion");
     }//GEN-LAST:event_jCBoxDuracInscripcActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -4652,6 +4700,7 @@ int oprime = evt.getKeyCode();
             jFramePays.setLocationRelativeTo(this);
             jFramePays.setVisible(true);
             jFramePays.setEnabled(true);
+            jFramePays.setTitle("Areas");
             String total = txtResultSum.getText();//es el total
             txtTotCobro.setText(total);
             txtEfect.setText(total);
@@ -4662,118 +4711,19 @@ int oprime = evt.getKeyCode();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       String[] arr = new String[7]; 
-        int isUltimTick = func.getUltimPagoarea(),//Se aumenta porq la columna no es increment
-                   isTurnoUlt = func.getenTurno(),
-                contadorGuard =0;
-          String fech = datCtrl.setDateActual(),
-                   ora = datCtrl.getHour(),
-                   total = txtResultSum.getText(),
-                   idAr = conten.get(jCmBxgetAreas.getSelectedIndex()),
-                  efectiv = txtEfect.getText();
-          arr[0] = Integer.toString(isUltimTick+1);
-          arr[1] = Integer.toString(isTurnoUlt);
-          arr[2] = fech;
-          arr[3] = ora;
-          arr[4] = idAr;
-          arr[5] = total;
-          arr[6] = efectiv;
-     //     contrl.guardaTicketArea(arr);//despues de guardar hay que refrescar todo y mostar el ultimo ticket
-       
- if(jChecMantSem.isSelected())
-         contadorGuard+= Integer.parseInt(jLabSemsPaysManten.getText());
-  if(jChecBasura.isSelected())
-        contadorGuard+= Integer.parseInt(jLabSemsPaysBasura.getText());
-if(jChecPolicia.isSelected())
-        contadorGuard+= Integer.parseInt(jLabSemsPaysPolis.getText());
- if(jChecResguardo.isSelected())
-        contadorGuard+= Integer.parseInt(jLabSemsPaysResg.getText());     
- 
- int j=1;//incializar contador para igualar al contador de arriba    
- do {
-      
-    if(jChecMantSem.isSelected()){
-        String[] guard = new String[5];
-        int idS = Integer.parseInt(txtMantenIdSem.getText());
-        int numVM = Integer.parseInt(jLabSemsPaysManten.getText());//#Semanas a pagar
-        int i=1;
-        do{
-        guard[0] = arr[0];
-        guard[1] = Integer.toString(j);
-        guard[2] = Integer.toString(idS+1);
-        guard[3] = "2";
-        guard[4] = jLabTarifaMantenim.getText();
-//contrl.guardadetailTicketArea(guard); 
-        System.out.println("j = "+j);
-        i++;
-        j++;
-        idS++;
-        }while(i <= numVM);
-    }
-    if(jChecBasura.isSelected()){
-        int iB = 1;
-        String[] guardB = new String[5];
-        int idSB = Integer.parseInt(txtBasurIdSem.getText());
-        int numVB = Integer.parseInt(jLabSemsPaysBasura.getText());
-        do{
-            guardB[0] = arr[0];
-            guardB[1] = Integer.toString(j);
-            guardB[2] = Integer.toString(idSB+1);
-            guardB[3] = "3";
-            guardB[4] = jLabTarifaBasura.getText();
-//contrl.guardadetailTicketArea(guardB); 
-            System.out.println("j = "+j);
-            iB++;
-            j++;
-            idSB++;
-        }while(iB <= numVB);
-    }
-    if(jChecPolicia.isSelected()){
-        int iP = 1;
-        String[] guardP = new String[5];
-        int idSP = Integer.parseInt(txtPoliciaIdSem.getText());
-        int numVP = Integer.parseInt(jLabSemsPaysPolis.getText());
-        do{
-            guardP[0] = arr[0];
-            guardP[1] = Integer.toString(j);
-            guardP[2] = Integer.toString(idSP+1);
-            guardP[3] = "4";
-            guardP[4] = jLabTarifPolicia.getText();
-//contrl.guardadetailTicketArea(guardP);
-            System.out.println("j = "+j);
-            iP++;
-            idSP++;
-            j++;
-        }while(iP <= numVP);
-    }
-    if(jChecResguardo.isSelected()){
-        int iR = 1;
-        String[] guardR = new String[5];
-        int idSR = Integer.parseInt(txtResguardIdSem.getText());
-        int numVR = Integer.parseInt(jLabSemsPaysResg.getText());
-        do{
-            guardR[0] = arr[0];
-            guardR[1] = Integer.toString(j);
-            guardR[2] = Integer.toString(idSR+1);
-            guardR[3] = "5";
-            guardR[4] = jLabTarifResguard.getText();
-//contrl.guardadetailTicketArea(guardR);
-            System.out.println("j = "+j);
-            iR++;
-            idSR++;
-            j++;
-        }while(iR <= numVR);
-    }
-   }while( j <= contadorGuard);
- 
- 
-        String[] dat = rP.getUltimPagoarea(arr[0]);
-        rP.imprim80MM(arr[0], dat,true);   
-
-     String[][] mat = contrl.matrizgetTicketsDia(fech);
-     jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
-             
-    inhabilitaAreas();
+        String var = jFramePays.getTitle();
+        switch(var){
+           case "Areas":
+               cobraAreas();
+           break;
+           
+           case "Ambulantes":
+               cobraAmbulantes();
+           break;
+           
+        };
+        JOptionPane.showMessageDialog(null, "Cobrar: "+var);
+        
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void txtEfectKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEfectKeyPressed
@@ -4847,32 +4797,17 @@ if(jChecPolicia.isSelected())
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jCheckResguardAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckResguardAmbActionPerformed
-            
-        if(jCheckResguardAmb.isSelected()){
-            jCBoxResguardosOpc.removeAllItems();
-            matResgVehiculo = getResgVehiculo();//obtenemos las cuotas de cada veiculo para ambulante
-            for (int i = 0; i < matResgVehiculo.length; i++) {
-                for (int j = 0; j < matResgVehiculo[0].length; j++) {
-                    if(j==1){
-                        jCBoxResguardosOpc.addItem(matResgVehiculo[i][j]);
-                    }
-                    System.out.print("["+matResgVehiculo[i][j]+"]");
-                }//foyCol
-                System.out.println("");  
-            }//forFil
-            jCBoxResguardosOpc.setSelectedIndex(0);
-            jLabTarifaResguard.setText(matResgVehiculo[0][2]);
-            
+              
                 String  granTotal = txtResultAmbu.getText(),
-                importResguard = jLabImporteResguard.getText(),
-                tarif = jLabTarifaResguard.getText(),
-                dto = jLabDstoResguard.getText()
+                    importResguard = jLabImporteResguard.getText(),
+                    tarif = jLabTarifaResguard.getText(),
+                    dto = jLabDstoResguard.getText(),
+                    numSemanas=jLabContSemsResguard.getText(),
+                        auxtot=""
                     ;
             BigDecimal amountOne = new BigDecimal(importResguard);
             BigDecimal amountTwo = new BigDecimal(granTotal);
             BigDecimal amTarif = new BigDecimal(tarif);
-            BigDecimal amDto = new BigDecimal(dto);
-            
         String ultimaSem = jLabUltimaResguardPay.getText();
         
         if(ultimaSem.equals("N/A")){
@@ -4891,46 +4826,83 @@ if(jChecPolicia.isSelected())
             jLaFechIniResguard.setText(datCtrl.getWeekStartDate(semA[3]) +" - "+datCtrl.getWeekStartDate(semA[4]));
             jLabAumResguard.setText(datCtrl.getWeekStartDate(semA[3]) +" - "+datCtrl.getWeekStartDate(semA[4]));
        
-
-
+            BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
+            BigDecimal amountFour = new BigDecimal(dto);//cantidad recivida
+jLabImporteResguard.setText(func.getDifference(amTarif,amountFour ).toString() );
+    importResguard = jLabImporteResguard.getText();
+txtResultAmbu.setText( func.getSum(amountTwo,new BigDecimal(importResguard)).toString() );
         }else{
-            
+                if(jCheckResguardAmb.isSelected()){
+                    jButMinusResgPaysAmb.setEnabled(true);
+                    jButMostSemsPaysAmb1.setEnabled(true);
+                    jButMinusResgSemfin.setEnabled(true);
+                    jButMostSemsPaysAmb2.setEnabled(true);
+                    jLabContSemsResguard.setText("1");
+                    BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
+                    BigDecimal amountFour = new BigDecimal(dto);//cantidad recivida
+auxtot = func.getDifference( func.multiplicaAmount(amTarif, amountTres), func.multiplicaAmount(amountTres, amountFour) ).toString();
+ jLabImporteResguard.setText(auxtot);
+                       BigDecimal amountFive = new BigDecimal(auxtot);//cantidad recivida
+txtResultAmbu.setText(func.getSum(amountTwo, amountFive).toString());
+                }else{
+                    jButMinusResgPaysAmb.setEnabled(false);
+                    jButMostSemsPaysAmb1.setEnabled(false);
+                    jButMinusResgSemfin.setEnabled(false);
+                    jButMostSemsPaysAmb2.setEnabled(false);
+                       BigDecimal amountTres = new BigDecimal(jLabImporteResguard.getText());//cantidad recivida
+                       txtResultAmbu.setText(func.getDifference(amountTwo, amountTres).toString());
+                       jLabContSemsResguard.setText("1");
+                       jLabImporteResguard.setText("0.00");
+                }
+        }
+ 
 
-        }
-  jLabImporteResguard.setText(func.getSum(amountTwo, func.getDifference(amTarif, amDto)).toString() );
-txtResultAmbu.setText( func.getSum(amountTwo,func.getDifference(amTarif, amDto) ).toString() );
-            
-            
-        }else{//ifjCheck
-             String  granTotal = txtResultAmbu.getText(),
-                importResguard = jLabImporteResguard.getText(),
-                tarif = jLabTarifaResguard.getText(),
-                dto = jLabDstoResguard.getText()
-                    ;
-             BigDecimal amountOne = new BigDecimal(importResguard);
-            BigDecimal amountTwo = new BigDecimal(granTotal);
-            BigDecimal amTarif = new BigDecimal(tarif);
-            BigDecimal amDto = new BigDecimal(dto);
-             
-          jLabImporteResguard.setText(func.getDifference(amountTwo, func.getDifference(amTarif, amDto)).toString() );
-          txtResultAmbu.setText( func.getDifference(amountTwo,func.getDifference(amTarif, amDto) ).toString() );
-        }
 
     }//GEN-LAST:event_jCheckResguardAmbActionPerformed
 
     private void jCheckInscripPaysAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckInscripPaysAmbActionPerformed
         
-        if(jCheckInscripPaysAmb.isSelected()){
-            
-        }else{
-            
-        }
-
-        // TODO add your handling code here:
+         String ultimaSem = jLabel60.getText(),
+                tarif = jLabTarifaInscripcion.getText(),
+                dcto = jLabDstoInscripcion.getText(),
+                totalAmbu = jLabImporteInscripcion.getText(),
+                 totAll = txtResultAmbu.getText(),
+                auxtot ="";/*Hacer suma de total Total*/
+         
+        BigDecimal amountOne = new BigDecimal(tarif);
+        BigDecimal amountTwo = new BigDecimal(dcto);//cantidad recivida
+        BigDecimal amountFour = new BigDecimal(totAll);//cantidad recivida
+         jDateChoInscripcion.setDate(datCtrl.cargafecha());
+         
+           if(ultimaSem.equals("N/A")){
+                    jLabel60.setText(datCtrl.getFecha(jDateChoInscripcion));
+                    
+                    jDateChoInscripcion.setDate(datCtrl.cargafecha());
+                    auxtot = func.getDifference(amountOne , amountTwo ).toString();
+                    jLabImporteInscripcion.setText(auxtot);
+                    BigDecimal amountFive = new BigDecimal(auxtot);//cantidad recivida
+                    txtResultAmbu.setText(func.getSum(amountFour, amountFive).toString());
+            }else{      
+                if(jCheckInscripPaysAmb.isSelected()){
+                    jCBoxDuracInscripc.setEnabled(true);
+                    auxtot = func.getDifference(amountOne , amountTwo ).toString();
+                    jLabImporteInscripcion.setText(auxtot);
+                    BigDecimal amountsix = new BigDecimal(auxtot);//cantidad recivida
+                    txtResultAmbu.setText(func.getSum(amountFour, amountsix).toString());
+                    
+                   jDateChoInscripcion.setDate(datCtrl.StringDate(jLabVigenciaView.getText().replace('-', '/')));
+                }else{
+                    jCBoxDuracInscripc.setEnabled(false);
+                      BigDecimal amountTres = new BigDecimal(jLabImporteInscripcion.getText());//cantidad recivida
+                       txtResultAmbu.setText(func.getDifference(amountFour, amountTres).toString());
+                       
+                 }
+           }
     }//GEN-LAST:event_jCheckInscripPaysAmbActionPerformed
 
     private void jCheckSemPaysAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckSemPaysAmbActionPerformed
-        String ultimaSem = jLabUltimaSemanaPay.getText(),
+         jLabContadorSemanas.setText("1");
+         String ultimaSem = jLabUltimaSemanaPay.getText(),
                 tarif = jLabTarifaSemanas.getText(),
                 costMant = jLabTarifaMantenim.getText(),
                 dcto = jLabDstoSemanas.getText(),
@@ -4947,6 +4919,13 @@ txtResultAmbu.setText( func.getSum(amountTwo,func.getDifference(amTarif, amDto) 
             txtSeminiAmb.setText(semA[2]);
             txtSemFinAmb.setText(semA[2]);
             jLaFechIniSemana.setText(datCtrl.getWeekStartDate(semA[3]) +" - "+datCtrl.getWeekStartDate(semA[4]));            
+            
+            BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
+            BigDecimal amountFour = new BigDecimal(dcto);//cantidad recivida
+jLabImporteSemanas.setText(func.getDifference(amountTwo,amountFour).toString());
+            totalAmbu = jLabImporteSemanas.getText();
+txtResultAmbu.setText(func.getSum(amountOne, new BigDecimal(totalAmbu)).toString());
+
         }else{
                 if(jCheckSemPaysAmb.isSelected()){
                        jButMinusSemsPaysAmb.setEnabled(true);
@@ -4967,6 +4946,8 @@ txtResultAmbu.setText(func.getSum(amountOne, amountFive).toString());
                        jLabImporteSemanas.setText("0.00");
                  }
         }
+        
+        
     }//GEN-LAST:event_jCheckSemPaysAmbActionPerformed
 
     private void jButMinusSemsPaysAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButMinusSemsPaysAmbActionPerformed
@@ -5035,8 +5016,6 @@ txtResultAmbu.setText( func.getDifference(totalAll, func.getDifference(amountTwo
                    BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida 
 jLabImporteSemanas.setText(func.getSum(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString() );
 txtResultAmbu.setText( func.getSum(totalAll,func.getDifference(amountTwo, amountOne) ).toString() );
-           
-    
 
     }//GEN-LAST:event_jButMostSemsPaysAmbActionPerformed
 
@@ -5047,16 +5026,33 @@ txtResultAmbu.setText( func.getSum(totalAll,func.getDifference(amountTwo, amount
             String multi1 = jLabDstoResguard.getText(),
                    multi2 = jLabTarifaResguard.getText(),
                    resAmbu = jLabImporteResguard.getText(),
-                   tot = txtResultAmbu.getText();
+                   tot = txtResultAmbu.getText(),
+                   numSems = jLabContSemsResguard.getText(),
+                    aux="",auxSems="",auxInsc="";
                    BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
                    BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
                    BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
-                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida 
-jLabImporteResguard.setText( func.getDifference(amountTwo, amountOne).toString() );
-//txtResultAmbu.setText(func.getDifference(amountTwo, amountOne) ).toString() );
-            
-            
+                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida
+                   BigDecimal amountNumSems = new BigDecimal(numSems);//cantidad recivida
+aux = func.multiplicaAmount(amountNumSems, func.getDifference(amountTwo, amountOne)).toString();
+System.out.println("Producto tarifa: "+aux);
+jLabImporteResguard.setText(aux);
+
+if(jCheckSemPaysAmb.isSelected()){
+    auxSems = jLabImporteSemanas.getText();
+   aux = func.getSum(new BigDecimal(auxSems), new BigDecimal(aux)).toString();
+}
+    
+if(jCheckInscripPaysAmb.isSelected()){
+    auxInsc = jLabImporteInscripcion.getText();
+   aux = func.getSum(new BigDecimal(auxInsc), new BigDecimal(aux)).toString();
+}
+
+txtResultAmbu.setText(aux);
+
         }
+        
+        System.err.print("Activa performed");
     }//GEN-LAST:event_jCBoxResguardosOpcActionPerformed
 
     private void jButMinusResgPaysAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButMinusResgPaysAmbActionPerformed
@@ -5212,6 +5208,24 @@ txtResultAmbu.setText( func.getSum(totalAll, func.getDifference(amountTwo, amoun
            
    System.err.println("ValenMost ++ ="+idResguardAmbu+" 2: "+idResguardAmbu2); 
     }//GEN-LAST:event_jButMostSemsPaysAmb2ActionPerformed
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        if( !jCheckSemPaysAmb.isSelected() && !jCheckResguardAmb.isSelected() &&
+        !jCheckInscripPaysAmb.isSelected() ){
+            JOptionPane.showMessageDialog(null, "Debe elegir almenos un pago.");
+        }else{
+            jFramePays.setLocationRelativeTo(null);
+            jFramePays.setVisible(true);
+            jFramePays.setEnabled(true);
+            jFramePays.setTitle("Ambulantes");
+            String total = txtResultAmbu.getText();//es el total
+            txtTotCobro.setText(total);
+            txtEfect.setText(total);
+            txtEfect.requestFocus(true);
+            txtEfect.selectAll();
+            jButton7.setEnabled(false);
+        }
+    }//GEN-LAST:event_jButton22ActionPerformed
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -5522,7 +5536,7 @@ txtResultAmbu.setText( func.getSum(totalAll, func.getDifference(amountTwo, amoun
             
           }//mostrarJpanNew
           
-        /*** METODO PARA CARGAR DINAMICAMENTE DATOS EN JPANELES*/
+        /*** METODO PARA CARGAR DINAMICAMENTE DATOS EN JPANELES ambulantes*/
       protected void mostrarJpanAmbulantes(String idAmb){
  //1. Obtener datos de tabla ambulantes, idResg, tarifa, condonaciones, vigMembresia
                 jCheckSemPaysAmb.setSelected(false);
@@ -5530,7 +5544,7 @@ txtResultAmbu.setText( func.getSum(totalAll, func.getDifference(amountTwo, amoun
                 jCheckInscripPaysAmb.setSelected(false);
                 txtResultAmbu.setText("0.00");
                 
-          String[] tarifas = func.getAmbusCondonac(idAmb);//obtenemos tarifas y descuentos a cobrar de ambulante
+     tarifas = func.getAmbusCondonac(idAmb);//obtenemos tarifas y descuentos a cobrar de ambulante
             String idTicultimaSem = "",
                     idresguardUltm="";
             
@@ -5582,7 +5596,7 @@ txtResultAmbu.setText( func.getSum(totalAll, func.getDifference(amountTwo, amoun
      numSemanaResguard= Integer.parseInt(arrResg[3]);
      
       String[] arrSemResg = contrl.regSemanas(numSemanaResguard);//datos de semana id pagada;
-      jLabUltimaResguardPay.setText("Semana : "+arrSemResg[2]);//mostramos numero de semana original
+      jLabUltimaResguardPay.setText(arrSemResg[2]);//mostramos numero de semana original
       String[] arrSemPlusResg =null;
       arrSemPlusResg = contrl.regSemanas(numSemanaResguard+1);
       numSemanaResguard  = Integer.parseInt(arrSemPlusResg[0]);
@@ -5657,7 +5671,250 @@ txtResultAmbu.setText( func.getSum(totalAll, func.getDifference(amountTwo, amoun
      jTabviewPays.setModel(new TModel(mat, cabAreasPays));
 //        llenacombogetAreas();
         }
+        
+        void inicaComboAmbu(){
+           jCBoxResguardosOpc.removeAllItems();
+            matResgVehiculo = getResgVehiculo();//obtenemos las cuotas de cada veiculo para ambulante
+            for (int i = 0; i < matResgVehiculo.length; i++) {
+                for (int j = 0; j < matResgVehiculo[0].length; j++) {
+                    if(j==1){
+                        jCBoxResguardosOpc.addItem(matResgVehiculo[i][j]);
+                    }
+                    System.out.print("["+matResgVehiculo[i][j]+"]");
+                }//foyCol
+                System.out.println("");  
+            }//forFil
 
+            jCBoxResguardosOpc.setSelectedIndex(0);
+            jLabTarifaResguard.setText(matResgVehiculo[0][2]);
+        }
+
+        protected void cobraAreas(){
+                String[] arr = new String[7]; 
+                int isUltimTick = func.getUltimPagoarea(),//Se aumenta porq la columna no es increment
+                           isTurnoUlt = func.getenTurno(),
+                        contadorGuard =0;
+                  String fech = datCtrl.setDateActual(),
+                           ora = datCtrl.getHour(),
+                           total = txtResultSum.getText(),
+                           idAr = conten.get(jCmBxgetAreas.getSelectedIndex()),
+                          efectiv = txtEfect.getText();
+                  arr[0] = Integer.toString(isUltimTick+1);
+                  arr[1] = Integer.toString(isTurnoUlt);
+                  arr[2] = fech;
+                  arr[3] = ora;
+                  arr[4] = idAr;
+                  arr[5] = total;
+                  arr[6] = efectiv;
+               contrl.guardaTicketArea(arr);//despues de guardar hay que refrescar todo y mostar el ultimo ticket
+
+         if(jChecMantSem.isSelected())
+                 contadorGuard+= Integer.parseInt(jLabSemsPaysManten.getText());
+          if(jChecBasura.isSelected())
+                contadorGuard+= Integer.parseInt(jLabSemsPaysBasura.getText());
+        if(jChecPolicia.isSelected())
+                contadorGuard+= Integer.parseInt(jLabSemsPaysPolis.getText());
+         if(jChecResguardo.isSelected())
+                contadorGuard+= Integer.parseInt(jLabSemsPaysResg.getText());     
+
+         int j=1;//incializar contador para igualar al contador de arriba    
+         do {
+
+            if(jChecMantSem.isSelected()){
+                String[] guard = new String[5];
+                int idS = Integer.parseInt(txtMantenIdSem.getText());
+                int numVM = Integer.parseInt(jLabSemsPaysManten.getText());//#Semanas a pagar
+                int i=1;
+                do{
+                guard[0] = arr[0];
+                guard[1] = Integer.toString(j);
+                guard[2] = Integer.toString(idS+1);
+                guard[3] = "2";
+                guard[4] = jLabTarifaMantenim.getText();
+        contrl.guardadetailTicketArea(guard); 
+               // System.out.println("j = "+j);
+                i++;
+                j++;
+                idS++;
+                }while(i <= numVM);
+            }
+            if(jChecBasura.isSelected()){
+                int iB = 1;
+                String[] guardB = new String[5];
+                int idSB = Integer.parseInt(txtBasurIdSem.getText());
+                int numVB = Integer.parseInt(jLabSemsPaysBasura.getText());
+                do{
+                    guardB[0] = arr[0];
+                    guardB[1] = Integer.toString(j);
+                    guardB[2] = Integer.toString(idSB+1);
+                    guardB[3] = "3";
+                    guardB[4] = jLabTarifaBasura.getText();
+        contrl.guardadetailTicketArea(guardB); 
+                    //System.out.println("j = "+j);
+                    iB++;
+                    j++;
+                    idSB++;
+                }while(iB <= numVB);
+            }
+            if(jChecPolicia.isSelected()){
+                int iP = 1;
+                String[] guardP = new String[5];
+                int idSP = Integer.parseInt(txtPoliciaIdSem.getText());
+                int numVP = Integer.parseInt(jLabSemsPaysPolis.getText());
+                do{
+                    guardP[0] = arr[0];
+                    guardP[1] = Integer.toString(j);
+                    guardP[2] = Integer.toString(idSP+1);
+                    guardP[3] = "4";
+                    guardP[4] = jLabTarifPolicia.getText();
+        contrl.guardadetailTicketArea(guardP);
+                    //System.out.println("j = "+j);
+                    iP++;
+                    idSP++;
+                    j++;
+                }while(iP <= numVP);
+            }
+            if(jChecResguardo.isSelected()){
+                int iR = 1;
+                String[] guardR = new String[5];
+                int idSR = Integer.parseInt(txtResguardIdSem.getText());
+                int numVR = Integer.parseInt(jLabSemsPaysResg.getText());
+                do{
+                    guardR[0] = arr[0];
+                    guardR[1] = Integer.toString(j);
+                    guardR[2] = Integer.toString(idSR+1);
+                    guardR[3] = "5";
+                    guardR[4] = jLabTarifResguard.getText();
+        contrl.guardadetailTicketArea(guardR);
+                    //System.out.println("j = "+j);
+                    iR++;
+                    idSR++;
+                    j++;
+                }while(iR <= numVR);
+            }
+           }while( j <= contadorGuard);
+
+            String[][] mat = contrl.matrizgetTicketsDia(fech);
+             jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
+            String[] dat = rP.getUltimPagoarea(arr[0]);
+            rP.imprim80MM(arr[0], dat,true);   
+            inhabilitaAreas();
+        }//@endCobroArea
+        
+        
+        protected void cobraAmbulantes(){
+                String[] arr = new String[7]; 
+                int isUltimTick = func.getUltimPagoambus(),//Se aumenta porq la columna no es increment
+                           isTurnoUlt = func.getenTurno(),
+                        contadorGuard =0;
+                  String fech = datCtrl.setDateActual(),
+                           ora = datCtrl.getHour(),
+                           total = txtTotCobro.getText(),
+                           idAmbu = jLabIdAmbu.getText(),
+                          efectiv = txtEfect.getText();
+                  arr[0] = Integer.toString(isUltimTick+1);
+                  arr[1] = Integer.toString(isTurnoUlt);
+                  arr[2] = fech;
+                  arr[3] = ora;
+                  arr[4] = idAmbu;
+                  arr[5] = total;
+                  arr[6] = efectiv;
+              contrl.guardaTicketAmbus(arr);//despues de guardar hay que refrescar todo y mostar el ultimo ticket
+
+         if(jCheckSemPaysAmb.isSelected())
+                 contadorGuard+= Integer.parseInt(jLabContadorSemanas.getText());
+          if(jCheckResguardAmb.isSelected())
+                contadorGuard+= Integer.parseInt(jLabContSemsResguard.getText());
+        if(jCheckInscripPaysAmb.isSelected())
+                contadorGuard+= 1;
+         
+         int j=1;//incializar contador para igualar al contador de arriba    
+         do {
+            if(jCheckSemPaysAmb.isSelected()){
+                String dcto = jLabDstoSemanas.getText(),
+                        tarif = jLabTarifaSemanas.getText();
+                
+                String[] guard = new String[6];
+                int idS = Integer.parseInt(txtIdSemOcultoAmb.getText());
+                int numVM = Integer.parseInt(jLabContadorSemanas.getText());//#Semanas a pagar
+                int i=1;
+                do{
+                guard[0] = arr[0];//idTicketguardado pagos_amb
+                guard[1] = Integer.toString(j);//item
+                guard[2] = "6";//idRubroPago
+                guard[3] = Integer.toString(idS+1);//rubrospago.id = Semana Ambulantes
+                guard[4] = jLabTarifaSemanas.getText();
+                guard[5] = jLabDstoSemanas.getText();
+            
+        contrl.guardadetailTicketAmbus(guard,guard.length); 
+                //System.out.println("Semana j = "+j);
+                i++;
+                j++;
+                idS++;
+                }while(i <= numVM);
+            }
+ 
+            if(jCheckResguardAmb.isSelected()){
+                int iB = 1;
+                String[] guardB = new String[6];
+              //  int idSB = Integer.parseInt(txtBasurIdSem.getText());
+                int numVB = Integer.parseInt(jLabContSemsResguard.getText());
+                do{
+                    guardB[0] = arr[0];
+                    guardB[1] = Integer.toString(j);
+                    guardB[2] = "7";
+                    guardB[3] = Integer.toString(idResguardAmbu);
+                    guardB[4] = jLabTarifaResguard.getText();
+                    guardB[5] = jLabDstoSemanas.getText();
+        contrl.guardadetailTicketAmbus(guardB,guardB.length); 
+                    //System.out.println("Resguardo j = "+j);
+                    iB++;
+                    j++;
+                    //idSB++;
+                    idResguardAmbu++;
+                }while(iB <= numVB);
+                contrl.f5idResgAmbu(idAmbu,matResgVehiculo[jCBoxResguardosOpc.getSelectedIndex()][0],"idResg");
+            }
+            
+            if(jCheckInscripPaysAmb.isSelected()){
+                int eligio = jCBoxDuracInscripc.getSelectedIndex()+8;
+                String[] guardP = new String[8];
+
+                    guardP[0] = arr[0];
+                    guardP[1] = Integer.toString(j);
+                    guardP[2] = Integer.toString(eligio);//rubrospago.id: Anual Semestral Trimestral 8,9,10
+                    guardP[3] = "1";
+                    guardP[4] = jLabTarifaInscripcion.getText();
+                    guardP[5] = jLabDstoSemanas.getText();
+                    guardP[6] = datCtrl.getFecha(jDateChoInscripcion);
+                    if(eligio == 8)
+                        guardP[7] = datCtrl.getsumaFecha(jDateChoInscripcion,12);
+      
+                    if(eligio == 9)
+                        guardP[7] = datCtrl.getsumaFecha(jDateChoInscripcion,6);
+
+                    if(eligio == 10)
+                        guardP[7] = datCtrl.getsumaFecha(jDateChoInscripcion,3);
+                    
+                 contrl.guardadetailTicketAmbus(guardP,guardP.length);
+                 
+                //    System.out.println("Inscrip j = "+j);
+                contrl.f5idResgAmbu(idAmbu,guardP[7],"vigMembresia");
+                    j++;
+
+            }
+           }while( j <= contadorGuard);
+/*
+            String[][] mat = contrl.matrizgetTicketsDia(fech);
+             jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
+
+            String[] dat = rP.getUltimPagoarea(arr[0]);
+            rP.imprim80MM(arr[0], dat,true);   
+*/
+    //         inhabilitaAreas();
+    }//@endCobroAmbulantes
+        
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButBasuraMoore;
     private javax.swing.JButton jButBasuraSubstract;

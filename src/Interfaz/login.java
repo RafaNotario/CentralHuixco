@@ -25,9 +25,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  * @author Antonio R. Notario
  */
 public class login extends javax.swing.JFrame {
-
     datesControl dCon = new datesControl();
-    
     internoCaja iCaj = null;
     areas Ar = null;
     cargadores cargA = null;
@@ -632,7 +630,6 @@ funciones func1 = new funciones();
          List<String> contentL = new ArrayList<String>();
         String monto1 = txtMontoaper1.getText(),
                 monto2 = txtMontoaper2.getText();
-        
         if(monto1.isEmpty() || monto2.isEmpty() || !monto1.equals(monto2))
         {
             JOptionPane.showMessageDialog(null, "Monto vacio ó desigual, Verifique porfavor.");
@@ -641,26 +638,17 @@ funciones func1 = new funciones();
             System.out.println("guardar id user = "+idReturn);
             contentL.add(Integer.toString(idReturn));
             contentL.add(monto2);
-            
             //comentar descomentar linea
-//func1.GuardaTurno(contentL); 
-            
+           func1.GuardaTurno(contentL); 
            func1.limpiar(jPanTrabajo);
-            inicioButton(true);//habilitar todos los botones del menucontent
-            
-            iCaj = new internoCaja(jLabUserNombre.getText());
-            
-            jPanTrabajo.setLayout(new GridLayout(1,1));
-            jPanTrabajo.add(iCaj);
-            jPanTrabajo.validate();
-            jPanTrabajo.setVisible(true);
-            jPanTrabajo.setEnabled(true);     
-/*            jPanTrabajo.setLayout(new GridLayout(1,1));
-            jPanTrabajo.add(jPaneFunc1);
-            jPanTrabajo.validate();
-            jPanTrabajo.setVisible(true);
-            jPanTrabajo.setEnabled(true);     
-    */    }
+           inicioButton(true);//habilitar todos los botones del menucontent
+           iCaj = new internoCaja(jLabUserNombre.getText());
+           jPanTrabajo.setLayout(new GridLayout(1,1));
+           jPanTrabajo.add(iCaj);
+           jPanTrabajo.validate();
+           jPanTrabajo.setVisible(true);
+           jPanTrabajo.setEnabled(true);
+        }
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void txtMontoaper2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoaper2KeyPressed

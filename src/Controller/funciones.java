@@ -319,6 +319,37 @@ public class funciones {
            return lapso;
     }//getAmbusCondonac      
        
+//Proceso para pago de ambulantes
+          public int getUltimPagoambus(){
+            Connection cn = con2.conexion();
+            int idTurno = -1;
+            String sql = "";
+            sql = "SELECT id FROM pagos_amb ORDER BY id DESC LIMIT 1; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idTurno = rs.getInt(1);
+                    }else{
+                         idTurno = -1;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idTurno;
+    }//@endgetUltimPagoAmbus
           
     public void limpiar(JPanel Pn)
     {
@@ -374,7 +405,7 @@ public class funciones {
                   // System.out.println(prue[i] ); 
               }
                
-         System.out.println("porcentaje: "+fn.percentage(amountOne, amountTwo));      
+         System.out.println("ambus iultimo: "+fn.getenTurno());      
        }
            
 }

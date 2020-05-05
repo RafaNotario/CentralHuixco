@@ -198,8 +198,30 @@ public String getHour(){
     String hor = Integer.toString(hora)+":"+Integer.toString(minutos)+":"+Integer.toString(segundos);
     return hor;
 }
-    
+ 
+public String sumaFecha(){
+        Date prox = null;
+        Calendar cal = Calendar.getInstance(); 
+//obtenemos la fecha actual y la convertmos a date
+        cal.setTime(StringDate(setDateActual()));
+        cal.add(Calendar.MONTH, 3);
+        prox=cal.getTime();
+        return formato.format(prox);
+    }
 
+public String getsumaFecha(JDateChooser jd,int monts){
+      Date prox = null;
+      Calendar cal = Calendar.getInstance(); 
+      
+    if(jd.getDate()!= null){
+        cal.setTime(StringDate(formato.format(jd.getDate())));
+        cal.add(Calendar.MONTH,monts);
+        prox=cal.getTime();
+        return formato.format(prox);
+    }else{
+        return null;
+    }
+}
 
     public static void main(String argv[]){
         datesControl dC = new datesControl();
@@ -209,8 +231,7 @@ public String getHour(){
     //    dC.jLocalFechas("2020/04/13");
         System.out.println("PRUEBAS DE STACKOVERFLOW");
         
-        System.out.println("La hora es : "+dC.getHour());
-       System.out.println("La fecha es : "+dC.setDateActual());
+        System.out.println("La hora es : "+dC.sumaFecha());
        // System.out.println("Semana fin: "+dC.getWeekEndDate("2020/03/23"));
         //System.out.println("Lapso"+dC.lapsoSem("",1));
        // dC.lapsoSem("",0);

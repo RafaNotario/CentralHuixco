@@ -353,11 +353,17 @@ public void guardadetailTicketArea(String[] param){
         public String[][] matrizgetTicketsDia(String fech){
         Connection cn = con2.conexion();
           String sql ="",aux;
-              sql = "SELECT  pagos_areas.id,DATE_FORMAT(pagos_areas.hora, \"%H : %i\") AS hor,'Pago semanal de area',areas.nombre,pagos_areas.total\n" +
+              sql = "(SELECT  pagos_areas.id,DATE_FORMAT(pagos_areas.hora, \"%H : %i\") AS hor,'Pago Areas',areas.nombre,pagos_areas.total\n" +
                         "FROM pagos_areas\n" +
                         "INNER JOIN areas\n" +
                         "ON areas.id = pagos_areas.idArea AND pagos_areas.fecha = '"+fech+"'\n" +
-                        "ORDER BY pagos_areas.id DESC;";      
+                        "ORDER BY pagos_areas.id DESC)\n" +
+                        "UNION\n" +
+                        "(SELECT  pagos_amb.id,DATE_FORMAT(pagos_amb.hora, \"%H : %i\") AS hor,'Pago Ambulantes',ambulantes.nombre,pagos_amb.total\n" +
+                        "FROM pagos_amb\n" +
+                        "INNER JOIN ambulantes\n" +
+                        "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.fecha = '"+fech+"'\n" +
+                        "ORDER BY pagos_amb.id DESC);";      
              int i =0,cantFilas=0, cont=1,cantColumnas=0;
              String[][] mat=null, mat2=null;
               int[] arrIdPedido = null;//int para usar hashMap
@@ -463,7 +469,8 @@ return mat;
            }
 return mat;            
 }//@endmatrizgetAmbuSemana
-        
+
+///*****METODOS PARA AMBULANTES
    public String getpagosAmbulante(String idAmbu, String idRubro){
         Connection cn = con2.conexion();
         String regresaTick = "";
@@ -487,14 +494,113 @@ return mat;
             Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
                     try {
-                        if(cn != null) cn.close();
+                        if(st != null) st.close();                
+                        if(cn !=null) cn.close();
+                       if(rs !=null) rs.close();
+                       
                     } catch (SQLException ex) {
                         System.err.println( ex.getMessage() );    
                     }
                 }
     return regresaTick;
 }//FinRegpagosAmbulante
+
+public void guardaTicketAmbus(String[] param){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";        
+
+                SQL="INSERT INTO pagos_amb (id,idTurno,fecha,hora,idAmb,total,efectivo) VALUES (?,?,?,?,?,?,?)";                           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param[0]);
+                pps.setString(2, param[1]);
+                pps.setString(3, param[2]);
+                pps.setString(4, param[3]);
+                pps.setString(5, param[4]);
+                pps.setString(6, param[5]);
+                pps.setString(7, param[6]);
                 
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Ticket Ambulante guardado correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+} //@endguardaTicketAmbus
+  
+public void guardadetailTicketAmbus(String[] param, int numParam){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";
+            if(numParam == 6)
+                SQL="INSERT INTO pagos_ambdet (idTicket,item,idRubroPago,idSemana,importe,descuento) VALUES (?,?,?,?,?,?)";                           
+            
+            if(numParam == 8)
+                SQL="INSERT INTO pagos_ambdet (idTicket,item,idRubroPago,idSemana,importe,descuento,finicio,fvenc) VALUES (?,?,?,?,?,?,?,?)";                           
+           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param[0]);
+                pps.setString(2, param[1]);
+                pps.setString(3, param[2]);
+                pps.setString(4, param[3]);
+                pps.setString(5, param[4]);
+                pps.setString(6, param[5]);
+          if(numParam == 8){
+              pps.setString(7, param[6]);
+              pps.setString(8, param[7]);
+          }
+                
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Detail payAmbu guardado correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+} //@endguardadetailTicketAmbus
+
+//metodo para actualizar idResg de ambullantes
+       public void f5idResgAmbu(String id, String val, String opcColumn){
+             Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";        
+                SQL="UPDATE ambulantes SET "+opcColumn+" =? WHERE id = '"+id+"' ";                           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, val);
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "idresg actualizado correctamente."+id);
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,"C.I.-f5idResgAmbu"+ex.getMessage() );    
+                    }
+            }//finally catch
+        }
+
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();
          System.out.println("Ultimo pagado: "+contrl.regLastTicket(19));
