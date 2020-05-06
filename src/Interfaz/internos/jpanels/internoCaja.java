@@ -4769,11 +4769,18 @@ int oprime = evt.getKeyCode();
         int fila = jTabviewPays.getSelectedRow();
          if (evt.getClickCount() > 1) {
                 if(fila >= 0){
-                    String mostTic = jTabviewPays.getValueAt(fila, 0).toString();
-       
-                    String[] dat = rP.getUltimPagoarea(mostTic);
-                    rP.imprim80MM(mostTic, dat,false);
 
+                    String mostTic = jTabviewPays.getValueAt(fila, 0).toString(),
+                            concepto = jTabviewPays.getValueAt(fila, 2).toString();
+                    if(concepto.equals("Pago Areas")){
+                        String[] dat = rP.getUltimPagoarea(mostTic);
+                        rP.imprim80MM(mostTic, dat,false);
+                    }
+                    if(concepto.equals("Pago Ambulantes")){
+                        String[] dat = rP.getTickPagoAmbu(mostTic);
+                        rP.imprim80MMAmbus(mostTic, dat,false);
+                    }
+                        
                 }else{
                     JOptionPane.showMessageDialog(null, "Debe elegir que mostrar");
                 }
@@ -5672,6 +5679,32 @@ txtResultAmbu.setText( func.getSum(totalAll, func.getDifference(amountTwo, amoun
 //        llenacombogetAreas();
         }
         
+        public void inhabilitaAmbus(){
+            jCheckSemPaysAmb.setSelected(false);
+            jCheckResguardAmb.setSelected(false);
+            jCheckInscripPaysAmb.setSelected(false);
+            
+            txtIdSemOcultoAmb.setText("");
+            txtIdResguardOcultoAmb.setText("");
+            
+            jButMinusSemsPaysAmb.setEnabled(false);
+            jButMostSemsPaysAmb.setEnabled(false);
+            jButMinusResgPaysAmb.setEnabled(false);
+            jButMinusResgSemfin.setEnabled(false);
+            jButMostSemsPaysAmb1.setEnabled(false);
+            jButMostSemsPaysAmb2.setEnabled(false);
+            
+            jCBoxResguardosOpc.setEnabled(false);
+            jCBoxDuracInscripc.setEnabled(false);
+            jDateChoInscripcion.setEnabled(false);
+            
+        txtResultAmbu.setText("0.00");
+        
+        String[][] mat = contrl.matrizgetTicketsDia(datCtrl.setDateActual());
+         jTabviewPays.setModel(new TModel(mat, cabAreasPays));
+//        llenacombogetAreas();
+        }
+
         void inicaComboAmbu(){
            jCBoxResguardosOpc.removeAllItems();
             matResgVehiculo = getResgVehiculo();//obtenemos las cuotas de cada veiculo para ambulante
@@ -5797,7 +5830,7 @@ txtResultAmbu.setText( func.getSum(totalAll, func.getDifference(amountTwo, amoun
             String[][] mat = contrl.matrizgetTicketsDia(fech);
              jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
             String[] dat = rP.getUltimPagoarea(arr[0]);
-            rP.imprim80MM(arr[0], dat,true);   
+            rP.imprim80MM(arr[0], dat,false);   
             inhabilitaAreas();
         }//@endCobroArea
         
@@ -5865,7 +5898,7 @@ txtResultAmbu.setText( func.getSum(totalAll, func.getDifference(amountTwo, amoun
                     guardB[2] = "7";
                     guardB[3] = Integer.toString(idResguardAmbu);
                     guardB[4] = jLabTarifaResguard.getText();
-                    guardB[5] = jLabDstoSemanas.getText();
+                    guardB[5] = jLabDstoResguard.getText();
         contrl.guardadetailTicketAmbus(guardB,guardB.length); 
                     //System.out.println("Resguardo j = "+j);
                     iB++;
@@ -5885,7 +5918,7 @@ txtResultAmbu.setText( func.getSum(totalAll, func.getDifference(amountTwo, amoun
                     guardP[2] = Integer.toString(eligio);//rubrospago.id: Anual Semestral Trimestral 8,9,10
                     guardP[3] = "1";
                     guardP[4] = jLabTarifaInscripcion.getText();
-                    guardP[5] = jLabDstoSemanas.getText();
+                    guardP[5] = jLabDstoInscripcion.getText();
                     guardP[6] = datCtrl.getFecha(jDateChoInscripcion);
                     if(eligio == 8)
                         guardP[7] = datCtrl.getsumaFecha(jDateChoInscripcion,12);
@@ -5904,14 +5937,13 @@ txtResultAmbu.setText( func.getSum(totalAll, func.getDifference(amountTwo, amoun
 
             }
            }while( j <= contadorGuard);
-/*
+
             String[][] mat = contrl.matrizgetTicketsDia(fech);
              jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
 
-            String[] dat = rP.getUltimPagoarea(arr[0]);
-            rP.imprim80MM(arr[0], dat,true);   
-*/
-    //         inhabilitaAreas();
+            String[] dat = rP.getTickPagoAmbu(arr[0]);
+            rP.imprim80MMAmbus(arr[0], dat,false);   
+             inhabilitaAmbus();
     }//@endCobroAmbulantes
         
         

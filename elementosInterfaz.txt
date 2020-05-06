@@ -173,27 +173,3 @@ jLabObserva
 
 @jPanSociosView
 
-                String ini = txtResgIniAmb.getText(),
-                fin = txtResgFinAmb.getText(),
-                multi1 ="",
-                multi2 = "",
-                resAmbu="",
-                tot="";
-        String[] arr = null;
-        String aux="";
-        int numeradorSem=Integer.parseInt(jLabContSemsResguard.getText());
-           //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
-         
-                    idResguardAmbu--;
-                    idResguardAmbu2--;
-                    arr = contrl.regSemanas(idResguardAmbu);
-                    aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
-                  
-                   txtResgIniAmb.setText(arr[2]);//en #semana 1-52
-                   txtResgFinAmb.setText(arr[2]);
-                   
-                   jLaFechIniResguard.setText(aux);
-                   jLabAumResguard.setText(aux);
-                   
-                   System.err.println("Valen ="+idResguardAmbu+" 2: "+idResguardAmbu2);
-

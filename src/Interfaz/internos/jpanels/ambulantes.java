@@ -5,8 +5,18 @@
  */
 package Interfaz.internos.jpanels;
 
+
+import conexion.ConexionDBOriginal;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import renderTable.TModel;
 
 /**
  *
@@ -14,12 +24,18 @@ import java.awt.event.ComponentEvent;
  */
 public class ambulantes extends javax.swing.JPanel {
 
+        ConexionDBOriginal con2 = new ConexionDBOriginal();
+        
+        String[] cabAreasPays = {"#ID", "Nombre", "Direccion", "Telefono", "Giro","Tarifa","Ultima Sem. Pag","Sem. Adeudo","Venc. Inscrip"};
+       
     /**
      * Creates new form ambulantes
      */
     public ambulantes() {
         initComponents();
         
+        cargaDatasAmbulantes();
+                
         jTable1.getParent().addComponentListener(new ComponentAdapter() {
     @Override
     public void componentResized(final ComponentEvent e) {
@@ -33,6 +49,74 @@ public class ambulantes extends javax.swing.JPanel {
 });
         
     }
+    
+    
+    protected void cargaDatasAmbulantes(){
+            String[][] mat = matrizgetAmbsAll();
+             jTable1.setModel(new TModel(mat, cabAreasPays));        
+    }
+    
+    //regresa matrizde vista tickets del dia
+        public String[][] matrizgetAmbsAll(){
+        Connection cn = con2.conexion();
+          String sql ="",aux;
+              sql = "SELECT ambulantes.id,ambulantes.nombre,ambulantes.direccion,ambulantes.telefono,giros.giro,tarifas.descripcion,\n" +
+                "(SELECT CONCAT(semanas.anio, \" - \", semanas.semana) FROM semanas where ambulantes.ultimaSem = semanas.id) AS vigenc,\n" +
+                "((SELECT semanas.id FROM semanas WHERE  CURDATE() BETWEEN finicial AND ffinal) - ambulantes.ultimaSem) AS  adeudos,\n" +
+                "ambulantes.vigMembresia\n" +
+                "FROM giros\n" +
+                "INNER JOIN ambulantes\n" +
+                "ON ambulantes.idGiro = giros.id\n" +
+                "INNER JOIN tarifas\n" +
+                "ON tarifas.id = ambulantes.idTarifa\n" +
+                "ORDER BY ambulantes.id;";      
+              
+             int i =0,cantFilas=0, cont=1,cantColumnas=0;
+             String[][] mat=null, mat2=null;
+              int[] arrIdPedido = null;//int para usar hashMap
+            Statement st = null;
+            ResultSet rs = null;            
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                cantColumnas = rs.getMetaData().getColumnCount();
+               if(rs.last()){//Nos posicionamos al final
+                    cantFilas = rs.getRow();//sacamos la cantidad de filas/registros
+                    rs.beforeFirst();//nos posicionamos antes del inicio (como viene por defecto)
+                }
+               mat = new String[cantFilas][cantColumnas];
+               //aqui iria crear matriz
+                while(rs.next())
+                {//es necesario el for para llenar dinamicamente la lista, ya que varia el numero de columnas de las tablas
+                 
+                      for (int x=1;x<= rs.getMetaData().getColumnCount();x++) {
+                           // System.out.print("| "+rs.getString(x)+" |");
+                             mat[i][x-1]=rs.getString(x);
+                      //System.out.print(x+" -> "+rs.getString(x));                   
+                      }//for
+                       i++;
+                }//whilE
+            } catch (SQLException ex) {
+                Logger.getLogger(ambulantes.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{               
+//             System.out.println("cierra conexion a la base de datos");    
+             try {        
+                 if(st != null) st.close();                
+                 if(cn !=null) cn.close();
+             } catch (SQLException ex) {
+                 JOptionPane.showMessageDialog(null,ex.getMessage()); 
+             }
+         }//finally        
+           if (cantFilas == 0){
+                mat=null;
+                mat = new String[1][cantColumnas];
+                
+                for (int j = 0; j < mat[0].length; j++) {
+                     mat[0][j]="NO DATA";
+                }
+           }
+return mat;            
+}//@endmatrizgetAmbuSemana
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,6 +193,7 @@ public class ambulantes extends javax.swing.JPanel {
             }
         ));
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTable1.setMaximumSize(new java.awt.Dimension(2147483647, 1500));
         jTable1.setRowHeight(22);
         jTable1.setRowMargin(2);
         jScrollPane1.setViewportView(jTable1);
@@ -195,7 +280,7 @@ public class ambulantes extends javax.swing.JPanel {
                     .addComponent(jComboBox1)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
                 .addContainerGap(296, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents

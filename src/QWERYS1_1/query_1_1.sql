@@ -128,7 +128,7 @@ ON UPDATE CASCADE;
 
 
 
-
+/**qwerys para bisquedas sistemon**/
 SELECT ambulantes.id,ambulantes.nombre,giro.giro,ambulantes.obs 
 FROM central.ambulantes
 INNER JOIN central.giro
@@ -195,6 +195,61 @@ FROM pagos_ambulantes
 INNER JOIN ambulantes
 ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.fecha = '2020/05/05'
 ORDER BY pagos_areas.id DESC;
+
+/*QWERY PARA MOSTRAR TICKET JASPER PAGOS AREAS MANTENIMIENTO*/
+SELECT pagos_areas.total,pagos_areas.efectivo, pagos_areas.total - pagos_areas.efectivo AS resta, usuarios.nombre, areas.nombre
+FROM pagos_areas
+INNER join areas
+ON pagos_areas.idArea = areas.id AND pagos_areas.id = 1134
+JOIN turnos
+on pagos_areas.idTurno = turnos.id
+join usuarios
+ON usuarios.id = turnos.idusuario;
+
+/*QWERY PARA MOSTRAR TICKET JASPER PAGOS AMBULANTES MANTENIMIENTO*/
+SELECT pagos_amb.total,pagos_amb.efectivo, pagos_amb.total - pagos_amb.efectivo AS resta, usuarios.nombre, ambulantes.nombre
+FROM pagos_amb
+INNER join ambulantes
+ON pagos_amb.idAmb = ambulantes.id AND pagos_amb.id = 17120
+JOIN turnos
+on pagos_amb.idTurno = turnos.id
+join usuarios
+ON usuarios.id = turnos.idusuario;
+
+/*qwery para obtener pagos Areas y mostrar ticket*/
+SELECT  rubrospago.descripcion,semanas.semana,
+date_format(semanas.finicial, '%d - %b ') AS fini, date_format(semanas.ffinal, '%d - %b ') AS ffin, if(semanas.semana = 53,date_format(semanas.finicial, '%Y '), date_format(semanas.ffinal, '%Y ') ) AS anio
+,pagos_areasdet.importe
+FROM pagos_areasdet
+INNER JOIN rubrospago
+ON pagos_areasdet.idRubroPago = rubrospago.id AND pagos_areasdet.idTicket = $P{numTicket}
+INNER JOIN semanas
+ON pagos_areasdet.idSemana = semanas.id;
+
+/*qwery para obtener pagos ambulantes y mostrar ticket*/
+SELECT  rubrospago.descripcion,semanas.semana,
+date_format(semanas.finicial, '%d - %b ') AS fini, date_format(semanas.ffinal, '%d - %b ') AS ffin, if(semanas.semana = 53,date_format(semanas.finicial, '%Y '), date_format(semanas.ffinal, '%Y ') ) AS anio
+,pagos_ambdet.importe - pagos_ambdet.descuento AS resty,IF(rubrospago.id > 7, (fini = pagos_ambdet.finicio, ffin = pagos_ambdet.fvenc), '' )
+FROM pagos_ambdet
+INNER JOIN rubrospago
+ON pagos_ambdet.idRubropago = rubrospago.id AND pagos_ambdet.idTicket = 17120
+INNER JOIN semanas
+ON pagos_ambdet.idSemana = semanas.id;
+
+
+/* query para cargar datos de  Ambulantes Vista general */
+SELECT ambulantes.id,ambulantes.nombre,ambulantes.direccion,ambulantes.telefono,giros.giro,tarifas.descripcion,
+                (SELECT CONCAT(semanas.anio, " - ", semanas.semana) FROM semanas where ambulantes.ultimaSem = semanas.id) AS vigenc,
+             ((SELECT semanas.id FROM semanas WHERE  CURDATE() BETWEEN finicial AND ffinal) - ambulantes.ultimaSem) AS  adeudos,
+                ambulantes.vigMembresia
+FROM giros
+INNER JOIN ambulantes
+ON ambulantes.idGiro = giros.id
+INNER JOIN tarifas
+ON tarifas.id = ambulantes.idTarifa
+ORDER BY ambulantes.id DESC LIMIT 100;
+
+
 
 
 /***ANOTACIONES

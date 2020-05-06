@@ -113,6 +113,7 @@ funciones func1 = new funciones();
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         jLayeredPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jLayeredPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jPanTrabajo.setBackground(new java.awt.Color(204, 255, 204));
         jPanTrabajo.setAutoscrolls(true);
@@ -404,7 +405,7 @@ funciones func1 = new funciones();
         jPanTrabajoLayout.setHorizontalGroup(
             jPanTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanTrabajoLayout.createSequentialGroup()
-                .addContainerGap(428, Short.MAX_VALUE)
+                .addContainerGap(424, Short.MAX_VALUE)
                 .addComponent(jLaylogInt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(386, 386, 386))
         );
@@ -413,7 +414,7 @@ funciones func1 = new funciones();
             .addGroup(jPanTrabajoLayout.createSequentialGroup()
                 .addGap(217, 217, 217)
                 .addComponent(jLaylogInt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         jPanMenuPrincipal.setBackground(new java.awt.Color(255, 255, 255));
