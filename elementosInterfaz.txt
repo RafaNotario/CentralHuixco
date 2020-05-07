@@ -33,8 +33,13 @@ jLabObserva
 
 	txtBuscCargadores
 	jTabCargadoresView
-
+	
+	jlabIdCargador
 	jLabNombreCargadores
+	jLabDirecCargad
+	jLabGiroCarg
+	jLabObservaCarg
+	
 
 @jPanVarios
 
@@ -173,3 +178,24 @@ jLabObserva
 
 @jPanSociosView
 
+
+	        int oprime = evt.getKeyCode(),
+                fila=jTabDatosAmbulante.getSelectedRow();
+         if(oprime == KeyEvent.VK_ENTER && fila > -1 ){
+             String opc = jTabDatosAmbulante.getValueAt(fila, 0).toString();
+             String[] datasAmb = func.getAmbus1(opc);//arreglo para mostra info en jpanelInfo
+             mostrarJpanAmbulantes(opc);
+             
+             
+             JOptionPane.showMessageDialog(null, "Obtener ultimo pago semana: "+opc);
+            jLabIdAmbu.setText(jTabDatosAmbulante.getValueAt(fila, 0).toString());
+             jLabNomAmb.setText(jTabDatosAmbulante.getValueAt(fila, 1).toString());
+           jLabDirecc1.setText(datasAmb[0]);
+            jLabGiro1.setText(datasAmb[1]);
+            jLabObserva1.setText(datasAmb[2]);
+            jPanTableBusqView.setVisible(false);
+            jPanDataambView1.setVisible(true);
+            txtBuscAmbulante.setText("");
+            txtBuscAmbulante.requestFocus(true);
+            
+    }

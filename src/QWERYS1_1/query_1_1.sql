@@ -1,8 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  * Author:  Antonio R. Notario Rodriguez
  * Created: 15/04/2020
@@ -124,6 +119,81 @@ ADD CONSTRAINT FK_pagambs_rubros FOREIGN KEY (idRubropago)
 REFERENCES central.rubrospago (id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
+
+                                                                        /*----      RELACIONES PARA CARGADORES  */
+/*RELACION CARGADORES-TARIFAS  YA*/
+ALTER TABLE central.cargadores
+ADD CONSTRAINT FK_cargador_tarifa FOREIGN KEY (idTarifa)
+REFERENCES central.tarifas (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*RELACION PAGOS_CARG-TURNOS YA */
+/*oBS: CAMBIAR TIPO DE DATO en central.pagos_carg.idTurno a mediumint(5) ya que central.turnos.id es mediumint(5)*/
+ALTER TABLE central.pagos_carg
+ADD CONSTRAINT FK_pagoscarg_turnos FOREIGN KEY (idTurno)
+REFERENCES central.turnos (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*RELACION PAGOS_CARG-CARGADORES  ya*/
+ALTER TABLE central.pagos_carg
+ADD CONSTRAINT FK_pagoscarg_cargadores FOREIGN KEY (idcarg)
+REFERENCES central.cargadores(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*RELACION PAGOS_CARGDET- PAGOS_CARG yes*/
+ALTER TABLE central.pagos_cargdet
+ADD CONSTRAINT FK_pagcargdet_tick FOREIGN KEY (idTicket)
+REFERENCES central.pagos_carg(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*RELACION PAGOS_CARGDET- RUBROSPAGO yes*/
+ALTER TABLE central.pagos_cargdet
+ADD CONSTRAINT FK_pagcargdet_rubros FOREIGN KEY (idRubropago)
+REFERENCES central.rubrospago(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*RELACION PAGOS_CARGDET- SEMANAS yes*/
+/*oBS: CAMBIAR TIPO DE DATO en central.pagos_cargdet.idSemana a samllint(3) ya que central.semanas.id es smallint(6) tenia tinyint(3)*/
+ALTER TABLE central.pagos_cargdet
+ADD CONSTRAINT FK_pagcargdet_semanas FOREIGN KEY (idSemana)
+REFERENCES central.semanas(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*RELACION PAGOS_CARGRENTA-TURNOS yes*/
+/*oBS: CAMBIAR TIPO DE DATO en central.pagos_cargrenta.idTurno a mediumint(5) ya que central.turnos.id es MEDIUMint(5) tenia tinyint(3)*/
+ALTER TABLE central.pagos_cargrenta
+ADD CONSTRAINT FK_pagcargrenta_turno FOREIGN KEY (idTurno)
+REFERENCES central.turnos(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*RELACION PAGOS_CARGRENTA-CARGADORES YA*/
+/*oBS: CAMBIAR TIPO DE DATO en central.pagos_cargrenta.idCarg a smallint(5) & Unsigned ya que central.cargadores.id es smallint(5),Unsigned tenia tinyint(3)*/
+ALTER TABLE central.pagos_cargrenta
+ADD CONSTRAINT FK_pagcargrenTc FOREIGN KEY (idCarg)
+REFERENCES central.cargadores(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*RELACION PAGOS_CARGRENTA-RUBROSPAGO ya*/
+ALTER TABLE central.pagos_cargrenta
+ADD CONSTRAINT FK_pagcargren_rubroP FOREIGN KEY (idRubropago)
+REFERENCES central.rubrospago(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+
+
+
+
+
+
 
 
 
@@ -249,7 +319,13 @@ INNER JOIN tarifas
 ON tarifas.id = ambulantes.idTarifa
 ORDER BY ambulantes.id DESC LIMIT 100;
 
-
+/*qwery obtener datos de cargador importantes*/
+SELECT cargadores.id,cargadores.nombre,cargadores.diablo,cargadores.condMemb,cargadores.condDerecho,
+            cargadores.condRenta,cargadores.vigMembresia,cargadores.ultimaSem,cargadores.idTarifa,
+            tarifas.derechoSemanal,tarifas.membAnual,tarifas.membSemestral,tarifas.membTrimestral 
+FROM central.cargadores
+INNER JOIN central.tarifas
+ON cargadores.idTarifas = tarifas.id AND cargadores.id = '45';
 
 
 /***ANOTACIONES

@@ -351,6 +351,60 @@ public class funciones {
            return idTurno;
     }//@endgetUltimPagoAmbus
           
+ /*//// OBTENER DATOS DE AMBULANTE para mostrar en panelInfo*/
+       public String[] getCargad(String idCargad){
+            Connection cn = con2.conexion();
+           String[] lapso = new String[15];
+            String sql = "";
+            sql = "SELECT cargadores.id,cargadores.nombre,cargadores.direccion,cargadores.obs,cargadores.diablo,"
+                    + "cargadores.condMemb,cargadores.condDerecho,\n" +
+                    "cargadores.condRenta,cargadores.vigMembresia,cargadores.ultimaSem,cargadores.idTarifa,\n" +
+                    "tarifas.derechoSemanal,tarifas.membAnual,tarifas.membSemestral,tarifas.membTrimestral \n" +
+                    "FROM central.cargadores\n" +
+                    "INNER JOIN central.tarifas\n" +
+                    "ON cargadores.idTarifa = tarifas.id AND cargadores.id = '"+idCargad+"';";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        lapso[0] = rs.getString(1);
+                        lapso[1]= rs.getString(2);
+                        lapso[2] = rs.getString(3);
+                        lapso[3] = rs.getString(4);
+                        lapso[4] = rs.getString(5);
+                        lapso[5] = rs.getString(6);
+                        lapso[6] = rs.getString(7);
+                        lapso[7] = rs.getString(8);
+                        lapso[8] = rs.getString(9);
+                        lapso[9] = rs.getString(10);
+                        lapso[10] = rs.getString(11);
+                        lapso[11] = rs.getString(12);
+                        lapso[12] = rs.getString(13);
+                        lapso[13] = rs.getString(14);
+                        lapso[14] = rs.getString(15);
+                    }else{
+                        for (int i = 0; i < lapso.length; i++) {
+                            lapso[i] = "NO-DATA";
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return lapso;
+    }//@endgetCargad       
+       
+          
     public void limpiar(JPanel Pn)
     {
         Pn.removeAll();
@@ -399,10 +453,10 @@ public class funciones {
            
            funciones fn =  new funciones();
               java.util.Date date = new Date();
-                String[] prue = fn.getAmbus1("45");
-              System.out.println("Guardare en TIMESTAMP: "+new java.sql.Timestamp(date.getTime() ) );
+                String[] prue = fn.getCargad("45");
+        //      System.out.println("Guardare en TIMESTAMP: "+new java.sql.Timestamp(date.getTime() ) );
                for (int i = 0; i < prue.length; i++) {
-                  // System.out.println(prue[i] ); 
+                   System.out.println(prue[i] ); 
               }
                
          System.out.println("ambus iultimo: "+fn.getenTurno());      
