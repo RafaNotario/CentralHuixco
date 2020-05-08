@@ -165,6 +165,36 @@ jLabObserva
 	jLabDstoInscripcion
 	jLabImporteInscripcion
 	jDateChoInscripcion
+
+
+/************************		//panel de Cargadores
+		/*panel semana cargadores*/
+	jLabnumSem
+	jCkBoxSemanas
+	jLabcontSemanas
+	txtOcultiDSemana
+	
+	jLabtarifSemanas
+	jLabDtoSemanas
+	jLabImportSemanasCargad
+	txtcontSemsIni
+	jLabIniSemsViews
+	jButMinusSems
+	txtcontSemsFin
+	jLabFinSemsViews
+	jButMooreSems
+		
+		/*panel inscripcion cargadores */	
+	jCkBoxInscripcion
+	jLabVigencia
+	jLabCoastTarifa	
+	jLabDescto
+	jLabImportInscripc
+	jDatChoIncripcion
+	jComBInscripc
+		
+
+//@endPANELES DE internoCaja.java
 	
 	
 //PANEL DE areas.java
@@ -178,24 +208,6 @@ jLabObserva
 
 @jPanSociosView
 
-
-	        int oprime = evt.getKeyCode(),
-                fila=jTabDatosAmbulante.getSelectedRow();
-         if(oprime == KeyEvent.VK_ENTER && fila > -1 ){
-             String opc = jTabDatosAmbulante.getValueAt(fila, 0).toString();
-             String[] datasAmb = func.getAmbus1(opc);//arreglo para mostra info en jpanelInfo
-             mostrarJpanAmbulantes(opc);
-             
-             
-             JOptionPane.showMessageDialog(null, "Obtener ultimo pago semana: "+opc);
-            jLabIdAmbu.setText(jTabDatosAmbulante.getValueAt(fila, 0).toString());
-             jLabNomAmb.setText(jTabDatosAmbulante.getValueAt(fila, 1).toString());
-           jLabDirecc1.setText(datasAmb[0]);
-            jLabGiro1.setText(datasAmb[1]);
-            jLabObserva1.setText(datasAmb[2]);
-            jPanTableBusqView.setVisible(false);
-            jPanDataambView1.setVisible(true);
-            txtBuscAmbulante.setText("");
-            txtBuscAmbulante.requestFocus(true);
+	aux = func.getDifference(amountTwo, func.percentage(amountTwo, amountOne)).toString();
+	                aux = func.getSum(new BigDecimal(auxSems), new BigDecimal(aux)).toString();
             
-    }

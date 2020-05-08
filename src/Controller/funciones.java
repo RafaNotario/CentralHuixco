@@ -356,9 +356,8 @@ public class funciones {
             Connection cn = con2.conexion();
            String[] lapso = new String[15];
             String sql = "";
-            sql = "SELECT cargadores.id,cargadores.nombre,cargadores.direccion,cargadores.obs,cargadores.diablo,"
-                    + "cargadores.condMemb,cargadores.condDerecho,\n" +
-                    "cargadores.condRenta,cargadores.vigMembresia,cargadores.ultimaSem,cargadores.idTarifa,\n" +
+            sql = "SELECT cargadores.id,cargadores.nombre,cargadores.direccion,cargadores.obs,cargadores.diablo,cargadores.condMemb,cargadores.condDerecho,\n" +
+                    "cargadores.condRenta,if(cargadores.vigMembresia IS NULL, \"\",cargadores.vigMembresia) AS fechon,cargadores.ultimaSem,cargadores.idTarifa,\n" +
                     "tarifas.derechoSemanal,tarifas.membAnual,tarifas.membSemestral,tarifas.membTrimestral \n" +
                     "FROM central.cargadores\n" +
                     "INNER JOIN central.tarifas\n" +
@@ -404,6 +403,37 @@ public class funciones {
            return lapso;
     }//@endgetCargad       
        
+//******/*************   PAGO DE CARGADORES -----------------------------------------
+       //OBTENER ULTIMO PAGO REALIZADO
+          public int getUltimPagoCargad(){
+            Connection cn = con2.conexion();
+            int idTurno = -1;
+            String sql = "";
+            sql = "SELECT id FROM pagos_carg ORDER BY id DESC LIMIT 1; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idTurno = rs.getInt(1);
+                    }else{
+                         idTurno = -1;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idTurno;
+    }//@endgetUltimPagoCargad
           
     public void limpiar(JPanel Pn)
     {
@@ -449,17 +479,17 @@ public class funciones {
             
        public static void main(String args[]){
            BigDecimal amountOne = new BigDecimal(250);//monto a cobrar
-           BigDecimal amountTwo = new BigDecimal(100);//cantidad recivida
+           BigDecimal amountTwo = new BigDecimal(0.00);//cantidad recivida
            
            funciones fn =  new funciones();
               java.util.Date date = new Date();
                 String[] prue = fn.getCargad("45");
         //      System.out.println("Guardare en TIMESTAMP: "+new java.sql.Timestamp(date.getTime() ) );
                for (int i = 0; i < prue.length; i++) {
-                   System.out.println(prue[i] ); 
+                 //  System.out.println(prue[i] ); 
               }
-               
-         System.out.println("ambus iultimo: "+fn.getenTurno());      
+             System.out.println("pay ultimo cargadores"+fn.getUltimPagoCargad());   
+        // System.out.println("PORCENTAJE: "+fn.percentage(amountOne, amountTwo));
        }
            
 }

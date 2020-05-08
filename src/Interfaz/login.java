@@ -606,7 +606,6 @@ funciones func1 = new funciones();
             pass=txtContraseña.getText();
             idReturn = func1.validaLoginUsers(user,pass);
             datosUserSys= func1.getnombreUsuario(idReturn);
-     //     System.out.println("Regreso"+idReturn);
             if(idReturn > -1 && idReturn < 5000 && !datosUserSys[0].equals("NO-DATA")){
                 jLabUserNombre.setText(datosUserSys[2]);
                 jPanLogin.setVisible(false);
@@ -617,14 +616,14 @@ funciones func1 = new funciones();
            }else{
                JOptionPane.showMessageDialog(null, "Login incorrecto");               
            }
-         
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void txtContraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaKeyPressed
-    int var = evt.getKeyCode();
-    if(var == KeyEvent.VK_ENTER){
-        jButton7.doClick();
-    }
+        int var = evt.getKeyCode();
+        if(var == KeyEvent.VK_ENTER){
+            jButton7.doClick();
+        }
     }//GEN-LAST:event_txtContraseñaKeyPressed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -639,8 +638,8 @@ funciones func1 = new funciones();
             System.out.println("guardar id user = "+idReturn);
             contentL.add(Integer.toString(idReturn));
             contentL.add(monto2);
-            //comentar descomentar linea
-           func1.GuardaTurno(contentL); 
+//comentar descomentar linea para guardar el turno
+//           func1.GuardaTurno(contentL); 
            func1.limpiar(jPanTrabajo);
            inicioButton(true);//habilitar todos los botones del menucontent
            iCaj = new internoCaja(jLabUserNombre.getText());

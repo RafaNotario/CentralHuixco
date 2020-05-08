@@ -601,6 +601,101 @@ public void guardadetailTicketAmbus(String[] param, int numParam){
             }//finally catch
         }
 
+public void guardaTicketCargad(String[] param){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";        
+                SQL="INSERT INTO pagos_carg (id,idTurno,fecha,hora,idcarg,total,efectivo) VALUES (?,?,?,?,?,?,?)";                           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param[0]);
+                pps.setString(2, param[1]);
+                pps.setString(3, param[2]);
+                pps.setString(4, param[3]);
+                pps.setString(5, param[4]);
+                pps.setString(6, param[5]);
+                pps.setString(7, param[6]);
+                
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Ticket Cargador guardado correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+} //@endguardaTicketCargad
+
+public void guardadetailTicketCargad(String[] param, int numParam){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";
+            if(numParam == 6)
+                SQL="INSERT INTO pagos_cargdet (idTicket,item,idRubropago,idSemana,importe,descuento) VALUES (?,?,?,?,?,?)";                           
+            
+            if(numParam == 8)
+                SQL="INSERT INTO pagos_ambdet (idTicket,item,idRubroPago,idSemana,importe,descuento,finicio,fvenc) VALUES (?,?,?,?,?,?,?,?)";                           
+           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param[0]);
+                pps.setString(2, param[1]);
+                pps.setString(3, param[2]);
+                pps.setString(4, param[3]);
+                pps.setString(5, param[4]);
+                pps.setString(6, param[5]);
+          if(numParam == 8){
+              pps.setString(7, param[6]);
+              pps.setString(8, param[7]);
+          }
+                
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Detail payCarg guardado correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+} //@endguardadetailTicketCargad
+       
+//metodo para actualizar idResg de ambullantes
+       public void f5postGuardCarg(String id, String val, String opcColumn){
+             Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";        
+                SQL="UPDATE cargadores SET "+opcColumn+" =? WHERE id = '"+id+"' ";                           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, val);
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "ultima semo vig actualizado correctamente."+id);
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,"C.I.-f5postGuardCarg"+ex.getMessage() );    
+                    }
+            }//finally catch
+        }//@endf5postGuardCarg
+       
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();
          System.out.println("Ultimo pagado: "+contrl.regLastTicket(19));
