@@ -4896,7 +4896,12 @@ txtResultAmbu.setText(aux);
                         String[] dat = rP.getTickPagoAmbu(mostTic);
                         rP.imprim80MMAmbus(mostTic, dat,false);
                     }
-                        
+                    
+                    if(concepto.equals("Pago Cargadores")){                    
+                        String[] dat = rP.getTickPagoCargad(mostTic);
+                        rP.imprim80MMCargad(mostTic, dat,false);
+                    }
+                    
                 }else{
                     JOptionPane.showMessageDialog(null, "Debe elegir que mostrar");
                 }
@@ -4909,14 +4914,30 @@ txtResultAmbu.setText(aux);
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        int fila = jTabviewPays.getSelectedRow();
-                if(fila > 0){
-                    String mostTic = jTabviewPays.getValueAt(fila, 0).toString();
-                    String[] dat = rP.getUltimPagoarea(mostTic);
-                    rP.imprim80MM(mostTic, dat,false);
+         int fila = jTabviewPays.getSelectedRow();
+  
+                if(fila >= 0){
+
+                    String mostTic = jTabviewPays.getValueAt(fila, 0).toString(),
+                            concepto = jTabviewPays.getValueAt(fila, 2).toString();
+                    if(concepto.equals("Pago Areas")){
+                        String[] dat = rP.getUltimPagoarea(mostTic);
+                        rP.imprim80MM(mostTic, dat,false);
+                    }
+                    if(concepto.equals("Pago Ambulantes")){
+                        String[] dat = rP.getTickPagoAmbu(mostTic);
+                        rP.imprim80MMAmbus(mostTic, dat,false);
+                    }
+                    
+                    if(concepto.equals("Pago Cargadores")){                    
+                        String[] dat = rP.getTickPagoCargad(mostTic);
+                        rP.imprim80MMCargad(mostTic, dat,false);
+                    }
+                    
                 }else{
                     JOptionPane.showMessageDialog(null, "Debe elegir que mostrar");
                 }
+         
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jCheckResguardAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckResguardAmbActionPerformed
@@ -6312,12 +6333,9 @@ txtTotalCarg.setText( func.getSum(totalAll, auxBig).toString() );
                   arr[5] = total;
                   arr[6] = efectiv;
    contrl.guardaTicketCargad(arr);//despues de guardar hay que refrescar todo y mostar el ultimo ticket
-
-   
    
          if(jCkBoxSemanas.isSelected())
                  contadorGuard+= Integer.parseInt(jLabcontSemanas.getText());
-        
         if(jCkBoxInscripcion.isSelected())
                 contadorGuard+= 1;
          
@@ -6342,75 +6360,56 @@ System.err.println("el Dcto final:"+aux);
                 guard[3] = Integer.toString(idS+1);//rubrospago.id = Semana Ambulantes
                 guard[4] = tarif;
                 guard[5] =aux;
-            
         contrl.guardadetailTicketCargad(guard,guard.length); 
                 //System.out.println("Semana j = "+j);
                 i++;
                 j++;
                 idS++;
                 }while(i <= numVM);
-                
-     contrl.f5postGuardCarg(idAmbu,Integer.toString(idS),"ultimaSem");
-            }
- 
-            if(jCheckResguardAmb.isSelected()){
-                int iB = 1;
-                String[] guardB = new String[6];
-              //  int idSB = Integer.parseInt(txtBasurIdSem.getText());
-                int numVB = Integer.parseInt(jLabContSemsResguard.getText());
-                do{
-                    guardB[0] = arr[0];
-                    guardB[1] = Integer.toString(j);
-                    guardB[2] = "7";
-                    guardB[3] = Integer.toString(idResguardAmbu);
-                    guardB[4] = jLabTarifaResguard.getText();
-                    guardB[5] = jLabDstoResguard.getText();
-        contrl.guardadetailTicketAmbus(guardB,guardB.length); 
-                    //System.out.println("Resguardo j = "+j);
-                    iB++;
-                    j++;
-                    //idSB++;
-                    idResguardAmbu++;
-                }while(iB <= numVB);
-                contrl.f5idResgAmbu(idAmbu,matResgVehiculo[jCBoxResguardosOpc.getSelectedIndex()][0],"idResg");
+    contrl.f5postGuardCarg(idAmbu,Integer.toString(idS),"ultimaSem");
             }
             
-            if(jCheckInscripPaysAmb.isSelected()){
-                int eligio = jCBoxDuracInscripc.getSelectedIndex()+8;
+            if(jCkBoxInscripcion.isSelected()){
+                int eligio = jComBInscripc.getSelectedIndex()+8;
+                String tarifInCarg = jLabCoastTarifa.getText(),
+                        dtoCrag = jLabDstoInscripcion.getText();
+                coast = new BigDecimal(tarifInCarg);
+                dscto = new BigDecimal(dtoCrag);
+                aux = func.percentage(coast, dscto).toString();
                 String[] guardP = new String[8];
-
                     guardP[0] = arr[0];
                     guardP[1] = Integer.toString(j);
                     guardP[2] = Integer.toString(eligio);//rubrospago.id: Anual Semestral Trimestral 8,9,10
-                    guardP[3] = "1";
-                    guardP[4] = jLabTarifaInscripcion.getText();
-                    guardP[5] = jLabDstoInscripcion.getText();
-                    guardP[6] = datCtrl.getFecha(jDateChoInscripcion);
+                    guardP[3] = "1";//idSemana siempre uno para este caso
+                    guardP[4] = tarifInCarg;
+                    guardP[5] = aux;
+                    
+                    guardP[6] = datCtrl.getFecha(jDatChoIncripcion);
                     if(eligio == 8)
-                        guardP[7] = datCtrl.getsumaFecha(jDateChoInscripcion,12);
+                        guardP[7] = datCtrl.getsumaFecha(jDatChoIncripcion,12);
       
                     if(eligio == 9)
-                        guardP[7] = datCtrl.getsumaFecha(jDateChoInscripcion,6);
+                        guardP[7] = datCtrl.getsumaFecha(jDatChoIncripcion,6);
 
                     if(eligio == 10)
-                        guardP[7] = datCtrl.getsumaFecha(jDateChoInscripcion,3);
+                        guardP[7] = datCtrl.getsumaFecha(jDatChoIncripcion,3);
                     
-                 contrl.guardadetailTicketAmbus(guardP,guardP.length);
-                 
+                 contrl.guardadetailTicketCargad(guardP,guardP.length);
                 //    System.out.println("Inscrip j = "+j);
-                contrl.f5idResgAmbu(idAmbu,guardP[7],"vigMembresia");
+                 contrl.f5postGuardCarg(idAmbu,guardP[7],"vigMembresia");
                     j++;
-
-            }
-           }while( j <= contadorGuard);
+           }
+  
+}while( j <= contadorGuard);//<- while para controlar el numero total de inserciones
 
             String[][] mat = contrl.matrizgetTicketsDia(fech);
              jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
 
-            String[] dat = rP.getTickPagoAmbu(arr[0]);
-            rP.imprim80MMAmbus(arr[0], dat,false);   
-             inhabilitaAmbus();
 
+           String[] dat = rP.getTickPagoCargad(arr[0]);
+         rP.imprim80MMCargad(arr[0], dat,false);
+
+           limpiPreDatCargad();
     }//@endCobroCargadores
         
         public void limpiPreDatCargad(){

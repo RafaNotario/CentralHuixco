@@ -359,11 +359,18 @@ public void guardadetailTicketArea(String[] param){
                         "ON areas.id = pagos_areas.idArea AND pagos_areas.fecha = '"+fech+"'\n" +
                         "ORDER BY pagos_areas.id DESC)\n" +
                         "UNION\n" +
-                        "(SELECT  pagos_amb.id,DATE_FORMAT(pagos_amb.hora, \"%H : %i\") AS hor,'Pago Ambulantes',ambulantes.nombre,pagos_amb.total\n" +
+                        "(SELECT pagos_amb.id,DATE_FORMAT(pagos_amb.hora, \"%H : %i\") AS hor,'Pago Ambulantes',ambulantes.nombre,pagos_amb.total\n" +
                         "FROM pagos_amb\n" +
                         "INNER JOIN ambulantes\n" +
                         "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.fecha = '"+fech+"'\n" +
-                        "ORDER BY pagos_amb.id DESC);";      
+                        "ORDER BY pagos_amb.id DESC)\n" +
+                        "UNION\n" +
+                        "(SELECT  pagos_carg.id,DATE_FORMAT(pagos_carg.hora, \"%H : %i\") AS hor,'Pago Cargadores',cargadores.nombre,pagos_carg.total\n" +
+                        "FROM pagos_carg\n" +
+                        "INNER JOIN cargadores\n" +
+                        "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.fecha = '"+fech+"'\n" +
+                        "ORDER BY pagos_carg.id DESC);";  
+              
              int i =0,cantFilas=0, cont=1,cantColumnas=0;
              String[][] mat=null, mat2=null;
               int[] arrIdPedido = null;//int para usar hashMap
@@ -640,7 +647,7 @@ public void guardadetailTicketCargad(String[] param, int numParam){
                 SQL="INSERT INTO pagos_cargdet (idTicket,item,idRubropago,idSemana,importe,descuento) VALUES (?,?,?,?,?,?)";                           
             
             if(numParam == 8)
-                SQL="INSERT INTO pagos_ambdet (idTicket,item,idRubroPago,idSemana,importe,descuento,finicio,fvenc) VALUES (?,?,?,?,?,?,?,?)";                           
+                SQL="INSERT INTO pagos_cargdet (idTicket,item,idRubroPago,idSemana,importe,descuento,finicio,fvenc) VALUES (?,?,?,?,?,?,?,?)";                           
            
             try {
                 pps = cn.prepareStatement(SQL);

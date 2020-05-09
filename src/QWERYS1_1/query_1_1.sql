@@ -266,6 +266,9 @@ INNER JOIN ambulantes
 ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.fecha = '2020/05/05'
 ORDER BY pagos_areas.id DESC;
 
+
+--                          *************        @startqwerysReportesMatrizParametro
+
 /*QWERY PARA MOSTRAR TICKET JASPER PAGOS AREAS MANTENIMIENTO*/
 SELECT pagos_areas.total,pagos_areas.efectivo, pagos_areas.total - pagos_areas.efectivo AS resta, usuarios.nombre, areas.nombre
 FROM pagos_areas
@@ -285,6 +288,21 @@ JOIN turnos
 on pagos_amb.idTurno = turnos.id
 join usuarios
 ON usuarios.id = turnos.idusuario;
+
+/*QWERY PARA MOSTRAR TICKET JASPER PAGOS CARGADORES MANTENIMIENTO*/
+SELECT pagos_carg.total,pagos_carg.efectivo, pagos_carg.total - pagos_carg.efectivo AS resta, usuarios.nombre, cargadores.nombre
+FROM pagos_carg
+INNER JOIN cargadores
+ON pagos_carg.idcarg = cargadores.id AND pagos_carg.id = 17120
+JOIN turnos
+on pagos_carg.idTurno = turnos.id
+join usuarios
+ON usuarios.id = turnos.idusuario;
+
+--                          *************        @end qwerysReportesMatrizParametro
+
+
+
 
 /*qwery para obtener pagos Areas y mostrar ticket*/
 SELECT  rubrospago.descripcion,semanas.semana,

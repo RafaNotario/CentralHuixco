@@ -616,7 +616,6 @@ funciones func1 = new funciones();
            }else{
                JOptionPane.showMessageDialog(null, "Login incorrecto");               
            }
-
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void txtContraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaKeyPressed
