@@ -187,12 +187,29 @@ jLabObserva
 		/*panel inscripcion cargadores */	
 	jCkBoxInscripcion
 	jLabVigencia
-	jLabCoastTarifa	
+	jLabCoastTarifa
 	jLabDescto
 	jLabImportInscripc
-	jDatChoIncripcion
+				
 	jComBInscripc
 		
+
+/************************		//panel de Infracciones
+		/*panel sInfracciones*/
+	jTabInfraccView
+	txtInFilterBusq
+	jCBoxFilterBusq
+	jLabtotInfracc
+	
+
+
+
+
+
+
+
+
+
 
 //@endPANELES DE internoCaja.java
 	
@@ -208,6 +225,3 @@ jLabObserva
 
 @jPanSociosView
 
-	aux = func.getDifference(amountTwo, func.percentage(amountTwo, amountOne)).toString();
-	                aux = func.getSum(new BigDecimal(auxSems), new BigDecimal(aux)).toString();
-            
