@@ -26,7 +26,6 @@ import java.util.Scanner;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
  
 /**
  *
@@ -39,7 +38,6 @@ public class datesControl {
     SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
     
     SimpleDateFormat formatoPrueba = new SimpleDateFormat("yyyy/MM/dd");
-    
     
     public Date StringDate(String fecha){//tenia: java.util.Date
     //    SimpleDateFormat formato_texto = new SimpleDateFormat("dd/MM/yyyy");

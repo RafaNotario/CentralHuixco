@@ -5,15 +5,53 @@
  */
 package Interfaz.internos.jpanels;
 
+import conexion.ConexionDBOriginal;
+import Controller.datesControl;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import Controller.controlInserts;
+import java.awt.event.KeyEvent;
+
 /**
  *
- * @author monit
+ * @author A. Rafael Notario Rodriguez
  */
 public class infracc_rw_DB extends javax.swing.JFrame {
 
-    public infracc_rw_DB() {
+    ConexionDBOriginal con2 = new ConexionDBOriginal();
+    
+    datesControl datC =  new datesControl();
+    controlInserts ctrlInsert = new controlInserts();
+    
+    List<String> idAgent = new ArrayList<String>();//para idagente levanta infraccion
+   
+    int paramAre;//0 = alta new, 1 = actualizar exist
+    String fol ="";
+    public infracc_rw_DB(int param,String fol) {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        this.paramAre = param;
+        this.fol = fol;
+        
+        llenacomboagent();
+        
+        if(param ==0)
+            limpiaCampos();
+        else{
+            
+            cargaDatosinfrac(fol);
+            txtfolInfrac.setEditable(false);
+            tctMontoinfrac.requestFocus(true);
+        }
     }
 
     /**
@@ -25,40 +63,44 @@ public class infracc_rw_DB extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateFechInfrac = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCBdoc = new javax.swing.JComboBox<>();
         txtDoc = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtMotivo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtVehicle = new javax.swing.JTextField();
+        txtfolInfrac = new javax.swing.JTextField();
+        txtObs = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jcomboAgent = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         tctMontoinfrac = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabLetrero = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Infracciones");
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
+        jDateFechInfrac.setDateFormatString("dd/MM/yyyy");
+        jDateFechInfrac.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Docuemento");
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Licencia", "Placa" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jCBdoc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCBdoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Licencia", "Placa" }));
+        jCBdoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jCBdocActionPerformed(evt);
             }
         });
 
@@ -70,16 +112,21 @@ public class infracc_rw_DB extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Folio");
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtMotivo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Vehiculo");
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtVehicle.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtfolInfrac.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtfolInfrac.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtfolInfracFocusLost(evt);
+            }
+        });
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtObs.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Fecha");
@@ -90,12 +137,11 @@ public class infracc_rw_DB extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Agente");
 
-        jComboBox2.setEditable(true);
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agente" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        jcomboAgent.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jcomboAgent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agente" }));
+        jcomboAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                jcomboAgentActionPerformed(evt);
             }
         });
 
@@ -104,14 +150,34 @@ public class infracc_rw_DB extends javax.swing.JFrame {
 
         tctMontoinfrac.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tctMontoinfrac.setText("0");
+        tctMontoinfrac.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tctMontoinfracFocusGained(evt);
+            }
+        });
+        tctMontoinfrac.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tctMontoinfracKeyReleased(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setText("Guardar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -134,6 +200,11 @@ public class infracc_rw_DB extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabLetrero.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabLetrero.setForeground(new java.awt.Color(204, 0, 0));
+        jLabLetrero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabLetrero.setText("YA EXISTE");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,52 +226,59 @@ public class infracc_rw_DB extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
-                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jCBdoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jDateFechInfrac, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfolInfrac))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDoc, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabLetrero, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(txtMotivo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtObs, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tctMontoinfrac, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jcomboAgent, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtVehicle, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(23, 52, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfolInfrac, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabLetrero, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateFechInfrac, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCBdoc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtVehicle, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtObs, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                    .addComponent(jcomboAgent, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -213,14 +291,82 @@ public class infracc_rw_DB extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-
+    private void jCBdocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBdocActionPerformed
           txtDoc.requestFocus(true);
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jCBdocActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void jcomboAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboAgentActionPerformed
             tctMontoinfrac.requestFocus(true);
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_jcomboAgentActionPerformed
+
+    private void txtfolInfracFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfolInfracFocusLost
+        String verifFol = txtfolInfrac.getText();
+        if (verifFol.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Folio no debe estar vacio");
+        } else {
+            if (validaRelCompPed(verifFol)) {
+                jLabLetrero.setVisible(true);
+                JOptionPane.showMessageDialog(null, "folio ya ha sido registrado");
+                jButton2.setEnabled(false);
+            } else {
+                jLabLetrero.setVisible(false);
+                jButton2.setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_txtfolInfracFocusLost
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        List<String> envGuard = new ArrayList<String>();//para idagente levanta infraccion
+        String fol = txtfolInfrac.getText(),
+                fech = datC.getFecha(jDateFechInfrac),
+                licPlaca = txtDoc.getText(),
+                motiv = txtMotivo.getText(),
+                vehic = txtVehicle.getText(),
+                observ = txtObs.getText(),
+                idAge = idAgent.get(jcomboAgent.getSelectedIndex()),
+                monto = tctMontoinfrac.getText()
+                ;
+        
+        if(fol.isEmpty() || licPlaca.isEmpty() || motiv.isEmpty() || monto.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campos folio, placa, motivo o monto vacios \n Verifique Porfavor");
+        }else{
+            envGuard.add(fol);
+            envGuard.add(fech);
+            envGuard.add("0");
+            envGuard.add(licPlaca);
+            envGuard.add(motiv);
+            envGuard.add(vehic);
+            envGuard.add(observ);
+            envGuard.add(idAge);
+            envGuard.add(monto);
+            
+            if(paramAre == 0){
+            ctrlInsert.guardaInfracc(envGuard);
+            }
+            
+            if(paramAre == 1){
+                ctrlInsert.actualizaInfrac(envGuard,fol);
+            }
+                    
+        }
+        this.dispose();
+                
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tctMontoinfracKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tctMontoinfracKeyReleased
+            int var = evt.getKeyCode();
+            if(var == KeyEvent.VK_ENTER){
+                jButton2.doClick();
+            } 
+    }//GEN-LAST:event_tctMontoinfracKeyReleased
+
+    private void tctMontoinfracFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tctMontoinfracFocusGained
+        tctMontoinfrac.setSelectionStart(0);
+    }//GEN-LAST:event_tctMontoinfracFocusGained
 
     /**
      * @param args the command line arguments
@@ -252,17 +398,132 @@ public class infracc_rw_DB extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new infracc_rw_DB().setVisible(true);
+                new infracc_rw_DB(1,"3040").setVisible(true);
             }
         });
     }
+    
+        private void llenacomboagent() {
+        Connection cn = con2.conexion();
+        idAgent.clear();
+        jcomboAgent.removeAllItems();
+        String consul = "SELECT nomina.id,nomina.nombre\n" +
+                    "FROM nomina\n" +
+                    "INNER JOIN nomina_depto\n" +
+                    "ON nomina.idDepto = nomina_depto.id AND nomina_depto.nombre = 'Transito';";
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery(consul);
+            while (rs.next()) {
+                idAgent.add(rs.getString(1));
+                jcomboAgent.addItem(rs.getString(2));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(infracc_rw_DB.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+    }//@endLlenacomb
+        
+     private void cargaDatosinfrac(String foli) {
+        Connection cn = con2.conexion();
+        String consul = "SELECT pagos_infrac.folio,pagos_infrac.fecha,pagos_infrac.tipoDoc,pagos_infrac.documento,pagos_infrac.motivo,pagos_infrac.vehiculo,\n" +
+                        "pagos_infrac.obs,nomina.nombre,pagos_infrac.monto\n" +
+                        "FROM pagos_infrac\n" +
+                        "INNER JOIN nomina\n" +
+                        "ON pagos_infrac.idagente = nomina.id AND pagos_infrac.folio = '"+foli+"';";
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            st = cn.createStatement();
+            rs = st.executeQuery(consul);
+            while (rs.next()) {
+               txtfolInfrac.setText(rs.getString(1));
+               jDateFechInfrac.setDate(datC.StringDate(rs.getString(2).replace('-', '/')));
+               jCBdoc.setSelectedIndex(0);
+               txtDoc.setText(rs.getString(4));
+               txtMotivo.setText(rs.getString(5));
+               txtVehicle.setText(rs.getString(6));
+               txtObs.setText(rs.getString(7));
+               jcomboAgent.setSelectedItem(rs.getString(8));
+               tctMontoinfrac.setText(rs.getString(9));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(infracc_rw_DB.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+    }//@endLlenacomb
+          
+          public boolean validaRelCompPed(String idBusq){
+            Connection cn = con2.conexion();
+            boolean existe =false;
+            int num=0,i=1;
+            String sql = "";
+            sql = "SELECT '1' FROM pagos_infrac WHERE folio  = '"+idBusq+"';";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        existe =true;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(infracc_rw_DB.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return existe;
+    }
+        
+        public void limpiaCampos(){
+            jDateFechInfrac.setDate(datC.cargafecha());
+            jLabLetrero.setVisible(false);
+            txtfolInfrac.setText("");
+            jCBdoc.setSelectedIndex(0);
+            txtDoc.setText("");
+            txtMotivo.setText("");
+            txtVehicle.setText("");
+            txtObs.setText("");
+            jcomboAgent.setSelectedIndex(0);
+            tctMontoinfrac.setText("0.00");
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    public javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jCBdoc;
+    private com.toedter.calendar.JDateChooser jDateFechInfrac;
+    private javax.swing.JLabel jLabLetrero;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -272,11 +533,12 @@ public class infracc_rw_DB extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JComboBox<String> jcomboAgent;
     private javax.swing.JTextField tctMontoinfrac;
     private javax.swing.JTextField txtDoc;
+    private javax.swing.JTextField txtMotivo;
+    private javax.swing.JTextField txtObs;
+    private javax.swing.JTextField txtVehicle;
+    public javax.swing.JTextField txtfolInfrac;
     // End of variables declaration//GEN-END:variables
 }

@@ -34,6 +34,7 @@ import javax.swing.table.TableColumnModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import renderTable.TModel;
 import tickets.Jasper.Reportes;
+import Interfaz.internos.jpanels.infracc_rw_DB;
 
 
 /**
@@ -49,6 +50,8 @@ public class internoCaja extends javax.swing.JPanel {
     controlInserts contrl = new controlInserts();
     funciones func = new funciones();
     Reportes rP = new Reportes();
+    
+    infracc_rw_DB infraccs= null;
     
      List<String> conten = new ArrayList<String>();//lista para guardar el id de cada area cobro de areas
      
@@ -128,6 +131,25 @@ public internoCaja(String usuarioN) {
         jButton7 = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jFramCobroInfrac = new javax.swing.JFrame();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabPlaca = new javax.swing.JLabel();
+        jLabFolio = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtNamePagad = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtImporte = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        txtDcto = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        txtEfectivo = new javax.swing.JTextField();
+        txtCambioInfrac = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -652,6 +674,214 @@ public internoCaja(String usuarioN) {
         jTextArea1.setRows(5);
         jScrollPane8.setViewportView(jTextArea1);
 
+        jFramCobroInfrac.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jFramCobroInfrac.setTitle("COBRO DE INFRACCION");
+        jFramCobroInfrac.setResizable(false);
+        jFramCobroInfrac.setSize(new java.awt.Dimension(437, 350));
+        jFramCobroInfrac.setType(java.awt.Window.Type.POPUP);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel25.setText("Pagar Infracción");
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel28.setText("Placa / Licencia");
+
+        jLabPlaca.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        jLabPlaca.setText("SL-65-750");
+        jLabPlaca.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jLabFolio.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        jLabFolio.setText("2020");
+        jLabFolio.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                            .addComponent(jLabPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 27, Short.MAX_VALUE))
+                    .addComponent(jLabFolio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabFolio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabPlaca)
+                .addGap(23, 23, 23))
+        );
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Persona que realiza el pago:");
+
+        txtNamePagad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNamePagad.setNextFocusableComponent(txtDcto);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel12.setText("Importe:");
+
+        txtImporte.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtImporte.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtImporte.setText("0.00");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel17.setText("Decuento:");
+
+        txtDcto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtDcto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtDcto.setText("0.00");
+        txtDcto.setNextFocusableComponent(txtEfectivo);
+        txtDcto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDctoFocusGained(evt);
+            }
+        });
+        txtDcto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDctoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDctoKeyReleased(evt);
+            }
+        });
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel21.setText("Total:");
+
+        txtTotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTotal.setText("0.00");
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel22.setText("Efectivo:");
+
+        txtEfectivo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtEfectivo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtEfectivo.setText("0.00");
+        txtEfectivo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtEfectivoFocusGained(evt);
+            }
+        });
+        txtEfectivo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEfectivoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEfectivoKeyReleased(evt);
+            }
+        });
+
+        txtCambioInfrac.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtCambioInfrac.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtCambioInfrac.setText("0.00");
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel23.setText("Cambio:");
+
+        jButton8.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nomina.png"))); // NOI18N
+        jButton8.setText("COBRAR");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jFramCobroInfracLayout = new javax.swing.GroupLayout(jFramCobroInfrac.getContentPane());
+        jFramCobroInfrac.getContentPane().setLayout(jFramCobroInfracLayout);
+        jFramCobroInfracLayout.setHorizontalGroup(
+            jFramCobroInfracLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFramCobroInfracLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jFramCobroInfracLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNamePagad, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jFramCobroInfracLayout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jFramCobroInfracLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jFramCobroInfracLayout.createSequentialGroup()
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtImporte))
+                            .addGroup(jFramCobroInfracLayout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDcto))
+                            .addGroup(jFramCobroInfracLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addGroup(jFramCobroInfracLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jFramCobroInfracLayout.createSequentialGroup()
+                                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtEfectivo))
+                                    .addGroup(jFramCobroInfracLayout.createSequentialGroup()
+                                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                                    .addGroup(jFramCobroInfracLayout.createSequentialGroup()
+                                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtCambioInfrac))))
+                            .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jFramCobroInfracLayout.setVerticalGroup(
+            jFramCobroInfracLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFramCobroInfracLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNamePagad, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jFramCobroInfracLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jFramCobroInfracLayout.createSequentialGroup()
+                        .addGroup(jFramCobroInfracLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtImporte, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jFramCobroInfracLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtDcto, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jFramCobroInfracLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtTotal, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jFramCobroInfracLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtEfectivo, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jFramCobroInfracLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtCambioInfrac, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+
         setPreferredSize(new java.awt.Dimension(1329, 921));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -920,6 +1150,11 @@ public internoCaja(String usuarioN) {
         jCBoxFilterBusq.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCBoxFilterBusq.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Folio", "Placa o licencia", "Automovil" }));
 
+        txtInFilterBusq.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtInFilterBusqFocusGained(evt);
+            }
+        });
         txtInFilterBusq.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtInFilterBusqKeyReleased(evt);
@@ -959,13 +1194,33 @@ public internoCaja(String usuarioN) {
 
         jButton30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mas-color.png"))); // NOI18N
         jButton30.setText("Registrar");
+        jButton30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton30ActionPerformed(evt);
+            }
+        });
 
         jButton31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lapiz.png"))); // NOI18N
+        jButton31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton31ActionPerformed(evt);
+            }
+        });
 
         jButton32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/salida.png"))); // NOI18N
+        jButton32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton32ActionPerformed(evt);
+            }
+        });
 
         jButton33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/moneda.png"))); // NOI18N
         jButton33.setText("Cobrar");
+        jButton33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton33ActionPerformed(evt);
+            }
+        });
 
         jLabel120.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel120.setText("total infracciones:  $");
@@ -4301,6 +4556,7 @@ txtResultAmbu.setText(aux);
         jPanCargadores.setVisible(false);
         jPanVarios.setVisible(false);
         jPanTransitoInfraccion.setVisible(true);
+        mostrarTabInfrac("folio","");
         jPanAreascobros .setVisible(false); 
         
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -4618,8 +4874,6 @@ txtResultAmbu.setText(aux);
         String aux="";
         int numeradorSem=Integer.parseInt(jLabSemsPaysPolis.getText());
            //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
-    
-       
                     idSemPolicia++;
                     arr = contrl.regSemanas(idSemPolicia);
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
@@ -4920,6 +5174,10 @@ txtResultAmbu.setText(aux);
                         rP.imprim80MMCargad(mostTic, dat,false);
                     }
                     
+                   if(concepto.equals("Pago Infraccion")){                    
+                         rP.imprim80MM_Infrac(mostTic,false);
+                    }
+                    
                 }else{
                     JOptionPane.showMessageDialog(null, "Debe elegir que mostrar");
                 }
@@ -4950,6 +5208,10 @@ txtResultAmbu.setText(aux);
                     if(concepto.equals("Pago Cargadores")){                    
                         String[] dat = rP.getTickPagoCargad(mostTic);
                         rP.imprim80MMCargad(mostTic, dat,false);
+                    }
+                    
+                    if(concepto.equals("Pago Infraccion")){                    
+                         rP.imprim80MM_Infrac(mostTic,false);
                     }
                     
                 }else{
@@ -5434,9 +5696,7 @@ aux = func.getDifference(amountTwo, func.percentage(amountTwo, amountOne)).toStr
                         auxSems = jLabImportSemanasCargad.getText();
                        aux = func.getSum(new BigDecimal(auxSems), new BigDecimal(aux)).toString();
                     }
-                        
               txtTotalCarg.setText(aux);
-        
         }
         
 
@@ -5568,6 +5828,170 @@ txtTotalCarg.setText( func.getSum(totalAll, auxBig).toString() );
         }
         
     }//GEN-LAST:event_txtInFilterBusqKeyReleased
+
+    private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
+            infraccs = new infracc_rw_DB(0,"");//alta de nueva infraccion
+            infraccs.setVisible(true);
+            infraccs.setEnabled(true);
+            infraccs.validate();
+    }//GEN-LAST:event_jButton30ActionPerformed
+
+    private void txtInFilterBusqFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtInFilterBusqFocusGained
+        txtInFilterBusq.setText("");
+        mostrarTabInfrac("folio","");
+    }//GEN-LAST:event_txtInFilterBusqFocusGained
+
+    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+        int filN = jTabInfraccView.getSelectedRow();
+        if(filN > -1){
+            String folParam = jTabInfraccView.getValueAt(filN, 0).toString();
+            infraccs = new infracc_rw_DB(1,folParam);//alta de nueva infraccion
+            infraccs.setVisible(true);
+            infraccs.setEnabled(true);
+            infraccs.validate();
+            infraccs.txtfolInfrac.setEnabled(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un registro de la tabla.");
+        }
+    }//GEN-LAST:event_jButton31ActionPerformed
+
+    private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
+       int filN = jTabInfraccView.getSelectedRow();
+        if(filN > -1){
+            String folParam = jTabInfraccView.getValueAt(filN, 0).toString();
+            contrl.elimaRow("pagos_infrac", "folio", folParam);
+            txtInFilterBusq.requestFocus(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un registro de la tabla.");
+        }
+    }//GEN-LAST:event_jButton32ActionPerformed
+
+    private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
+       int filN = jTabInfraccView.getSelectedRow();
+       if(filN > -1){
+            String folParam = jTabInfraccView.getValueAt(filN, 0).toString(),
+                    placa = jTabInfraccView.getValueAt(filN, 2).toString(),
+                    mont = jTabInfraccView.getValueAt(filN, 4).toString()
+                    ;
+                    jFramCobroInfrac.setLocationRelativeTo(null);
+                    jFramCobroInfrac.setVisible(true);
+                    jFramCobroInfrac.setEnabled(true);
+                    txtImporte.setText(mont);
+                    txtTotal.setText(mont);
+                    txtEfectivo.setText(mont);
+                    jLabFolio.setText(folParam);
+                    jLabPlaca.setText(placa);
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un registro de la tabla.");
+        }
+
+    }//GEN-LAST:event_jButton33ActionPerformed
+
+    private void txtDctoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDctoKeyReleased
+
+        String dto = txtDcto.getText(),
+                toI = txtImporte.getText()
+                ;
+if(!dto.isEmpty() && !toI.isEmpty()){
+        BigDecimal dscto = new BigDecimal(dto);
+        BigDecimal importe = new BigDecimal(toI);
+                
+        /*CompareTo: 
+                0 : Si amountOne == parametro
+                1: Si amountOne > parametro 
+                -1: Si amountOne < parametro
+        */
+                if(dscto.compareTo(importe) <= 0){
+                    txtTotal.setText(func.getDifference(importe, dscto).toString());
+                    txtEfectivo.setText(func.getDifference(importe, dscto).toString());
+                    txtCambioInfrac.setText("0.00");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Importe debe ser mayor que descuento \n Verifique porfavor.");
+                    txtDcto.setText("0.00");
+                    txtDcto.setSelectionStart(0);
+                }
+}     
+    }//GEN-LAST:event_txtDctoKeyReleased
+
+    private void txtEfectivoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEfectivoKeyReleased
+       
+               String efec = txtEfectivo.getText(),
+                toI = txtTotal.getText()
+                ;
+    if(!efec.isEmpty() && !toI.isEmpty()){
+        BigDecimal efectiv = new BigDecimal(efec);
+        BigDecimal importe = new BigDecimal(toI);
+                
+        /*CompareTo: 
+                0 : Si amountOne == parametro
+                1: Si amountOne > parametro 
+                -1: Si amountOne < parametro
+        */
+           txtCambioInfrac.setText(func.getDifference(efectiv, importe).toString());
+}
+    }//GEN-LAST:event_txtEfectivoKeyReleased
+
+    private void txtDctoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDctoFocusGained
+    txtDcto.setSelectionStart(0);
+    }//GEN-LAST:event_txtDctoFocusGained
+
+    private void txtEfectivoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEfectivoFocusGained
+        txtEfectivo.setSelectionStart(0);
+    }//GEN-LAST:event_txtEfectivoFocusGained
+
+    private void txtDctoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDctoKeyPressed
+        int var = evt.getKeyCode();
+        if(var == KeyEvent.VK_ENTER){
+            jButton8.doClick();
+        }
+    }//GEN-LAST:event_txtDctoKeyPressed
+
+    private void txtEfectivoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEfectivoKeyPressed
+        int var = evt.getKeyCode();
+        if(var == KeyEvent.VK_ENTER){
+            jButton8.doClick();
+        }
+    }//GEN-LAST:event_txtEfectivoKeyPressed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        String totA = txtTotal.getText(),
+                efectV = txtEfectivo.getText(),
+                namePag = txtNamePagad.getText();
+        
+        if(!totA.isEmpty() && !efectV.isEmpty() && !namePag.isEmpty()){
+        BigDecimal totAll = new BigDecimal(totA);
+        BigDecimal efectivale = new BigDecimal(efectV);
+                
+        /*CompareTo: 
+                0 : Si amountOne == parametro
+                1: Si amountOne > parametro 
+                -1: Si amountOne < parametro
+        */
+                if(totAll.compareTo(efectivale) <= 0){
+                    List<String> enviaData = new ArrayList<String>();//lista para guardar el id de cada area cobro de areas
+                        String urno = Integer.toString(func.getenTurno()),
+                                fech = datCtrl.setDateActual(),
+                                horP = datCtrl.getHour(),
+                                dscto = txtDcto.getText() ;
+                                enviaData.add(urno);
+                                enviaData.add(fech);
+                                enviaData.add(horP);
+                                enviaData.add(namePag);
+                                enviaData.add(dscto);
+                                enviaData.add(efectV);
+                                contrl.payInfracc(enviaData,jLabFolio.getText());
+                                 rP.imprim80MM_Infrac(jLabFolio.getText(),false);
+                                 contrl.matrizgetTicketsDia(fech);
+                                limpiPayInfrac();
+                                jFramCobroInfrac.dispose();
+                                
+                              
+                }else{
+                    JOptionPane.showMessageDialog(null, "Efectivo debe ser mayor que total \n Verifique porfavor.");
+                    txtEfectivo.setText(txtTotal.getText());
+                }
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -6481,10 +6905,10 @@ System.err.println("el Dcto final:"+aux);
         };
         String consul="";
             if(atributo.equals("folio") || atributo.equals("")){
-consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehiculo,monto FROM central.pagos_infrac WHERE folio LIKE '"+var+"%' ORDER BY fecha DESC;";
+consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehiculo,monto FROM central.pagos_infrac WHERE folio LIKE '"+var+"%' ORDER BY fecha DESC LIMIT 30;";
             }else{
                if(atributo.equals("placa")){
-consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehiculo,monto FROM central.pagos_infrac WHERE documento LIKE '"+var+"%' ORDER BY fech DESC;";
+consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehiculo,monto FROM central.pagos_infrac WHERE documento LIKE '"+var+"%' ORDER BY fecha DESC LIMIT 30;";
                }
          }
         modelo.addColumn("Folio");
@@ -6496,7 +6920,6 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     //    TableColumnModel columnModel = jTabInfraccView.getColumnModel();
        // columnModel.getColumn(0).setPreferredWidth(10);
        // columnModel.getColumn(1).setPreferredWidth(50);
-
      //   jTabInfraccView.getColumnModel().getColumn(0).setMaxWidth(0);
        // jTabInfraccView.getColumnModel().getColumn(0).setMinWidth(0);
        // jTabInfraccView.getColumnModel().getColumn(0).setPreferredWidth(0);
@@ -6528,6 +6951,18 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
              }
          }
     }    
+      
+      //limpiar campos de pagoInfraccion
+      public void limpiPayInfrac(){
+          txtNamePagad.setText("");
+	txtImporte.setText("0.00");
+	txtDcto.setText("0.00");
+	txtTotal.setText("0.00");
+	txtEfectivo.setText("0.00");
+	txtCambioInfrac.setText("0.00");
+	jLabFolio.setText("--");
+	jLabPlaca.setText("--");
+      }
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButBasuraMoore;
@@ -6578,6 +7013,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JButton jButton51;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jCBoxDuracInscripc;
     private javax.swing.JComboBox<String> jCBoxFilterBusq;
     private javax.swing.JComboBox<String> jCBoxResguardosOpc;
@@ -6599,6 +7035,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private com.toedter.calendar.JDateChooser jDateChooser6;
     private com.toedter.calendar.JDateChooser jDateChooser9;
     private javax.swing.JDialog jDialCalendarMantenim;
+    private javax.swing.JFrame jFramCobroInfrac;
     private javax.swing.JFrame jFramePays;
     private javax.swing.JLabel jLaFechFinBasura;
     private javax.swing.JLabel jLaFechFinManten;
@@ -6624,6 +7061,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JLabel jLabDstoSemanas;
     private javax.swing.JLabel jLabDtoSemanas;
     private javax.swing.JLabel jLabFinSemsViews;
+    private javax.swing.JLabel jLabFolio;
     private javax.swing.JLabel jLabGiro1;
     private javax.swing.JLabel jLabGiroCarg;
     private javax.swing.JLabel jLabIdAmbu;
@@ -6643,6 +7081,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JLabel jLabObserva1;
     private javax.swing.JLabel jLabObserva3;
     private javax.swing.JTextArea jLabObservaCarg;
+    private javax.swing.JLabel jLabPlaca;
     private javax.swing.JLabel jLabSemsPaysBasura;
     private javax.swing.JLabel jLabSemsPaysManten;
     private javax.swing.JLabel jLabSemsPaysPolis;
@@ -6668,6 +7107,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JLabel jLabel104;
     private javax.swing.JLabel jLabel105;
     private javax.swing.JLabel jLabel109;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel111;
     private javax.swing.JLabel jLabel112;
     private javax.swing.JLabel jLabel113;
@@ -6677,6 +7117,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JLabel jLabel117;
     private javax.swing.JLabel jLabel118;
     private javax.swing.JLabel jLabel119;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel120;
     private javax.swing.JLabel jLabel121;
     private javax.swing.JLabel jLabel122;
@@ -6699,13 +7140,19 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JLabel jLabel164;
     private javax.swing.JLabel jLabel165;
     private javax.swing.JLabel jLabel166;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
@@ -6816,6 +7263,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel35;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
@@ -6864,19 +7312,24 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JTextField txtBuscAmbulante;
     private javax.swing.JTextField txtBuscCargadores;
     private javax.swing.JTextField txtCambio;
+    private javax.swing.JTextField txtCambioInfrac;
+    private javax.swing.JTextField txtDcto;
     private javax.swing.JTextField txtEfect;
+    private javax.swing.JTextField txtEfectivo;
     private javax.swing.JTextField txtFinBasura;
     private javax.swing.JTextField txtFinManten;
     private javax.swing.JTextField txtFinPolicia;
     private javax.swing.JTextField txtFinResguard;
     private javax.swing.JTextField txtIdResguardOcultoAmb;
     private javax.swing.JTextField txtIdSemOcultoAmb;
+    private javax.swing.JTextField txtImporte;
     private javax.swing.JTextField txtInFilterBusq;
     private javax.swing.JTextField txtIniBasura;
     private javax.swing.JTextField txtIniManten;
     private javax.swing.JTextField txtIniPolic;
     private javax.swing.JTextField txtIniResg;
     private javax.swing.JTextField txtMantenIdSem;
+    private javax.swing.JTextField txtNamePagad;
     private javax.swing.JTextField txtOcultiDSemana;
     private javax.swing.JTextField txtPoliciaIdSem;
     private javax.swing.JTextField txtResgFinAmb;
@@ -6887,6 +7340,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JTextField txtSemFinAmb;
     private javax.swing.JTextField txtSeminiAmb;
     private javax.swing.JTextField txtTotCobro;
+    private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtTotalCarg;
     private javax.swing.JTextField txtcontSemsFin;
     private javax.swing.JTextField txtcontSemsIni;

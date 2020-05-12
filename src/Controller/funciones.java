@@ -26,7 +26,6 @@ import javax.swing.JPanel;
  * @author Antonio R. Notario Rodriguez
  */
 
-
 public class funciones {
     
       //VARIABLES PARA CALCULO DE DINERO  
@@ -475,6 +474,80 @@ public class funciones {
          fAmountOne = rounded(base);
             fAmountTwo = rounded(pct);
        return fAmountOne.multiply(fAmountTwo).divide(ONE_HUNDRED);
+    }
+     
+            ///*** Obtener ultimo turno creado
+     public String getMontoInfrac(String foli){
+            Connection cn = con2.conexion();
+            String montoIn = "";
+            String sql = "";
+            sql = "SELECT monto FROM pagos_infrac WHERE folio = '"+foli+"'; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                if(rs.next())
+                {
+                        montoIn = rs.getString(1);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return montoIn;
+    }//@endgetMontoInfrac
+     
+     //valida si existe ese id en alguna tabla Aun no se usa
+         public boolean validaRelCompPed(String idBusq,String camp){
+            Connection cn = con2.conexion();
+            boolean existe =false;
+            int num=0,i=1;
+            String sql = "";
+            switch(camp){
+                case "id_compraProveed":
+                    sql = "SELECT '1' FROM relcomprapedido WHERE id_compraProveed = '"+idBusq+"';";
+                break;
+                case "id_pedidoCli":
+                    sql = "SELECT '1' FROM relcomprapedido WHERE id_pedidoCli = '"+idBusq+"';";
+                break;
+                case "id_fleteP":
+                    sql = "SELECT '1' FROM relcomprapedido WHERE id_fleteP = '"+idBusq+"';";
+                break;
+                case "fleteenviado":
+                    sql = "SELECT '1' FROM fleteenviado WHERE id_fleteE = '"+idBusq+"';";
+                break;
+                case "compramayoreo":
+                    sql = "SELECT '1' FROM compramayoreo WHERE id_compraProveMin = '"+idBusq+"';";
+                break;
+            };
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        existe =true;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return existe;
     }
             
        public static void main(String args[]){

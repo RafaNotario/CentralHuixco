@@ -188,14 +188,36 @@ REFERENCES central.rubrospago(id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
+/*----------++++++++++********* RELACIONES PARA PAGO DE INFRACCIONES */
+/*  RELACION NOMINA-NOMINA_DEPTO    YA*/
+ALTER TABLE central.nomina
+ADD CONSTRAINT FK_nomin_dpto FOREIGN KEY (idDepto)
+REFERENCES central.nomina_depto(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*  RELACION PAGOS_INFRAC - NOMINA.     YA*/
+ALTER TABLE central.pagos_infrac
+ADD CONSTRAINT FK_payInf_nomin FOREIGN KEY (idagente)
+REFERENCES central.nomina(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
 
 
 
 
+/**QWERY CARGAR USUARIOS QUE PUEDEN HACER INFRACCION nomina_depto.nombre = Trnasito*/
+SELECT nomina.id,nomina.nombre
+FROM nomina
+INNER JOIN nomina_depto
+ON nomina.idDepto = nomina_depto.id AND nomina_depto.nombre = 'Transito';
 
-
-
-
+/*   CARGAR DATOS DE INFRACCION PARA ACTUALIZAR*/
+SELECT pagos_infrac.folio,pagos_infrac.fecha,pagos_infrac.tipoDoc,pagos_infrac.documento,pagos_infrac.motivo,pagos_infrac.vehiculo,
+                pagos_infrac.obs,nomina.nombre,pagos_infrac.monto
+FROM pagos_infrac
+INNER JOIN nomina
+ON pagos_infrac.idagente = nomina.id AND pagos_infrac.folio = 2155;
 
 
 /**qwerys para bisquedas sistemon**/
@@ -299,6 +321,9 @@ on pagos_carg.idTurno = turnos.id
 join usuarios
 ON usuarios.id = turnos.idusuario;
 
+/*PARA TICKET DE INFRACCION SOLO SE ENVIA FOLIO*/
+
+
 --                          *************        @end qwerysReportesMatrizParametro
 
 
@@ -345,34 +370,10 @@ FROM central.cargadores
 INNER JOIN central.tarifas
 ON cargadores.idTarifas = tarifas.id AND cargadores.id = '45';
 
-
-/***ANOTACIONES
-Tablas que no se usan
- -> bodegas
- -> bodegas_edos
-
-que paga cada area 
-0 CAJAS VACIAS -> Mant. semanal, Basura semanal
-1 CEBOLLAS -> Mant. semanal, Basura semanal
-2 CHILES SECOS -> Mant. semanal, Basura semanal
-3 CHILES VERDES -> Mant. semanal, Basura semanal
-4 DETALLE 1 -> Mant. semanal, Basura semanal
-5 DETALLE 2 -> Mant. semanal, Basura semanal
-6 ELOTES -> Mant. semanal, Basura semanal
-7 FRUTAS 1 -> Mant. semanal, Basura semanal
-8 FRUTAS 2 -> Mant. semanal, Basura semanal
-9 FRUTAS 3 -> Mant. semanal, Basura semanal
-10 JARCIAS -> Mant. semanal, Basura semanal
-11 JITOMATES ->  ''
-12 LEGUMBRES -> ''
-13 PAPAS -> ''
-14 ROPA Y CALZADO ->''
-15 TOMATES Y CHAYOTES -> ''
-16 TUNAS Y NOPALES -> ''
-17 VARIOS -> ''
-18 DESAYUNOS -> '',Policia semanal,Resguardo semanal
-19 JUGOS -> '',Policia semanal,Resguardo semanal
-20 CASETEROS -> '',Policia semanal,Resguardo semanal
-21 PANADEROS -> '',Policia semanal,Resguardo semanal
-
-*/
+/*QWERY DE JASPER REPORT*/
+SELECT  pagos_infrac.documento,DATE_FORMAT(pagos_infrac.fecha, "%d - %M - %Y "),pagos_infrac.documento,pagos_infrac.motivo,
+                pagos_infrac.vehiculo,pagos_infrac.quienpaga,DATE_FORMAT(pagos_infrac.fechapag, "%d - %M - %Y "),
+                DATE_FORMAT(pagos_infrac.horapag, "%H : %i") AS hor,pagos_infrac.monto,pagos_infrac.descuento,pagos_infrac.monto - pagos_infrac.descuento,
+                pagos_infrac.efectivo,pagos_infrac.efectivo - (,pagos_infrac.monto - pagos_infrac.descuento)
+FROM pagos_infrac
+WHERE pagos_infrac.folio =2021;

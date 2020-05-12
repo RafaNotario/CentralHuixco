@@ -354,22 +354,26 @@ public void guardadetailTicketArea(String[] param){
         Connection cn = con2.conexion();
           String sql ="",aux;
               sql = "(SELECT  pagos_areas.id,DATE_FORMAT(pagos_areas.hora, \"%H : %i\") AS hor,'Pago Areas',areas.nombre,pagos_areas.total\n" +
-                        "FROM pagos_areas\n" +
-                        "INNER JOIN areas\n" +
-                        "ON areas.id = pagos_areas.idArea AND pagos_areas.fecha = '"+fech+"'\n" +
-                        "ORDER BY pagos_areas.id DESC)\n" +
-                        "UNION\n" +
-                        "(SELECT pagos_amb.id,DATE_FORMAT(pagos_amb.hora, \"%H : %i\") AS hor,'Pago Ambulantes',ambulantes.nombre,pagos_amb.total\n" +
-                        "FROM pagos_amb\n" +
-                        "INNER JOIN ambulantes\n" +
-                        "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.fecha = '"+fech+"'\n" +
-                        "ORDER BY pagos_amb.id DESC)\n" +
-                        "UNION\n" +
-                        "(SELECT  pagos_carg.id,DATE_FORMAT(pagos_carg.hora, \"%H : %i\") AS hor,'Pago Cargadores',cargadores.nombre,pagos_carg.total\n" +
-                        "FROM pagos_carg\n" +
-                        "INNER JOIN cargadores\n" +
-                        "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.fecha = '"+fech+"'\n" +
-                        "ORDER BY pagos_carg.id DESC);";  
+                    "FROM pagos_areas\n" +
+                    "INNER JOIN areas\n" +
+                    "ON areas.id = pagos_areas.idArea AND pagos_areas.fecha = '"+fech+"'\n" +
+                    "ORDER BY pagos_areas.id DESC)\n" +
+                    "UNION\n" +
+                    "(SELECT pagos_amb.id,DATE_FORMAT(pagos_amb.hora, \"%H : %i\") AS hor,'Pago Ambulantes',ambulantes.nombre,pagos_amb.total\n" +
+                    "FROM pagos_amb\n" +
+                    "INNER JOIN ambulantes\n" +
+                    "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.fecha = '"+fech+"'\n" +
+                    "ORDER BY pagos_amb.id DESC)\n" +
+                    "UNION\n" +
+                    "(SELECT  pagos_carg.id,DATE_FORMAT(pagos_carg.hora, \"%H : %i\") AS hor,'Pago Cargadores',cargadores.nombre,pagos_carg.total\n" +
+                    "FROM pagos_carg\n" +
+                    "INNER JOIN cargadores\n" +
+                    "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.fecha = '"+fech+"'\n" +
+                    "ORDER BY pagos_carg.id DESC)\n" +
+                    "UNION\n" +
+                    "(SELECT  pagos_infrac.folio,DATE_FORMAT(pagos_infrac.horapag, \"%H : %i\") AS hor,'Pago Infraccion',pagos_infrac.quienpaga,pagos_infrac.monto - pagos_infrac.descuento\n" +
+                    "FROM pagos_infrac\n" +
+                    "WHERE pagos_infrac.fechapag = '"+fech+"' );";  
               
              int i =0,cantFilas=0, cont=1,cantColumnas=0;
              String[][] mat=null, mat2=null;
@@ -703,6 +707,138 @@ public void guardadetailTicketCargad(String[] param, int numParam){
             }//finally catch
         }//@endf5postGuardCarg
        
+       //metodo para guardar nueva infraccion
+       public void guardaInfracc( List<String> param){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";        
+                SQL="INSERT INTO pagos_infrac (folio,fecha,tipoDoc,documento,motivo,vehiculo,obs,idagente,monto) VALUES (?,?,?,?,?,?,?,?,?)";                           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param.get(0));
+                pps.setString(2, param.get(1));
+                pps.setString(3, param.get(2));
+                pps.setString(4, param.get(3));
+                pps.setString(5, param.get(4));
+                pps.setString(6, param.get(5));
+                pps.setString(7, param.get(6));
+                pps.setString(8, param.get(7));
+                pps.setString(9, param.get(8));
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Infraccion creada correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+} //@endguardaInfracc
+       
+       public void actualizaInfrac(List<String> param,String id){
+             Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";        
+SQL="UPDATE pagos_infrac SET folio = ?, fecha = ?, tipodoc = ?,documento = ?, motivo = ?, vehiculo = ?, obs = ?, idagente = ?,monto = ? WHERE folio = '"+id+"'; ";                           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param.get(0));
+                pps.setString(2, param.get(1));
+                pps.setString(3, param.get(2));
+                pps.setString(4, param.get(3));
+                pps.setString(5, param.get(4));
+                pps.setString(6, param.get(5));
+                pps.setString(7, param.get(6));
+                pps.setString(8, param.get(7));
+                pps.setString(9, param.get(8));
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Infraccion actualizada correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+        }//@end
+       
+       public void elimaRow(String table,String campo,String id){
+        Connection cn = con2.conexion();
+        PreparedStatement preparedStmt = null;
+        if(!id.isEmpty()){
+
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog (null, "<html> "
+                    + "Seguro que desea eliminar el registro con ID:<h1> "+id+" </h1>? </html>","Eliminar",dialogButton);
+            if(dialogResult == JOptionPane.YES_OPTION){
+            try {
+            String query = "delete from "+table+" where "+campo+" = '"+id+"' ";
+            preparedStmt = cn.prepareStatement(query);
+            preparedStmt.execute();
+      
+            JOptionPane.showMessageDialog(null, "Eliminado Correctamente");
+
+        } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+//            System.out.println("cierra conexion a la base de datos");    
+            try {
+                if(preparedStmt != null) preparedStmt.close();                
+                if(cn !=null) cn.close();
+            } catch (SQLException ex) {
+                System.err.println("RAFA elimina Row"); 
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+//                System.out.println("Error al cerrar la conexon");
+            }//catch
+        }//finally 
+            } else {
+                JOptionPane.showMessageDialog(null,"No se borro el registro: "+id);
+            }
+        }else
+            JOptionPane.showMessageDialog(null,"Sin data a eliminar");
+}
+       
+       
+       /*METODO PARA ACTUALIZAR DATOS DE INFRACCIONAL HACER UN PAGO*/ 
+              public void payInfracc(List<String> param,String fol){
+             Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";        
+SQL="UPDATE pagos_infrac SET idTurno = ?, fechapag = ?, horapag = ?,quienpaga = ?, descuento = ?, efectivo = ? WHERE folio = '"+fol+"'; ";                           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param.get(0));
+                pps.setString(2, param.get(1));
+                pps.setString(3, param.get(2));
+                pps.setString(4, param.get(3));
+                pps.setString(5, param.get(4));
+                pps.setString(6, param.get(5));
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Pago de infraccion realizado correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+        }//@endpayInfracc
+              
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();
          System.out.println("Ultimo pagado: "+contrl.regLastTicket(19));

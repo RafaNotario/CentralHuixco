@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="283" whenNoDataType="AllSectionsNoDetail" columnWidth="216" leftMargin="5" rightMargin="5" topMargin="0" bottomMargin="10" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="numTicket" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT  pagos_infrac.documento,DATE_FORMAT(pagos_infrac.fecha, "%d - %m - %Y ") AS OCURR,pagos_infrac.documento,pagos_infrac.motivo,
+                pagos_infrac.vehiculo,pagos_infrac.quienpaga,if(pagos_infrac.tipoDoc = 0,"Licencia","Placa") AS typDoc,
+DATE_FORMAT(pagos_infrac.fechapag, "%d - %m - %Y ") AS FECpAY,
+                DATE_FORMAT(pagos_infrac.horapag, "%H : %i") AS hor,pagos_infrac.monto,pagos_infrac.descuento,pagos_infrac.monto - pagos_infrac.descuento AS TOT1,
+                pagos_infrac.efectivo,pagos_infrac.efectivo - (pagos_infrac.monto - pagos_infrac.descuento) AS TOTFIN
+FROM pagos_infrac
+WHERE pagos_infrac.folio = $P{numTicket};]]>
+	</queryString>
+	<field name="documento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="OCURR" class="java.lang.String"/>
+	<field name="motivo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vehiculo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="quienpaga" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="typDoc" class="java.lang.String"/>
+	<field name="FECpAY" class="java.lang.String"/>
+	<field name="hor" class="java.lang.String"/>
+	<field name="monto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descuento" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TOT1" class="java.math.BigDecimal"/>
+	<field name="efectivo" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TOTFIN" class="java.math.BigDecimal"/>
+	<title>
+		<band height="96" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="10" y="0" width="195" height="79" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
+				<imageExpression><![CDATA["C:\\central\\src\\images\\logo80MM.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="33" y="79" width="147" height="13" forecolor="#3333FF" uuid="2b292a92-0302-46b2-bfec-0232a67d2289"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pago de Infracciones]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="91" width="195" height="1" uuid="c1e4c872-16ba-4809-939e-9cfa42c4d990"/>
+				<graphicElement>
+					<pen lineStyle="Double" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="13" width="57" height="13" uuid="6877f7c5-93c4-4fe1-9ffa-31dd25ce4217"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Folio:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="26" width="195" height="1" uuid="5982a3a7-ceb5-439f-8f08-f06aa0da8003"/>
+				<graphicElement>
+					<pen lineStyle="Dotted" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="57" y="13" width="100" height="12" uuid="c8de3081-1efd-4022-9cff-70053a8241fe"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numTicket}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="0" width="193" height="12" uuid="c4c68228-ceea-433f-9269-72bca4d6eb93"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[DATOS DE LA INFRACCION]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="68" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="55" width="57" height="13" uuid="429de9ca-2941-400e-8305-41ba27b3dac6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NUMERO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="42" width="57" height="13" uuid="3dc81600-f973-46de-9ab2-0fe351807e67"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DOC:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="29" width="57" height="13" uuid="9a040f16-06ed-497a-aa08-e0ad56e219a0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[VEH:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="16" width="57" height="13" uuid="8ac3d25a-0afd-439b-900c-f9474db33b06"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[MOTIVO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="3" width="57" height="13" uuid="0a4ee642-0de6-4bbf-8686-afd794ece1de"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="57" y="3" width="100" height="12" uuid="802912ac-50b8-456b-a166-202c7b8023b5"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OCURR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="17" width="159" height="12" uuid="13df8db0-d337-496f-bea2-09f00603f2f0"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{motivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="30" width="100" height="12" uuid="bab6ce68-e31c-42d4-84d2-d48248a6c6e0"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vehiculo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="43" width="100" height="12" uuid="0f9cbe08-f2d4-46eb-81bd-610863353472"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{typDoc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="55" width="100" height="12" uuid="cdd9bac5-d819-4871-a0db-9e2b09a62776"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{documento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="126">
+			<staticText>
+				<reportElement x="0" y="67" width="57" height="12" uuid="2852f6ce-ff4f-4dfe-afc1-77f02b76f971"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TOTAL:         $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="79" width="57" height="12" uuid="cba7a00d-616c-4024-9c04-9136cb994ef0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[EFECTIVO:  $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="91" width="57" height="12" uuid="cd78c522-1279-4052-9fac-8d8c3d434301"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CAMBIO:      $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="103" width="216" height="23" uuid="ffc79fd8-d3ad-4493-a68b-b11070f0a2b9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CONSERVE ESTE COMPROBANTE PARA CUALQUIER ACLARACION]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="14" width="195" height="1" uuid="ba8fa49b-b347-43bd-8f11-7226ab7c7332"/>
+				<graphicElement>
+					<pen lineStyle="Dotted" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="10" y="102" width="195" height="1" uuid="5df74da7-e743-45c1-8e60-202ae65f3fd7"/>
+				<graphicElement>
+					<pen lineStyle="Dotted" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="55" width="57" height="12" uuid="ecd43e14-f4ed-44e9-866d-20a440ff21af"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DESCTO:     $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="43" width="57" height="12" uuid="d7c1eb2a-8d12-41f8-af11-b34e8c81ee8b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[IMPORTE:     $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="31" width="57" height="12" uuid="482ac4d7-73a6-4a98-9208-d67750838ae9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA:         ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="19" width="57" height="12" uuid="7ca41ca3-2a95-4d09-93ce-853bc1d1ea3f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NOMBRE:         $]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="4" width="195" height="1" uuid="38b4a72a-be57-4804-ae1f-78f3e8e285f5"/>
+				<graphicElement>
+					<pen lineStyle="Dotted" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="10" y="4" width="193" height="12" uuid="9a085c0a-1ecb-47fa-9307-2a5886220c6c"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[DATOS DEL PAGO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="57" y="31" width="84" height="12" uuid="043cbeae-43fa-4f6e-b985-0cf79efa913e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FECpAY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="19" width="159" height="12" uuid="7404124e-872b-4ce5-8249-f0e2dda59d3f"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quienpaga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="43" width="100" height="12" uuid="fa7c5a40-326f-4475-b589-548aa83eab04"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="55" width="100" height="12" uuid="1c0b1ee1-0095-4f8a-9c93-96671a33c693"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="67" width="100" height="12" uuid="1e992596-ce90-4abd-916d-7ceedddd8609"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOT1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="79" width="100" height="12" uuid="d8d12015-e90a-4cfd-b8b9-76e8a23d3768"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{efectivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="91" width="100" height="12" uuid="69ba24c6-f379-4c54-893d-da4e3655d07d"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTFIN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="31" width="72" height="12" uuid="3f581220-34f8-4ad0-8912-f67c96612547"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
