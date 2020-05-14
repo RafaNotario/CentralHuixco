@@ -202,6 +202,37 @@ ADD CONSTRAINT FK_payInf_nomin FOREIGN KEY (idagente)
 REFERENCES central.nomina(id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
+/*@end----------++++++++++********* RELACIONES PARA PAGO DE INFRACCIONES */
+
+/* --- +++ ----    RELACIONES PARA OTROS COBROS ----------------------- */
+/*  RELACION OTROS_CATALOGO - OTROS_RUBROS.     YA*/
+ALTER TABLE central.otros_catalogo
+ADD CONSTRAINT FK_otsCat_otsRub FOREIGN KEY (idrubro)
+REFERENCES central.otros_rubros(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*  RELACION OTROS_VENTA - TURNOS.  */
+/*oBS: CAMBIAR TIPO DE DATO en central.otros_venta.idTurno a mediumint(5) ya que central.turnos.id es mediumint(5)*/
+ALTER TABLE central.otros_venta
+ADD CONSTRAINT FK_otsVent_turnos FOREIGN KEY (idTurno)
+REFERENCES central.turnos(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*  RELACION OTROS_VENTADET - OTROS_CATALOGO      YA  */
+ALTER TABLE central.otros_ventadet
+ADD CONSTRAINT FK_otsVentDet_otsCat FOREIGN KEY (idProd)
+REFERENCES central.otros_catalogo(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*  RELACION OTROS_VENTADET - OTROS_CATALOGO      YA  */
+ALTER TABLE central.otros_ventadet
+ADD CONSTRAINT FK_otsVentDet_otsVent FOREIGN KEY (idVenta)
+REFERENCES central.otros_venta(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
 
 
 

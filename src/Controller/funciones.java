@@ -434,6 +434,51 @@ public class funciones {
            return idTurno;
     }//@endgetUltimPagoCargad
           
+/*FUNCION PARA OBTENER DATOS DE OTROSV¿COBROS SEGUN TIPO */
+          /*//// OBTENER DATOS DE AMBULANTE para mostrar en panelInfo*/
+       public String[] getAllOtros(String id, String qEs){
+            Connection cn = con2.conexion();
+           String[] lapso = new String[2];
+            String sql = "";
+            
+            if(qEs.equals("Ambulante"))
+                sql = "select ambulantes.direccion,ambulantes.obs FROM ambulantes WHERE ambulantes.id = '"+id+"';";
+
+            if(qEs.equals("Cargador"))
+                sql = "select cargadores.direccion,cargadores.obs FROM cargadores WHERE cargadores.id = '"+id+"';";
+
+            if(qEs.equals("Cliente"))
+                sql = "select clientes.direccion,clientes.obs FROM clientes WHERE clientes.id = '"+id+"';";
+
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        lapso[0] = rs.getString(1);
+                        lapso[1]= rs.getString(2);
+                    }else{
+                        for (int i = 0; i < lapso.length; i++) {
+                            lapso[i] = "NO-DATA";
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return lapso;
+    }//@end getAllOtros     
+       
+          
     public void limpiar(JPanel Pn)
     {
         Pn.removeAll();

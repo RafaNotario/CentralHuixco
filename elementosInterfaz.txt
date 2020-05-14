@@ -200,16 +200,49 @@ jLabObserva
 	txtInFilterBusq
 	jCBoxFilterBusq
 	jLabtotInfracc
+
+		//jPanelAlta/Paga infracc
+	txtfolInfrac
+	jDateFechInfrac
+	jCBdoc
+	txtDoc
+	txtMotivo
+	txtVehicle
+	txtObs
+	jcomboAgent
+	tctMontoinfrac
 	
+		//PANEL INTERNO COBRA INFRACCION
+	txtNamePagad
+	txtImporte
+	txtDcto
+	txtTotal
+	txtEfectivo
+	txtCambioInfrac
+	jLabFolio
+	jLabPlaca
 
+/		-----PANEL INTERNO VARIOS**/
+	jPanDataambView3
+	jPanTableBusqView2
 
+	txtBusqOtros
+	jTabVariosView
+	
+	jLabFoli
+	jLabNombre3
+	jLabDirecc3
+	jLabObserva3
+	jLabThisIs	
 
+		//PARTE BUSCAR CONCEPTO
+	jPanTableBusqView3
+	jPanvIEWcOAST
 
-
-
-
-
-
+	txtBusqConcept
+	jTabViewOtherProd
+	
+	
 
 //@endPANELES DE internoCaja.java
 	
@@ -224,4 +257,18 @@ jLabObserva
 	
 
 @jPanSociosView
+
+            int oprime = evt.getKeyCode();
+            String var = txtBuscCargadores.getText();
+            if(!var.isEmpty()){
+                mostrarTablaCargadores(var);
+                jPanDataambView2.setVisible(false);
+                jPanTableBusqView1.setVisible(true);
+
+                if(oprime == KeyEvent.VK_ENTER){
+                    jTabCargadoresView.requestFocus(true);
+                }
+            }else{
+                jPanTableBusqView1.setVisible(false);
+            }
 
