@@ -478,7 +478,76 @@ public class funciones {
            return lapso;
     }//@end getAllOtros     
        
-          
+          /*//// OBTENER DATOS DE AMBULANTE para mostrar en panelInfo*/
+       public String[] getOtros_catalogId(String id){
+            Connection cn = con2.conexion();
+           String[] lapso = new String[5];
+            String sql = "";
+
+                sql = "select * FROM otros_catalogo WHERE id = '"+id+"';";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        lapso[0] = rs.getString(1);
+                        lapso[1]= rs.getString(2);
+                        lapso[2]= rs.getString(3);
+                        lapso[3]= rs.getString(4);
+                        lapso[4]= rs.getString(5);
+                    }else{
+                        for (int i = 0; i < lapso.length; i++) {
+                            lapso[i] = "NO-DATA";
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return lapso;
+    }//@endgetOtros_catalogId
+       
+              //OBTENER ULTIMO PAGO REALIZADO
+          public int getUltimPagootros_venta(){
+            Connection cn = con2.conexion();
+            int idTurno = -1;
+            String sql = "";
+            sql = "SELECT id FROM otros_venta ORDER BY id DESC LIMIT 1; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idTurno = rs.getInt(1);
+                    }else{
+                         idTurno = -1;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idTurno;
+    }//@endgetUltimPagootros_venta
+       
+       
     public void limpiar(JPanel Pn)
     {
         Pn.removeAll();
@@ -594,6 +663,38 @@ public class funciones {
                     }
            return existe;
     }
+         
+                       //OBTENER ULTIMO PAGO OTROS_CATALOGO
+          public int getUltimOtrosCatalog(){
+            Connection cn = con2.conexion();
+            int idTurno = -1;
+            String sql = "";
+            sql = "SELECT id FROM otros_catalogo ORDER BY id DESC LIMIT 1; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idTurno = rs.getInt(1);
+                    }else{
+                         idTurno = -1;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idTurno;
+    }//@end getUltimOtrosCatalog
+          
             
        public static void main(String args[]){
            BigDecimal amountOne = new BigDecimal(250);//monto a cobrar
@@ -606,7 +707,8 @@ public class funciones {
                for (int i = 0; i < prue.length; i++) {
                  //  System.out.println(prue[i] ); 
               }
-             System.out.println("pay ultimo cargadores"+fn.getUltimPagoCargad());   
+               int var = fn.getUltimOtrosCatalog();
+             System.out.println("pay ultimo otros_catalogos"+(var+1));   
         // System.out.println("PORCENTAJE: "+fn.percentage(amountOne, amountTwo));
        }
            

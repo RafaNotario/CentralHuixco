@@ -241,7 +241,18 @@ jLabObserva
 
 	txtBusqConcept
 	jTabViewOtherProd
-	
+
+	jLabConceptName
+	txtIdOculto
+	txtCantidadOths
+	txtPreciooths
+	txtImportOths
+
+
+	jTabVistaVentaOthers
+	txtTotOthers	
+
+		
 	
 
 //@endPANELES DE internoCaja.java
@@ -258,17 +269,50 @@ jLabObserva
 
 @jPanSociosView
 
-            int oprime = evt.getKeyCode();
-            String var = txtBuscCargadores.getText();
-            if(!var.isEmpty()){
-                mostrarTablaCargadores(var);
-                jPanDataambView2.setVisible(false);
-                jPanTableBusqView1.setVisible(true);
 
-                if(oprime == KeyEvent.VK_ENTER){
-                    jTabCargadoresView.requestFocus(true);
+        int opc = jCombCliVentaP.getSelectedIndex(),//index de CLIENTE
+                codP = jCombProdVentaP.getSelectedIndex();//index de producto
+
+        String id_cli = conten.get(opc),//idProveedor devuelto de la base de datos
+                codPro = idProductsVent.get(codP),//idProducto devuelto de la base de datos
+
+                costoProd = txtPrecProdVentaP.getText(),
+                cantidad = txtCantVentaPiso.getText(),//indexCliente
+                nota = txtNotaVentP.getText(),
+                importe = txtImportVentaP.getText(),
+                dateVentP = fn.getFecha(jDFVentaPiso),
+                sumando = txtTotalVentaPiso.getText();
+
+        // System.out.println("IdCliente: " + id_cli + "\t idProd: " + codPro + "Fecha: " + dateVentP);
+        importes.add(txtImportVentaP.getText());
+
+        List<String> dataVentPiso = new ArrayList<String>();
+        if (cantidad.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad");
+        } else {
+            dtm = (DefaultTableModel) jTabDescVentaP.getModel();
+
+            int filas = dtm.getRowCount(), filasPrec = dtm.getRowCount();
+            int column = dtm.getColumnCount(), column2 = dtm.getColumnCount();
+            if (filas == 0) {
+                if (nota.isEmpty()) {
+                    nota = "/";
                 }
-            }else{
-                jPanTableBusqView1.setVisible(false);
+                dataVentPiso.add(id_cli);
+                dataVentPiso.add(dateVentP);
+                dataVentPiso.add(nota);
+                controlInserts.guardaVentaPiso(dataVentPiso);
             }
+            dtm.addRow(new Object[]{codPro, jCombProdVentaP.getSelectedItem().toString(), cantidad, costoProd, importe});
+            jTabDescVentaP.setModel(dtm);
+            BigDecimal amountOne = new BigDecimal(sumando);//monto a cobrar
+            BigDecimal amountTwo = new BigDecimal(importe);//cantidad recivida
+
+            txtTotalVentaPiso.setText(fn.getSum(amountOne, amountTwo).toString());
+
+            limpiaVentaPiso();
+            jCombCliVentaP.setEnabled(false);
+            txtNotaVentP.setEnabled(false);
+        }//else vacio
+
 

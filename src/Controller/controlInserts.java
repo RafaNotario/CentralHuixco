@@ -682,6 +682,69 @@ public void guardadetailTicketCargad(String[] param, int numParam){
             }//finally catch
 } //@endguardadetailTicketCargad
        
+/*-----------++++++++++METODO PARA GUARDAR PAGO DE OTROS vENTA*/
+public void guardaTicketOtherPays(String[] param){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";        
+                SQL="INSERT INTO otros_venta (id,idTurno,fecha,hora,tipoPersona,idPersona,efectivo) VALUES (?,?,?,?,?,?,?)";                           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param[0]);
+                pps.setString(2, param[1]);
+                pps.setString(3, param[2]);
+                pps.setString(4, param[3]);
+                pps.setString(5, param[4]);
+                pps.setString(6, param[5]);
+                pps.setString(7, param[6]);
+                
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Ticket OtroPago guardado correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+        }     //@end guardaTicketOtherPays
+            
+
+public void guardadetailOthsPays(List<String> param){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";
+            SQL="INSERT INTO otros_ventadet (idVenta,idProd,item,cant,precio) VALUES (?,?,?,?,?)";                           
+          try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param.get(0));
+                pps.setString(2, param.get(1));
+                pps.setString(3, param.get(2));
+                pps.setString(4, param.get(3));
+                pps.setString(5, param.get(4));
+
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Detail payOths guardado correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+} //@end guardadetailOthsPays
+
+
 //metodo para actualizar idResg de ambullantes
        public void f5postGuardCarg(String id, String val, String opcColumn){
              Connection cn = con2.conexion();
@@ -838,6 +901,36 @@ SQL="UPDATE pagos_infrac SET idTurno = ?, fechapag = ?, horapag = ?,quienpaga = 
                     }
             }//finally catch
         }//@endpayInfracc
+             
+              
+     public void guardOthsCatalog(String[] param){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";
+            SQL="INSERT INTO otros_catalogo (id,idrubro,descrip,precio,activo) VALUES (?,?,?,?,?)";                           
+          try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param[0]);
+                pps.setString(2, param[1]);
+                pps.setString(3, param[2]);
+                pps.setString(4, param[3]);
+                pps.setString(5, param[4]);
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, param[2]+" guardado correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+} //@end guardadetailOthsPays
+              
               
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();
