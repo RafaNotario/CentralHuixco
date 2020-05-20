@@ -354,26 +354,34 @@ public void guardadetailTicketArea(String[] param){
         Connection cn = con2.conexion();
           String sql ="",aux;
               sql = "(SELECT  pagos_areas.id,DATE_FORMAT(pagos_areas.hora, \"%H : %i\") AS hor,'Pago Areas',areas.nombre,pagos_areas.total\n" +
-                    "FROM pagos_areas\n" +
-                    "INNER JOIN areas\n" +
-                    "ON areas.id = pagos_areas.idArea AND pagos_areas.fecha = '"+fech+"'\n" +
-                    "ORDER BY pagos_areas.id DESC)\n" +
-                    "UNION\n" +
-                    "(SELECT pagos_amb.id,DATE_FORMAT(pagos_amb.hora, \"%H : %i\") AS hor,'Pago Ambulantes',ambulantes.nombre,pagos_amb.total\n" +
-                    "FROM pagos_amb\n" +
-                    "INNER JOIN ambulantes\n" +
-                    "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.fecha = '"+fech+"'\n" +
-                    "ORDER BY pagos_amb.id DESC)\n" +
-                    "UNION\n" +
-                    "(SELECT  pagos_carg.id,DATE_FORMAT(pagos_carg.hora, \"%H : %i\") AS hor,'Pago Cargadores',cargadores.nombre,pagos_carg.total\n" +
-                    "FROM pagos_carg\n" +
-                    "INNER JOIN cargadores\n" +
-                    "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.fecha = '"+fech+"'\n" +
-                    "ORDER BY pagos_carg.id DESC)\n" +
-                    "UNION\n" +
-                    "(SELECT  pagos_infrac.folio,DATE_FORMAT(pagos_infrac.horapag, \"%H : %i\") AS hor,'Pago Infraccion',pagos_infrac.quienpaga,pagos_infrac.monto - pagos_infrac.descuento\n" +
-                    "FROM pagos_infrac\n" +
-                    "WHERE pagos_infrac.fechapag = '"+fech+"' );";  
+                        "FROM pagos_areas\n" +
+                        "INNER JOIN areas\n" +
+                        "ON areas.id = pagos_areas.idArea AND pagos_areas.fecha = '"+fech+"'\n" +
+                        "ORDER BY pagos_areas.id DESC)\n" +
+                        "UNION\n" +
+                        "(SELECT pagos_amb.id,DATE_FORMAT(pagos_amb.hora, \"%H : %i\") AS hor,'Pago Ambulantes',ambulantes.nombre,pagos_amb.total\n" +
+                        "FROM pagos_amb\n" +
+                        "INNER JOIN ambulantes\n" +
+                        "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.fecha = '"+fech+"'\n" +
+                        "ORDER BY pagos_amb.id DESC)\n" +
+                        "UNION\n" +
+                        "(SELECT  pagos_carg.id,DATE_FORMAT(pagos_carg.hora, \"%H : %i\") AS hor,'Pago Cargadores',cargadores.nombre,pagos_carg.total\n" +
+                        "FROM pagos_carg\n" +
+                        "INNER JOIN cargadores\n" +
+                        "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.fecha = '"+fech+"'\n" +
+                        "ORDER BY pagos_carg.id DESC)\n" +
+                        "UNION\n" +
+                        "(SELECT  pagos_infrac.folio,DATE_FORMAT(pagos_infrac.horapag, \"%H : %i\") AS hor,'Pago Infraccion',pagos_infrac.quienpaga,pagos_infrac.monto - pagos_infrac.descuento\n" +
+                        "FROM pagos_infrac\n" +
+                        "WHERE pagos_infrac.fechapag = '"+fech+"')\n" +
+                        "UNION\n" +
+                        "(SELECT otros_venta.id,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
+                        "IF(otros_venta.tipoPersona = 0,'Varios Amb.',IF(otros_venta.tipoPersona = 1,'Varios Carg.', IF(otros_venta.tipoPersona = 2,'Varios Cte.','NADON') ) ) AS quees,\n" +
+                        "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
+                        "        otros_venta.efectivo\n" +
+                        "FROM otros_venta\n" +
+                        "WHERE otros_venta.fecha = '"+fech+"'\n" +
+                        ");";  
               
              int i =0,cantFilas=0, cont=1,cantColumnas=0;
              String[][] mat=null, mat2=null;

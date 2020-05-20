@@ -408,3 +408,19 @@ SELECT  pagos_infrac.documento,DATE_FORMAT(pagos_infrac.fecha, "%d - %M - %Y "),
                 pagos_infrac.efectivo,pagos_infrac.efectivo - (,pagos_infrac.monto - pagos_infrac.descuento)
 FROM pagos_infrac
 WHERE pagos_infrac.folio =2021;
+
+/*QWERY PARA CARGAR TICKETS DIA OTROS*/
+SELECT  otros_venta.id,DATE_FORMAT(otros_venta.hora, "%H : %i") AS hor,
+    IF(otros_venta.tipoPersona = 0,'Varios Amb.',IF(otros_venta.tipoPersona = 1,'Varios Carg.', IF(otros_venta.tipoPersona = 2,'Varios Cte.','NADON') ) ),
+        otros_venta.efectivo
+FROM pagos_carg
+INNER JOIN cargadores
+ON cargadores.id = pagos_carg.idcarg AND pagos_carg.fecha = curdate()
+ORDER BY pagos_carg.id DESC
+
+SELECT otros_venta.id,DATE_FORMAT(otros_venta.hora, "%H : %i") AS hor,
+IF(otros_venta.tipoPersona = 0,'Varios Amb.',IF(otros_venta.tipoPersona = 1,'Varios Carg.', IF(otros_venta.tipoPersona = 2,'Varios Cte.','NADON') ) ) AS quees,
+IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,
+        otros_venta.efectivo
+FROM otros_venta
+WHERE otros_venta.fecha = '2020-05-19';

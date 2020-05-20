@@ -7554,17 +7554,13 @@ System.err.println("el Dcto final:"+aux);
                 contrl.guardadetailOthsPays(datos);
                 datos.clear();
             }
-
-
-       //     String[][] mat = contrl.matrizgetTicketsDia(fech);
-        //     jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
-
-
         //   String[] dat = rP.getTickPagoCargad(arr[0]);
         // rP.imprim80MMCargad(arr[0], dat,false);
-
         }
    
+              String[][] mat = contrl.matrizgetTicketsDia(fech);
+             jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
+
            limpiaOthsPays();
    
    
