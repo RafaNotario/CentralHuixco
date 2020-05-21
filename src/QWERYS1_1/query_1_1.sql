@@ -354,11 +354,18 @@ ON usuarios.id = turnos.idusuario;
 
 /*PARA TICKET DE INFRACCION SOLO SE ENVIA FOLIO*/
 
+/*QWERY PARA MOSTRAR TICKET JASPER PAGOS OTROS-RUBROS*/
+SELECT otros_venta.efectivo,date_format(otros_venta.fecha,'%d - %m - %Y') AS fech, DATE_FORMAT(otros_venta.hora, "%H : %i") AS hor, usuarios.nombre,
+IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees
+FROM otros_venta
+JOIN turnos
+on otros_venta.idTurno = turnos.id AND otros_venta.id = 593
+join usuarios
+ON usuarios.id = turnos.idusuario;
+
+
 
 --                          *************        @end qwerysReportesMatrizParametro
-
-
-
 
 /*qwery para obtener pagos Areas y mostrar ticket*/
 SELECT  rubrospago.descripcion,semanas.semana,
@@ -424,3 +431,9 @@ IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre WHERE ambulantes.id = 
         otros_venta.efectivo
 FROM otros_venta
 WHERE otros_venta.fecha = '2020-05-19';
+
+/*QUERY PARA TICKET OTROS RUBROS*/
+SELECT  otros_catalogo.descrip,otros_ventadet.cant,otros_ventadet.precio
+FROM otros_ventadet
+INNER JOIN otros_catalogo
+ON otros_ventadet.idProd = otros_catalogo.id AND otros_ventadet.idVenta = 593;

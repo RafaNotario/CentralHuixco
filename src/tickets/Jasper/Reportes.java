@@ -170,6 +170,47 @@ void imprim() throws JRException{
                 }
 }//@imprim80MM
 
+    /*Generar ticket de otros_pagos */
+  public void imprim80MMOthers(String param,String[] datas, boolean print){
+        Connection cn = con2.conexion();
+        String  var = "C:/central/src/tickets/Jasper/ticket80MM_Others.jasper";
+        JasperReport reporte = null;
+            try {
+                 Map parametro = new HashMap();
+                parametro.put("numTicket",param);
+                parametro.put("paramTotal",datas[0]);
+                parametro.put("fechcomp",datas[1]);
+                parametro.put("horComp",datas[2]);
+                parametro.put("nombAtendio",datas[3]);
+                parametro.put("whoes",datas[4]);
+                parametro.put("nombAmbu",datas[5]);
+                
+                reporte = (JasperReport) JRLoader.loadObjectFromFile(var);
+                JasperPrint jp = JasperFillManager.fillReport(reporte, parametro, cn);
+
+                //linea para mandar a imprimir
+                if(print){
+                    JasperPrintManager.printReport(jp, false);
+                }else{
+                    JasperViewer jv = new JasperViewer(jp,false);
+                    jv.setZoomRatio(new Float(1.5));
+                   jv.setVisible(true);
+                   jv.setTitle("Central Huixcolotla \t Pago otros rubros.");
+                }
+            
+            }  catch (JRException ex) {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                 //   System.out.println( "cierra conexion a la base de datos" );    
+                    try {
+                        if(cn != null) cn.close();
+                    } catch (SQLException ex) {
+                        System.err.println( ex.getMessage() );    
+                    }
+                }
+}//@imprim80MM
+  
+  
 //imprimir tickets de infracciones
    public void imprim80MM_Infrac(String param, boolean print){
         Connection cn = con2.conexion();
@@ -320,11 +361,50 @@ void imprim() throws JRException{
                     }
            return totalesAreaSem;
     }//@endgetTickPagoCargad        
+           
+/**** Para obtener total,efectivo y diferencia ticket semanal area **/
+          public String[] getTickOthers(String idTicket){
+            Connection cn = con2.conexion();
+            String[] totalesAreaSem = new String[6]; 
+            String sql = "";
+            sql = "SELECT otros_venta.efectivo,date_format(otros_venta.fecha,'%d-%m-%Y') AS fech, DATE_FORMAT(otros_venta.hora, \"%H:%i\") AS hor, usuarios.nombre,\n" +
+                    "IF(otros_venta.tipoPersona = 0,'Ambulante',IF(otros_venta.tipoPersona = 1,'Cargador', IF(otros_venta.tipoPersona = 2,'Cliente','NADON') ) ) AS whoes,\n" +
+                    "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees\n" +
+                    "FROM otros_venta\n" +
+                    "JOIN turnos\n" +
+                    "on otros_venta.idTurno = turnos.id AND otros_venta.id = '"+idTicket+"'\n" +
+                    "join usuarios\n" +
+                    "ON usuarios.id = turnos.idusuario;";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                if(rs.next())
+                {
+                    totalesAreaSem[0] = rs.getString(1);
+                    totalesAreaSem[1] = rs.getString(2);
+                    totalesAreaSem[2] = rs.getString(3);
+                    totalesAreaSem[3] = rs.getString(4);
+                    totalesAreaSem[4] = rs.getString(5);
+                    totalesAreaSem[5] = rs.getString(6);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return totalesAreaSem;
+    }//@end getTickOthers
           
 public static void main(String []argv) throws JRException{
         Reportes rP = new Reportes();
-       // String[] dat = rP.getTickPagoCargad("64318");
-         rP.imprim80MM_Infrac("2617",false);
+        String[] dat = rP.getTickOthers("2");
+        rP.imprim80MMOthers("2",dat,false);
         System.out.println("Y atermino");
     }
     

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="225" whenNoDataType="AllSectionsNoDetail" columnWidth="216" leftMargin="5" rightMargin="5" topMargin="0" bottomMargin="0" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1"/>
+	<parameter name="numTicket" class="java.lang.String"/>
+	<parameter name="nombAmbu" class="java.lang.String"/>
+	<parameter name="nombAtendio" class="java.lang.String"/>
+	<parameter name="paramTotal" class="java.lang.String"/>
+	<parameter name="fechcomp" class="java.lang.String"/>
+	<parameter name="horComp" class="java.lang.String"/>
+	<parameter name="whoes" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT  otros_catalogo.descrip,TRUNCATE(otros_ventadet.cant,0) as cant,otros_ventadet.precio,(TRUNCATE (otros_ventadet.cant * otros_ventadet.precio,2)) AS multip 
+FROM otros_ventadet
+INNER JOIN otros_catalogo
+ON otros_ventadet.idProd = otros_catalogo.id AND otros_ventadet.idVenta = $P{numTicket}
+;]]>
+	</queryString>
+	<field name="descrip" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cant" class="java.math.BigDecimal"/>
+	<field name="precio" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="multip" class="java.math.BigDecimal"/>
+	<title>
+		<band height="96" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="10" y="0" width="195" height="79" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
+				<imageExpression><![CDATA["C:\\central\\src\\images\\logo80MM.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="33" y="79" width="147" height="13" forecolor="#3333FF" uuid="2b292a92-0302-46b2-bfec-0232a67d2289"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cobro de Varios]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="93" width="195" height="1" uuid="c1e4c872-16ba-4809-939e-9cfa42c4d990"/>
+				<graphicElement>
+					<pen lineStyle="Double" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="45" height="13" uuid="6877f7c5-93c4-4fe1-9ffa-31dd25ce4217"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Folio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="12" width="45" height="12" uuid="bdd09513-1e40-45dd-8fda-1b2e597e366d"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="34" width="45" height="12" uuid="0511f8d0-344a-4620-abea-9b096d7b7370"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Atendio:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="48" width="195" height="1" uuid="5982a3a7-ceb5-439f-8f08-f06aa0da8003"/>
+				<graphicElement>
+					<pen lineStyle="Dotted" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="44" y="34" width="160" height="12" uuid="fde2777c-c97d-4a2d-9735-921bb0252c82"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombAtendio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="44" y="0" width="100" height="12" uuid="c8de3081-1efd-4022-9cff-70053a8241fe"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numTicket}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="44" y="23" width="160" height="12" uuid="580a18b7-626e-415a-ba26-15375d40a532"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombAmbu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="44" y="11" width="86" height="12" uuid="4dc2ece4-ad3b-4a39-b19b-2d569e9d807e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechcomp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="12" width="63" height="12" uuid="b8611ed0-35b3-4ca3-afbc-fb6f3655efc0"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{horComp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="23" width="45" height="12" uuid="094d9373-ca2e-4b8f-bba8-b9bad8950471"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{whoes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="58">
+			<staticText>
+				<reportElement x="75" y="26" width="57" height="13" uuid="429de9ca-2941-400e-8305-41ba27b3dac6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[COSTO UNIT.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="15" width="216" height="12" uuid="a477312e-eb31-46cc-9377-7f583fb15bd7"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descrip}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="39" width="67" height="12" uuid="8627b025-3f94-4382-aa2d-5be07df04c36"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="27" width="69" height="12" uuid="2a293416-3da9-42b2-8a36-988ad989396e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="3" y="39" width="66" height="12" uuid="139fff33-c7e0-4f4c-afea-2d672c348308"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cant}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="156" y="27" width="59" height="12" uuid="58378def-dae2-4222-a8c0-a9a87e408b6f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[IMPORTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="3" width="69" height="12" uuid="08c02400-4ce2-4cfe-a6da-7d6c246a7f9c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CONCEPTO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="150" y="39" width="65" height="12" uuid="5808800b-c209-4366-8829-cce76df3b4fa"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{multip}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="62" y="51" width="80" height="1" uuid="7c2abe09-3cb9-47fd-9ae7-789067effb61"/>
+				<graphicElement>
+					<pen lineStyle="Dotted" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="69">
+			<staticText>
+				<reportElement x="18" y="17" width="57" height="12" uuid="2852f6ce-ff4f-4dfe-afc1-77f02b76f971"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TOTAL:         $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="45" width="216" height="24" uuid="ffc79fd8-d3ad-4493-a68b-b11070f0a2b9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CONSERVE ESTE COMPROBANTE PARA CUALQUIER ACLARACION]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="2" width="195" height="1" uuid="ba8fa49b-b347-43bd-8f11-7226ab7c7332"/>
+				<graphicElement>
+					<pen lineStyle="Dotted" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="10" y="42" width="195" height="1" uuid="5df74da7-e743-45c1-8e60-202ae65f3fd7"/>
+				<graphicElement>
+					<pen lineStyle="Dotted" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="75" y="17" width="100" height="12" uuid="32b07bf7-3a12-4bad-88b0-a78e94493ae1"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paramTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
