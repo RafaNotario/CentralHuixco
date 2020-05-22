@@ -259,7 +259,10 @@ jLabObserva
 	txtFoltotExplanad
 	txtCoastExplan
 	
-
+/*			Interno registro de clientes otros cobros*/
+	jFramAltaCliente
+	
+	
 
 //@endPANELES DE internoCaja.java
 	
@@ -274,23 +277,4 @@ jLabObserva
 	
 
 @jPanSociosView
-
-        if (filas > 0) {
-            for (int i = 0; i < filas; i++) {
-                datos.add(arr[0]);
-                for (int j = 0; j < column; j++) {
-//                     System.out.print("["+jTabDescVentaP.getValueAt(i, j)+"]");
-                    if (j == 0) {
-                        datos.add(jTabDescVentaP.getValueAt(i, j).toString());
-                    }
-                    if (j == 2) {
-                        datos.add(jTabDescVentaP.getValueAt(i, j).toString());
-                    }
-                    if (j == 3) {
-                        datos.add(jTabDescVentaP.getValueAt(i, j).toString());
-                    }
-                }
-                controlInserts.guardaDetalleVentPiso(datos);
-                datos.clear();
-            }
 

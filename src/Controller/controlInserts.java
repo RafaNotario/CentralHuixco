@@ -722,6 +722,38 @@ public void guardaTicketOtherPays(String[] param){
             }//finally catch
         }     //@end guardaTicketOtherPays
             
+// ------ ++ GUARDAR CLIENTE NUEVO
+public void guardCliente(String[] param){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";
+            SQL="INSERT INTO clientes (id,nombre,direccion,correo,telefono,rfc,obs) VALUES (?,?,?,?,?,?,?)";                           
+          try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param[0]);
+                pps.setString(2, param[1]);
+                pps.setString(3, param[2]);
+                pps.setString(4, param[3]);
+                pps.setString(5, param[4]);
+                pps.setString(6, param[5]);
+                pps.setString(7, param[6]);
+
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Cliente registrado correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+} //@end guardCliente
+
 
 public void guardadetailOthsPays(List<String> param){
      Connection cn = con2.conexion();

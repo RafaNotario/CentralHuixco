@@ -695,7 +695,65 @@ public class funciones {
            return idTurno;
     }//@end getUltimOtrosCatalog
           
-            
+      public int getIdClient(){
+            Connection cn = con2.conexion();
+            int idUser= -1;
+            String sql = "";
+            sql = "SELECT id FROM clientes ORDER BY id DESC LIMIT 1";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idUser=rs.getInt(1);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idUser;
+    }//@end getIdClient
+          
+      
+           public int getIdOthsCatalog(){
+            Connection cn = con2.conexion();
+            int idUser= -1;
+            String sql = "";
+            sql = "SELECT id FROM otros_catalogo ORDER BY id DESC LIMIT 1";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idUser=rs.getInt(1);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idUser;
+    }//@end getIdOthsCatalog
+           
        public static void main(String args[]){
            BigDecimal amountOne = new BigDecimal(250);//monto a cobrar
            BigDecimal amountTwo = new BigDecimal(0.00);//cantidad recivida
@@ -703,12 +761,9 @@ public class funciones {
            funciones fn =  new funciones();
               java.util.Date date = new Date();
                 String[] prue = fn.getCargad("45");
-        //      System.out.println("Guardare en TIMESTAMP: "+new java.sql.Timestamp(date.getTime() ) );
-               for (int i = 0; i < prue.length; i++) {
-                 //  System.out.println(prue[i] ); 
-              }
-               int var = fn.getUltimOtrosCatalog();
-             System.out.println("pay ultimo otros_catalogos"+(var+1));   
+
+               int var = fn.getIdOthsCatalog();
+             System.out.println("pay ultimo CLIENTE sera "+(var+1));
         // System.out.println("PORCENTAJE: "+fn.percentage(amountOne, amountTwo));
        }
            

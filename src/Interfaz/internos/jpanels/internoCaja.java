@@ -54,8 +54,9 @@ public class internoCaja extends javax.swing.JPanel {
     infracc_rw_DB infraccs= null;
     
      List<String> conten = new ArrayList<String>();//lista para guardar el id de cada area cobro de areas
-     
-           int bandC = 0,
+     List<String> contenRubOths = new ArrayList<String>();
+           
+     int bandC = 0,
            idSemMantini=0,//contador para ultimas semanas pagadas
            idSemBasura=0,
            idSemPolicia=0,
@@ -171,15 +172,26 @@ public internoCaja(String usuarioN) {
         jLabel48 = new javax.swing.JLabel();
         jLabel57 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtNombClient = new javax.swing.JTextField();
+        txtDirClient = new javax.swing.JTextField();
+        txtCorrClient = new javax.swing.JTextField();
+        txtObsClient = new javax.swing.JTextField();
+        txtTelClient = new javax.swing.JTextField();
         jLabel59 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtRfcClient = new javax.swing.JTextField();
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
+        jDialresProdOther = new javax.swing.JDialog();
+        jLabel68 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel69 = new javax.swing.JLabel();
+        jLabel70 = new javax.swing.JLabel();
+        jLabel79 = new javax.swing.JLabel();
+        txtDescripProd = new javax.swing.JTextField();
+        txtPrec = new javax.swing.JTextField();
+        jCBRubroProd = new javax.swing.JComboBox<>();
+        jButton20 = new javax.swing.JButton();
+        jButton21 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -1072,6 +1084,10 @@ public internoCaja(String usuarioN) {
 
         jFramAltaCliente.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jFramAltaCliente.setTitle("SistemaCentral Huixcolotla");
+        jFramAltaCliente.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        jFramAltaCliente.setPreferredSize(new java.awt.Dimension(543, 360));
+        jFramAltaCliente.setResizable(false);
+        jFramAltaCliente.setSize(new java.awt.Dimension(543, 360));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel43.setText("Registrar cliente");
@@ -1098,21 +1114,21 @@ public internoCaja(String usuarioN) {
         jLabel58.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel58.setText("Teléfono");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtNombClient.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDirClient.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtCorrClient.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtObsClient.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTelClient.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jLabel59.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel59.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel59.setText("RFC");
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtRfcClient.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -1124,27 +1140,27 @@ public internoCaja(String usuarioN) {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtNombClient, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtDirClient, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCorrClient, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtObsClient, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTelClient, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtRfcClient, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -1153,35 +1169,45 @@ public internoCaja(String usuarioN) {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombClient, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDirClient, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCorrClient, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtObsClient, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelClient, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRfcClient, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jButton13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/uicheckOk.png"))); // NOI18N
         jButton13.setText("Guardar");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         jButton14.setText("Cancelar");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jFramAltaClienteLayout = new javax.swing.GroupLayout(jFramAltaCliente.getContentPane());
         jFramAltaCliente.getContentPane().setLayout(jFramAltaClienteLayout);
@@ -1214,7 +1240,123 @@ public internoCaja(String usuarioN) {
                 .addGroup(jFramAltaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        jDialresProdOther.setTitle("Central de Abastos Huixcolotla");
+        jDialresProdOther.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        jDialresProdOther.setResizable(false);
+        jDialresProdOther.setSize(new java.awt.Dimension(549, 254));
+
+        jLabel68.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel68.setText("Registrar producto");
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel69.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel69.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel69.setText("Descripción");
+
+        jLabel70.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel70.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel70.setText("Rubro");
+
+        jLabel79.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel79.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel79.setText("Precio");
+
+        txtDescripProd.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        txtPrec.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jCBRubroProd.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDescripProd, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCBRubroProd, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel79, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPrec, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel69, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(txtDescripProd, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                        .addGap(1, 1, 1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBRubroProd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel79, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrec, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jButton20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/uicheckOk.png"))); // NOI18N
+        jButton20.setText("Aceptar");
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
+
+        jButton21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
+        jButton21.setText("Cancelar");
+
+        javax.swing.GroupLayout jDialresProdOtherLayout = new javax.swing.GroupLayout(jDialresProdOther.getContentPane());
+        jDialresProdOther.getContentPane().setLayout(jDialresProdOtherLayout);
+        jDialresProdOtherLayout.setHorizontalGroup(
+            jDialresProdOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialresProdOtherLayout.createSequentialGroup()
+                .addGroup(jDialresProdOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialresProdOtherLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDialresProdOtherLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(51, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialresProdOtherLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
+        );
+        jDialresProdOtherLayout.setVerticalGroup(
+            jDialresProdOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialresProdOtherLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jDialresProdOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         setPreferredSize(new java.awt.Dimension(1329, 921));
@@ -1861,6 +2003,11 @@ public internoCaja(String usuarioN) {
         jButton50.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mas-color.png"))); // NOI18N
         jButton50.setText("  Alta");
+        jButton50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton50ActionPerformed(evt);
+            }
+        });
 
         jTabVistaVentaOthers.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTabVistaVentaOthers.setModel(new javax.swing.table.DefaultTableModel(
@@ -6635,7 +6782,11 @@ if(!dto.isEmpty() && !toI.isEmpty()){
     }//GEN-LAST:event_jButton34ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
+            jDialresProdOther.setLocationRelativeTo(null);
+            jDialresProdOther.setVisible(true);
+            jDialresProdOther.setEnabled(true);
+            llenaCBRubrosOths();
+            
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jTabVistaVentaOthersKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTabVistaVentaOthersKeyPressed
@@ -6666,7 +6817,7 @@ if(selec > -1){
         int fila = jTabVistaVentaOthers.getRowCount();
         
         System.out.println("Teien filas = "+fila);
-       if(fila > 0){   
+       if(fila > 0){ 
         DefaultTableModel   dtmAux = (DefaultTableModel) jTabVistaVentaOthers.getModel();//obtenemos modelo de tablaVista Compra a Mayorista
         int row = dtmAux.getRowCount();
         for (int i = 0; i < row; i++) {
@@ -6725,9 +6876,7 @@ if(selec > -1){
             txtFolIniExplanad.setText("1");
             txtFolFinExplanad.setText("1");
             txtFoltotExplanad.setText("1");
-            
             txtFolIniExplanad.setSelectionStart(0);
-            
     }//GEN-LAST:event_jButton51ActionPerformed
 
     private void txtFolIniExplanadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFolIniExplanadKeyReleased
@@ -6791,12 +6940,93 @@ if(selec > -1){
               jPanTableBusqView3.setVisible(false);
               jPanvIEWcOAST.setVisible(true);
              jFramExplanadaCob.dispose();
+             jButton34.setEnabled(true);
         }
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void txtFolFinExplanadFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFolFinExplanadFocusGained
         txtFolFinExplanad.setSelectionStart(0);
     }//GEN-LAST:event_txtFolFinExplanadFocusGained
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        String nombCli = txtNombClient.getText(),
+                dirCli = txtDirClient.getText(),
+                corCli = txtCorrClient.getText(),
+                obsCli = txtObsClient.getText(),
+                telCli = txtTelClient.getText(),
+                rfcCli = txtRfcClient.getText();
+        
+        if(!nombCli.isEmpty() && !obsCli.isEmpty()){
+            String[] datcli = new String[7];
+             int idCli = func.getIdClient();
+             
+          datcli[0] = Integer.toString((idCli + 1)); 
+          datcli[1] = (nombCli.isEmpty()) ? "" : nombCli;
+          datcli[2] = (dirCli.isEmpty()) ? "" : dirCli;
+          datcli[3] = (corCli.isEmpty()) ? "" : corCli;
+          datcli[4] = (telCli.isEmpty()) ? "" : telCli;
+          datcli[5] = (rfcCli.isEmpty()) ? "" : rfcCli;
+          datcli[6] = (obsCli.isEmpty()) ? "" : obsCli;
+                  contrl.guardCliente(datcli);
+          jLabFoli.setText(datcli[0]);
+          jLabNombre3.setText(datcli[1]);
+          jLabDirecc3.setText(datcli[2]);
+          jLabObserva3.setText(datcli[6]);
+          jLabThisIs.setText("Cliente");
+
+          txtBusqOtros.setText("");
+          jPanDataambView3.setVisible(true);
+          jPanTableBusqView2.setVisible(false);
+          limpiaRegClient();
+          jFramAltaCliente.dispose();
+          txtTotOthers.requestFocus(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe ingresar por lo menos Nombre y Obs");
+        }
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton50ActionPerformed
+            jFramAltaCliente.setLocationRelativeTo(null);
+            jFramAltaCliente.setVisible(true);
+            jFramAltaCliente.setEnabled(true);
+    }//GEN-LAST:event_jButton50ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        jFramAltaCliente.dispose();
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        String desc = txtDescripProd.getText(),
+                prec = txtPrec.getText();
+                
+        if(!desc.isEmpty() && !prec.isEmpty()){
+            String[] arreg = new String[5];
+            String idRub = contenRubOths.get(jCBRubroProd.getSelectedIndex());
+            int ultimoC = func.getIdOthsCatalog();
+            
+            arreg[0] = Integer.toString((ultimoC + 1));
+            arreg[1] = idRub;
+            arreg[2] = desc;
+            arreg[3] = prec;
+            arreg[4] = "1";
+            contrl.guardOthsCatalog(arreg);
+            
+            jPanTableBusqView3.setVisible(false);
+            jPanvIEWcOAST.setVisible(true);
+            txtBusqConcept.setText("");
+            jLabConceptName.setText(desc);
+            txtIdOculto.setText(arreg[0]);
+            txtCantidadOths.setText("1");
+            txtPreciooths.setText(prec);
+            txtImportOths.setText(prec);
+            jDialresProdOther.dispose();
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.");
+        }
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton20ActionPerformed
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -7282,6 +7512,39 @@ if(selec > -1){
           System.out.println("");
             
           }//@endmostrarJpanCargadores
+   
+      
+    //metodo para llenar combo de areas
+        private void llenaCBRubrosOths() {
+            Connection cn = con2.conexion();
+            contenRubOths.clear();
+            jCBRubroProd.removeAllItems();
+            String consul = "SELECT id, nombre from otros_rubros ORDER BY nombre";
+            Statement st = null;
+            ResultSet rs = null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(consul);
+                while (rs.next()) {
+                    contenRubOths.add(rs.getString(1));
+                    jCBRubroProd.addItem(rs.getString(2));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(internoCaja.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    if (st != null) {
+                        st.close();
+                    }
+                    if (cn != null) {
+                        cn.close();
+                    }
+                } catch (SQLException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
+         //  return conten;
+    }//Llena llenaCBRubrosOths
       
         public void inhabilitaAreas(){
             jChecMantSem.setSelected(false);
@@ -7855,6 +8118,15 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
           txtImportOths.setText("");
       }
       
+      public void limpiaRegClient(){
+          txtNombClient.setText("");
+          txtDirClient.setText("");
+          txtCorrClient.setText("");
+          txtObsClient.setText("");
+          txtTelClient.setText("");
+          txtRfcClient.setText("");
+      }
+      
              //funcion para busqueda automatica ambulantes
         void allClisAmbCarg(String var){
         int band = 0;
@@ -8012,6 +8284,8 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton26;
@@ -8039,6 +8313,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox<String> jCBRubroProd;
     private javax.swing.JComboBox<String> jCBoxDuracInscripc;
     private javax.swing.JComboBox<String> jCBoxFilterBusq;
     private javax.swing.JComboBox<String> jCBoxResguardosOpc;
@@ -8060,6 +8335,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private com.toedter.calendar.JDateChooser jDateChooser6;
     private com.toedter.calendar.JDateChooser jDateChooser9;
     private javax.swing.JDialog jDialCalendarMantenim;
+    private javax.swing.JDialog jDialresProdOther;
     private javax.swing.JFrame jFramAltaCliente;
     private javax.swing.JFrame jFramCobroInfrac;
     private javax.swing.JFrame jFramExplanadaCob;
@@ -8225,7 +8501,10 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel70;
     private javax.swing.JLabel jLabel71;
     private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
@@ -8234,6 +8513,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
+    private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
@@ -8306,6 +8586,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanvIEWcOAST;
@@ -8341,13 +8622,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTabviewPays;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel jlabIdCargador;
     private javax.swing.JLabel jlabImportBasura;
     private javax.swing.JLabel jlabImportMantenim;
@@ -8362,7 +8637,10 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JTextField txtCambioInfrac;
     private javax.swing.JTextField txtCantidadOths;
     private javax.swing.JTextField txtCoastExplan;
+    private javax.swing.JTextField txtCorrClient;
     private javax.swing.JTextField txtDcto;
+    private javax.swing.JTextField txtDescripProd;
+    private javax.swing.JTextField txtDirClient;
     private javax.swing.JTextField txtEfect;
     private javax.swing.JTextField txtEfectivo;
     private javax.swing.JTextField txtFinBasura;
@@ -8384,16 +8662,21 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JTextField txtIniResg;
     private javax.swing.JTextField txtMantenIdSem;
     private javax.swing.JTextField txtNamePagad;
+    private javax.swing.JTextField txtNombClient;
+    private javax.swing.JTextField txtObsClient;
     private javax.swing.JTextField txtOcultiDSemana;
     private javax.swing.JTextField txtPoliciaIdSem;
+    private javax.swing.JTextField txtPrec;
     private javax.swing.JTextField txtPreciooths;
     private javax.swing.JTextField txtResgFinAmb;
     private javax.swing.JTextField txtResgIniAmb;
     private javax.swing.JTextField txtResguardIdSem;
     private javax.swing.JTextField txtResultAmbu;
     private javax.swing.JTextField txtResultSum;
+    private javax.swing.JTextField txtRfcClient;
     private javax.swing.JTextField txtSemFinAmb;
     private javax.swing.JTextField txtSeminiAmb;
+    private javax.swing.JTextField txtTelClient;
     private javax.swing.JTextField txtTotCobro;
     private javax.swing.JTextField txtTotOthers;
     private javax.swing.JTextField txtTotal;
