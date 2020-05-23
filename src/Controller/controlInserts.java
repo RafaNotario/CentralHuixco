@@ -971,7 +971,61 @@ SQL="UPDATE pagos_infrac SET idTurno = ?, fechapag = ?, horapag = ?,quienpaga = 
             }//finally catch
 } //@end guardadetailOthsPays
               
-              
+//metodo para actualizar las cancelaciones en pagos_areas, pagos_amb,pagos_carg,otros_venta
+       public void f5CancelTypesAll(String table,String opcColumn,String id, String val){
+             Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";        
+                SQL="UPDATE '"+table+"' SET "+opcColumn+" =? WHERE id = '"+id+"' ";                           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, val);
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "ultima semo vig actualizado correctamente."+id);
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,"C.I.-f5postGuardCarg"+ex.getMessage() );    
+                    }
+            }//finally catch
+        }//@end f5CancelTypesAll
+     
+     public void guardInCancelaciones(String[] param){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";
+            SQL="INSERT INTO cancelaciones (id,idUsuario,autorizo,idTurno,fecha,hora,motivo) VALUES (?,?,?,?,?,?,?)";                           
+          try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param[0]);
+                pps.setString(2, param[1]);
+                pps.setString(3, param[1]);
+                pps.setString(4, param[2]);
+                pps.setString(5, param[3]);
+                pps.setString(6, param[4]);
+                pps.setString(7, param[5]);
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, param[5]+" guardado correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+} //@end guardInCancelaciones
+       
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();
          System.out.println("Ultimo pagado: "+contrl.regLastTicket(19));

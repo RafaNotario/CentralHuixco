@@ -259,10 +259,26 @@ jLabObserva
 	txtFoltotExplanad
 	txtCoastExplan
 	
-/*			Interno registro de clientes otros cobros*/
+/*			Interno registro de clientes otros cobros	*/
 	jFramAltaCliente
-	
-	
+	txtNombClient
+	txtDirClient
+	txtCorrClient
+	txtObsClient
+	txtTelClient
+	txtRfcClient
+/*			Interno registro de nuevo producto		*/
+	jDialresProdOther
+	txtDescripProd
+	jCBRubroProd
+	txtPrec
+
+/*			Interno cancelacion de ticket cualquiera*/
+	jDialCancelaciones
+	txtCancelTick
+		
+
+llenaCBRubrosOths
 
 //@endPANELES DE internoCaja.java
 	

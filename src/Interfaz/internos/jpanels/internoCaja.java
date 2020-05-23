@@ -77,6 +77,8 @@ String[][] matResgVehiculo = null;//Matriz para cargar las tarifas de resguardo 
 public internoCaja(String usuarioN) {
         initComponents();
         this.User = usuarioN;
+        JOptionPane.showMessageDialog(null,"recibi user: "+User);
+        
      jButton2.doClick();
      jPanTableBusqView.setVisible(false);
      jPanRentCargador.setVisible(false);
@@ -192,6 +194,11 @@ public internoCaja(String usuarioN) {
         jCBRubroProd = new javax.swing.JComboBox<>();
         jButton20 = new javax.swing.JButton();
         jButton21 = new javax.swing.JButton();
+        jDialCancelaciones = new javax.swing.JDialog();
+        jLabel80 = new javax.swing.JLabel();
+        txtCancelTick = new javax.swing.JTextField();
+        jButton24 = new javax.swing.JButton();
+        jButton25 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -1085,7 +1092,6 @@ public internoCaja(String usuarioN) {
         jFramAltaCliente.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jFramAltaCliente.setTitle("SistemaCentral Huixcolotla");
         jFramAltaCliente.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
-        jFramAltaCliente.setPreferredSize(new java.awt.Dimension(543, 360));
         jFramAltaCliente.setResizable(false);
         jFramAltaCliente.setSize(new java.awt.Dimension(543, 360));
 
@@ -1301,7 +1307,6 @@ public internoCaja(String usuarioN) {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(txtDescripProd, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                         .addGap(1, 1, 1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel70, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCBRubroProd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1357,6 +1362,55 @@ public internoCaja(String usuarioN) {
                     .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        jDialCancelaciones.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jDialCancelaciones.setTitle("Cancelar Ticket");
+        jDialCancelaciones.setType(java.awt.Window.Type.UTILITY);
+
+        jLabel80.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel80.setText("Ingrese el motivo de la cancelación");
+
+        txtCancelTick.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jButton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
+        jButton24.setText("Cancelar");
+
+        jButton25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/uicheckOk.png"))); // NOI18N
+        jButton25.setText("OK");
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialCancelacionesLayout = new javax.swing.GroupLayout(jDialCancelaciones.getContentPane());
+        jDialCancelaciones.getContentPane().setLayout(jDialCancelacionesLayout);
+        jDialCancelacionesLayout.setHorizontalGroup(
+            jDialCancelacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialCancelacionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialCancelacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jDialCancelacionesLayout.createSequentialGroup()
+                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCancelTick, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel80, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jDialCancelacionesLayout.setVerticalGroup(
+            jDialCancelacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialCancelacionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel80, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCancelTick, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialCancelacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         setPreferredSize(new java.awt.Dimension(1329, 921));
@@ -1545,6 +1599,11 @@ public internoCaja(String usuarioN) {
 
         jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         jButton18.setText("Cancelar ticket");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
 
         jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Actualizar.png"))); // NOI18N
         jButton19.setText("Actualizar");
@@ -5142,12 +5201,8 @@ if(jCheckResguardAmb.isSelected()){
     auxInsc = jLabImporteResguard.getText();
    aux = func.getSum(new BigDecimal(auxInsc), new BigDecimal(aux)).toString();
 }
-
 txtResultAmbu.setText(aux);
-
         }      
-        
-        
         System.err.println("Performed tarifas isncripcion");
     }//GEN-LAST:event_jCBoxDuracInscripcActionPerformed
 
@@ -5253,8 +5308,6 @@ txtResultAmbu.setText(aux);
              String opc = jTabDatosAmbulante.getValueAt(fila, 0).toString();
              String[] datasAmb = func.getAmbus1(opc);//arreglo para mostra info en jpanelInfo
              mostrarJpanAmbulantes(opc);
-             
-             
              JOptionPane.showMessageDialog(null, "Obtener ultimo pago semana: "+opc);
             jLabIdAmbu.setText(jTabDatosAmbulante.getValueAt(fila, 0).toString());
              jLabNomAmb.setText(jTabDatosAmbulante.getValueAt(fila, 1).toString());
@@ -5265,7 +5318,6 @@ txtResultAmbu.setText(aux);
             jPanDataambView1.setVisible(true);
             txtBuscAmbulante.setText("");
             txtBuscAmbulante.requestFocus(true);
-            
     }
     }//GEN-LAST:event_jTabDatosAmbulanteKeyPressed
 
@@ -5276,7 +5328,6 @@ txtResultAmbu.setText(aux);
                 mostrarTablaCargadores(var);
                 jPanDataambView2.setVisible(false);
                 jPanTableBusqView1.setVisible(true);
-
                 if(oprime == KeyEvent.VK_ENTER){
                     jTabCargadoresView.requestFocus(true);
                 }
@@ -5832,9 +5883,7 @@ txtResultAmbu.setText(aux);
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
          int fila = jTabviewPays.getSelectedRow();
-  
                 if(fila >= 0){
-
                     String mostTic = jTabviewPays.getValueAt(fila, 0).toString(),
                             concepto = jTabviewPays.getValueAt(fila, 2).toString();
                     if(concepto.equals("Pago Areas")){
@@ -5845,25 +5894,20 @@ txtResultAmbu.setText(aux);
                         String[] dat = rP.getTickPagoAmbu(mostTic);
                         rP.imprim80MMAmbus(mostTic, dat,false);
                     }
-                    
                     if(concepto.equals("Pago Cargadores")){                    
                         String[] dat = rP.getTickPagoCargad(mostTic);
                         rP.imprim80MMCargad(mostTic, dat,false);
                     }
-                    
                     if(concepto.equals("Pago Infraccion")){                    
                          rP.imprim80MM_Infrac(mostTic,false);
                     }
-                    
                     if(concepto.equals("Varios Amb.") || concepto.equals("Varios Cte.") || concepto.equals("Varios Carg.")){                    
                          String[] dat = rP.getTickOthers(mostTic);
                          rP.imprim80MMOthers(mostTic,dat,false);
                     }
-                    
                 }else{
                     JOptionPane.showMessageDialog(null, "Debe elegir que mostrar");
                 }
-         
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jCheckResguardAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckResguardAmbActionPerformed
@@ -7003,7 +7047,6 @@ if(selec > -1){
             String[] arreg = new String[5];
             String idRub = contenRubOths.get(jCBRubroProd.getSelectedIndex());
             int ultimoC = func.getIdOthsCatalog();
-            
             arreg[0] = Integer.toString((ultimoC + 1));
             arreg[1] = idRub;
             arreg[2] = desc;
@@ -7020,13 +7063,66 @@ if(selec > -1){
             txtPreciooths.setText(prec);
             txtImportOths.setText(prec);
             jDialresProdOther.dispose();
-            
         }else{
             JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.");
         }
-        
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+         String desc = txtCancelTick.getText();
+          int fila = jTabviewPays.getSelectedRow();
+       
+         if(fila >= 0){
+            if(!desc.isEmpty()){
+                String[] arregCan = new String[6]; 
+                int ultCanc = func.getUltimCancelaciones();
+                int ultTurno = func.getenTurno();
+                String fech = datCtrl.setDateActual(),
+                        ora = datCtrl.getHour(),
+                       mostTic = jTabviewPays.getValueAt(fila, 0).toString(),
+                       concepto = jTabviewPays.getValueAt(fila, 2).toString();
+               
+                 arregCan[0] = Integer.toString((ultCanc+1));
+                 arregCan[1] = User; 
+                 arregCan[2] = Integer.toString(ultTurno);
+                 arregCan[3] = fech;
+                 arregCan[4] = ora;
+                 arregCan[5] = desc;
+              
+                    if(concepto.equals("Pago Areas")){
+                         contrl.guardInCancelaciones(arregCan);
+                        contrl.f5CancelTypesAll("pagos_areas","idCancelacion",mostTic,arregCan[0]);
+                    }
+                    if(concepto.equals("Pago Ambulantes")){
+                           contrl.guardInCancelaciones(arregCan);
+                        contrl.f5CancelTypesAll("pagos_amb","idCancelacion",mostTic,arregCan[0]);
+                    }
+                    if(concepto.equals("Pago Cargadores")){     
+                           contrl.guardInCancelaciones(arregCan);
+                        contrl.f5CancelTypesAll("pagos_carg","idCancelacion",mostTic,arregCan[0]);
+                    }
+                    if(concepto.equals("Pago Infraccion")){                    
+                        JOptionPane.showMessageDialog(null, "Pendiente cancelacion infracciones");
+//                        contrl.f5CancelTypesAll("pagos_areas","idCancelacion",mostTic,arregCan[0]);
+                    }
+                    if(concepto.equals("Varios Amb.") || concepto.equals("Varios Cte.") || concepto.equals("Varios Carg.")){                    
+                        contrl.guardInCancelaciones(arregCan);
+                        contrl.f5CancelTypesAll("otros_venta","idCancelacion",mostTic,arregCan[0]);
+                    }
+            }else{
+                JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.");
+            }//IS ISEMPTY
+        }else{
+                    JOptionPane.showMessageDialog(null, "Debe elegir que mostrar");
+          }//IFFILA >=0
+    }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        jDialCancelaciones.setLocationRelativeTo(null);
+        jDialCancelaciones.setVisible(true);
+        jDialCancelaciones.setEnabled(true);
+        txtCancelTick.setText("");
+    }//GEN-LAST:event_jButton18ActionPerformed
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -8288,6 +8384,8 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton3;
@@ -8335,6 +8433,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private com.toedter.calendar.JDateChooser jDateChooser6;
     private com.toedter.calendar.JDateChooser jDateChooser9;
     private javax.swing.JDialog jDialCalendarMantenim;
+    private javax.swing.JDialog jDialCancelaciones;
     private javax.swing.JDialog jDialresProdOther;
     private javax.swing.JFrame jFramAltaCliente;
     private javax.swing.JFrame jFramCobroInfrac;
@@ -8515,6 +8614,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
@@ -8635,6 +8735,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JTextField txtBusqOtros;
     private javax.swing.JTextField txtCambio;
     private javax.swing.JTextField txtCambioInfrac;
+    private javax.swing.JTextField txtCancelTick;
     private javax.swing.JTextField txtCantidadOths;
     private javax.swing.JTextField txtCoastExplan;
     private javax.swing.JTextField txtCorrClient;

@@ -546,8 +546,7 @@ public class funciones {
                     }
            return idTurno;
     }//@endgetUltimPagootros_venta
-       
-       
+          
     public void limpiar(JPanel Pn)
     {
         Pn.removeAll();
@@ -754,6 +753,37 @@ public class funciones {
            return idUser;
     }//@end getIdOthsCatalog
            
+         public int getUltimCancelaciones(){
+            Connection cn = con2.conexion();
+            int idTurno = -1;
+            String sql = "";
+            sql = "SELECT id FROM cancelaciones ORDER BY id DESC LIMIT 1; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idTurno = rs.getInt(1);
+                    }else{
+                         idTurno = -1;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idTurno;
+    }//@endgetUltimPagoarea
+           
        public static void main(String args[]){
            BigDecimal amountOne = new BigDecimal(250);//monto a cobrar
            BigDecimal amountTwo = new BigDecimal(0.00);//cantidad recivida
@@ -762,7 +792,7 @@ public class funciones {
               java.util.Date date = new Date();
                 String[] prue = fn.getCargad("45");
 
-               int var = fn.getIdOthsCatalog();
+               int var = fn.getUltimCancelaciones();
              System.out.println("pay ultimo CLIENTE sera "+(var+1));
         // System.out.println("PORCENTAJE: "+fn.percentage(amountOne, amountTwo));
        }

@@ -635,15 +635,13 @@ funciones func1 = new funciones();
         {
             JOptionPane.showMessageDialog(null, "Monto vacio ó desigual, Verifique porfavor.");
         }else{
-           // JOptionPane.showMessageDialog(null, "si cumple");
-            System.out.println("guardar id user = "+idReturn);
             contentL.add(Integer.toString(idReturn));
             contentL.add(monto2);
 //comentar descomentar linea para guardar el turno
 //           func1.GuardaTurno(contentL); 
            func1.limpiar(jPanTrabajo);
            inicioButton(true);//habilitar todos los botones del menucontent
-           iCaj = new internoCaja(jLabUserNombre.getText());
+           iCaj = new internoCaja(Integer.toString(idReturn));
            jPanTrabajo.setLayout(new GridLayout(1,1));
            jPanTrabajo.add(iCaj);
            jPanTrabajo.validate();
@@ -750,11 +748,6 @@ funciones func1 = new funciones();
         String arr[] = func1.lapsoSemanasIni(dCon.setDateActual());
         jLabNsem.setText("Semana "+arr[2]);
         jLabLapsoSemana.setText(dCon.getWeekStartDate(arr[3])+" - "+dCon.getWeekStartDate(arr[4]));
-        
-  /*      for (int i = 0; i < arr.length; i++) {
-            System.out.println(arr[i]);
-        }
-*/
     }
     
     private void inicioButton(boolean act){
