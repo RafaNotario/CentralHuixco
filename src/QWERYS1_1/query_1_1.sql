@@ -234,6 +234,24 @@ REFERENCES central.otros_venta(id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
+/****--------- RELACION DE OTROS GASTOS GASTOS CAJA*/
+/*  RELACION GASTOS_CAJA - TURNOS     YA  */
+/*oBS: CAMBIAR TIPO DE DATO en central.gastos_caja.idTurno a mediumint(5)&unsigned ya que central.turnos.id es mediumint(5)*/
+ALTER TABLE central.gastos_caja
+ADD CONSTRAINT FK_gastCaj_turns FOREIGN KEY (idTurno)
+REFERENCES central.turnos(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+/*  RELACION GASTOS_CAJA - RUBROS_CAJA     YA  */
+ALTER TABLE central.gastos_caja
+ADD CONSTRAINT FK_gastCaj_rubCaj FOREIGN KEY (idRubrocaja)
+REFERENCES central.rubroscaja(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+
+
 
 
 
@@ -437,3 +455,11 @@ SELECT  otros_catalogo.descrip,otros_ventadet.cant,otros_ventadet.precio
 FROM otros_ventadet
 INNER JOIN otros_catalogo
 ON otros_ventadet.idProd = otros_catalogo.id AND otros_ventadet.idVenta = 593;
+
+
+/*mostrar gastos del dia*/
+SELECT gastos_caja.id,gastos_caja.hora,rubroscaja.concepto,gastos_caja.monto
+FROM central.gastos_caja
+INNER JOIN central.rubroscaja
+ON gastos_caja.idRubrocaja = rubroscaja.id AND gastos_caja.fecha = '2020-05-23';
+

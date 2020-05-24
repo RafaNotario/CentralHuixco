@@ -276,9 +276,23 @@ jLabObserva
 /*			Interno cancelacion de ticket cualquiera*/
 	jDialCancelaciones
 	txtCancelTick
+	
 		
+/*			--_Internos de gastos _caja*/
+	jPanInternGastos
+	jCombBOpcBusqGastos
+	txtBusGasto
+	jTabViewGastos
+	
+		//Dialog Alta de GAstos caja
+	jDialAltaGastos
+	jCombBTypeRubros
+	txtConcept
+	txtsolict	
+	txtObservs
+	txtMontoGasto
 
-llenaCBRubrosOths
+mostrarGastosDia
 
 //@endPANELES DE internoCaja.java
 	

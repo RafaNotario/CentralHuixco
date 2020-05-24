@@ -784,6 +784,75 @@ public class funciones {
            return idTurno;
     }//@endgetUltimPagoarea
            
+                       //OBTENER ULTIMO GASTO DE CAJA REALIZADO
+          public int getUltimGastCaja(){
+            Connection cn = con2.conexion();
+            int idTurno = -1;
+            String sql = "";
+            sql = "SELECT id FROM gastos_caja ORDER BY id DESC LIMIT 1; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idTurno = rs.getInt(1);
+                    }else{
+                         idTurno = -1;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idTurno;
+    }//@end getUltimGastCaja
+         
+                    /*//// OBTENER DATOS DE AMBULANTE para mostrar en panelInfo*/
+       public String[] getDatsGasto(String id){
+            Connection cn = con2.conexion();
+           String[] lapso = new String[5];
+            String sql = "";
+                sql = "select idRubrocaja,concepto,solicitante,obs,monto FROM gastos_caja WHERE id = '"+id+"';";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        lapso[0] = rs.getString(1);
+                        lapso[1]= rs.getString(2);
+                        lapso[2]= rs.getString(3);
+                        lapso[3]= rs.getString(4);
+                        lapso[4]= rs.getString(5);
+                    }else{
+                        for (int i = 0; i < lapso.length; i++) {
+                            lapso[i] = "NO-DATA";
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return lapso;
+    }//@endgetOtros_catalogId
+          
+          
        public static void main(String args[]){
            BigDecimal amountOne = new BigDecimal(250);//monto a cobrar
            BigDecimal amountTwo = new BigDecimal(0.00);//cantidad recivida

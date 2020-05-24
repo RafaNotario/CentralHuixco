@@ -356,19 +356,19 @@ public void guardadetailTicketArea(String[] param){
               sql = "(SELECT  pagos_areas.id,DATE_FORMAT(pagos_areas.hora, \"%H : %i\") AS hor,'Pago Areas',areas.nombre,pagos_areas.total\n" +
                         "FROM pagos_areas\n" +
                         "INNER JOIN areas\n" +
-                        "ON areas.id = pagos_areas.idArea AND pagos_areas.fecha = '"+fech+"'\n" +
+                        "ON areas.id = pagos_areas.idArea AND pagos_areas.fecha = '"+fech+"' AND idCancelacion = 0\n" +
                         "ORDER BY pagos_areas.id DESC)\n" +
                         "UNION\n" +
                         "(SELECT pagos_amb.id,DATE_FORMAT(pagos_amb.hora, \"%H : %i\") AS hor,'Pago Ambulantes',ambulantes.nombre,pagos_amb.total\n" +
                         "FROM pagos_amb\n" +
                         "INNER JOIN ambulantes\n" +
-                        "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.fecha = '"+fech+"'\n" +
+                        "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.fecha = '"+fech+"' AND idCancelacion = 0\n" +
                         "ORDER BY pagos_amb.id DESC)\n" +
                         "UNION\n" +
                         "(SELECT  pagos_carg.id,DATE_FORMAT(pagos_carg.hora, \"%H : %i\") AS hor,'Pago Cargadores',cargadores.nombre,pagos_carg.total\n" +
                         "FROM pagos_carg\n" +
                         "INNER JOIN cargadores\n" +
-                        "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.fecha = '"+fech+"'\n" +
+                        "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.fecha = '"+fech+"' AND idCancelacion = 0\n" +
                         "ORDER BY pagos_carg.id DESC)\n" +
                         "UNION\n" +
                         "(SELECT  pagos_infrac.folio,DATE_FORMAT(pagos_infrac.horapag, \"%H : %i\") AS hor,'Pago Infraccion',pagos_infrac.quienpaga,pagos_infrac.monto - pagos_infrac.descuento\n" +
@@ -380,7 +380,7 @@ public void guardadetailTicketArea(String[] param){
                         "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
                         "        otros_venta.efectivo\n" +
                         "FROM otros_venta\n" +
-                        "WHERE otros_venta.fecha = '"+fech+"'\n" +
+                        "WHERE otros_venta.fecha = '"+fech+"' AND idCancelacion = 0\n" +
                         ");";  
               
              int i =0,cantFilas=0, cont=1,cantColumnas=0;
@@ -878,7 +878,6 @@ SQL="UPDATE pagos_infrac SET folio = ?, fecha = ?, tipodoc = ?,documento = ?, mo
         Connection cn = con2.conexion();
         PreparedStatement preparedStmt = null;
         if(!id.isEmpty()){
-
             int dialogButton = JOptionPane.YES_NO_OPTION;
             int dialogResult = JOptionPane.showConfirmDialog (null, "<html> "
                     + "Seguro que desea eliminar el registro con ID:<h1> "+id+" </h1>? </html>","Eliminar",dialogButton);
@@ -976,7 +975,7 @@ SQL="UPDATE pagos_infrac SET idTurno = ?, fechapag = ?, horapag = ?,quienpaga = 
              Connection cn = con2.conexion();
             PreparedStatement pps=null;
             String SQL="";        
-                SQL="UPDATE '"+table+"' SET "+opcColumn+" =? WHERE id = '"+id+"' ";                           
+                SQL="UPDATE "+table+" SET "+opcColumn+" =? WHERE id = '"+id+"' ";                           
             try {
                 pps = cn.prepareStatement(SQL);
                 pps.setString(1, val);
@@ -1025,6 +1024,52 @@ SQL="UPDATE pagos_infrac SET idTurno = ?, fechapag = ?, horapag = ?,quienpaga = 
                     }
             }//finally catch
 } //@end guardInCancelaciones
+     
+     //guarda gasto de caja
+     public void guardGastoCaja(String[] param, String idT){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="",band="";      
+            try {
+              
+
+          if(idT.isEmpty()){
+ SQL="INSERT INTO gastos_caja (id,idTurno,fecha,hora,idRubrocaja,concepto,solicitante,obs,monto) VALUES (?,?,?,?,?,?,?,?,?)";                           
+  pps = cn.prepareStatement(SQL);
+                pps.setString(1, param[0]);
+                pps.setString(2, param[1]);
+                pps.setString(3, param[2]);
+                pps.setString(4, param[3]);
+                pps.setString(5, param[4]);
+                pps.setString(6, param[5]);
+                pps.setString(7, param[6]);
+                pps.setString(8, param[7]);
+                pps.setString(9, param[8]);
+                band = "creado";
+          }else{
+SQL="UPDATE gastos_caja SET concepto=?,solicitante=?,obs=?,monto=? WHERE id = '"+idT+"'; ";              
+pps = cn.prepareStatement(SQL);
+                pps.setString(1, param[0]);
+                pps.setString(2, param[1]);
+                pps.setString(3, param[2]);
+                pps.setString(4, param[3]);
+                band="actualizado";
+          }      
+                pps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Gasto "+band+" correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+ //               System.out.println( "cierra conexion a la base de datos" );    
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+} //@end guardGastoCaja
        
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();
