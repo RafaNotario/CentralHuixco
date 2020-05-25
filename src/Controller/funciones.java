@@ -855,15 +855,15 @@ public class funciones {
           
        public static void main(String args[]){
            BigDecimal amountOne = new BigDecimal(250);//monto a cobrar
-           BigDecimal amountTwo = new BigDecimal(0.00);//cantidad recivida
+           BigDecimal amountTwo = new BigDecimal(100.00);//cantidad recivida
            
            funciones fn =  new funciones();
               java.util.Date date = new Date();
                 String[] prue = fn.getCargad("45");
 
                int var = fn.getUltimCancelaciones();
-             System.out.println("pay ultimo CLIENTE sera "+(var+1));
-        // System.out.println("PORCENTAJE: "+fn.percentage(amountOne, amountTwo));
+          //   System.out.println("pay ultimo CLIENTE sera "+(var+1));
+         System.out.println("PORCENTAJE: "+fn.percentage(amountOne, amountTwo));
        }
            
 }

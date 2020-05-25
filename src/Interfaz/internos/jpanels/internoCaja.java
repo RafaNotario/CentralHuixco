@@ -5441,7 +5441,6 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
        int var = jCBoxDuracInscripc.getSelectedIndex();
         if(var > -1){
             jLabTarifaInscripcion.setText(tarifas[var+6]);
-
            String multi1 = jLabDstoInscripcion.getText(),
                    multi2 = jLabTarifaInscripcion.getText(),
                    resAmbu = jLabImporteInscripcion.getText(),
@@ -5452,22 +5451,18 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                    BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
                    BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida
               //     BigDecimal amountNumSems = new BigDecimal(numSems);//cantidad recivida
-aux = func.getDifference(amountTwo, amountOne).toString();
-
+aux = func.getDifference(amountTwo, func.percentage(amountTwo, amountOne)).toString();
 jLabImporteInscripcion.setText(aux);
-
 if(jCheckSemPaysAmb.isSelected()){
     auxSems = jLabImporteSemanas.getText();
    aux = func.getSum(new BigDecimal(auxSems), new BigDecimal(aux)).toString();
 }
-    
 if(jCheckResguardAmb.isSelected()){
     auxInsc = jLabImporteResguard.getText();
    aux = func.getSum(new BigDecimal(auxInsc), new BigDecimal(aux)).toString();
 }
 txtResultAmbu.setText(aux);
         }      
-        System.err.println("Performed tarifas isncripcion");
     }//GEN-LAST:event_jCBoxDuracInscripcActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -5608,25 +5603,21 @@ txtResultAmbu.setText(aux);
              String opc = jTabCargadoresView.getValueAt(fila, 0).toString();
              datasCarg = func.getCargad(opc);//arreglo para mostra info en jpanelInfo
 //aca va metodo para cargar datos en jPaneles
-            
-             
             jlabIdCargador.setText(jTabCargadoresView.getValueAt(fila, 0).toString());
              jLabNombreCargadores.setText(jTabCargadoresView.getValueAt(fila, 1).toString());
              
              jLabDirecCargad.setText(datasCarg[2]);
               jLabObservaCarg.setText(datasCarg[3]);
              if(datasCarg[4].equals("0"))
-            jLabGiroCarg.setText("Propio");
+                jLabGiroCarg.setText("Propio");
              else if(datasCarg[4].equals("1"))
-                  jLabGiroCarg.setText("Renta");
+                jLabGiroCarg.setText("Renta");
            
             jPanTableBusqView1.setVisible(false);
             jPanDataambView2.setVisible(true);
             txtBuscCargadores.setText("");
             txtBuscCargadores.requestFocus(true);
-            
             mostrarJpanCargadores(datasCarg);
-            
         }
     }//GEN-LAST:event_jTabCargadoresViewKeyPressed
 
@@ -6175,7 +6166,6 @@ txtResultAmbu.setText(aux);
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jCheckResguardAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckResguardAmbActionPerformed
-              
                 String  granTotal = txtResultAmbu.getText(),
                     importResguard = jLabImporteResguard.getText(),
                     tarif = jLabTarifaResguard.getText(),
@@ -6192,12 +6182,9 @@ txtResultAmbu.setText(aux);
             String[] semA = func.lapsoSemanasIni(datCtrl.setDateActual());
             jLabUltimaResguardPay.setText(semA[2]);
             txtIdResguardOcultoAmb.setText(semA[0]);
-            
             idResguardAmbu = Integer.parseInt(semA[0]);//idSemana de ultimo pago si es N/A obtenemos semana actual
             idResguardAmbu2=idResguardAmbu;
-            
-            System.err.println("idAmbu noData= "+idResguardAmbu);
-
+//            System.err.println("idAmbu noData= "+idResguardAmbu);
             txtResgIniAmb.setText(semA[2]);
             txtResgFinAmb.setText(semA[2]);
             
@@ -6206,7 +6193,8 @@ txtResultAmbu.setText(aux);
        
             BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
             BigDecimal amountFour = new BigDecimal(dto);//cantidad recivida
-jLabImporteResguard.setText(func.getDifference(amTarif,amountFour ).toString() );
+//func.getDifference(amountTwo, func.percentage(amountTwo, amountFour)).toString()
+jLabImporteResguard.setText(func.getDifference(amTarif, func.percentage(amTarif, amountFour)).toString() );
     importResguard = jLabImporteResguard.getText();
 txtResultAmbu.setText( func.getSum(amountTwo,new BigDecimal(importResguard)).toString() );
         }else{
@@ -6218,7 +6206,9 @@ txtResultAmbu.setText( func.getSum(amountTwo,new BigDecimal(importResguard)).toS
                     jLabContSemsResguard.setText("1");
                     BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
                     BigDecimal amountFour = new BigDecimal(dto);//cantidad recivida
-auxtot = func.getDifference( func.multiplicaAmount(amTarif, amountTres), func.multiplicaAmount(amountTres, amountFour) ).toString();
+          //calculamos la cantidad a dscontar %de cant          
+                    BigDecimal amounPorcint =  func.percentage(amTarif, amountFour);
+auxtot = func.getDifference( func.multiplicaAmount(amTarif, amountTres), func.multiplicaAmount(amountTres, amounPorcint) ).toString();
  jLabImporteResguard.setText(auxtot);
                        BigDecimal amountFive = new BigDecimal(auxtot);//cantidad recivida
 txtResultAmbu.setText(func.getSum(amountTwo, amountFive).toString());
@@ -6239,41 +6229,35 @@ txtResultAmbu.setText(func.getSum(amountTwo, amountFive).toString());
     }//GEN-LAST:event_jCheckResguardAmbActionPerformed
 
     private void jCheckInscripPaysAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckInscripPaysAmbActionPerformed
-        
          String ultimaSem = jLabel60.getText(),
                 tarif = jLabTarifaInscripcion.getText(),
                 dcto = jLabDstoInscripcion.getText(),
                 totalAmbu = jLabImporteInscripcion.getText(),
                  totAll = txtResultAmbu.getText(),
                 auxtot ="";/*Hacer suma de total Total*/
-         
         BigDecimal amountOne = new BigDecimal(tarif);
         BigDecimal amountTwo = new BigDecimal(dcto);//cantidad recivida
         BigDecimal amountFour = new BigDecimal(totAll);//cantidad recivida
          jDateChoInscripcion.setDate(datCtrl.cargafecha());
-         
            if(ultimaSem.equals("N/A")){
                     jLabel60.setText(datCtrl.getFecha(jDateChoInscripcion));
-                    
                     jDateChoInscripcion.setDate(datCtrl.cargafecha());
-                    auxtot = func.getDifference(amountOne , amountTwo ).toString();
+                    auxtot = func.percentage(amountOne,amountTwo ).toString();
                     jLabImporteInscripcion.setText(auxtot);
                     BigDecimal amountFive = new BigDecimal(auxtot);//cantidad recivida
-                    txtResultAmbu.setText(func.getSum(amountFour, amountFive).toString());
+                    txtResultAmbu.setText(func.getSum(amountFour,amountFive).toString());
             }else{      
                 if(jCheckInscripPaysAmb.isSelected()){
                     jCBoxDuracInscripc.setEnabled(true);
-                    auxtot = func.getDifference(amountOne , amountTwo ).toString();
+                    auxtot = func.percentage(amountOne,amountTwo).toString();
                     jLabImporteInscripcion.setText(auxtot);
                     BigDecimal amountsix = new BigDecimal(auxtot);//cantidad recivida
                     txtResultAmbu.setText(func.getSum(amountFour, amountsix).toString());
-                    
                    jDateChoInscripcion.setDate(datCtrl.StringDate(jLabVigenciaView.getText().replace('-', '/')));
                 }else{
                     jCBoxDuracInscripc.setEnabled(false);
                       BigDecimal amountTres = new BigDecimal(jLabImporteInscripcion.getText());//cantidad recivida
                        txtResultAmbu.setText(func.getDifference(amountFour, amountTres).toString());
-                       
                  }
            }
     }//GEN-LAST:event_jCheckInscripPaysAmbActionPerformed
@@ -6297,10 +6281,9 @@ txtResultAmbu.setText(func.getSum(amountTwo, amountFive).toString());
             txtSeminiAmb.setText(semA[2]);
             txtSemFinAmb.setText(semA[2]);
             jLaFechIniSemana.setText(datCtrl.getWeekStartDate(semA[3]) +" - "+datCtrl.getWeekStartDate(semA[4]));            
-            
             BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
             BigDecimal amountFour = new BigDecimal(dcto);//cantidad recivida
-jLabImporteSemanas.setText(func.getDifference(amountTwo,amountFour).toString());
+jLabImporteSemanas.setText(func.getDifference(amountTwo, func.percentage(amountTwo, amountFour)).toString());//func.getDifference(amountTwo,amountFour).toString()
             totalAmbu = jLabImporteSemanas.getText();
 txtResultAmbu.setText(func.getSum(amountOne, new BigDecimal(totalAmbu)).toString());
 
@@ -6308,10 +6291,11 @@ txtResultAmbu.setText(func.getSum(amountOne, new BigDecimal(totalAmbu)).toString
                 if(jCheckSemPaysAmb.isSelected()){
                        jButMinusSemsPaysAmb.setEnabled(true);
                        jButMostSemsPaysAmb.setEnabled(true);
-                        jLabContadorSemanas.setText("1");
+                       jLabContadorSemanas.setText("1");
                        BigDecimal amountTres = new BigDecimal(numSemanas);//cantidad recivida
                        BigDecimal amountFour = new BigDecimal(dcto);//cantidad recivida
-     auxtot = func.getDifference( func.multiplicaAmount(amountTwo, amountTres), func.multiplicaAmount(amountTres, amountFour) ).toString();
+                       BigDecimal amounPorcint =  func.percentage(amountTwo, amountFour);
+     auxtot = func.getDifference( func.multiplicaAmount(amountTwo, amountTres), func.multiplicaAmount(amountTres, amounPorcint) ).toString();
  jLabImporteSemanas.setText(auxtot);
                        BigDecimal amountFive = new BigDecimal(auxtot);//cantidad recivida
 txtResultAmbu.setText(func.getSum(amountOne, amountFive).toString());
@@ -6337,6 +6321,7 @@ txtResultAmbu.setText(func.getSum(amountOne, amountFive).toString());
                 tot="";
         String[] arr = null;
         String aux="";
+        BigDecimal auxBig;
         int numeradorSem=Integer.parseInt(jLabContadorSemanas.getText());
            //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
              if(Integer.parseInt(ini) < Integer.parseInt(fin)){
@@ -6356,8 +6341,11 @@ txtResultAmbu.setText(func.getSum(amountOne, amountFive).toString());
                    BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
                    BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
                    BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida 
-jLabImporteSemanas.setText(func.getDifference(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString()  );
-txtResultAmbu.setText( func.getDifference(totalAll, func.getDifference(amountTwo, amountOne)).toString() );           
+//auxiliar para no tener tan anidado el llamado a funciones Bigdecimal por percentage                   
+                  auxBig = func.getDifference(amountTwo, func.percentage(amountTwo, amountOne));
+                  
+jLabImporteSemanas.setText(func.getDifference(amountAmbusMenos, auxBig).toString()  );
+txtResultAmbu.setText( func.getDifference(totalAll, auxBig).toString() );           
              }else{
                  JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
              }
@@ -6373,13 +6361,12 @@ txtResultAmbu.setText( func.getDifference(totalAll, func.getDifference(amountTwo
                 tot="";
         String[] arr = null;
         String aux="";
+        BigDecimal auxBig;
         int numeradorSem=Integer.parseInt(jLabContadorSemanas.getText());
            //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
-   
                     idSemambu++;
                     arr = contrl.regSemanas(idSemambu);
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
-                  
                    txtSemFinAmb.setText(arr[2]);//en #semana 1-52
                    jLabAumentaSemanas.setText(aux);       
                    jLabContadorSemanas.setText(Integer.toString(numeradorSem+1));
@@ -6392,9 +6379,10 @@ txtResultAmbu.setText( func.getDifference(totalAll, func.getDifference(amountTwo
                    BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
                    BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
                    BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida 
-jLabImporteSemanas.setText(func.getSum(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString() );
-txtResultAmbu.setText( func.getSum(totalAll,func.getDifference(amountTwo, amountOne) ).toString() );
-
+//auxiliar para no tener tan anidado el llamado a funciones Bigdecimal por percentage                   
+                  auxBig = func.getDifference(amountTwo, func.percentage(amountTwo, amountOne));
+jLabImporteSemanas.setText(func.getSum(amountAmbusMenos, auxBig).toString());//func.getSum(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString() 
+txtResultAmbu.setText( func.getSum(totalAll,auxBig ).toString() );
     }//GEN-LAST:event_jButMostSemsPaysAmbActionPerformed
 
     private void jCBoxResguardosOpcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBoxResguardosOpcActionPerformed
@@ -6412,8 +6400,9 @@ txtResultAmbu.setText( func.getSum(totalAll,func.getDifference(amountTwo, amount
                    BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
                    BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida
                    BigDecimal amountNumSems = new BigDecimal(numSems);//cantidad recivida
-aux = func.multiplicaAmount(amountNumSems, func.getDifference(amountTwo, amountOne)).toString();
-System.out.println("Producto tarifa: "+aux);
+                   BigDecimal amounPorcint =  func.percentage(amountTwo, amountOne);
+aux = func.multiplicaAmount(amountNumSems, func.getDifference(amountTwo, amounPorcint)).toString();
+System.out.println("Producto tarifa Resguard: "+aux);
 jLabImporteResguard.setText(aux);
 
 if(jCheckSemPaysAmb.isSelected()){
@@ -6430,7 +6419,7 @@ txtResultAmbu.setText(aux);
 
         }
         
-        System.err.print("Activa performed");
+    //    System.err.print("Activa performed");
     }//GEN-LAST:event_jCBoxResguardosOpcActionPerformed
 
     private void jButMinusResgPaysAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButMinusResgPaysAmbActionPerformed
@@ -6456,7 +6445,7 @@ txtResultAmbu.setText(aux);
                    jLaFechIniResguard.setText(aux);
                    jLabAumResguard.setText(aux);
                    
-                   System.err.println("Valen--  ="+idResguardAmbu+" 2: "+idResguardAmbu2);
+      //             System.err.println("Valen--  ="+idResguardAmbu+" 2: "+idResguardAmbu2);
                    jLabContSemsResguard.setText("1");
           /*obtenemos el producto del numero de tickets por semana que pagara
                    multi1 = jLabDstoResguard.getText();
@@ -6493,7 +6482,7 @@ txtResultAmbu.setText(aux);
                    
                    jLaFechIniResguard.setText(aux); 
                    jLabAumResguard.setText(aux);
-                   System.err.println("Valen++ ="+idResguardAmbu+" 2: "+idResguardAmbu2); 
+     //              System.err.println("Valen++ ="+idResguardAmbu+" 2: "+idResguardAmbu2); 
                   jLabContSemsResguard.setText("1");
            /*
                    obtenemos el producto del numero de tickets por semana que pagara
@@ -6520,13 +6509,13 @@ txtResultAmbu.setText(aux);
                 tot="";
         String[] arr = null;
         String aux="";
+        BigDecimal auxBig;
         int numeradorSem=Integer.parseInt(jLabContSemsResguard.getText());
            //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
              if(Integer.parseInt(ini) < Integer.parseInt(fin)){
                     idResguardAmbu2--;
                     arr = contrl.regSemanas(idResguardAmbu2);
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
-                  
                    txtResgFinAmb.setText(arr[2]);//en #semana 1-52
                    jLabAumResguard.setText(aux);       
                    jLabContSemsResguard.setText(Integer.toString(numeradorSem-1));
@@ -6535,16 +6524,15 @@ txtResultAmbu.setText(aux);
                    multi2 = jLabTarifaResguard.getText();
                    resAmbu = jLabImporteResguard.getText();
                    tot = txtResultAmbu.getText();
-                   
                    BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
                    BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
                    BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
                    BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida
-                   
-jLabImporteResguard.setText(func.getDifference(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString()  );
-txtResultAmbu.setText( func.getDifference(totalAll, func.getDifference(amountTwo, amountOne)).toString() );           
-           
-                System.err.println("ValeMinus ++ ="+idResguardAmbu+" 2: "+idResguardAmbu2); 
+ //auxiliar para no tener tan anidado el llamado a funciones Bigdecimal por percentage                   
+                  auxBig = func.percentage(amountTwo, amountOne);                  
+jLabImporteResguard.setText(func.getDifference(amountAmbusMenos, auxBig).toString()  );
+txtResultAmbu.setText( func.getDifference(totalAll, auxBig).toString() );     
+                System.err.println("ValeMinus Resguard-- ="+idResguardAmbu+" 2: "+idResguardAmbu2); 
              }else{
                  JOptionPane.showMessageDialog(null, "Inicio no pude ser mayor que Fecha fin");
              }
@@ -6560,13 +6548,12 @@ txtResultAmbu.setText( func.getDifference(totalAll, func.getDifference(amountTwo
                 tot="";
         String[] arr = null;
         String aux="";
+        BigDecimal auxBig;
         int numeradorSem=Integer.parseInt(jLabContSemsResguard.getText());
            //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
-
                     idResguardAmbu2++;
                     arr = contrl.regSemanas(idResguardAmbu2);
                     aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
-                  
                    txtResgFinAmb.setText(arr[2]);//en #semana 1-52
                    jLabAumResguard.setText(aux);       
                    jLabContSemsResguard.setText(Integer.toString(numeradorSem+1));
@@ -6575,16 +6562,15 @@ txtResultAmbu.setText( func.getDifference(totalAll, func.getDifference(amountTwo
                    multi2 = jLabTarifaResguard.getText();
                    resAmbu = jLabImporteResguard.getText();
                    tot = txtResultAmbu.getText();
-                   
                    BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
                    BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
                    BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
                    BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida
-                   
-jLabImporteResguard.setText(func.getSum(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString()  );
-txtResultAmbu.setText( func.getSum(totalAll, func.getDifference(amountTwo, amountOne)).toString() );           
-           
-   System.err.println("ValenMost ++ ="+idResguardAmbu+" 2: "+idResguardAmbu2); 
+           //auxiliar para no tener tan anidado el llamado a funciones Bigdecimal por percentage                   
+                  auxBig = func.percentage(amountTwo, amountOne);        
+jLabImporteResguard.setText(func.getSum(amountAmbusMenos, auxBig).toString()  );
+txtResultAmbu.setText( func.getSum(totalAll, auxBig).toString() );   
+   System.err.println("ValenMost Resguard++ ="+idResguardAmbu+" 2: "+idResguardAmbu2); 
     }//GEN-LAST:event_jButMostSemsPaysAmb2ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
@@ -6728,7 +6714,6 @@ txtTotalCarg.setText( func.getDifference(totalAll, auxBig).toString() );
                           
 jLabImportSemanasCargad.setText(func.getSum(amountAmbusMenos, auxBig).toString()  );
 txtTotalCarg.setText( func.getSum(totalAll, auxBig).toString() );           
-
     }//GEN-LAST:event_jButMooreSemsActionPerformed
 
     private void jCkBoxInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCkBoxInscripcionActionPerformed
@@ -7829,18 +7814,16 @@ if(selec > -1){
                 jCheckResguardAmb.setSelected(false);
                 jCheckInscripPaysAmb.setSelected(false);
                 txtResultAmbu.setText("0.00");
-                
      tarifas = func.getAmbusCondonac(idAmb);//obtenemos tarifas y descuentos a cobrar de ambulante
             String idTicultimaSem = "",
                     idresguardUltm="";
-            
-            
             String aux ="";
             int numSemanaOrigin =0,
                     numSemanaResguard=0
                     ;
-            idTicultimaSem = contrl.getpagosAmbulante(idAmb, "6");//ulimopago de #ambulante,Semana
+         
             
+            idTicultimaSem = contrl.getpagosAmbulante(idAmb, "6");//ulimopago de #ambulante,Semana
             if(idTicultimaSem.isEmpty() || idTicultimaSem.equals("")  || idTicultimaSem == null){
                 jLabUltimaSemanaPay.setText("N/A");
             }else{
@@ -7855,7 +7838,6 @@ if(selec > -1){
             String[] arrSemPlus =null;
             arrSemPlus = contrl.regSemanas(numSemanaOrigin+1);
             numSemanaOrigin  = Integer.parseInt(arrSemPlus[0]);  //guardamos idSemana mas uno que se va a ´pagar
-            
             idSemambu = Integer.parseInt(arrSemPlus[0]);//idSemanaPagada+1
             
             aux = datCtrl.getWeekStartDate(arrSemPlus[3]) + " - "+ datCtrl.getWeekStartDate(arrSemPlus[4]);
@@ -7864,13 +7846,10 @@ if(selec > -1){
             jLaFechIniSemana.setText(aux);
             txtSemFinAmb.setText(arrSemPlus[2]);
             jLabAumentaSemanas.setText(aux);
-            
-          
             }
               jLabContadorSemanas.setText("1");
-            jLabDstoSemanas.setText(tarifas[2]);
-            jLabTarifaSemanas.setText(tarifas[5]);
-            
+              jLabDstoSemanas.setText(tarifas[2]);
+              jLabTarifaSemanas.setText(tarifas[5]);
 //Llenar campos de resguardo
  idresguardUltm=contrl.getpagosAmbulante(idAmb, "7");//rubropago=7, Resguardo ambulante
     if(tarifas[0].equals("0") || idresguardUltm.isEmpty() || idresguardUltm.equals("")  || idresguardUltm == null){
@@ -7890,7 +7869,7 @@ if(selec > -1){
       idResguardAmbu = Integer.parseInt(arrSemPlusResg[0]);//idSemana ultimoPay +1
       idResguardAmbu2 = idResguardAmbu;//variables para los dos campos incrementables
       
-        System.err.println("idAmbu yesData= "+idResguardAmbu);
+   //     System.err.println("idAmbu yesData= "+idResguardAmbu);
       aux = datCtrl.getWeekStartDate(arrSemPlusResg[3]) + " - "+ datCtrl.getWeekStartDate(arrSemPlusResg[4]);
       
        txtResgIniAmb.setText(arrSemPlusResg[2]);
@@ -7899,8 +7878,7 @@ if(selec > -1){
          jLabAumResguard.setText(aux);
     }
      jLabContSemsResguard.setText("1");
-         jLabDstoResguard.setText(tarifas[3]);
-
+     jLabDstoResguard.setText(tarifas[3]);
          
          if (tarifas[4] == null || tarifas[4].equals("0000-00-00") || tarifas[4].isEmpty()) {
               jLabel60.setText("N/A");
@@ -7912,11 +7890,8 @@ if(selec > -1){
               jLabVigenciaView.setIcon(null);
               jLabVigenciaView.setText(tarifas[4]);
               jDateChoInscripcion.setDate(datCtrl.cargafecha());
-             
           }
         jLabDstoInscripcion.setText(tarifas[1]);
-    System.out.println("Vigencia: "+tarifas[4]);   
-            
           }//mostrarJpanAmbulantes
       
         
@@ -7934,9 +7909,7 @@ if(selec > -1){
               jButton40.setVisible(true);
               jButton41.setVisible(true);
               jButton40.doClick();
-              
-              //jCkBoxSemanas.setSelected(true);
-              //jCkBoxInscripcion.setSelected(true);
+
 /////PARA PANEL PAGO DE SEMANAS
               jLabcontSemanas.setText("1");
               jLabtarifSemanas.setText(datAMB[11]);
@@ -7970,7 +7943,6 @@ if(selec > -1){
         if(datAMB[8].equals("") ||  datAMB[8].isEmpty() || datAMB[8].equals("0000-00-00")){
            jLabel53.setText("Sin Inscripcion");
            jDatChoIncripcion.setDate(datCtrl.cargafecha());
-           
         }else{
             jLabel53.setText("Vigencia :- ");
             jLabVigencia.setText(datAMB[8]);
@@ -8239,7 +8211,6 @@ if(selec > -1){
             if(jCheckSemPaysAmb.isSelected()){
                 String dcto = jLabDstoSemanas.getText(),
                         tarif = jLabTarifaSemanas.getText();
-                
                 String[] guard = new String[6];
                 int idS = Integer.parseInt(txtIdSemOcultoAmb.getText());
                 int numVM = Integer.parseInt(jLabContadorSemanas.getText());//#Semanas a pagar
@@ -8250,8 +8221,7 @@ if(selec > -1){
                 guard[2] = "6";//idRubroPago
                 guard[3] = Integer.toString(idS+1);//rubrospago.id = Semana Ambulantes
                 guard[4] = jLabTarifaSemanas.getText();
-                guard[5] = jLabDstoSemanas.getText();
-            
+                guard[5] = func.percentage(new BigDecimal(tarif),new BigDecimal(dcto)).toString();
         contrl.guardadetailTicketAmbus(guard,guard.length); 
                 //System.out.println("Semana j = "+j);
                 i++;
@@ -8259,8 +8229,9 @@ if(selec > -1){
                 idS++;
                 }while(i <= numVM);
             }
- 
             if(jCheckResguardAmb.isSelected()){
+                 String dctoResg = jLabDstoResguard.getText(),
+                        tarifResg = jLabTarifaResguard.getText();
                 int iB = 1;
                 String[] guardB = new String[6];
               //  int idSB = Integer.parseInt(txtBasurIdSem.getText());
@@ -8271,7 +8242,7 @@ if(selec > -1){
                     guardB[2] = "7";
                     guardB[3] = Integer.toString(idResguardAmbu);
                     guardB[4] = jLabTarifaResguard.getText();
-                    guardB[5] = jLabDstoResguard.getText();
+                    guardB[5] = func.percentage(new BigDecimal(tarifResg),new BigDecimal(dctoResg)).toString();
         contrl.guardadetailTicketAmbus(guardB,guardB.length); 
                     //System.out.println("Resguardo j = "+j);
                     iB++;
@@ -8283,37 +8254,33 @@ if(selec > -1){
             }
             
             if(jCheckInscripPaysAmb.isSelected()){
+                
                 int eligio = jCBoxDuracInscripc.getSelectedIndex()+8;
                 String[] guardP = new String[8];
-
+                String dctoIns = jLabDstoInscripcion.getText(),
+                        tarifIns = jLabTarifaInscripcion.getText();
                     guardP[0] = arr[0];
                     guardP[1] = Integer.toString(j);
                     guardP[2] = Integer.toString(eligio);//rubrospago.id: Anual Semestral Trimestral 8,9,10
                     guardP[3] = "1";
                     guardP[4] = jLabTarifaInscripcion.getText();
-                    guardP[5] = jLabDstoInscripcion.getText();
+                    guardP[5] = func.percentage(new BigDecimal(tarifIns),new BigDecimal(dctoIns)).toString();
                     guardP[6] = datCtrl.getFecha(jDateChoInscripcion);
                     if(eligio == 8)
                         guardP[7] = datCtrl.getsumaFecha(jDateChoInscripcion,12);
       
                     if(eligio == 9)
                         guardP[7] = datCtrl.getsumaFecha(jDateChoInscripcion,6);
-
                     if(eligio == 10)
                         guardP[7] = datCtrl.getsumaFecha(jDateChoInscripcion,3);
-                    
                  contrl.guardadetailTicketAmbus(guardP,guardP.length);
-                 
                 //    System.out.println("Inscrip j = "+j);
                 contrl.f5idResgAmbu(idAmbu,guardP[7],"vigMembresia");
                     j++;
-
             }
            }while( j <= contadorGuard);
-
             String[][] mat = contrl.matrizgetTicketsDia(fech);
              jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
-
             String[] dat = rP.getTickPagoAmbu(arr[0]);
             rP.imprim80MMAmbus(arr[0], dat,false);   
              inhabilitaAmbus();
