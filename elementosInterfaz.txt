@@ -284,7 +284,7 @@ jLabObserva
 	txtBusGasto
 	jTabViewGastos
 	
-		//Dialog Alta de GAstos caja
+		//Dialog Alta de Gastos caja
 	jDialAltaGastos
 	jCombBTypeRubros
 	txtConcept
