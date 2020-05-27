@@ -3385,7 +3385,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
 
         jButton36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reloj.png"))); // NOI18N
 
-        txtTotalCarg.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        txtTotalCarg.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         txtTotalCarg.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTotalCarg.setText("0.00");
 
@@ -3437,8 +3437,8 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                                 .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanCargadoresLayout.createSequentialGroup()
-                                .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(178, 178, 178)
+                                .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(171, 171, 171)
                                 .addComponent(jLabel125, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtTotalCarg, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3465,24 +3465,26 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(txtBuscCargadores))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(255, 255, 255)
-                .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton37, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTotalCarg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel125, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanCargadoresLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(255, 255, 255)
+                        .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTotalCarg)
+                            .addComponent(jLabel125, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanCargadoresLayout.createSequentialGroup()
+                        .addGap(294, 294, 294)
+                        .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(210, Short.MAX_VALUE))
             .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanCargadoresLayout.createSequentialGroup()
-                    .addContainerGap(301, Short.MAX_VALUE)
+                    .addContainerGap(302, Short.MAX_VALUE)
                     .addComponent(jLayeredPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(257, Short.MAX_VALUE)))
+                    .addContainerGap(258, Short.MAX_VALUE)))
         );
 
         jPanambulantes.setBackground(new java.awt.Color(255, 255, 255));
@@ -6197,6 +6199,7 @@ txtResultAmbu.setText(aux);
 jLabImporteResguard.setText(func.getDifference(amTarif, func.percentage(amTarif, amountFour)).toString() );
     importResguard = jLabImporteResguard.getText();
 txtResultAmbu.setText( func.getSum(amountTwo,new BigDecimal(importResguard)).toString() );
+jCBoxResguardosOpc.setEnabled(true);
         }else{
                 if(jCheckResguardAmb.isSelected()){
                     jButMinusResgPaysAmb.setEnabled(true);
@@ -6212,6 +6215,7 @@ auxtot = func.getDifference( func.multiplicaAmount(amTarif, amountTres), func.mu
  jLabImporteResguard.setText(auxtot);
                        BigDecimal amountFive = new BigDecimal(auxtot);//cantidad recivida
 txtResultAmbu.setText(func.getSum(amountTwo, amountFive).toString());
+jCBoxResguardosOpc.setEnabled(true);
                 }else{
                     jButMinusResgPaysAmb.setEnabled(false);
                     jButMostSemsPaysAmb1.setEnabled(false);
@@ -6221,6 +6225,7 @@ txtResultAmbu.setText(func.getSum(amountTwo, amountFive).toString());
                        txtResultAmbu.setText(func.getDifference(amountTwo, amountTres).toString());
                        jLabContSemsResguard.setText("1");
                        jLabImporteResguard.setText("0.00");
+                       jCBoxResguardosOpc.setEnabled(false);
                 }
         }
  
@@ -6241,6 +6246,8 @@ txtResultAmbu.setText(func.getSum(amountTwo, amountFive).toString());
          jDateChoInscripcion.setDate(datCtrl.cargafecha());
            if(ultimaSem.equals("N/A")){
                     jLabel60.setText(datCtrl.getFecha(jDateChoInscripcion));
+                    jCBoxDuracInscripc.setEnabled(true);
+                    jDateChoInscripcion.setEnabled(true);
                     jDateChoInscripcion.setDate(datCtrl.cargafecha());
                     auxtot = func.percentage(amountOne,amountTwo ).toString();
                     jLabImporteInscripcion.setText(auxtot);
@@ -6253,11 +6260,13 @@ txtResultAmbu.setText(func.getSum(amountTwo, amountFive).toString());
                     jLabImporteInscripcion.setText(auxtot);
                     BigDecimal amountsix = new BigDecimal(auxtot);//cantidad recivida
                     txtResultAmbu.setText(func.getSum(amountFour, amountsix).toString());
+                    jDateChoInscripcion.setEnabled(true);
                    jDateChoInscripcion.setDate(datCtrl.StringDate(jLabVigenciaView.getText().replace('-', '/')));
                 }else{
                     jCBoxDuracInscripc.setEnabled(false);
-                      BigDecimal amountTres = new BigDecimal(jLabImporteInscripcion.getText());//cantidad recivida
-                       txtResultAmbu.setText(func.getDifference(amountFour, amountTres).toString());
+                    BigDecimal amountTres = new BigDecimal(jLabImporteInscripcion.getText());//cantidad recivida
+                    txtResultAmbu.setText(func.getDifference(amountFour, amountTres).toString());
+                    jDateChoInscripcion.setEnabled(false);
                  }
            }
     }//GEN-LAST:event_jCheckInscripPaysAmbActionPerformed
@@ -7821,13 +7830,11 @@ if(selec > -1){
             int numSemanaOrigin =0,
                     numSemanaResguard=0
                     ;
-         
-            
             idTicultimaSem = contrl.getpagosAmbulante(idAmb, "6");//ulimopago de #ambulante,Semana
             if(idTicultimaSem.isEmpty() || idTicultimaSem.equals("")  || idTicultimaSem == null){
                 jLabUltimaSemanaPay.setText("N/A");
             }else{
-            JOptionPane.showMessageDialog(null, "Regreso de ribropag=6: "+idTicultimaSem);
+        //    JOptionPane.showMessageDialog(null, "Regreso de ribropag=6: "+idTicultimaSem);
             String[] arr = contrl.regpagosambdet(Integer.parseInt(idTicultimaSem),6);//array para obtener cuotas a cobrar segun area seleccionada
             
             txtIdSemOcultoAmb.setText(arr[3]);//mostrar idSemana ultimo pago
@@ -8228,6 +8235,7 @@ if(selec > -1){
                 j++;
                 idS++;
                 }while(i <= numVM);
+          contrl.f5idResgAmbu(idAmbu, guard[3], "ultimaSem");
             }
             if(jCheckResguardAmb.isSelected()){
                  String dctoResg = jLabDstoResguard.getText(),
@@ -8323,7 +8331,7 @@ if(selec > -1){
                 coast = new BigDecimal(tarif);
                 dscto = new BigDecimal(dcto);
 aux = func.percentage(coast, dscto).toString();
-System.err.println("el Dcto final:"+aux);
+//System.err.println("el Dcto final:"+aux);
                 String[] guard = new String[6];
                 int idS = Integer.parseInt(txtOcultiDSemana.getText());
                 int numVM = Integer.parseInt(jLabcontSemanas.getText());//#Semanas a pagar

@@ -5,19 +5,47 @@
  */
 package Interfaz.internos.jpanels;
 
+import conexion.ConexionDBOriginal;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import renderTable.TModel;
+
 /**
  *
  * @author monit
  */
 public class cargadores extends javax.swing.JPanel {
+        ConexionDBOriginal con2 = new ConexionDBOriginal();
+        
+        String[] cabAreasPays = {"#ID", "Nombre", "Direccion", "Telefono","Diablito","Ultima Sem. Pag","Sem. Adeudo","Venc. Inscrip"};
 
     /**
      * Creates new form cargadores
      */
     public cargadores() {
         initComponents();
+        
+        cargaDataCargadores();
+        
+        jTable1.getParent().addComponentListener(new ComponentAdapter() {
+    @Override
+    public void componentResized(final ComponentEvent e) {
+        if (jTable1.getPreferredSize().width < jTable1.getParent().getWidth()) {
+           // System.out.println("Resize"+jTable1.getParent().getWidth());
+            jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_ALL_COLUMNS);
+        } else {
+            jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
+        }
     }
-
+});
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -181,7 +209,68 @@ public class cargadores extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
+ protected void cargaDataCargadores(){
+            String[][] mat = matrizgetAmbsAll();
+             jTable1.setModel(new TModel(mat, cabAreasPays));        
+    }
+ 
+     //regresa matrizde vista tickets del dia
+        public String[][] matrizgetAmbsAll(){
+        Connection cn = con2.conexion();
+          String sql ="",aux;
+              sql = "SELECT cargadores.id,cargadores.nombre,cargadores.direccion,cargadores.telefono,if(cargadores.diablo = 0,'Propio','Rentado') as diab,\n" +
+                "(SELECT CONCAT(semanas.anio, \" - \", semanas.semana) FROM semanas where cargadores.ultimaSem = semanas.id) AS ultSem,\n" +
+                "(cast( (SELECT semanas.id FROM semanas WHERE curdate() BETWEEN finicial AND ffinal) as signed ) - cast(cargadores.ultimaSem as SIGNED) ) AS adeud,\n" +
+                "cargadores.vigMembresia\n" +
+                "FROM cargadores\n" +
+                "ORDER BY cargadores.id;";      
+             int i =0,cantFilas=0, cont=1,cantColumnas=0;
+             String[][] mat=null, mat2=null;
+              int[] arrIdPedido = null;//int para usar hashMap
+            Statement st = null;
+            ResultSet rs = null;            
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                cantColumnas = rs.getMetaData().getColumnCount();
+               if(rs.last()){//Nos posicionamos al final
+                    cantFilas = rs.getRow();//sacamos la cantidad de filas/registros
+                    rs.beforeFirst();//nos posicionamos antes del inicio (como viene por defecto)
+                }
+               mat = new String[cantFilas][cantColumnas];
+               //aqui iria crear matriz
+                while(rs.next())
+                {//es necesario el for para llenar dinamicamente la lista, ya que varia el numero de columnas de las tablas
+                      for (int x=1;x<= rs.getMetaData().getColumnCount();x++) {
+                           // System.out.print("| "+rs.getString(x)+" |");
+                             mat[i][x-1]=rs.getString(x);
+                      //System.out.print(x+" -> "+rs.getString(x));                   
+                      }//for
+                       i++;
+                }//whilE
+            } catch (SQLException ex) {
+                Logger.getLogger(cargadores.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{               
+//             System.out.println("cierra conexion a la base de datos");    
+             try {        
+                 if(st != null) st.close();                
+                 if(cn !=null) cn.close();
+             } catch (SQLException ex) {
+                 JOptionPane.showMessageDialog(null,ex.getMessage()); 
+             }
+         }//finally        
+           if (cantFilas == 0){
+                mat=null;
+                mat = new String[1][cantColumnas];
+                
+                for (int j = 0; j < mat[0].length; j++) {
+                     mat[0][j]="NO DATA";
+                }
+           }
+return mat;            
+}//@endmatrizgetAmbuSemana
+        
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

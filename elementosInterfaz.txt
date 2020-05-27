@@ -306,33 +306,6 @@ mostrarGastosDia
 	
 @jPanSociosView
 
-        String ini = txtSeminiAmb.getText(),
-                fin = txtSemFinAmb.getText(),
-                multi1 ="",
-                multi2 = "",
-                resAmbu="",
-                tot="";
-        String[] arr = null;
-        String aux="";
-        BigDecimal auxBig;
-        int numeradorSem=Integer.parseInt(jLabContadorSemanas.getText());
-           //amountThree.compareTo(func.getSum(amountOne, amountTwo)) >= 0
-                    idSemambu++;
-                    arr = contrl.regSemanas(idSemambu);
-                    aux = datCtrl.getWeekStartDate(arr[3]) + " - "+ datCtrl.getWeekStartDate(arr[4]);
-                   txtSemFinAmb.setText(arr[2]);//en #semana 1-52
-                   jLabAumentaSemanas.setText(aux);       
-                   jLabContadorSemanas.setText(Integer.toString(numeradorSem+1));
-          /*obtenemos el producto del numero de tickets por semana que pagara*/
-                   multi1 = jLabDstoSemanas.getText();
-                   multi2 = jLabTarifaSemanas.getText();
-                   resAmbu = jLabImporteSemanas.getText();
-                   tot = txtResultAmbu.getText();
-                   BigDecimal amountOne = new BigDecimal(multi1);//monto a cobrar
-                   BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
-                   BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
-                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida 
-//auxiliar para no tener tan anidado el llamado a funciones Bigdecimal por percentage                   
-                  auxBig = func.getDifference(amountTwo, func.percentage(amountTwo, amountOne));
-jLabImporteSemanas.setText(func.getSum(amountAmbusMenos, auxBig).toString());//func.getSum(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString() 
-txtResultAmbu.setText( func.getSum(totalAll,auxBig ).toString() );          
+    contrl.f5postGuardCarg(idAmbu,Integer.toString(idS),"ultimaSem");
+    contrl.f5postGuardCarg(idAmbu,guardP[7],"vigMembresia");
+          

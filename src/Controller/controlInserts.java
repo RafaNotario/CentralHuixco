@@ -595,6 +595,8 @@ public void guardadetailTicketAmbus(String[] param, int numParam){
             }//finally catch
 } //@endguardadetailTicketAmbus
 
+
+       
 //metodo para actualizar idResg de ambullantes
        public void f5idResgAmbu(String id, String val, String opcColumn){
              Connection cn = con2.conexion();
@@ -795,7 +797,7 @@ public void guardadetailOthsPays(List<String> param){
                 pps = cn.prepareStatement(SQL);
                 pps.setString(1, val);
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "ultima semo vig actualizado correctamente."+id);
+                JOptionPane.showMessageDialog(null, "ultima sem vig actualizado correctamente."+id);
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");

@@ -61,8 +61,8 @@ public class ambulantes extends javax.swing.JPanel {
         Connection cn = con2.conexion();
           String sql ="",aux;
               sql = "SELECT ambulantes.id,ambulantes.nombre,ambulantes.direccion,ambulantes.telefono,giros.giro,tarifas.descripcion,\n" +
-                "(SELECT CONCAT(semanas.anio, \" - \", semanas.semana) FROM semanas where ambulantes.ultimaSem = semanas.id) AS vigenc,\n" +
-                "((SELECT semanas.id FROM semanas WHERE  CURDATE() BETWEEN finicial AND ffinal) - ambulantes.ultimaSem) AS  adeudos,\n" +
+                "(SELECT CONCAT(semanas.anio, \" - \", semanas.semana) FROM semanas where ambulantes.ultimaSem = semanas.id) AS ultSem,\n" +
+                "( cast( (SELECT semanas.id FROM semanas WHERE curdate() BETWEEN finicial AND ffinal) as signed ) - cast(ambulantes.ultimaSem as SIGNED) ) AS adeud,\n" +
                 "ambulantes.vigMembresia\n" +
                 "FROM giros\n" +
                 "INNER JOIN ambulantes\n" +
