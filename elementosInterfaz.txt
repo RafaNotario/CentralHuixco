@@ -292,7 +292,19 @@ jLabObserva
 	txtObservs
 	txtMontoGasto
 
-mostrarGastosDia
+	mostrarGastosDia
+	
+	
+---/*/*/*/	Busqueda de all tickets por dia
+	jCBBusqTicketall
+	txtBusqTickAll
+	jDatChoFechBusqtick
+	
+
+
+
+
+
 
 //@endPANELES DE internoCaja.java
 	
@@ -306,6 +318,5 @@ mostrarGastosDia
 	
 @jPanSociosView
 
-    contrl.f5postGuardCarg(idAmbu,Integer.toString(idS),"ultimaSem");
-    contrl.f5postGuardCarg(idAmbu,guardP[7],"vigMembresia");
+
           

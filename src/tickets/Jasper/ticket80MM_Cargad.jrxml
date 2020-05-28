@@ -9,6 +9,7 @@
 	<parameter name="paramTotal" class="java.lang.String"/>
 	<parameter name="paramEfectiv" class="java.lang.String"/>
 	<parameter name="paramCambio" class="java.lang.String"/>
+	<parameter name="fecHorTicCarg" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT  rubrospago.descripcion,semanas.semana,
 date_format(semanas.finicial, '%d - %b ') AS fini, date_format(semanas.ffinal, '%d - %b ') AS ffin, if(semanas.semana = 53,date_format(semanas.finicial, '%Y '),
@@ -82,13 +83,6 @@ ON pagos_cargdet.idSemana = semanas.id;]]>
 				</textElement>
 				<text><![CDATA[Atendio:]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy HH.mm.ss">
-				<reportElement x="56" y="12" width="145" height="12" uuid="2837cd3f-3d46-4e7e-a4b4-fb7195dc0d8e"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement x="10" y="48" width="195" height="1" uuid="5982a3a7-ceb5-439f-8f08-f06aa0da8003"/>
 				<graphicElement>
@@ -115,6 +109,13 @@ ON pagos_cargdet.idSemana = semanas.id;]]>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{nombAmbu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="12" width="135" height="12" uuid="d4156d06-561d-421b-a75f-31d2f6ecc50f"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecHorTicCarg}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

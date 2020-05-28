@@ -9,6 +9,7 @@
 	<parameter name="paramTotal" class="java.lang.String"/>
 	<parameter name="paramEfectiv" class="java.lang.String"/>
 	<parameter name="paramCambio" class="java.lang.String"/>
+	<parameter name="fechHorArea" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT  rubrospago.descripcion,semanas.semana,
 date_format(semanas.finicial, '%d - %b ') AS fini, date_format(semanas.ffinal, '%d - %b ') AS ffin, if(semanas.semana = 53,date_format(semanas.finicial, '%Y '), date_format(semanas.ffinal, '%Y ') ) AS anio
@@ -17,13 +18,7 @@ FROM pagos_areasdet
 INNER JOIN rubrospago
 ON pagos_areasdet.idRubroPago = rubrospago.id AND pagos_areasdet.idTicket = $P{numTicket}
 INNER JOIN semanas
-ON pagos_areasdet.idSemana = semanas.id;
-
-
-
-
-
-]]>
+ON pagos_areasdet.idSemana = semanas.id;]]>
 	</queryString>
 	<field name="descripcion" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -88,13 +83,6 @@ ON pagos_areasdet.idSemana = semanas.id;
 				</textElement>
 				<text><![CDATA[Atendio:]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy HH.mm.ss">
-				<reportElement x="47" y="12" width="145" height="12" uuid="2837cd3f-3d46-4e7e-a4b4-fb7195dc0d8e"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="47" y="23" width="100" height="12" uuid="cfe293f1-b0d4-481a-a939-955f5fcec369"/>
 				<textElement>
@@ -121,6 +109,13 @@ ON pagos_areasdet.idSemana = semanas.id;
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{numTicket}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="47" y="12" width="154" height="12" uuid="96ac0ff5-39aa-40ec-a379-3020236d3404"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechHorArea}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

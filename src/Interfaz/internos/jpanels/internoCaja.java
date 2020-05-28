@@ -77,7 +77,7 @@ String[][] matResgVehiculo = null;//Matriz para cargar las tarifas de resguardo 
 public internoCaja(String usuarioN) {
         initComponents();
         this.User = usuarioN;
-        JOptionPane.showMessageDialog(null,"recibi user: "+User);
+//        JOptionPane.showMessageDialog(null,"recibi user: "+User);
         
      jButton2.doClick();
      jPanTableBusqView.setVisible(false);
@@ -96,10 +96,13 @@ public internoCaja(String usuarioN) {
 
 /*Ambulantes*/    
     inicaComboAmbu();
+//vista general para corte de caja
+jCBBusqTicketall.setSelectedIndex(0);    
     
 /*Gstos Caja*/
 llenacombogetcuentaGasto();
 mostrarGastosDia(datCtrl.setDateActual());
+
 
 
 jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
@@ -230,14 +233,16 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanInterncoborstivk = new javax.swing.JPanel();
         jLabel47 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField10 = new javax.swing.JTextField();
+        jCBBusqTicketall = new javax.swing.JComboBox<>();
         jButton16 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabviewPays = new javax.swing.JTable();
         jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
         jButton19 = new javax.swing.JButton();
+        jLayeredPane5 = new javax.swing.JLayeredPane();
+        txtBusqTickAll = new javax.swing.JTextField();
+        jDatChoFechBusqtick = new com.toedter.calendar.JDateChooser();
         jPanInternGastos = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
         jTabViewGastos = new javax.swing.JTable();
@@ -1725,12 +1730,20 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jLabel47.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel47.setText("Buscar");
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jTextField10.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jCBBusqTicketall.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jCBBusqTicketall.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ticket", "Fecha" }));
+        jCBBusqTicketall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBBusqTicketallActionPerformed(evt);
+            }
+        });
 
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/goma-de-borrar.png"))); // NOI18N
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         jTabviewPays.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTabviewPays.setModel(new javax.swing.table.DefaultTableModel(
@@ -1782,6 +1795,37 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
             }
         });
 
+        txtBusqTickAll.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+
+        jDatChoFechBusqtick.setDateFormatString("dd/MM/yyyy");
+
+        jLayeredPane5.setLayer(txtBusqTickAll, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane5.setLayer(jDatChoFechBusqtick, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane5Layout = new javax.swing.GroupLayout(jLayeredPane5);
+        jLayeredPane5.setLayout(jLayeredPane5Layout);
+        jLayeredPane5Layout.setHorizontalGroup(
+            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtBusqTickAll, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane5Layout.createSequentialGroup()
+                    .addComponent(jDatChoFechBusqtick, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jLayeredPane5Layout.setVerticalGroup(
+            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane5Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(txtBusqTickAll, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane5Layout.createSequentialGroup()
+                    .addComponent(jDatChoFechBusqtick, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout jPanInterncoborstivkLayout = new javax.swing.GroupLayout(jPanInterncoborstivk);
         jPanInterncoborstivk.setLayout(jPanInterncoborstivkLayout);
         jPanInterncoborstivkLayout.setHorizontalGroup(
@@ -1790,35 +1834,37 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addGap(0, 0, 0)
                 .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanInterncoborstivkLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanInterncoborstivkLayout.createSequentialGroup()
                         .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanInterncoborstivkLayout.createSequentialGroup()
                                 .addComponent(jLabel47)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCBBusqTicketall, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanInterncoborstivkLayout.createSequentialGroup()
                                 .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(14, 14, 14)
                                 .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(673, 673, 673))))
+                        .addGap(673, 673, 673))
+                    .addGroup(jPanInterncoborstivkLayout.createSequentialGroup()
+                        .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanInterncoborstivkLayout.setVerticalGroup(
             jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanInterncoborstivkLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCBBusqTicketall, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -7477,6 +7523,29 @@ if(selec > -1){
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton38ActionPerformed
 
+    private void jCBBusqTicketallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBBusqTicketallActionPerformed
+        int opc = jCBBusqTicketall.getSelectedIndex();
+        txtBusqTickAll.setText("");
+        jDatChoFechBusqtick.setDate(datCtrl.cargafecha());
+        if(opc == 0){
+            txtBusqTickAll.setVisible(true);
+            jDatChoFechBusqtick.setVisible(false);
+        }else{
+            txtBusqTickAll.setVisible(false);
+            jDatChoFechBusqtick.setVisible(true);
+        }
+    }//GEN-LAST:event_jCBBusqTicketallActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        int opc = jCBBusqTicketall.getSelectedIndex();
+
+        if(opc == 1){
+         String fechin = datCtrl.getFecha(jDatChoFechBusqtick);
+            String[][] mat = contrl.matrizgetTicketsDia(fechin);
+         jTabviewPays.setModel(new TModel(mat, cabAreasPays));
+        }
+    }//GEN-LAST:event_jButton16ActionPerformed
+
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
             Connection cn = con2.conexion();
@@ -8847,6 +8916,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox<String> jCBBusqTicketall;
     private javax.swing.JComboBox<String> jCBRubroProd;
     private javax.swing.JComboBox<String> jCBoxDuracInscripc;
     private javax.swing.JComboBox<String> jCBoxFilterBusq;
@@ -8865,7 +8935,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JComboBox<String> jComBInscripc;
     private javax.swing.JComboBox<String> jCombBOpcBusqGastos;
     private javax.swing.JComboBox<String> jCombBTypeRubros;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private com.toedter.calendar.JDateChooser jDatChoFechBusqtick;
     private com.toedter.calendar.JDateChooser jDatChoIncripcion;
     private com.toedter.calendar.JDateChooser jDateChoInscripcion;
     private com.toedter.calendar.JDateChooser jDateChooser6;
@@ -9083,6 +9153,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JLayeredPane jLayeredPane4;
+    private javax.swing.JLayeredPane jLayeredPane5;
     private javax.swing.JLayeredPane jLayeredPanePerson;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanAreascobros;
@@ -9172,7 +9243,6 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTabviewPays;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JLabel jlabIdCargador;
     private javax.swing.JLabel jlabImportBasura;
     private javax.swing.JLabel jlabImportMantenim;
@@ -9184,6 +9254,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JTextField txtBuscCargadores;
     private javax.swing.JTextField txtBusqConcept;
     private javax.swing.JTextField txtBusqOtros;
+    private javax.swing.JTextField txtBusqTickAll;
     private javax.swing.JTextField txtCambio;
     private javax.swing.JTextField txtCambioInfrac;
     private javax.swing.JTextField txtCancelTick;
