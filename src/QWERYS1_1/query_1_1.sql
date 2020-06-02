@@ -2,6 +2,10 @@
  * Author:  Antonio R. Notario Rodriguez
  * Created: 15/04/2020
  */
+-- Exportar base de datos
+-- 1. Correr CDM como administrados y moverse a c:\Program Files\MySQL\MySQL Server 8.0\bin>
+-- 2. Correr $- mysqldump -u root -p --routines=TRUE central > DBCentralFuncional.sql
+-- 3. respaldar y verificar que se realize el respaldo con las relaciones creadas $- mysql -u root -p centralRespFunc < DBCentralFuncional.sql
 
 /*Deshabilitar revision de FK constrain*/        
 SET FOREIGN_KEY_CHECKS=0;
@@ -12,39 +16,40 @@ mysql -u usuario -p -h 192.168.x.x -P 3307   //-p <- Verificar
 
 /*Relacion AREAS-SOCIOS PENDIENTE error = AMBULANTES - SEMANAS YA*/
 /*SOLUCION = Verificar misma longitud y tipo de datos areas.idPresi Atributos = "" socios.is Atributos = UNSIGNED*/
-ALTER TABLE centraldb.areas
+ALTER TABLE central.areas
 ADD CONSTRAINT FK_this_ FOREIGN KEY (idPresi)
-REFERENCES centraldb.socios (id)
+REFERENCES central.socios (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*Relacion AMBULANTES - SEMANAS PENDIENTE marca error YA*/
-ALTER TABLE `centraldb`.`ambulantes`
+-- deshabilitar revisiion de claves foraneas
+ALTER TABLE central.ambulantes
 ADD CONSTRAINT FK_amb_semanas FOREIGN KEY (ultimaSem)
-REFERENCES centraldb.semanas (id)
+REFERENCES central.semanas (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*Relacion AREAS-PAGOS YA*/
 ALTER TABLE central.pagos_areas
 ADD CONSTRAINT FK_pag_areas FOREIGN KEY (idArea)
 REFERENCES central.areas (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*Relacion PAGOS_AREASDET - RUBROSPAGO ya*/
 ALTER TABLE central.pagos_areasdet
 ADD CONSTRAINT FK_pag_areas_rubrosPag FOREIGN KEY (idRubroPago)
 REFERENCES central.rubrospago (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*Relacion PAGOS_AREASDET - IDSEMANA YA*/
 ALTER TABLE central.pagos_areasdet
 ADD CONSTRAINT FK_pag_areasdet_Semana FOREIGN KEY (idSemana)
 REFERENCES central.semanas (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*Relacion PAGOS_AREASDET - TICKER PK compuesta va a serFK de PK YA */
 /*oBS: CAMBIAR TIPO DE DATO en central.pagos_areasdet.idTicket a mediumint(5) ya que central.pagos_areas.id es smallint */
@@ -52,7 +57,7 @@ ALTER TABLE central.pagos_areasdet
 ADD CONSTRAINT FK_pag_areasdet_Ticket FOREIGN KEY (idTicket)
 REFERENCES central.pagos_areas (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*Relacion PAGOSAREAS - TURNO*/
 /*oBS: CAMBIAR TIPO DE DATO en central.pagos_areas.idTurno a mediumint(5) ya que central.pagos_turno.id es mediumint(5)C6 */
@@ -60,43 +65,43 @@ ALTER TABLE central.pagos_areas
 ADD CONSTRAINT FK_pag_areas_Turno FOREIGN KEY (idTurno)
 REFERENCES central.turnos (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*Relacion TURNOS - USUARIOS YA*/
 ALTER TABLE central.turnos
-ADD CONSTRAINT FK_turnos-usuario FOREIGN KEY (idusuario)
+ADD CONSTRAINT FK_turnos_usuario FOREIGN KEY (idusuario)
 REFERENCES central.usuarios (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /***---------*********************************** AMBULANTES*/
 /*  Relacion ambulantes-giro YA*/
-ALTER TABLE centraldb.ambulantes
+ALTER TABLE central.ambulantes
 ADD CONSTRAINT FK_ambulantes_giro FOREIGN KEY (idGiro)
-REFERENCES centraldb.giros (id)
+REFERENCES central.giros (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*  Relacion ambulantes-tarifas     YA*/
-ALTER TABLE centraldb.ambulantes
+ALTER TABLE central.ambulantes
 ADD CONSTRAINT FK_ambulantes_tarifa FOREIGN KEY (idTarifa)
-REFERENCES centraldb.tarifas (id)
+REFERENCES central.tarifas (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*  Relacion AMBULANTES-PAGOS_AMB YA    */
 ALTER TABLE central.pagos_amb
 ADD CONSTRAINT FK_pag_ambs FOREIGN KEY (idAmb)
 REFERENCES central.ambulantes (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*  Relacion PAGOS_AMB-PAGOS-AMBDET YA    */
 ALTER TABLE central.pagos_ambdet
 ADD CONSTRAINT FK_pagambs_pagsamb FOREIGN KEY (idTicket)
 REFERENCES central.pagos_amb (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*  Relacion PAGOS_AMB-PAGOS-TURNOS YA    */
 /*oBS: CAMBIAR TIPO DE DATO en central.pagos_amb.idTurno a mediumint(5) ya que central.pagos_turno.id es mediumint(5)C6 */
@@ -104,21 +109,22 @@ ALTER TABLE central.pagos_amb
 ADD CONSTRAINT FK_pagamb_turno FOREIGN KEY (idTurno)
 REFERENCES central.turnos (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*  Relacion PAGOS_AMBDET-SEMANAS  YA    */
+/*oBS: CAMBIAR TIPO DE DATO en central.pagos_ambdet.idSemana a SMALLINT ya que central.semanas.id es SMALLINT(6)C6 */
 ALTER TABLE central.pagos_ambdet
 ADD CONSTRAINT FK_pagambs_sems FOREIGN KEY (idSemana)
 REFERENCES central.semanas (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*  Relacion PAGOS_AMBDET- RUBROSPAGO YA    */
 ALTER TABLE central.pagos_ambdet
 ADD CONSTRAINT FK_pagambs_rubros FOREIGN KEY (idRubropago)
 REFERENCES central.rubrospago (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
                                                                         /*----      RELACIONES PARA CARGADORES  */
 /*RELACION CARGADORES-TARIFAS  YA*/
@@ -126,7 +132,7 @@ ALTER TABLE central.cargadores
 ADD CONSTRAINT FK_cargador_tarifa FOREIGN KEY (idTarifa)
 REFERENCES central.tarifas (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*RELACION PAGOS_CARG-TURNOS YA */
 /*oBS: CAMBIAR TIPO DE DATO en central.pagos_carg.idTurno a mediumint(5) ya que central.turnos.id es mediumint(5)*/
@@ -134,28 +140,28 @@ ALTER TABLE central.pagos_carg
 ADD CONSTRAINT FK_pagoscarg_turnos FOREIGN KEY (idTurno)
 REFERENCES central.turnos (id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*RELACION PAGOS_CARG-CARGADORES  ya*/
 ALTER TABLE central.pagos_carg
 ADD CONSTRAINT FK_pagoscarg_cargadores FOREIGN KEY (idcarg)
 REFERENCES central.cargadores(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*RELACION PAGOS_CARGDET- PAGOS_CARG yes*/
 ALTER TABLE central.pagos_cargdet
 ADD CONSTRAINT FK_pagcargdet_tick FOREIGN KEY (idTicket)
 REFERENCES central.pagos_carg(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*RELACION PAGOS_CARGDET- RUBROSPAGO yes*/
 ALTER TABLE central.pagos_cargdet
 ADD CONSTRAINT FK_pagcargdet_rubros FOREIGN KEY (idRubropago)
 REFERENCES central.rubrospago(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*RELACION PAGOS_CARGDET- SEMANAS yes*/
 /*oBS: CAMBIAR TIPO DE DATO en central.pagos_cargdet.idSemana a samllint(3) ya que central.semanas.id es smallint(6) tenia tinyint(3)*/
@@ -163,7 +169,7 @@ ALTER TABLE central.pagos_cargdet
 ADD CONSTRAINT FK_pagcargdet_semanas FOREIGN KEY (idSemana)
 REFERENCES central.semanas(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*RELACION PAGOS_CARGRENTA-TURNOS yes*/
 /*oBS: CAMBIAR TIPO DE DATO en central.pagos_cargrenta.idTurno a mediumint(5) ya que central.turnos.id es MEDIUMint(5) tenia tinyint(3)*/
@@ -171,7 +177,7 @@ ALTER TABLE central.pagos_cargrenta
 ADD CONSTRAINT FK_pagcargrenta_turno FOREIGN KEY (idTurno)
 REFERENCES central.turnos(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*RELACION PAGOS_CARGRENTA-CARGADORES YA*/
 /*oBS: CAMBIAR TIPO DE DATO en central.pagos_cargrenta.idCarg a smallint(5) & Unsigned ya que central.cargadores.id es smallint(5),Unsigned tenia tinyint(3)*/
@@ -179,14 +185,14 @@ ALTER TABLE central.pagos_cargrenta
 ADD CONSTRAINT FK_pagcargrenTc FOREIGN KEY (idCarg)
 REFERENCES central.cargadores(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*RELACION PAGOS_CARGRENTA-RUBROSPAGO ya*/
 ALTER TABLE central.pagos_cargrenta
 ADD CONSTRAINT FK_pagcargren_rubroP FOREIGN KEY (idRubropago)
 REFERENCES central.rubrospago(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*----------++++++++++********* RELACIONES PARA PAGO DE INFRACCIONES */
 /*  RELACION NOMINA-NOMINA_DEPTO    YA*/
@@ -194,14 +200,14 @@ ALTER TABLE central.nomina
 ADD CONSTRAINT FK_nomin_dpto FOREIGN KEY (idDepto)
 REFERENCES central.nomina_depto(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*  RELACION PAGOS_INFRAC - NOMINA.     YA*/
 ALTER TABLE central.pagos_infrac
 ADD CONSTRAINT FK_payInf_nomin FOREIGN KEY (idagente)
 REFERENCES central.nomina(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 /*@end----------++++++++++********* RELACIONES PARA PAGO DE INFRACCIONES */
 
 /* --- +++ ----    RELACIONES PARA OTROS COBROS ----------------------- */
@@ -210,7 +216,7 @@ ALTER TABLE central.otros_catalogo
 ADD CONSTRAINT FK_otsCat_otsRub FOREIGN KEY (idrubro)
 REFERENCES central.otros_rubros(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*  RELACION OTROS_VENTA - TURNOS.  */
 /*oBS: CAMBIAR TIPO DE DATO en central.otros_venta.idTurno a mediumint(5) ya que central.turnos.id es mediumint(5)*/
@@ -218,21 +224,21 @@ ALTER TABLE central.otros_venta
 ADD CONSTRAINT FK_otsVent_turnos FOREIGN KEY (idTurno)
 REFERENCES central.turnos(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*  RELACION OTROS_VENTADET - OTROS_CATALOGO      YA  */
 ALTER TABLE central.otros_ventadet
 ADD CONSTRAINT FK_otsVentDet_otsCat FOREIGN KEY (idProd)
 REFERENCES central.otros_catalogo(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*  RELACION OTROS_VENTADET - OTROS_CATALOGO      YA  */
 ALTER TABLE central.otros_ventadet
 ADD CONSTRAINT FK_otsVentDet_otsVent FOREIGN KEY (idVenta)
 REFERENCES central.otros_venta(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /****--------- RELACION DE OTROS GASTOS GASTOS CAJA*/
 /*  RELACION GASTOS_CAJA - TURNOS     YA  */
@@ -241,7 +247,7 @@ ALTER TABLE central.gastos_caja
 ADD CONSTRAINT FK_gastCaj_turns FOREIGN KEY (idTurno)
 REFERENCES central.turnos(id)
 ON DELETE CASCADE
-ON UPDATE CASCADE;
+ON UPDATE CASCADE;*
 
 /*  RELACION GASTOS_CAJA - RUBROS_CAJA     YA  */
 ALTER TABLE central.gastos_caja
@@ -443,6 +449,9 @@ INNER JOIN cargadores
 ON cargadores.id = pagos_carg.idcarg AND pagos_carg.fecha = curdate()
 ORDER BY pagos_carg.id DESC
 
+
+
+
 SELECT otros_venta.id,DATE_FORMAT(otros_venta.hora, "%H : %i") AS hor,
 IF(otros_venta.tipoPersona = 0,'Varios Amb.',IF(otros_venta.tipoPersona = 1,'Varios Carg.', IF(otros_venta.tipoPersona = 2,'Varios Cte.','NADON') ) ) AS quees,
 IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,
@@ -456,6 +465,17 @@ FROM otros_ventadet
 INNER JOIN otros_catalogo
 ON otros_ventadet.idProd = otros_catalogo.id AND otros_ventadet.idVenta = 593;
 
+/*qwery para obtener pagos Renta Cargador y mostrar ticket*/
+SELECT  rubrospago.descripcion,CONCAT(date_format(pagos_cargrenta.fecha, '%d - %M - %Y'), '  ', date_format(pagos_cargrenta.hora, '%H : %i') ) AS datf,
+    usuarios.usuario,cargadores.nombre, date_format(pagos_cargrenta.fecharenta, '%d - %m - %Y') AS ffin, pagos_cargrenta.numdiablo,pagos_cargrenta.importe
+FROM rubrospago
+INNER JOIN pagos_cargrenta
+ON rubrospago.id = pagos_cargrenta.idRubropago AND pagos_cargrenta.id = 7563
+INNER JOIN cargadores
+ON pagos_cargrenta.idCarg = cargadores.id
+INNER JOIN turnos on pagos_cargrenta.idTurno =  turnos.id
+inner join usuarios on turnos.idusuario = usuarios.id;
+
 
 /*mostrar gastos del dia*/
 SELECT gastos_caja.id,gastos_caja.hora,rubroscaja.concepto,gastos_caja.monto
@@ -463,3 +483,63 @@ FROM central.gastos_caja
 INNER JOIN central.rubroscaja
 ON gastos_caja.idRubrocaja = rubroscaja.id AND gastos_caja.fecha = '2020-05-23';
 
+/*qwery para obtener pagos renta cargadores diablito del dia*/
+SELECT  pagos_cargrenta.id,DATE_FORMAT(pagos_cargrenta.hora, "%H : %i") AS hor,'Pago Renta Carg',cargadores.nombre,pagos_cargrenta.importe
+FROM pagos_cargrenta
+INNER JOIN cargadores
+ON pagos_cargrenta.idCarg = cargadores.id AND pagos_cargrenta.fecha = CURDATE() ORDER BY pagos_cargrenta.id DESC;
+
+/*	QWERY PARA OBTENER CORTE DE CAJA */
+-- corte de pago_areas
+(SELECT count(distinct(pagos_areas.id)) AS numAreas,rubrospago.descripcion,sum(pagos_areasdet.importe) AS totAreas
+FROM pagos_areas
+INNER JOIN pagos_areasdet
+ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areas.fecha = '2020-03-25'
+INNER JOIN rubrospago
+ON pagos_areasdet.idRubroPago = rubrospago.id
+GROUP BY pagos_areasdet.idRubroPago)
+UNION
+-- corte de pago_amb
+(SELECT count(distinct(pagos_amb.id)) AS numAmbs,rubrospago.descripcion,sum(pagos_ambdet.importe - pagos_ambdet.descuento) AS totAmbs
+FROM pagos_amb
+INNER JOIN pagos_ambdet
+ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_amb.fecha = '2020-03-25'
+INNER JOIN rubrospago
+ON pagos_ambdet.idRubropago = rubrospago.id
+GROUP BY pagos_ambdet.idRubropago)
+UNION
+-- corte de pago_carg
+(SELECT count(distinct(pagos_carg.id)) AS numCarg,rubrospago.descripcion,sum(pagos_cargdet.importe - pagos_cargdet.descuento) AS totCarg
+FROM pagos_carg
+INNER JOIN pagos_cargdet
+ON pagos_carg.id = pagos_cargdet.idTicket AND pagos_carg.fecha = '2020-03-25'
+INNER JOIN rubrospago
+ON pagos_cargdet.idRubropago = rubrospago.id
+GROUP BY pagos_cargdet.idRubropago)
+;
+-- CORTE DE PAGOS RENTA CARGADOR
+SELECT count(pagos_cargrenta.id) AS numCargR, rubrospago.descripcion,sum(pagos_cargrenta.importe) AS totCargR
+FROM pagos_cargrenta
+INNER JOIN rubrospago
+ON pagos_cargrenta.idRubropago = rubrospago.id AND pagos_cargrenta.fecha = '2020-03-25';
+
+-- CORTE DE PAGOS INFRACCION
+SELECT count(pagos_infrac.folio) AS numInfrac, 'Infracciones',IF(pagos_infrac.descuento IS NULL, sum(pagos_infrac.monto), sum(pagos_infrac.monto - pagos_infrac.descuento ))  AS totInfrac
+FROM pagos_infrac
+WHERE pagos_infrac.fechapag = '2020-03-25';
+
+-- corte de varios venta
+SELECT otros_rubros.nombre,sum(otros_venta.efectivo) AS totCarg, count(*)
+FROM otros_venta
+INNER JOIN otros_ventadet
+ON otros_venta.id = otros_ventadet.idVenta AND otros_venta.fecha = '2020-03-25'
+INNER JOIN otros_catalogo
+ON otros_ventadet.idProd = otros_catalogo.id
+INNER JOIN otros_rubros
+ON otros_catalogo.idrubro = otros_rubros.id
+GROUP BY otros_rubros.id;
+
+-- QWERY PARA MOSTRAR GASTOS DEL DIA CORTE CAJA 
+SELECT count(*),gastos_caja.concepto,gastos_caja.monto
+FROM gastos_caja
+WHERE fecha = '2020-03-25';

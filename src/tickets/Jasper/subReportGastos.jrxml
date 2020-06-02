@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="216" pageHeight="216" whenNoDataType="AllSectionsNoDetail" columnWidth="216" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="sub_param_fech" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 1,gastos_caja.concepto,gastos_caja.monto
+FROM gastos_caja
+WHERE fecha = '2020-03-25']]>
+	</queryString>
+	<field name="1" class="java.lang.Long"/>
+	<field name="concepto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Se entiende que siempre son en efectivo]]></fieldDescription>
+	</field>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="59" y="5" width="100" height="13" uuid="c06b23ee-e4a2-4b61-a582-f2740a86c5a3"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTOS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19">
+			<textField>
+				<reportElement x="0" y="2" width="18" height="13" uuid="b5f83330-8aa3-4d38-83e3-b6dc129c6996"/>
+				<textFieldExpression><![CDATA[$F{1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="18" y="2" width="155" height="13" uuid="03b5c084-1554-43c9-8ee7-775d9bc591f9"/>
+				<textFieldExpression><![CDATA[$F{concepto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="173" y="2" width="40" height="13" uuid="5728c127-be7c-4193-af1f-53460e80a311"/>
+				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

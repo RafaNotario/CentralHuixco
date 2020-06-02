@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="226" whenNoDataType="AllSectionsNoDetail" columnWidth="216" leftMargin="5" rightMargin="5" topMargin="0" bottomMargin="10" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechCorte" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\central\\src\\tickets\\Jasper\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[(SELECT count(distinct(pagos_areas.id)) AS numera,CONCAT(rubrospago.descripcion,'(Area)')AS descrip,sum(pagos_areasdet.importe) AS totl
+FROM pagos_areas
+INNER JOIN pagos_areasdet
+ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areas.fecha = $P{fechCorte}
+INNER JOIN rubrospago
+ON pagos_areasdet.idRubroPago = rubrospago.id
+GROUP BY pagos_areasdet.idRubroPago)
+UNION
+-- corte de pago_amb
+(SELECT count(distinct(pagos_amb.id)) AS numera,rubrospago.descripcion,sum(pagos_ambdet.importe - pagos_ambdet.descuento) AS totl
+FROM pagos_amb
+INNER JOIN pagos_ambdet
+ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_amb.fecha = $P{fechCorte}
+INNER JOIN rubrospago
+ON pagos_ambdet.idRubropago = rubrospago.id
+GROUP BY pagos_ambdet.idRubropago)
+UNION
+(SELECT count(distinct(pagos_carg.id)) AS numCarg,rubrospago.descripcion,sum(pagos_cargdet.importe - pagos_cargdet.descuento) AS totCarg
+FROM pagos_carg
+INNER JOIN pagos_cargdet
+ON pagos_carg.id = pagos_cargdet.idTicket AND pagos_carg.fecha = $P{fechCorte}
+INNER JOIN rubrospago
+ON pagos_cargdet.idRubropago = rubrospago.id
+GROUP BY pagos_cargdet.idRubropago)
+UNION -- qwery para mostrar cobro de rentas diablo cargador
+(SELECT count(pagos_cargrenta.id) AS numCargR, rubrospago.descripcion,sum(pagos_cargrenta.importe) AS totCargR
+FROM pagos_cargrenta
+INNER JOIN rubrospago
+ON pagos_cargrenta.idRubropago = rubrospago.id AND pagos_cargrenta.fecha = $P{fechCorte}
+)
+UNION -- qwery para mostrar cobros diarios
+(SELECT count(pagos_infrac.folio) AS numInfrac, 'Infracciones',IF(pagos_infrac.descuento IS NULL, sum(pagos_infrac.monto), sum(pagos_infrac.monto - pagos_infrac.descuento ))  AS totInfrac
+FROM pagos_infrac
+WHERE pagos_infrac.fechapag = $P{fechCorte})
+UNION -- qwery para mostrar cobros diarios
+(SELECT count(*),otros_rubros.nombre,sum(otros_venta.efectivo) AS totCarg
+FROM otros_venta
+INNER JOIN otros_ventadet
+ON otros_venta.id = otros_ventadet.idVenta AND otros_venta.fecha = $P{fechCorte}
+INNER JOIN otros_catalogo
+ON otros_ventadet.idProd = otros_catalogo.id
+INNER JOIN otros_rubros
+ON otros_catalogo.idrubro = otros_rubros.id
+GROUP BY otros_rubros.id)
+UNION
+(SELECT 1,gastos_caja.concepto,gastos_caja.monto
+FROM gastos_caja
+WHERE fecha = $P{fechCorte})
+;]]>
+	</queryString>
+	<field name="numera" class="java.lang.Long"/>
+	<field name="descrip" class="java.lang.String"/>
+	<field name="totl" class="java.math.BigDecimal"/>
+	<title>
+		<band height="96" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="10" y="0" width="195" height="79" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
+				<imageExpression><![CDATA["C:\\central\\src\\images\\logo80MM.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="44" y="79" width="131" height="13" forecolor="#3333FF" uuid="2b292a92-0302-46b2-bfec-0232a67d2289"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[corte de caja]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="91" width="195" height="1" uuid="c1e4c872-16ba-4809-939e-9cfa42c4d990"/>
+				<graphicElement>
+					<pen lineStyle="Double" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="57" height="13" uuid="6877f7c5-93c4-4fe1-9ffa-31dd25ce4217"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Corte:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="12" width="57" height="12" uuid="bdd09513-1e40-45dd-8fda-1b2e597e366d"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Cajero(a):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="23" width="57" height="12" uuid="ddfb8062-8f97-44ca-8bd4-77daaf371fed"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Apertura:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="34" width="57" height="12" uuid="0511f8d0-344a-4620-abea-9b096d7b7370"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Cierre:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="48" width="195" height="1" uuid="5982a3a7-ceb5-439f-8f08-f06aa0da8003"/>
+				<graphicElement>
+					<pen lineStyle="Dotted" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="62" y="0" width="100" height="13" uuid="12f63db3-4442-46ce-b06d-ce3867a383e9"/>
+				<textFieldExpression><![CDATA[$P{fechCorte}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="162" y="2" width="54" height="14" uuid="44867bc4-218f-466c-bdc1-03811223a379"/>
+				<textFieldExpression><![CDATA[$F{totl}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="20" y="2" width="139" height="15" isPrintWhenDetailOverflows="true" uuid="9697b157-efd2-4c20-bcfa-5d4de5461361"/>
+				<textFieldExpression><![CDATA[$F{descrip}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="3" width="20" height="14" uuid="db402ed8-12b7-4553-b5fc-45f3ad1ecd11"/>
+				<textFieldExpression><![CDATA[$F{numera}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="56">
+			<line>
+				<reportElement x="14" y="1" width="195" height="1" uuid="ba8fa49b-b347-43bd-8f11-7226ab7c7332"/>
+				<graphicElement>
+					<pen lineStyle="Dotted" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</lastPageFooter>
+</jasperReport>

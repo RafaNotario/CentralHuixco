@@ -78,6 +78,165 @@ public String setDateActual(){
         return formato.format(fechaAct);
 }
 
+        public String volteaFecha(String cad,int opc){//opc=0:dd/mm/YYYY; opc=1:YYYY/mm/dd
+            //cad = "16/06/2017";
+            char var[];
+            var = cad.toCharArray();
+            String p1 ="",p2="",p3="",newFech="";
+            if(opc == 0)
+            {
+                for(int i = 0; i< var.length;i++){
+                    if(i<2)
+                        p1+=var[i];
+                
+                    if(i>2 && i<5)
+                        p2+=var[i];
+                
+                    if(i>5 && i<var.length)
+                        p3+=var[i];
+                }
+            }
+            if(opc == 1)
+            {
+                for(int i = 0;i<var.length;i++){
+                    if(i<4)
+                        p1+=var[i];
+                    
+                    if(i>4 && i<7)
+                        p2+=var[i];
+                    
+                    if(i>7 && i<var.length)
+                        p3+=var[i];
+                }
+            }
+            newFech=p3+"/"+p2+"/"+p1;
+            return newFech;
+        }
+
+    /**
+ * Calcula la diferencia entre dos fechas. Devuelve el resultado en días, meses o años según sea el valor del parámetro 'tipo'
+ * @param fechaInicio Fecha inicial
+ * @param fechaFin Fecha final
+ * @param tipo 0=TotalAños; 1=TotalMeses; 2=TotalDías; 3=MesesDelAnio; 4=DiasDelMes
+ * @return numero de días, meses o años de diferencia
+ */
+    public long getDiffDates(Date fechaInicio, Date fechaFin, int tipo) {
+	// Fecha inicio
+	Calendar calendarInicio = Calendar.getInstance();
+	calendarInicio.setTime(fechaInicio);
+	int diaInicio = calendarInicio.get(Calendar.DAY_OF_MONTH);
+	int mesInicio = calendarInicio.get(Calendar.MONTH) + 1; // 0 Enero, 11 Diciembre
+	int anioInicio = calendarInicio.get(Calendar.YEAR);
+	// Fecha fin
+	Calendar calendarFin = Calendar.getInstance();
+	calendarFin.setTime(fechaFin);
+	int diaFin = calendarFin.get(Calendar.DAY_OF_MONTH);
+	int mesFin = calendarFin.get(Calendar.MONTH) + 1; // 0 Enero, 11 Diciembre
+	int anioFin = calendarFin.get(Calendar.YEAR);
+	int anios = 0;
+	int mesesPorAnio = 0;
+	int diasPorMes = 0;
+	int diasTipoMes = 0;
+	//
+	// Calculo de días del mes
+	//
+	if (mesInicio == 2) {
+		// Febrero
+		if ((anioFin % 4 == 0) && ((anioFin % 100 != 0) || (anioFin % 400 == 0))) {
+			// Bisiesto
+			diasTipoMes = 29;
+		} else {
+			// No bisiesto
+			diasTipoMes = 28;
+		}
+	} else if (mesInicio <= 7) {
+		// De Enero a Julio los meses pares tienen 30 y los impares 31
+		if (mesInicio % 2 == 0) {
+			diasTipoMes = 30;
+		} else {
+			diasTipoMes = 31;
+		}
+	} else if (mesInicio > 7) {
+		// De Julio a Diciembre los meses pares tienen 31 y los impares 30
+		if (mesInicio % 2 == 0) {
+			diasTipoMes = 31;
+		} else {
+			diasTipoMes = 30;
+		}
+	}
+	//
+	// Calculo de diferencia de año, mes y dia
+	//
+	if ((anioInicio > anioFin) || (anioInicio == anioFin && mesInicio > mesFin)
+			|| (anioInicio == anioFin && mesInicio == mesFin && diaInicio > diaFin)) {
+		// La fecha de inicio es posterior a la fecha fin
+		// System.out.println("La fecha de inicio ha de ser anterior a la fecha fin");
+		return -1;
+	} else {
+		if (mesInicio <= mesFin) {
+			anios = anioFin - anioInicio;
+			if (diaInicio <= diaFin) {
+				mesesPorAnio = mesFin - mesInicio;
+				diasPorMes = diaFin - diaInicio;
+			} else {
+				if (mesFin == mesInicio) {
+					anios = anios - 1;
+				}
+				mesesPorAnio = (mesFin - mesInicio - 1 + 12) % 12;
+				diasPorMes = diasTipoMes - (diaInicio - diaFin);
+			}
+		} else {
+			anios = anioFin - anioInicio - 1;
+//			System.out.println(anios);
+			if (diaInicio > diaFin) {
+				mesesPorAnio = mesFin - mesInicio - 1 + 12;
+				diasPorMes = diasTipoMes - (diaInicio - diaFin);
+			} else {
+				mesesPorAnio = mesFin - mesInicio + 12;
+				diasPorMes = diaFin - diaInicio;
+			}
+		}
+	}
+	//System.out.println("Han transcurrido " + anios + " Años, " + mesesPorAnio + " Meses y " + diasPorMes + " Días.");		
+	//
+	// Totales
+	//
+	long returnValue = -1;
+ 
+	switch (tipo) {
+		case 0:
+			// Total Años
+			returnValue = anios;
+			// System.out.println("Total años: " + returnValue + " Años.");
+			break;
+		case 1:
+			// Total Meses
+			returnValue = anios * 12 + mesesPorAnio;
+			// System.out.println("Total meses: " + returnValue + " Meses.");
+			break;
+ 
+		case 2:
+			// Total Dias (se calcula a partir de los milisegundos por día)
+			long millsecsPerDay = 86400000; // Milisegundos al día
+			returnValue = (fechaFin.getTime() - fechaInicio.getTime()) / millsecsPerDay;
+			// System.out.println("Total días: " + returnValue + " Días.");
+			break;
+		case 3:
+			// Meses del año
+			returnValue = mesesPorAnio;
+			// System.out.println("Meses del año: " + returnValue);
+			break;
+		case 4:
+			// Dias del mes
+			returnValue = diasPorMes;
+			// System.out.println("Dias del mes: " + returnValue);
+			break;
+		default:
+			break;
+	}
+	return returnValue;
+}//@end getdiffdates
+        
 public int semanYear(String dat,int band){
     Calendar calendar = Calendar.getInstance();
     calendar.setFirstDayOfWeek( Calendar.MONDAY);//MONDAY
@@ -197,12 +356,12 @@ public String getHour(){
     return hor;
 }
  
-public String sumaFecha(){
+public String getSumFechDay(String fech, int nDays){
         Date prox = null;
         Calendar cal = Calendar.getInstance(); 
 //obtenemos la fecha actual y la convertmos a date
-        cal.setTime(StringDate(setDateActual()));
-        cal.add(Calendar.MONTH, 3);
+        cal.setTime(StringDate(fech));
+        cal.add(Calendar.DAY_OF_YEAR, nDays);
         prox=cal.getTime();
         return formato.format(prox);
     }
@@ -229,7 +388,8 @@ public String getsumaFecha(JDateChooser jd,int monts){
     //    dC.jLocalFechas("2020/04/13");
         System.out.println("PRUEBAS DE STACKOVERFLOW");
         
-        System.out.println("La hora es : "+dC.sumaFecha());
+        System.out.println("La hora es : "+dC.getSumFechDay("2020/05/30",1));
+        
        // System.out.println("Semana fin: "+dC.getWeekEndDate("2020/03/23"));
         //System.out.println("Lapso"+dC.lapsoSem("",1));
        // dC.lapsoSem("",0);

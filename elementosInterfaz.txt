@@ -192,7 +192,17 @@ jLabObserva
 	jLabImportInscripc
 				
 	jComBInscripc
-		
+
+		/*panel renta de diablito cargadores*/
+	jPanRentCargador
+	dCCFechIniRentCarg
+	dCCFechFinRentCarg
+	txtnumDaysrentdiab
+	txtNumDiabRent
+	
+	jLabTarifRentCarg
+	jLabCondonacRentDiab
+	jLabImportRentDiab
 
 /************************		//panel de Infracciones
 		/*panel sInfracciones*/
@@ -291,7 +301,6 @@ jLabObserva
 	txtsolict	
 	txtObservs
 	txtMontoGasto
-
 	mostrarGastosDia
 	
 	

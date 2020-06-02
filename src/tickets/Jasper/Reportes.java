@@ -247,7 +247,35 @@ void imprim() throws JRException{
                 }
 }//@endimprim80MM_Infrac
 
-
+ public void imprim80MM_CargRent(String param,boolean print){
+        Connection cn = con2.conexion();
+        String  var = "C:/central/src/tickets/Jasper/ticket80MM_RentCarg.jasper";
+        JasperReport reporte = null;
+            try {
+                 Map parametro = new HashMap();
+                parametro.put("numTicket",param);
+                reporte = (JasperReport) JRLoader.loadObjectFromFile(var);
+                JasperPrint jp = JasperFillManager.fillReport(reporte, parametro, cn);
+                //linea para mandar a imprimir
+                if(print){
+                    JasperPrintManager.printReport(jp, false);
+                }else{
+                    JasperViewer jv = new JasperViewer(jp,false);
+                    jv.setZoomRatio(new Float(1.5));
+                   jv.setVisible(true);
+                   jv.setTitle("Central Huixcolotla");
+                }
+            }  catch (JRException ex) {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                 //   System.out.println( "cierra conexion a la base de datos" );    
+                    try {
+                        if(cn != null) cn.close();
+                    } catch (SQLException ex) {
+                        System.err.println( ex.getMessage() );    
+                    }
+                }
+}//@imprim80MM_CargRent
 
 //codigos para mandar por parametro datos de consulta
 /**** Para obtener total,efectivo y diferencia ticket semanal area **/
