@@ -210,6 +210,43 @@ public class funciones {
            return idTurno;
     }//@endgetenTurno
      
+          public String[] getTurnoData(int id){
+            Connection cn = con2.conexion();
+            String[] idUser = new String[5];
+            String sql = "";
+            sql = "SELECT * FROM turnos WHERE id = '"+id+"'";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idUser[0]=rs.getString(1);
+                        idUser[1]=rs.getString(2);
+                        idUser[2]=rs.getString(3);
+                        idUser[3]=rs.getString(4);
+                        idUser[4]=rs.getString(5);
+                    }else{
+                        for (int j = 0; j < idUser.length; j++) {
+                            idUser[j] = "NO-DATA";
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idUser;
+    }//@end getTurnoData
+     
           public int getUltimPagoarea(){
             Connection cn = con2.conexion();
             int idTurno = -1;
@@ -890,11 +927,15 @@ public class funciones {
            
            funciones fn =  new funciones();
               java.util.Date date = new Date();
-                String[] prue = fn.getCargad("45");
-
-               int var = fn.getUltimCancelaciones();
+                String[] prue = fn.getTurnoData(121);
+                for (int i = 0; i < prue.length; i++) {
+               System.out.println("datas turno: "+prue[i]);
+           }
+            if(prue[4] == null){
+                JOptionPane.showMessageDialog(null, "Es nulo yes");
+            }
           //   System.out.println("pay ultimo CLIENTE sera "+(var+1));
-         System.out.println("PORCENTAJE: "+fn.percentage(amountOne, amountTwo));
+         //System.out.println("PORCENTAJE: "+fn.percentage(amountOne, amountTwo));
        }
            
 }

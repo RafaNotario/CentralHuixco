@@ -91,6 +91,7 @@ funciones func1 = new funciones();
         jButton8 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabUserNombre = new javax.swing.JLabel();
+        jLaidUSer = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Central");
@@ -572,7 +573,9 @@ funciones func1 = new funciones();
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLaidUSer)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabUserNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -588,9 +591,11 @@ funciones func1 = new funciones();
                     .addComponent(jLabNsem, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabLapsoSemana)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabLapsoSemana)
+                        .addComponent(jLaidUSer))
                     .addComponent(jLabUserNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane1))
@@ -608,13 +613,29 @@ funciones func1 = new funciones();
             pass=txtContraseña.getText();
             idReturn = func1.validaLoginUsers(user,pass);
             datosUserSys= func1.getnombreUsuario(idReturn);
+            String[] arrTurns = null;
             if(idReturn > -1 && idReturn < 5000 && !datosUserSys[0].equals("NO-DATA")){
                 jLabUserNombre.setText(datosUserSys[2]);
-                jPanLogin.setVisible(false);
-                jPanMontApert.setVisible(true);
-                jPanMontApert.setEnabled(true);
-                txtMontoaper2.requestFocus();
-                txtMontoaper2.selectAll();            
+                jLaidUSer.setText(datosUserSys[0]);
+                
+                arrTurns = func1.getTurnoData(Integer.parseInt(datosUserSys[6]));
+                if(arrTurns[4] == null){
+                    JOptionPane.showMessageDialog(null, "En turno");
+                    func1.limpiar(jPanTrabajo);
+                    inicioButton(true);//habilitar todos los botones del menucontent
+                    iCaj = new internoCaja(Integer.toString(idReturn));
+                    jPanTrabajo.setLayout(new GridLayout(1,1));
+                    jPanTrabajo.add(iCaj);
+                    jPanTrabajo.validate();
+                    jPanTrabajo.setVisible(true);
+                    jPanTrabajo.setEnabled(true);
+                }else{
+                    jPanLogin.setVisible(false);
+                    jPanMontApert.setVisible(true);
+                    jPanMontApert.setEnabled(true);
+                    txtMontoaper2.requestFocus();
+                    txtMontoaper2.selectAll();    
+                }
            }else{
                JOptionPane.showMessageDialog(null, "Login incorrecto");               
            }
@@ -638,7 +659,7 @@ funciones func1 = new funciones();
             contentL.add(Integer.toString(idReturn));
             contentL.add(monto2);
 //comentar descomentar linea para guardar el turno
-//           func1.GuardaTurno(contentL); 
+           func1.GuardaTurno(contentL); 
            func1.limpiar(jPanTrabajo);
            inicioButton(true);//habilitar todos los botones del menucontent
            iCaj = new internoCaja(Integer.toString(idReturn));
@@ -787,6 +808,7 @@ funciones func1 = new funciones();
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLaidUSer;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLaylogInt;
     private javax.swing.JPanel jPanLogin;

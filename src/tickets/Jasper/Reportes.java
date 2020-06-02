@@ -5,10 +5,6 @@
  */
 package tickets.Jasper;
 
-import java.awt.print.PrinterJob;
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -16,8 +12,9 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import conexion.ConexionDBOriginal;
-import java.io.IOException;
-import java.net.URL;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,9 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JRRuntimeException;
-import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -38,7 +34,8 @@ import net.sf.jasperreports.view.JasperViewer;
 public class Reportes {
     
         ConexionDBOriginal con2 = new ConexionDBOriginal();
-
+        JButton b1 = new JButton("CerrarTurno");
+        
 void imprim() throws JRException{
         Connection cn = con2.conexion();
       String  var = "C:/central/src/tickets/Jasper/ticket1.jasper";
@@ -276,6 +273,57 @@ void imprim() throws JRException{
                     }
                 }
 }//@imprim80MM_CargRent
+ 
+ // REPORTE PARA CORTE DE CAJA
+  public void imprim80MM_corteCaja(String param, boolean print){
+        Connection cn = con2.conexion();
+        String  var = "C:/central/src/tickets/Jasper/ticket80MM_CorteCaja.jasper";
+        JasperReport reporte = null;
+            try {
+                 Map parametro = new HashMap();
+                parametro.put("fechCorte",param);
+                reporte = (JasperReport) JRLoader.loadObjectFromFile(var);
+                JasperPrint jp = JasperFillManager.fillReport(reporte, parametro, cn);
+
+                net.sf.jasperreports.swing.JRViewer jv = new net.sf.jasperreports.swing.JRViewer(jp);
+                JFrame  jf = new JFrame();
+                
+           jf.getContentPane().setLayout(new BorderLayout());//FlowLayout()
+           jf.getContentPane().add(jv,BorderLayout.CENTER);
+//           jf.getContentPane().setSize();
+
+           jf.add(b1,BorderLayout.SOUTH);
+          b1.setBounds(0,0, 97, 25);
+          b1.setBackground(Color.CYAN);
+           jf.validate();
+           jf.setVisible(true);
+           jf.setSize(new Dimension(800,600));
+           jf.setLocation(300,100);
+           jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+           jf.setTitle("CORTE DE CAJA");
+                
+                //linea para mandar a imprimir
+  /*              if(print){
+                    
+                    JasperPrintManager.printReport(jp, false);
+                }else{
+                    JasperViewer jv = new JasperViewer(jp,false);
+                    jv.setZoomRatio(new Float(1.5));
+                   jv.setVisible(true);
+                   jv.setTitle("Central Huixcolotla");
+                }
+     */       
+            }  catch (JRException ex) {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                 //   System.out.println( "cierra conexion a la base de datos" );    
+                    try {
+                        if(cn != null) cn.close();
+                    } catch (SQLException ex) {
+                        System.err.println( ex.getMessage() );    
+                    }
+                }
+}//@end imprim80MM_corteCaja
 
 //codigos para mandar por parametro datos de consulta
 /**** Para obtener total,efectivo y diferencia ticket semanal area **/
@@ -437,7 +485,7 @@ void imprim() throws JRException{
 public static void main(String []argv) throws JRException{
         Reportes rP = new Reportes();
         String[] dat = rP.getTickOthers("2");
-        rP.imprim80MMOthers("2",dat,false);
+        rP.imprim80MM_corteCaja("2020-03-25",false);
         System.out.println("Y atermino");
     }
     

@@ -543,3 +543,8 @@ GROUP BY otros_rubros.id;
 SELECT count(*),gastos_caja.concepto,gastos_caja.monto
 FROM gastos_caja
 WHERE fecha = '2020-03-25';
+
+-- verificar sesion de usuario
+SELECT * FROM turnos
+INNER JOIN usuarios
+on turnos.idusuario = usuarios.id AND usuarios.id = 6 AND ffinal IS NOT NULL;
