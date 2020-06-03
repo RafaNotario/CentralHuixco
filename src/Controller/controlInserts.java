@@ -305,7 +305,7 @@ public void guardaTicketArea(String[] param){
                 pps.setString(7, param[6]);
                 
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Pedido guardado correctamente.");
+                //JOptionPane.showMessageDialog(null, "Pedido guardado correctamente.");
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -334,7 +334,7 @@ public void guardadetailTicketArea(String[] param){
                 pps.setString(4, param[3]);
                 pps.setString(5, param[4]);
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Pedido guardado correctamente.");
+            //    JOptionPane.showMessageDialog(null, "Pedido guardado correctamente.");
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -547,7 +547,7 @@ public void guardaTicketAmbus(String[] param){
                 pps.setString(7, param[6]);
                 
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Ticket Ambulante guardado correctamente.");
+            //    JOptionPane.showMessageDialog(null, "Ticket Ambulante guardado correctamente.");
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -586,7 +586,7 @@ public void guardadetailTicketAmbus(String[] param, int numParam){
           }
                 
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Detail payAmbu guardado correctamente.");
+              //  JOptionPane.showMessageDialog(null, "Detail payAmbu guardado correctamente.");
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -613,7 +613,7 @@ public void guardadetailTicketAmbus(String[] param, int numParam){
                 pps = cn.prepareStatement(SQL);
                 pps.setString(1, val);
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "idresg actualizado correctamente."+id);
+             //   JOptionPane.showMessageDialog(null, "idresg actualizado correctamente."+id);
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -644,7 +644,7 @@ public void guardaTicketCargad(String[] param){
                 pps.setString(7, param[6]);
                 
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Ticket Cargador guardado correctamente.");
+              // JOptionPane.showMessageDialog(null, "Ticket Cargador guardado correctamente.");
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -683,7 +683,7 @@ public void guardadetailTicketCargad(String[] param, int numParam){
           }
                 
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Detail payCarg guardado correctamente.");
+             //   JOptionPane.showMessageDialog(null, "Detail payCarg guardado correctamente.");
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -715,7 +715,7 @@ public void guardaTicketOtherPays(String[] param){
                 pps.setString(7, param[6]);
                 
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Ticket OtroPago guardado correctamente.");
+            //    JOptionPane.showMessageDialog(null, "Ticket OtroPago guardado correctamente.");
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -747,7 +747,7 @@ public void guardCliente(String[] param){
                 pps.setString(7, param[6]);
 
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Cliente registrado correctamente.");
+          //      JOptionPane.showMessageDialog(null, "Cliente registrado correctamente.");
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -777,7 +777,7 @@ public void guardadetailOthsPays(List<String> param){
                 pps.setString(5, param.get(4));
 
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Detail payOths guardado correctamente.");
+         //       JOptionPane.showMessageDialog(null, "Detail payOths guardado correctamente.");
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -803,7 +803,7 @@ public void guardadetailOthsPays(List<String> param){
                 pps = cn.prepareStatement(SQL);
                 pps.setString(1, val);
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "ultima sem vig actualizado correctamente."+id);
+          //      JOptionPane.showMessageDialog(null, "ultima sem vig actualizado correctamente."+id);
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -836,7 +836,7 @@ public void guardadetailOthsPays(List<String> param){
                 pps.setString(8, param.get(7));
                 pps.setString(9, param.get(8));
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Infraccion creada correctamente.");
+          //      JOptionPane.showMessageDialog(null, "Infraccion creada correctamente.");
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -883,39 +883,34 @@ SQL="UPDATE pagos_infrac SET folio = ?, fecha = ?, tipodoc = ?,documento = ?, mo
         }//@end
        
        public void elimaRow(String table,String campo,String id){
-        Connection cn = con2.conexion();
-        PreparedStatement preparedStmt = null;
-        if(!id.isEmpty()){
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog (null, "<html> "
-                    + "Seguro que desea eliminar el registro con ID:<h1> "+id+" </h1>? </html>","Eliminar",dialogButton);
-            if(dialogResult == JOptionPane.YES_OPTION){
-            try {
-            String query = "delete from "+table+" where "+campo+" = '"+id+"' ";
-            preparedStmt = cn.prepareStatement(query);
-            preparedStmt.execute();
-      
-            JOptionPane.showMessageDialog(null, "Eliminado Correctamente");
-
-        } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
-            Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-//            System.out.println("cierra conexion a la base de datos");    
-            try {
-                if(preparedStmt != null) preparedStmt.close();                
-                if(cn !=null) cn.close();
+            Connection cn = con2.conexion();
+            PreparedStatement preparedStmt = null;
+            if(!id.isEmpty()){
+                int dialogButton = JOptionPane.YES_NO_OPTION;
+                int dialogResult = JOptionPane.showConfirmDialog (null, "<html> "
+                        + "Seguro que desea eliminar el registro con ID:<h1> "+id+" </h1>? </html>","Eliminar",dialogButton);
+                if(dialogResult == JOptionPane.YES_OPTION){
+                try {
+                String query = "delete from "+table+" where "+campo+" = '"+id+"' ";
+                preparedStmt = cn.prepareStatement(query);
+                preparedStmt.execute();
+                JOptionPane.showMessageDialog(null, "Eliminado Correctamente");
             } catch (SQLException ex) {
-                System.err.println("RAFA elimina Row"); 
-                JOptionPane.showMessageDialog(null, ex.getMessage());
-//                System.out.println("Error al cerrar la conexon");
-            }//catch
-        }//finally 
-            } else {
-                JOptionPane.showMessageDialog(null,"No se borro el registro: "+id);
-            }
-        }else
-            JOptionPane.showMessageDialog(null,"Sin data a eliminar");
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                try {
+                    if(preparedStmt != null) preparedStmt.close();                
+                    if(cn !=null) cn.close();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }//catch
+            }//finally 
+                } else {
+                    JOptionPane.showMessageDialog(null,"No se borro el registro: "+id);
+                }
+            }else
+                JOptionPane.showMessageDialog(null,"Sin data a eliminar");
 }
        
        
@@ -988,7 +983,7 @@ SQL="UPDATE pagos_infrac SET idTurno = ?, fechapag = ?, horapag = ?,quienpaga = 
                 pps = cn.prepareStatement(SQL);
                 pps.setString(1, val);
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "ultima semo vig actualizado correctamente."+id);
+     //           JOptionPane.showMessageDialog(null, "ultima semo vig actualizado correctamente."+id);
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -1097,7 +1092,7 @@ public void guardTickRentCarg(String[] param){
                 pps.setString(9, param[8]);
                 
                 pps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Ticket Renta Cargador guardado correctamente.");
+             //   JOptionPane.showMessageDialog(null, "Ticket Renta Cargador guardado correctamente.");
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");

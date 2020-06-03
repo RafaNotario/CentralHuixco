@@ -548,3 +548,7 @@ WHERE fecha = '2020-03-25';
 SELECT * FROM turnos
 INNER JOIN usuarios
 on turnos.idusuario = usuarios.id AND usuarios.id = 6 AND ffinal IS NOT NULL;
+
+SELECT * FROM turnos
+INNER JOIN usuarios
+on turnos.idusuario = usuarios.id AND usuarios.id = 6 order by turnos.id DESC limit 1;

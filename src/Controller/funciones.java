@@ -176,14 +176,17 @@ public class funciones {
                     }
            return lapso;
     }//validaloginUsers
-
        
-       ///*** Obtener ultimo turno creado
-     public int getenTurno(){
+       // Obtener ultimo turno creado
+     public int getenTurno(int id){
             Connection cn = con2.conexion();
             int idTurno = -1;
             String sql = "";
-            sql = "SELECT id FROM turnos ORDER BY id DESC LIMIT 1; ";
+            //SELECT id FROM turnos ORDER BY id DESC LIMIT 1;
+            sql = "SELECT turnos.id FROM turnos\n" +
+                    "INNER JOIN usuarios\n" +
+                    "on turnos.idusuario = usuarios.id AND usuarios.id = "+id+" and turnos.ffinal is null\n" +
+                    "order by turnos.id DESC limit 1;";
             Statement st = null;
             ResultSet rs= null;
             try {
@@ -209,6 +212,41 @@ public class funciones {
                     }
            return idTurno;
     }//@endgetenTurno
+     
+     
+          ///*** Obtener ultimo turno creado
+    public int getenTurno(){
+            Connection cn = con2.conexion();
+            int idTurno = -1;
+            String sql = "";
+           
+            sql = "SELECT id FROM turnos ORDER BY id DESC LIMIT 1;";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idTurno = rs.getInt(1);
+                    }else{
+                         idTurno = -1;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idTurno;
+    }//@endgetenTurno
+     
      
           public String[] getTurnoData(int id){
             Connection cn = con2.conexion();

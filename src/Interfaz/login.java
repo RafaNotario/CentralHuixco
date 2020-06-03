@@ -25,16 +25,18 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  * @author Antonio R. Notario
  */
 public class login extends javax.swing.JFrame {
+    controlInserts contrl = new controlInserts();
     datesControl dCon = new datesControl();
+    funciones func1 = new funciones();
+    
     internoCaja iCaj = null;
     areas Ar = null;
     cargadores cargA = null;
     ambulantes ambA = null;
-    
-funciones func1 = new funciones();
+ 
  int idReturn = 5000;//Variable para obtener id de usuario del sistema
  String[] datosUserSys = null;//arreglo para obtener todos los datos de usuario del sistema
-
+ String[] arrTurns = null; //arreglo para obtener datos de turno usuario activo
  
     public login() {
         initComponents();
@@ -611,16 +613,16 @@ funciones func1 = new funciones();
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         String user = txtUserLogin.getText(),
             pass=txtContraseña.getText();
-            idReturn = func1.validaLoginUsers(user,pass);
-            datosUserSys= func1.getnombreUsuario(idReturn);
-            String[] arrTurns = null;
+            idReturn = func1.validaLoginUsers(user,pass);//es el id del usuario
+            datosUserSys= func1.getnombreUsuario(idReturn);//obtenemos todos los datos del usuario
+            
             if(idReturn > -1 && idReturn < 5000 && !datosUserSys[0].equals("NO-DATA")){
                 jLabUserNombre.setText(datosUserSys[2]);
                 jLaidUSer.setText(datosUserSys[0]);
                 
                 arrTurns = func1.getTurnoData(Integer.parseInt(datosUserSys[6]));
                 if(arrTurns[4] == null){
-                    JOptionPane.showMessageDialog(null, "En turno");
+              //      JOptionPane.showMessageDialog(null, "En turno");
                     func1.limpiar(jPanTrabajo);
                     inicioButton(true);//habilitar todos los botones del menucontent
                     iCaj = new internoCaja(Integer.toString(idReturn));
@@ -649,9 +651,10 @@ funciones func1 = new funciones();
     }//GEN-LAST:event_txtContraseñaKeyPressed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-         List<String> contentL = new ArrayList<String>();
+        List<String> contentL = new ArrayList<String>();
         String monto1 = txtMontoaper1.getText(),
                 monto2 = txtMontoaper2.getText();
+        int newTurnUser =-1;
         if(monto1.isEmpty() || monto2.isEmpty() || !monto1.equals(monto2))
         {
             JOptionPane.showMessageDialog(null, "Monto vacio ó desigual, Verifique porfavor.");
@@ -659,10 +662,15 @@ funciones func1 = new funciones();
             contentL.add(Integer.toString(idReturn));
             contentL.add(monto2);
 //comentar descomentar linea para guardar el turno
-           func1.GuardaTurno(contentL); 
+           func1.GuardaTurno(contentL); // crea turno nuevo con id de logueado
+           newTurnUser = func1.getenTurno();
+           JOptionPane.showMessageDialog(null, "Nuevo turno");
+           contrl.f5CancelTypesAll("usuarios", "turno", contentL.get(0), Integer.toString(newTurnUser));
+           
            func1.limpiar(jPanTrabajo);
            inicioButton(true);//habilitar todos los botones del menucontent
            iCaj = new internoCaja(Integer.toString(idReturn));
+           
            jPanTrabajo.setLayout(new GridLayout(1,1));
            jPanTrabajo.add(iCaj);
            jPanTrabajo.validate();
@@ -702,7 +710,7 @@ funciones func1 = new funciones();
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
             func1.limpiar(jPanTrabajo);
-            iCaj = new internoCaja(jLabUserNombre.getText());
+            iCaj = new internoCaja(jLaidUSer.getText());
             jPanTrabajo.setLayout(new GridLayout(1,1));
             jPanTrabajo.add(iCaj);
             jPanTrabajo.validate();

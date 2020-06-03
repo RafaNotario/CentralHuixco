@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="226" whenNoDataType="AllSectionsNoDetail" columnWidth="216" leftMargin="5" rightMargin="5" topMargin="0" bottomMargin="10" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="300" whenNoDataType="AllSectionsNoDetail" columnWidth="216" leftMargin="5" rightMargin="5" topMargin="0" bottomMargin="14" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -134,7 +134,7 @@ WHERE fecha = $P{fechCorte})
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="19" splitType="Stretch">
+		<band height="17" splitType="Immediate">
 			<textField isBlankWhenNull="true">
 				<reportElement x="162" y="2" width="54" height="14" uuid="44867bc4-218f-466c-bdc1-03811223a379"/>
 				<textFieldExpression><![CDATA[$F{totl}]]></textFieldExpression>
@@ -151,28 +151,32 @@ WHERE fecha = $P{fechCorte})
 	</detail>
 	<lastPageFooter>
 		<band height="56">
+			<textField>
+				<reportElement x="75" y="40" width="100" height="13" uuid="5ae0df9b-569e-481c-9fff-4f45966bd81c"/>
+				<textFieldExpression><![CDATA[$P{fechCorte}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="75" height="13" uuid="e3b2f72e-59cf-47ae-9a2f-3a23d09fd129"/>
+				<text><![CDATA[TOTAL CAJA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="27" width="83" height="13" uuid="a4cfc605-abec-40cc-910e-fa1f50bb1e1e"/>
+				<text><![CDATA[TOTAL GASTOS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="14" width="83" height="13" uuid="2e0c5541-f7c2-452c-8115-9880ca48c9fa"/>
+				<text><![CDATA[TOTAL COBROS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="75" height="13" uuid="6f823241-66f1-4350-9af2-9853181fa4a7"/>
+				<text><![CDATA[SALDO INICIAL:]]></text>
+			</staticText>
 			<line>
-				<reportElement x="14" y="1" width="195" height="1" uuid="ba8fa49b-b347-43bd-8f11-7226ab7c7332"/>
+				<reportElement x="14" y="0" width="195" height="1" uuid="ba8fa49b-b347-43bd-8f11-7226ab7c7332"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#999999"/>
 				</graphicElement>
 			</line>
-			<staticText>
-				<reportElement x="0" y="2" width="75" height="13" uuid="6f823241-66f1-4350-9af2-9853181fa4a7"/>
-				<text><![CDATA[SALDO INICIAL:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="15" width="83" height="13" uuid="2e0c5541-f7c2-452c-8115-9880ca48c9fa"/>
-				<text><![CDATA[TOTAL COBROS:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="28" width="83" height="13" uuid="a4cfc605-abec-40cc-910e-fa1f50bb1e1e"/>
-				<text><![CDATA[TOTAL GASTOS:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="41" width="75" height="13" uuid="e3b2f72e-59cf-47ae-9a2f-3a23d09fd129"/>
-				<text><![CDATA[TOTAL CAJA:]]></text>
-			</staticText>
 		</band>
 	</lastPageFooter>
 </jasperReport>

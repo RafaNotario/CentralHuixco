@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package Interfaz.internos.jpanels;
-
 import java.text.SimpleDateFormat;
 import Controller.datesControl;
 import Controller.funciones;
@@ -15,29 +14,19 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import conexion.ConexionDBOriginal;
 import Controller.controlInserts;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import renderTable.TModel;
 import tickets.Jasper.Reportes;
 import Interfaz.internos.jpanels.infracc_rw_DB;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.text.ParseException;
 import java.util.Calendar;
 
 
@@ -48,14 +37,12 @@ import java.util.Calendar;
  */
 public class internoCaja extends javax.swing.JPanel {
     String User;
- 
     String fech = "",fechCarg ="";
     datesControl datCtrl = new datesControl();
     ConexionDBOriginal con2 = new ConexionDBOriginal();
     controlInserts contrl = new controlInserts();
     funciones func = new funciones();
     Reportes rP = new Reportes();
-    
     infracc_rw_DB infraccs= null;
     
      List<String> conten = new ArrayList<String>();//lista para guardar el id de cada area cobro de areas
@@ -74,7 +61,8 @@ public class internoCaja extends javax.swing.JPanel {
 String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"},
         cabInfraccionesView = {"Folio", "Fecha","Placa/Licencia", "Vehiculo","Importe"},
         tarifas=null,//para tener las tarifas a cobrar a los ambulnates
-        datasCarg = null//para tener los datos a usar de cragador, trifas, diablo popio, descuentos
+        datasCarg = null,//para tener los datos a usar de cargador, trifas, diablo popio, descuentos
+        infoUser = null
         ;
 
 String[][] matResgVehiculo = null;//Matriz para cargar las tarifas de resguardo a ambulantes
@@ -85,7 +73,8 @@ public internoCaja(String usuarioN) {
         initComponents();
         this.User = usuarioN;
 //        JOptionPane.showMessageDialog(null,"recibi user: "+User);
-        
+     infoUser = func.getnombreUsuario(Integer.parseInt(usuarioN));//obtener array de usuario logueado
+     
      jButton2.doClick();
      jPanTableBusqView.setVisible(false);
      jPanRentCargador.setVisible(false);
@@ -123,8 +112,6 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     bandC =0;
            }
     }} );
-
-
  }
 
     /**
@@ -259,11 +246,13 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jTabViewGastos = new javax.swing.JTable();
         jLabel81 = new javax.swing.JLabel();
         jCombBOpcBusqGastos = new javax.swing.JComboBox<>();
-        txtBusGasto = new javax.swing.JTextField();
-        jLabel85 = new javax.swing.JLabel();
         jButton28 = new javax.swing.JButton();
         jButton29 = new javax.swing.JButton();
         jButton38 = new javax.swing.JButton();
+        jLayeredPane6 = new javax.swing.JLayeredPane();
+        txtBusGasto = new javax.swing.JTextField();
+        jDateChoGastos = new com.toedter.calendar.JDateChooser();
+        jButton44 = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanCargadores = new javax.swing.JPanel();
         jLayeredPane4 = new javax.swing.JLayeredPane();
@@ -1798,11 +1787,12 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
             jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtBusqTickAll, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                .addGap(70, 70, 70))
+                .addComponent(txtBusqTickAll, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane5Layout.createSequentialGroup()
-                    .addComponent(jDatChoFechBusqtick, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane5Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jDatChoFechBusqtick, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jLayeredPane5Layout.setVerticalGroup(
@@ -1813,7 +1803,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
             .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane5Layout.createSequentialGroup()
                     .addComponent(jDatChoFechBusqtick, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jTabviewPays.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1877,7 +1867,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCBBusqTicketall, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1886,7 +1876,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cobros", jPanInterncoborstivk);
@@ -1916,11 +1906,12 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jLabel81.setText("Buscar");
 
         jCombBOpcBusqGastos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCombBOpcBusqGastos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Concepto" }));
-
-        txtBusGasto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel85.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/goma-de-borrar.png"))); // NOI18N
+        jCombBOpcBusqGastos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Concepto", "Fecha" }));
+        jCombBOpcBusqGastos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCombBOpcBusqGastosActionPerformed(evt);
+            }
+        });
 
         jButton28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mas.png"))); // NOI18N
@@ -1948,6 +1939,37 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
             }
         });
 
+        jLayeredPane6.setPreferredSize(new java.awt.Dimension(196, 31));
+
+        txtBusGasto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jLayeredPane6.setLayer(txtBusGasto, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(jDateChoGastos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane6Layout = new javax.swing.GroupLayout(jLayeredPane6);
+        jLayeredPane6.setLayout(jLayeredPane6Layout);
+        jLayeredPane6Layout.setHorizontalGroup(
+            jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane6Layout.createSequentialGroup()
+                .addComponent(txtBusGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jDateChoGastos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
+        );
+        jLayeredPane6Layout.setVerticalGroup(
+            jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtBusGasto)
+            .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jDateChoGastos, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+        );
+
+        jButton44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search-what.png"))); // NOI18N
+        jButton44.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton44ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanInternGastosLayout = new javax.swing.GroupLayout(jPanInternGastos);
         jPanInternGastos.setLayout(jPanInternGastosLayout);
         jPanInternGastosLayout.setHorizontalGroup(
@@ -1956,41 +1978,42 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addContainerGap()
                 .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanInternGastosLayout.createSequentialGroup()
-                        .addComponent(jLabel81)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCombBOpcBusqGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBusGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel85))
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
-                    .addGroup(jPanInternGastosLayout.createSequentialGroup()
                         .addComponent(jButton28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanInternGastosLayout.createSequentialGroup()
+                        .addComponent(jLabel81, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCombBOpcBusqGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLayeredPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton44, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanInternGastosLayout.createSequentialGroup()
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(5, 5, 5))
         );
         jPanInternGastosLayout.setVerticalGroup(
             jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanInternGastosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel81)
-                        .addComponent(jCombBOpcBusqGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtBusGasto)
-                    .addComponent(jLabel85, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLayeredPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(jCombBOpcBusqGastos)
+                    .addComponent(jLabel81, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Gastos", jPanInternGastos);
@@ -2751,7 +2774,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jPanTableBusqView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanTableBusqView1Layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+            .addComponent(jScrollPane3)
             .addContainerGap())
     );
     jPanTableBusqView1Layout.setVerticalGroup(
@@ -2776,7 +2799,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanDataambView2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
     );
     jLayeredPane3Layout.setVerticalGroup(
         jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2861,13 +2884,13 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                             .addComponent(jButton37))))
                 .addGroup(jPanCargadoresLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap(13, Short.MAX_VALUE))
         .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanCargadoresLayout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLayeredPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
     );
     jPanCargadoresLayout.setVerticalGroup(
         jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2891,10 +2914,10 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                         .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtTotalCarg)
                         .addComponent(jLabel125, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanCargadoresLayout.createSequentialGroup()
-                    .addGap(294, 294, 294)
+                .addGroup(jPanCargadoresLayout.createSequentialGroup()
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addContainerGap(210, Short.MAX_VALUE))
+            .addContainerGap(214, Short.MAX_VALUE))
         .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanCargadoresLayout.createSequentialGroup()
                 .addContainerGap(302, Short.MAX_VALUE)
@@ -3547,39 +3570,34 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
     jPanTransitoInfraccionLayout.setHorizontalGroup(
         jPanTransitoInfraccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanTransitoInfraccionLayout.createSequentialGroup()
-            .addGroup(jPanTransitoInfraccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanTransitoInfraccionLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jButton30)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel120)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jLabtotInfracc, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanTransitoInfraccionLayout.createSequentialGroup()
-                    .addGroup(jPanTransitoInfraccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanTransitoInfraccionLayout.createSequentialGroup()
-                            .addGap(31, 31, 31)
-                            .addComponent(jLabel118, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanTransitoInfraccionLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanTransitoInfraccionLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel119, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(6, 6, 6)
-                            .addComponent(jCBoxFilterBusq, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtInFilterBusq, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 21, Short.MAX_VALUE)))
-            .addContainerGap())
+            .addContainerGap()
+            .addComponent(jButton30)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jLabel120)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jLabtotInfracc, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGroup(jPanTransitoInfraccionLayout.createSequentialGroup()
+            .addGap(31, 31, 31)
+            .addComponent(jLabel118, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGroup(jPanTransitoInfraccionLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+            .addGap(5, 5, 5))
+        .addGroup(jPanTransitoInfraccionLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jLabel119, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(6, 6, 6)
+            .addComponent(jCBoxFilterBusq, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(txtInFilterBusq, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
     jPanTransitoInfraccionLayout.setVerticalGroup(
         jPanTransitoInfraccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3604,7 +3622,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addComponent(jButton31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton30, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGap(226, 226, 226))
+            .addContainerGap(226, Short.MAX_VALUE))
     );
 
     jPanambulantes.setBackground(new java.awt.Color(255, 255, 255));
@@ -4403,7 +4421,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jPanTableBusqViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanTableBusqViewLayout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
             .addContainerGap())
     );
     jPanTableBusqViewLayout.setVerticalGroup(
@@ -4420,12 +4438,12 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jLayeredPane2Layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jPanTableBusqView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap())
+            .addComponent(jPanTableBusqView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addComponent(jPanDataambView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap()))
+                .addComponent(jPanDataambView1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE)))
     );
     jLayeredPane2Layout.setVerticalGroup(
         jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4493,7 +4511,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
             .addComponent(jButton22))
         .addGroup(jPanambulantesLayout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLayeredPane2))
     );
     jPanambulantesLayout.setVerticalGroup(
         jPanambulantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4524,6 +4542,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
 
     jPanAreascobros.setBackground(new java.awt.Color(255, 255, 255));
     jPanAreascobros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+    jPanAreascobros.setPreferredSize(new java.awt.Dimension(625, 775));
 
     jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
     jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/almacen.png"))); // NOI18N
@@ -4938,7 +4957,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jLaFechFinBasura, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, 0)
                     .addComponent(jButBasuraMoore, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addGroup(jPanBasuraContenPaysLayout.createSequentialGroup()
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -5099,7 +5118,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addComponent(jLabel31))
             .addGap(23, 23, 23)
             .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabSemsPaysPolis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabSemsPaysPolis, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                 .addGroup(jPanel13Layout.createSequentialGroup()
                     .addGap(11, 11, 11)
                     .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -5157,7 +5176,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jLaFechFinPolicia, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, 0)
                     .addComponent(jButPolicMoore, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
     jPanPiliceContenPaysLayout.setVerticalGroup(
@@ -5477,53 +5496,53 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanAreascobros, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE)))
+                .addComponent(jPanAreascobros, javax.swing.GroupLayout.PREFERRED_SIZE, 638, Short.MAX_VALUE)
+                .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(jPanambulantes, javax.swing.GroupLayout.PREFERRED_SIZE, 653, Short.MAX_VALUE)
+                .addComponent(jPanambulantes, javax.swing.GroupLayout.PREFERRED_SIZE, 648, Short.MAX_VALUE)
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanTransitoInfraccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE)))
+                .addComponent(jPanTransitoInfraccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanCargadores, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE)))
+                .addComponent(jPanCargadores, javax.swing.GroupLayout.PREFERRED_SIZE, 638, Short.MAX_VALUE)
+                .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanVarios, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE)))
+                .addComponent(jPanVarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)))
     );
     jLayeredPane1Layout.setVerticalGroup(
         jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 919, Short.MAX_VALUE)
+        .addGap(0, 0, Short.MAX_VALUE)
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(jPanAreascobros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 144, Short.MAX_VALUE)))
+                .addComponent(jPanAreascobros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(144, 144, 144)))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(jPanambulantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 134, Short.MAX_VALUE)))
+                .addComponent(jPanambulantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(134, 134, 134)))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(jPanTransitoInfraccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 73, Short.MAX_VALUE)))
-        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addComponent(jPanCargadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE)))
+                .addComponent(jPanTransitoInfraccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(73, 73, 73)))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGap(9, 9, 9)
-                .addComponent(jPanVarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE)))
+                .addComponent(jPanCargadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(104, 104, 104)))
+        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(jPanVarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(94, 94, 94)))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -5536,9 +5555,9 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 639, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, Short.MAX_VALUE)
+            .addGap(0, 0, 0)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
             .addContainerGap())
     );
     layout.setVerticalGroup(
@@ -5549,8 +5568,10 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 809, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addContainerGap(107, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(5, 5, 5)))
+            .addGap(107, 107, 107))
         .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
     );
     }// </editor-fold>//GEN-END:initComponents
@@ -6972,19 +6993,21 @@ if(!dto.isEmpty() && !toI.isEmpty()){
         */
                 if(totAll.compareTo(efectivale) <= 0){
                     List<String> enviaData = new ArrayList<String>();//lista para guardar el id de cada area cobro de areas
-                        String urno = Integer.toString(func.getenTurno()),
-                                fech = datCtrl.setDateActual(),
+                      //  String urno = Integer.toString(func.getenTurno()),
+                          String fech = datCtrl.setDateActual(),
                                 horP = datCtrl.getHour(),
                                 dscto = txtDcto.getText() ;
-                                enviaData.add(urno);
+                                enviaData.add(infoUser[6]);//tenia urno
                                 enviaData.add(fech);
                                 enviaData.add(horP);
                                 enviaData.add(namePag);
                                 enviaData.add(dscto);
                                 enviaData.add(efectV);
                                 contrl.payInfracc(enviaData,jLabFolio.getText());
-                                 rP.imprim80MM_Infrac(jLabFolio.getText(),false);
+                                
                                  contrl.matrizgetTicketsDia(fech);
+                                  rP.imprim80MM_Infrac(jLabFolio.getText(),true);
+                                  
                                 limpiPayInfrac();
                                 jFramCobroInfrac.dispose();
                 }else{
@@ -7377,7 +7400,7 @@ if(selec > -1){
             if(!desc.isEmpty()){
                 String[] arregCan = new String[6]; 
                 int ultCanc = func.getUltimCancelaciones();
-                int ultTurno = func.getenTurno();
+              //  int ultTurno = func.getenTurno(); *
                 String fech = datCtrl.setDateActual(),
                         ora = datCtrl.getHour(),
                        mostTic = jTabviewPays.getValueAt(fila, 0).toString(),
@@ -7385,7 +7408,7 @@ if(selec > -1){
                
                  arregCan[0] = Integer.toString((ultCanc+1));
                  arregCan[1] = User; 
-                 arregCan[2] = Integer.toString(ultTurno);
+                 arregCan[2] = infoUser[6];//Integer.toString(ultTurno); *
                  arregCan[3] = fech;
                  arregCan[4] = ora;
                  arregCan[5] = desc;
@@ -7442,7 +7465,7 @@ if(selec > -1){
     private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton39ActionPerformed
                 String[] arregCan = new String[9];
                 int ultGast = func.getUltimGastCaja();
-                int ultTurno = func.getenTurno();
+               // int ultTurno = func.getenTurno(); *
 
                 String[] arregModif = new String[4];
 
@@ -7456,7 +7479,7 @@ if(selec > -1){
                         stButn = jButton39.getText();
                 if(!concept.isEmpty() && !mont.isEmpty()){
                     arregCan[0] = Integer.toString((ultGast + 1 ));
-                    arregCan[1] = Integer.toString(ultTurno);
+                    arregCan[1] = infoUser[6];//Integer.toString(ultTurno); *
                     arregCan[2] = fech;
                     arregCan[3] = ora;
                     arregCan[4] = idRub; 
@@ -7544,9 +7567,14 @@ if(selec > -1){
 
         if(opc == 1){
          String fechin = datCtrl.getFecha(jDatChoFechBusqtick);
+        
             String[][] mat = contrl.matrizgetTicketsDia(fechin);
          jTabviewPays.setModel(new TModel(mat, cabAreasPays));
          tamColViwePays();
+//para cargar gastos de la misma fecha de busqueda    
+          jCombBOpcBusqGastos.setSelectedIndex(1);
+          jDateChoGastos.setDate(datCtrl.StringDate(fechin));
+          jButton44.doClick();
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 
@@ -7596,8 +7624,32 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         String fechCort = datCtrl.getFecha(jDateChoCorte);
         rP.imprim80MM_corteCaja(fechCort,false);
+        rP.creListenerButton(Integer.parseInt(infoUser[6]), infoUser[2]);
         jDateChoCorte.setDate(datCtrl.cargafecha());
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jCombBOpcBusqGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCombBOpcBusqGastosActionPerformed
+        int opc = jCombBOpcBusqGastos.getSelectedIndex();
+        txtBusGasto.setText("");
+        jDateChoGastos.setDate(datCtrl.cargafecha());
+        if(opc == 0){
+            txtBusGasto.setVisible(true);
+            jDateChoGastos.setVisible(false);
+        }else{
+            txtBusGasto.setVisible(false);
+            jDateChoGastos.setVisible(true);
+        }
+    }//GEN-LAST:event_jCombBOpcBusqGastosActionPerformed
+
+    private void jButton44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton44ActionPerformed
+        int opc = jCombBOpcBusqGastos.getSelectedIndex();
+
+        if(opc == 1){
+         String fechin = datCtrl.getFecha(jDateChoGastos);
+            mostrarGastosDia(fechin);
+         //tamColViwePays();
+        }
+    }//GEN-LAST:event_jButton44ActionPerformed
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -8197,7 +8249,7 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
         protected void cobraAreas(){
                 String[] arr = new String[7]; 
                 int isUltimTick = func.getUltimPagoarea(),//Se aumenta porq la columna no es increment
-                           isTurnoUlt = func.getenTurno(),
+                    //       isTurnoUlt = func.getenTurno(), *
                         contadorGuard =0;
                   String fech = datCtrl.setDateActual(),
                            ora = datCtrl.getHour(),
@@ -8205,7 +8257,7 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
                            idAr = conten.get(jCmBxgetAreas.getSelectedIndex()),
                           efectiv = txtEfect.getText();
                   arr[0] = Integer.toString(isUltimTick+1);
-                  arr[1] = Integer.toString(isTurnoUlt);
+                  arr[1] = infoUser[6];//Integer.toString(isTurnoUlt); *
                   arr[2] = fech;
                   arr[3] = ora;
                   arr[4] = idAr;
@@ -8303,7 +8355,7 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
              jTabviewPays.setModel(new TModel(mat, cabAreasPays));    
              tamColViwePays();
             String[] dat = rP.getUltimPagoarea(arr[0]);
-            rP.imprim80MM(arr[0], dat,false);   
+            rP.imprim80MM(arr[0], dat,true);   
             inhabilitaAreas();
         }//@endCobroArea
         
@@ -8311,7 +8363,7 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
         protected void cobraAmbulantes(){
                 String[] arr = new String[7]; 
                 int isUltimTick = func.getUltimPagoambus(),//Se aumenta porq la columna no es increment
-                           isTurnoUlt = func.getenTurno(),
+                           //isTurnoUlt = func.getenTurno(), *
                         contadorGuard =0;
                   String fech = datCtrl.setDateActual(),
                            ora = datCtrl.getHour(),
@@ -8319,7 +8371,7 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
                            idAmbu = jLabIdAmbu.getText(),
                           efectiv = txtEfect.getText();
                   arr[0] = Integer.toString(isUltimTick+1);
-                  arr[1] = Integer.toString(isTurnoUlt);
+                  arr[1] = infoUser[6];//Integer.toString(isTurnoUlt); *
                   arr[2] = fech;
                   arr[3] = ora;
                   arr[4] = idAmbu;
@@ -8411,7 +8463,7 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
              jTabviewPays.setModel(new TModel(mat, cabAreasPays));       
              tamColViwePays();
             String[] dat = rP.getTickPagoAmbu(arr[0]);
-            rP.imprim80MMAmbus(arr[0], dat,false);   
+            rP.imprim80MMAmbus(arr[0], dat,true);   
              inhabilitaAmbus();
     }//@endCobroAmbulantes
         
@@ -8421,7 +8473,7 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
                             dscto,
                             totalimport;
                 int isUltimTick = func.getUltimPagoCargad(),//Se aumenta porq la columna no es increment
-                           isTurnoUlt = func.getenTurno(),
+                           //isTurnoUlt = func.getenTurno(),
                         contadorGuard =0;
                   String fech = datCtrl.setDateActual(),
                            ora = datCtrl.getHour(),
@@ -8430,7 +8482,7 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
                           efectiv = txtEfect.getText(),
                           aux="";
                   arr[0] = Integer.toString(isUltimTick+1);
-                  arr[1] = Integer.toString(isTurnoUlt);
+                  arr[1] = infoUser[6];//Integer.toString(isTurnoUlt);
                   arr[2] = fech;
                   arr[3] = ora;
                   arr[4] = idAmbu;
@@ -8511,8 +8563,7 @@ aux = func.percentage(coast, dscto).toString();
 tamColViwePays();
 
            String[] dat = rP.getTickPagoCargad(arr[0]);
-         rP.imprim80MMCargad(arr[0], dat,false);
-
+         rP.imprim80MMCargad(arr[0], dat,true);
            limpiPreDatCargad();
     }//@endCobroCargadores
         
@@ -8523,7 +8574,7 @@ protected void cobraOtrosPays(){
                     dscto,
                     totalimport;
           int isUltimTick = func.getUltimPagootros_venta(),//Se aumenta porq la columna no es increment
-                    isTurnoUlt = func.getenTurno(),
+                    //isTurnoUlt = func.getenTurno(), *
                     contadorGuard =0;
           String fech = datCtrl.setDateActual(),
                     ora = datCtrl.getHour(),
@@ -8541,7 +8592,7 @@ protected void cobraOtrosPays(){
                   aux = "1";
                   
            arr[0] = Integer.toString(isUltimTick+1);
-           arr[1] = Integer.toString(isTurnoUlt);
+           arr[1] = infoUser[6];//Integer.toString(isTurnoUlt); *
            arr[2] = fech;
            arr[3] = ora;
            arr[4] = aux;
@@ -8572,11 +8623,12 @@ protected void cobraOtrosPays(){
                 datos.clear();
             }
         }
-          String[] dat = rP.getTickOthers(arr[0]);
-          rP.imprim80MMOthers(arr[0],dat,false);
           
           String[][] mat = contrl.matrizgetTicketsDia(fech);
-          jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
+          jTabviewPays.setModel(new TModel(mat, cabAreasPays)); 
+          
+          String[] dat = rP.getTickOthers(arr[0]);
+          rP.imprim80MMOthers(arr[0],dat,true);
           tamColViwePays();
            limpiaOthsPays();
     }//@end cobroOthers
@@ -8588,7 +8640,7 @@ protected void cobraRentCarg(){
                     dscto
                   ;
           int isUltimTick = func.getUltimPagoCarg_Rent(),//Se aumenta porq la columna no es increment
-                    isTurnoUlt = func.getenTurno(),
+                    //isTurnoUlt = func.getenTurno(), *
                     contadorGuard =Integer.parseInt(txtnumDaysrentdiab.getText()),
                   auxIdTic = 1
                   ;
@@ -8608,7 +8660,7 @@ protected void cobraRentCarg(){
               percnt = func.getDifference(coast, func.percentage(coast, dscto)).toString();
            
            arr[0] = Integer.toString(isUltimTick+1);
-           arr[1] = Integer.toString(isTurnoUlt);
+           arr[1] = infoUser[6];//Integer.toString(isTurnoUlt); *
            arr[2] = fech;
            arr[3] = ora;
            arr[4] = idCarg;
@@ -8622,12 +8674,14 @@ protected void cobraRentCarg(){
                 auxFech = arr[6];auxIdTic=Integer.parseInt(arr[0]);
                 arr[0] = Integer.toString(auxIdTic+1);
                 arr[6] = datCtrl.getSumFechDay(auxFech,1);
+                
+                 rP.imprim80MM_CargRent(Integer.toString(auxIdTic),true);
            }
            comoNewRentCarg();
           String[][] mat = contrl.matrizgetTicketsDia(fech);
           jTabviewPays.setModel(new TModel(mat, cabAreasPays));  
           tamColViwePays();
-          rP.imprim80MM_CargRent(Integer.toString(auxIdTic),false);
+         
     }//@end cobraRentCarg
 
         public void limpiPreDatCargad(){
@@ -9034,6 +9088,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton42;
     private javax.swing.JButton jButton43;
+    private javax.swing.JButton jButton44;
     private javax.swing.JButton jButton47;
     private javax.swing.JButton jButton48;
     private javax.swing.JButton jButton49;
@@ -9066,6 +9121,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private com.toedter.calendar.JDateChooser jDatChoFechBusqtick;
     private com.toedter.calendar.JDateChooser jDatChoIncripcion;
     private com.toedter.calendar.JDateChooser jDateChoCorte;
+    private com.toedter.calendar.JDateChooser jDateChoGastos;
     private com.toedter.calendar.JDateChooser jDateChoInscripcion;
     private javax.swing.JDialog jDialAltaGastos;
     private javax.swing.JDialog jDialCalendarMantenim;
@@ -9256,7 +9312,6 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
-    private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
     private javax.swing.JLabel jLabel88;
@@ -9281,6 +9336,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JLayeredPane jLayeredPane4;
     private javax.swing.JLayeredPane jLayeredPane5;
+    private javax.swing.JLayeredPane jLayeredPane6;
     private javax.swing.JLayeredPane jLayeredPanePerson;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanAreascobros;

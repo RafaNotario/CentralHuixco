@@ -5,6 +5,7 @@
  */
 package tickets.Jasper;
 
+import Controller.controlInserts;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -15,16 +16,20 @@ import conexion.ConexionDBOriginal;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -35,6 +40,10 @@ public class Reportes {
     
         ConexionDBOriginal con2 = new ConexionDBOriginal();
         JButton b1 = new JButton("CerrarTurno");
+        controlInserts contrR = new controlInserts();
+        public Reportes(){
+      //      creListenerButton();
+        }
         
 void imprim() throws JRException{
         Connection cn = con2.conexion();
@@ -288,19 +297,19 @@ void imprim() throws JRException{
                 net.sf.jasperreports.swing.JRViewer jv = new net.sf.jasperreports.swing.JRViewer(jp);
                 JFrame  jf = new JFrame();
                 
-           jf.getContentPane().setLayout(new BorderLayout());//FlowLayout()
-           jf.getContentPane().add(jv,BorderLayout.CENTER);
+                jf.getContentPane().setLayout(new BorderLayout());//FlowLayout()
+                jf.getContentPane().add(jv,BorderLayout.CENTER);
 //           jf.getContentPane().setSize();
 
-           jf.add(b1,BorderLayout.SOUTH);
-          b1.setBounds(0,0, 97, 25);
-          b1.setBackground(Color.CYAN);
-           jf.validate();
-           jf.setVisible(true);
-           jf.setSize(new Dimension(800,600));
-           jf.setLocation(300,100);
-           jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-           jf.setTitle("CORTE DE CAJA");
+                    jf.add(b1,BorderLayout.SOUTH);
+                   b1.setBounds(0,0, 97, 50);
+                   b1.setBackground(Color.CYAN);
+                    jf.validate();
+                    jf.setVisible(true);
+                    jf.setSize(new Dimension(800,600));
+                    jf.setLocation(300,100);
+                    jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    jf.setTitle("CORTE DE CAJA");
                 
                 //linea para mandar a imprimir
   /*              if(print){
@@ -482,10 +491,34 @@ void imprim() throws JRException{
            return totalesAreaSem;
     }//@end getTickOthers
           
+         public void creListenerButton(int idT,String nUser){
+             b1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cierraTurno(idT,nUser);
+            }
+        });
+          }
+          
+          private void cierraTurno(int idTurno, String userN){
+               int dialogButton = JOptionPane.YES_NO_OPTION;
+                int dialogResult = JOptionPane.showConfirmDialog (null, "<html> "
+                        + "Seguro que desea cerrar el turno de:<h1> "+userN+" </h1>? </html>","Eliminar",dialogButton);
+                if(dialogResult == JOptionPane.YES_OPTION){
+                    java.util.Date date = new Date(); //finally
+                    String timeDate = new java.sql.Timestamp(date.getTime()).toString();
+                    contrR.f5CancelTypesAll("turnos", "ffinal", Integer.toString(idTurno), timeDate);
+                    JOptionPane.showMessageDialog(null, "turno cerrado correctamente");
+                    System.exit(0);
+                } else {
+                    JOptionPane.showMessageDialog(null,"No se cerro el turno: "+idTurno);
+                }
+          }
+          
 public static void main(String []argv) throws JRException{
         Reportes rP = new Reportes();
         String[] dat = rP.getTickOthers("2");
-        rP.imprim80MM_corteCaja("2020-03-25",false);
+        rP.imprim80MM_corteCaja("2020-03-28",false);
         System.out.println("Y atermino");
     }
     
