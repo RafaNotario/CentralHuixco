@@ -57,8 +57,7 @@ void imprim() throws JRException{
          JasperPrintManager.printReport(jp, false);
 }//@endimrpim
 
-
- public void imprim80MM(String param,String[] datas, boolean print){
+ public void imprim80MM(String param,String[] datas, boolean print){//pago semanal de area
         Connection cn = con2.conexion();
         String  var = "C:/central/src/tickets/Jasper/ticket80MM.jasper";
         JasperReport reporte = null;
@@ -97,7 +96,7 @@ void imprim() throws JRException{
                 }
 }//@imprim80MM
 
- /*Generar ticket de Ambulantes */
+ /*Generar ticket de pago semanal de Ambulantes */
   public void imprim80MMAmbus(String param,String[] datas, boolean print){
         Connection cn = con2.conexion();
         String  var = "C:/central/src/tickets/Jasper/ticket80MM_Ambu.jasper";
@@ -108,9 +107,10 @@ void imprim() throws JRException{
                 parametro.put("paramTotal",datas[0]);
                 parametro.put("paramEfectiv",datas[1]);
                 parametro.put("paramCambio",datas[2]);
-                parametro.put("nombAmbu",datas[4]);
+                parametro.put("nombAmbu",datas[5]);
                 parametro.put("nombAtendio",datas[3]);
-                parametro.put("fechHorTicAmb",datas[5]);
+                parametro.put("fechHorTicAmb",datas[6]);
+                parametro.put("numAmbu",datas[4]);
                 
                 reporte = (JasperReport) JRLoader.loadObjectFromFile(var);
                 JasperPrint jp = JasperFillManager.fillReport(reporte, parametro, cn);
@@ -138,7 +138,7 @@ void imprim() throws JRException{
 }//@imprim80MM
 
   
-   /*Generar ticket de Cargadores */
+   /*Generar ticket de pago semanal de Cargadores */
   public void imprim80MMCargad(String param,String[] datas, boolean print){
         Connection cn = con2.conexion();
         String  var = "C:/central/src/tickets/Jasper/ticket80MM_Cargad.jasper";
@@ -149,10 +149,10 @@ void imprim() throws JRException{
                 parametro.put("paramTotal",datas[0]);
                 parametro.put("paramEfectiv",datas[1]);
                 parametro.put("paramCambio",datas[2]);
-                parametro.put("nombAmbu",datas[4]);
+                parametro.put("nombAmbu",datas[5]);
                 parametro.put("nombAtendio",datas[3]);
-                parametro.put("fecHorTicCarg",datas[5]);
-                
+                parametro.put("fecHorTicCarg",datas[6]);
+                parametro.put("numCargador",datas[4]);
                 reporte = (JasperReport) JRLoader.loadObjectFromFile(var);
                 JasperPrint jp = JasperFillManager.fillReport(reporte, parametro, cn);
 
@@ -233,8 +233,7 @@ void imprim() throws JRException{
 
                 //linea para mandar a imprimir
                 if(print){
-                    
-       JasperPrintManager.printReport(jp, false);//imprimir sin mostrar cuadro de dialogo
+                   JasperPrintManager.printReport(jp, false);//imprimir sin mostrar cuadro de dialogo
                 }else{
                     JasperViewer jv = new JasperViewer(jp,false);
                     jv.setZoomRatio(new Float(1.5));
@@ -377,9 +376,9 @@ void imprim() throws JRException{
 /**** Para obtener total,efectivo y diferencia ticket semanal area **/
           public String[] getTickPagoAmbu(String idTicket){
             Connection cn = con2.conexion();
-            String[] totalesAreaSem = new String[6]; 
+            String[] totalesAreaSem = new String[7]; 
             String sql = "";
-            sql = "SELECT pagos_amb.total,pagos_amb.efectivo, pagos_amb.efectivo - pagos_amb.total AS resta, usuarios.nombre, ambulantes.nombre,CONCAT(date_format(pagos_amb.fecha,'%d-%m-%Y'),' ',date_format(pagos_amb.hora,'%H : %i')  )\n" +
+            sql = "SELECT pagos_amb.total,pagos_amb.efectivo, pagos_amb.efectivo - pagos_amb.total AS resta, usuarios.nombre, ambulantes.id,ambulantes.nombre,CONCAT(date_format(pagos_amb.fecha,'%d-%m-%Y'),' ',date_format(pagos_amb.hora,'%H : %i')  )\n" +
                     "FROM pagos_amb\n" +
                     "INNER join ambulantes\n" +
                     "ON pagos_amb.idAmb = ambulantes.id AND pagos_amb.id = '"+idTicket+"'\n" +
@@ -400,6 +399,7 @@ void imprim() throws JRException{
                     totalesAreaSem[3] = rs.getString(4);
                     totalesAreaSem[4] = rs.getString(5);
                     totalesAreaSem[5] = rs.getString(6);
+                    totalesAreaSem[6] = rs.getString(7);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
@@ -416,9 +416,9 @@ void imprim() throws JRException{
 // obtener datos para rellenar ticket de Cargadores
            public String[] getTickPagoCargad(String idTicket){
             Connection cn = con2.conexion();
-            String[] totalesAreaSem = new String[6]; 
+            String[] totalesAreaSem = new String[7]; 
             String sql = "";
-            sql = "SELECT pagos_carg.total,pagos_carg.efectivo, pagos_carg.efectivo - pagos_carg.total AS resta, usuarios.nombre, cargadores.nombre,CONCAT(date_format(pagos_carg.fecha,'%d-%m-%Y'),' ',date_format(pagos_carg.hora,'%H : %i')  )\n" +
+            sql = "SELECT pagos_carg.total,pagos_carg.efectivo, pagos_carg.efectivo - pagos_carg.total AS resta, usuarios.nombre, cargadores.id,cargadores.nombre,CONCAT(date_format(pagos_carg.fecha,'%d-%m-%Y'),' ',date_format(pagos_carg.hora,'%H : %i')  )\n" +
                     "FROM pagos_carg\n" +
                     "INNER JOIN cargadores\n" +
                     "ON pagos_carg.idcarg = cargadores.id AND pagos_carg.id = '"+idTicket+"'\n" +
@@ -439,6 +439,7 @@ void imprim() throws JRException{
                     totalesAreaSem[3] = rs.getString(4);
                     totalesAreaSem[4] = rs.getString(5);
                     totalesAreaSem[5] = rs.getString(6);
+                    totalesAreaSem[6] = rs.getString(7);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);

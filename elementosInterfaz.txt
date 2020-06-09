@@ -26,6 +26,10 @@ jLabObserva
 	jTabDatosAmbulante
 	jLabNomAmb
 
+	jDialogBajAltAmb
+	txtMotivBaja
+	
+
 @jPanCargadores
 	jPanCargadorInscr
 	jPanSemCargad
@@ -309,9 +313,10 @@ jLabObserva
 	txtBusqTickAll
 	jDatChoFechBusqtick
 	
-
-
-
+---/*/*/*/	Busqueda de all gastos por dia
+	jCombBOpcBusqGastos
+	jDateChoGastos
+	txtBusGasto
 
 
 
@@ -327,5 +332,26 @@ jLabObserva
 	
 @jPanSociosView
 
+        //** JFRAME ALTA AMBULANTES VIEW ***/
+	txtfolAmb
+	txtNombAmb
+	txtDirAmb
+	txtObsAmb
+	jCBoxGirosAmb
+	txtTelAmb
 
-          
+	jCBoxTarifaAmb
+	txtCoastSemAmb
+	txtCoastInscAmb
+	txtCoastResgAmb
+	jCBoxResgAmb
+	txtDsctoAmbSem
+	txtDsctoAmbIns
+	txtDsctoResgAmb
+	
+	jPaniNIpAYSaMB
+
+	jButton2
+	jButton3
+	jButton1
+	jButton4

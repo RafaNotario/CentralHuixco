@@ -388,7 +388,7 @@ public String getsumaFecha(JDateChooser jd,int monts){
     //    dC.jLocalFechas("2020/04/13");
         System.out.println("PRUEBAS DE STACKOVERFLOW");
         
-        System.out.println("La hora es : "+dC.getSumFechDay("2020/05/30",1));
+        System.out.println("La hora es : "+dC.getSumFechDay("2020/06/05",-1));
         
        // System.out.println("Semana fin: "+dC.getWeekEndDate("2020/03/23"));
         //System.out.println("Lapso"+dC.lapsoSem("",1));

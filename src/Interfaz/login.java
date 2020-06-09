@@ -784,9 +784,9 @@ public class login extends javax.swing.JFrame {
         jButton3.setEnabled(act);
         jButton1.setEnabled(act);
         jButton5.setEnabled(act);
-        jButton6.setEnabled(act);
-        jButton4.setEnabled(act);
-        jButton8.setEnabled(act);    
+        jButton6.setEnabled(false);
+        jButton4.setEnabled(false);
+        jButton8.setEnabled(false);    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

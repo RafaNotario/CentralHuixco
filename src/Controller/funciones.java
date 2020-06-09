@@ -319,9 +319,9 @@ public class funciones {
 /*//// OBTENER DATOS DE AMBULANTE para mostrar en panelInfo*/
        public String[] getAmbus1(String idAmbu){
             Connection cn = con2.conexion();
-           String[] lapso = new String[3];
+           String[] lapso = new String[4];
             String sql = "";
-            sql = "SELECT ambulantes.direccion, giros.giro, ambulantes.obs \n" +
+            sql = "SELECT ambulantes.direccion, giros.giro, ambulantes.obs,ambulantes.ultimaSem \n" +
                     "FROM ambulantes\n" +
                     "INNER JOIN giros\n" +
                     "ON ambulantes.idGiro = giros.id AND ambulantes.id = '"+idAmbu+"'; ";
@@ -336,6 +336,7 @@ public class funciones {
                         lapso[0] = rs.getString(1);
                         lapso[1]= rs.getString(2);
                         lapso[2] = rs.getString(3);
+                        lapso[3] = rs.getString(4);
                     }else{
                         for (int i = 0; i < lapso.length; i++) {
                             lapso[i] = "NO-DATA";
@@ -958,14 +959,90 @@ public class funciones {
            return lapso;
     }//@endgetOtros_catalogId
           
-          
+          public String[] getAllDataAmb(String id){
+            Connection cn = con2.conexion();
+            String[] idUser = new String[16];
+            String sql = "";
+            sql = "SELECT * FROM ambulantes WHERE id = '"+id+"'";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idUser[0]=rs.getString(1);
+                        idUser[1]=rs.getString(2);
+                        idUser[2]=rs.getString(3);
+                        idUser[3]=rs.getString(4);
+                        idUser[4]=rs.getString(5);
+                        idUser[5]=rs.getString(6);
+                        idUser[6]=rs.getString(7);
+                        idUser[7]=rs.getString(8);
+                        idUser[8]=rs.getString(9);
+                        idUser[9]=rs.getString(10);
+                        idUser[10]=rs.getString(11);
+                        idUser[11]=rs.getString(12);
+                        idUser[12]=rs.getString(13);
+                        idUser[13]=rs.getString(14);
+                        idUser[14]=rs.getString(15);
+                        idUser[15]=rs.getString(16);
+                    }else{
+                        for (int j = 0; j < idUser.length; j++) {
+                            idUser[j] = "NO-DATA";
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idUser;
+    }//@endgetnombreUsuario
+               
+          public String getnombreTarifaAmb(String colum,String tabl,String idComp){
+            Connection cn = con2.conexion();
+          String nAmb = "";
+            String sql = "";
+            sql = "SELECT "+colum+" FROM "+tabl+" WHERE id = '"+idComp+"'";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        nAmb = rs.getString(1);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return nAmb;
+    }//@end getnombreTarifa
+               
        public static void main(String args[]){
            BigDecimal amountOne = new BigDecimal(250);//monto a cobrar
            BigDecimal amountTwo = new BigDecimal(100.00);//cantidad recivida
            
            funciones fn =  new funciones();
               java.util.Date date = new Date();
-                String[] prue = fn.getTurnoData(121);
+                String[] prue = fn.getAllDataAmb("56");
                 for (int i = 0; i < prue.length; i++) {
                System.out.println("datas turno: "+prue[i]);
            }

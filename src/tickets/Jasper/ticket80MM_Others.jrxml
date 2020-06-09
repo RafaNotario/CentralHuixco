@@ -27,20 +27,20 @@ ON otros_ventadet.idProd = otros_catalogo.id AND otros_ventadet.idVenta = $P{num
 	</field>
 	<field name="multip" class="java.math.BigDecimal"/>
 	<title>
-		<band height="96" splitType="Stretch">
+		<band height="89" splitType="Stretch">
 			<image scaleImage="FillFrame">
 				<reportElement x="10" y="0" width="195" height="79" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
 				<imageExpression><![CDATA["C:\\central\\src\\images\\logo80MM.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="33" y="79" width="147" height="13" forecolor="#3333FF" uuid="2b292a92-0302-46b2-bfec-0232a67d2289"/>
+				<reportElement x="33" y="75" width="147" height="13" forecolor="#3333FF" uuid="2b292a92-0302-46b2-bfec-0232a67d2289"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cobro de Varios]]></text>
 			</staticText>
 			<line>
-				<reportElement x="10" y="93" width="195" height="1" uuid="c1e4c872-16ba-4809-939e-9cfa42c4d990"/>
+				<reportElement x="10" y="87" width="195" height="1" uuid="c1e4c872-16ba-4809-939e-9cfa42c4d990"/>
 				<graphicElement>
 					<pen lineStyle="Double" lineColor="#999999"/>
 				</graphicElement>
@@ -48,7 +48,7 @@ ON otros_ventadet.idProd = otros_catalogo.id AND otros_ventadet.idVenta = $P{num
 		</band>
 	</title>
 	<pageHeader>
-		<band height="51" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="45" height="13" uuid="6877f7c5-93c4-4fe1-9ffa-31dd25ce4217"/>
 				<textElement>
@@ -64,20 +64,20 @@ ON otros_ventadet.idProd = otros_catalogo.id AND otros_ventadet.idVenta = $P{num
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="34" width="45" height="12" uuid="0511f8d0-344a-4620-abea-9b096d7b7370"/>
+				<reportElement x="0" y="35" width="45" height="12" uuid="0511f8d0-344a-4620-abea-9b096d7b7370"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Atendio:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="10" y="48" width="195" height="1" uuid="5982a3a7-ceb5-439f-8f08-f06aa0da8003"/>
+				<reportElement x="9" y="47" width="195" height="1" uuid="5982a3a7-ceb5-439f-8f08-f06aa0da8003"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="44" y="34" width="160" height="12" uuid="fde2777c-c97d-4a2d-9735-921bb0252c82"/>
+				<reportElement x="44" y="35" width="160" height="12" uuid="fde2777c-c97d-4a2d-9735-921bb0252c82"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
@@ -91,7 +91,7 @@ ON otros_ventadet.idProd = otros_catalogo.id AND otros_ventadet.idVenta = $P{num
 				<textFieldExpression><![CDATA[$P{numTicket}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="44" y="23" width="160" height="12" uuid="580a18b7-626e-415a-ba26-15375d40a532"/>
+				<reportElement x="44" y="24" width="160" height="12" uuid="580a18b7-626e-415a-ba26-15375d40a532"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
@@ -112,7 +112,7 @@ ON otros_ventadet.idProd = otros_catalogo.id AND otros_ventadet.idVenta = $P{num
 				<textFieldExpression><![CDATA[$P{horComp}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="23" width="45" height="12" uuid="094d9373-ca2e-4b8f-bba8-b9bad8950471"/>
+				<reportElement x="0" y="24" width="45" height="12" uuid="094d9373-ca2e-4b8f-bba8-b9bad8950471"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
@@ -123,63 +123,63 @@ ON otros_ventadet.idProd = otros_catalogo.id AND otros_ventadet.idVenta = $P{num
 	<detail>
 		<band height="58">
 			<staticText>
-				<reportElement x="75" y="26" width="57" height="13" uuid="429de9ca-2941-400e-8305-41ba27b3dac6"/>
+				<reportElement x="75" y="33" width="57" height="13" uuid="429de9ca-2941-400e-8305-41ba27b3dac6"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[COSTO UNIT.]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="0" y="15" width="216" height="12" uuid="a477312e-eb31-46cc-9377-7f583fb15bd7"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="12" width="215" height="12" uuid="a477312e-eb31-46cc-9377-7f583fb15bd7"/>
 				<textElement>
-					<font size="9"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{descrip}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="75" y="39" width="67" height="12" uuid="8627b025-3f94-4382-aa2d-5be07df04c36"/>
+				<reportElement x="75" y="45" width="67" height="12" uuid="8627b025-3f94-4382-aa2d-5be07df04c36"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="27" width="69" height="12" uuid="2a293416-3da9-42b2-8a36-988ad989396e"/>
+				<reportElement x="0" y="34" width="69" height="12" uuid="2a293416-3da9-42b2-8a36-988ad989396e"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[CANTIDAD:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="3" y="39" width="66" height="12" uuid="139fff33-c7e0-4f4c-afea-2d672c348308"/>
+				<reportElement x="3" y="45" width="66" height="12" uuid="139fff33-c7e0-4f4c-afea-2d672c348308"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cant}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="156" y="27" width="59" height="12" uuid="58378def-dae2-4222-a8c0-a9a87e408b6f"/>
+				<reportElement x="156" y="34" width="59" height="12" uuid="58378def-dae2-4222-a8c0-a9a87e408b6f"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[IMPORTE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3" y="3" width="69" height="12" uuid="08c02400-4ce2-4cfe-a6da-7d6c246a7f9c"/>
+				<reportElement x="3" y="0" width="69" height="12" uuid="08c02400-4ce2-4cfe-a6da-7d6c246a7f9c"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[CONCEPTO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="150" y="39" width="65" height="12" uuid="5808800b-c209-4366-8829-cce76df3b4fa"/>
+				<reportElement x="150" y="45" width="65" height="12" uuid="5808800b-c209-4366-8829-cce76df3b4fa"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{multip}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="62" y="51" width="80" height="1" uuid="7c2abe09-3cb9-47fd-9ae7-789067effb61"/>
+				<reportElement x="62" y="57" width="80" height="1" uuid="7c2abe09-3cb9-47fd-9ae7-789067effb61"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#999999"/>
 				</graphicElement>

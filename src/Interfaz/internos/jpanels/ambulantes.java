@@ -128,6 +128,10 @@ return mat;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialogBajAltAmb = new javax.swing.JDialog();
+        jLabel2 = new javax.swing.JLabel();
+        txtMotivBaja = new javax.swing.JTextField();
+        jButton10 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -146,6 +150,47 @@ return mat;
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabViewAllAmbs = new javax.swing.JTable();
         jButton9 = new javax.swing.JButton();
+
+        jDialogBajAltAmb.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jDialogBajAltAmb.setBackground(new java.awt.Color(255, 255, 255));
+        jDialogBajAltAmb.setSize(new java.awt.Dimension(585, 155));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("Especifique motivo de baja");
+
+        txtMotivBaja.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jButton10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chequeOk.png"))); // NOI18N
+        jButton10.setText("Aceptar");
+
+        javax.swing.GroupLayout jDialogBajAltAmbLayout = new javax.swing.GroupLayout(jDialogBajAltAmb.getContentPane());
+        jDialogBajAltAmb.getContentPane().setLayout(jDialogBajAltAmbLayout);
+        jDialogBajAltAmbLayout.setHorizontalGroup(
+            jDialogBajAltAmbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogBajAltAmbLayout.createSequentialGroup()
+                .addGroup(jDialogBajAltAmbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogBajAltAmbLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jDialogBajAltAmbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMotivBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jDialogBajAltAmbLayout.createSequentialGroup()
+                        .addGap(206, 206, 206)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        jDialogBajAltAmbLayout.setVerticalGroup(
+            jDialogBajAltAmbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogBajAltAmbLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtMotivBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/informacion.png"))); // NOI18N
         jButton1.setText("Información");
@@ -172,6 +217,11 @@ return mat;
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Actualizar.png"))); // NOI18N
         jButton4.setText("Actualizar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/print32x32.png"))); // NOI18N
 
@@ -182,7 +232,7 @@ return mat;
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Mostrar");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activos" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTIVOS", "BAJA", "TODOS" }));
         jComboBox1.setOpaque(false);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
@@ -348,15 +398,25 @@ return mat;
         int fila = jTabViewAllAmbs.getSelectedRow();
 
         if(fila > -1){
+              jDialogBajAltAmb.setLocationRelativeTo(null);
+              jDialogBajAltAmb.setVisible(true);
+              jDialogBajAltAmb.setEnabled(true);
+    //    jDialCancelaciones.setTitle("Cancelacion de Renta cargador");
+ 
             
         }else{
             JOptionPane.showMessageDialog(null,"no data View");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    cargaDatasAmbulantes();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -368,11 +428,14 @@ return mat;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JDialog jDialogBajAltAmb;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTabViewAllAmbs;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtMotivBaja;
     // End of variables declaration//GEN-END:variables
 }
