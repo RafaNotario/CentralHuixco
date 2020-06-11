@@ -355,3 +355,12 @@ jLabObserva
 	jButton3
 	jButton1
 	jButton4
+
+/* parametros corte de caja*/
+namCajero
+fechApert
+fechCierre
+saldInicial
+totCobros
+totGastos
+totCajaAll

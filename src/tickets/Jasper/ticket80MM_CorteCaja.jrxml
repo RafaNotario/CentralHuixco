@@ -4,14 +4,18 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="fechCorte" class="java.lang.String"/>
-	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\central\\src\\tickets\\Jasper\\"]]></defaultValueExpression>
-	</parameter>
+	<parameter name="namCajero" class="java.lang.String"/>
+	<parameter name="fechApert" class="java.lang.String"/>
+	<parameter name="fechCierre" class="java.lang.String"/>
+	<parameter name="saldInicial" class="java.lang.String"/>
+	<parameter name="totCobros" class="java.lang.String"/>
+	<parameter name="totGastos" class="java.lang.String"/>
+	<parameter name="totCajaAll" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[(SELECT count(distinct(pagos_areas.id)) AS numera,CONCAT(rubrospago.descripcion,'(areas)') AS descrip,sum(pagos_areasdet.importe) AS totl
 FROM pagos_areas
 INNER JOIN pagos_areasdet
-ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areas.fecha = $P{fechCorte}
+ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areas.idCancelacion = 0 AND pagos_areas.idTurno = $P{fechCorte}
 INNER JOIN rubrospago
 ON pagos_areasdet.idRubroPago = rubrospago.id
 GROUP BY pagos_areasdet.idRubroPago)
@@ -20,7 +24,7 @@ UNION
 (SELECT count(distinct(pagos_amb.id)) AS numera,rubrospago.descripcion,sum(pagos_ambdet.importe - pagos_ambdet.descuento) AS totl
 FROM pagos_amb
 INNER JOIN pagos_ambdet
-ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_amb.fecha = $P{fechCorte}
+ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_amb.idCancelacion = 0 AND pagos_amb.idTurno = $P{fechCorte}
 INNER JOIN rubrospago
 ON pagos_ambdet.idRubropago = rubrospago.id
 GROUP BY pagos_ambdet.idRubropago)
@@ -29,7 +33,7 @@ UNION
 (SELECT count(distinct(pagos_carg.id)) AS numCarg,rubrospago.descripcion,sum(pagos_cargdet.importe - pagos_cargdet.descuento) AS totCarg
 FROM pagos_carg
 INNER JOIN pagos_cargdet
-ON pagos_carg.id = pagos_cargdet.idTicket AND pagos_carg.fecha = $P{fechCorte}
+ON pagos_carg.id = pagos_cargdet.idTicket AND pagos_carg.idCancelacion = 0 AND pagos_carg.idTurno = $P{fechCorte}
 INNER JOIN rubrospago
 ON pagos_cargdet.idRubropago = rubrospago.id
 GROUP BY pagos_cargdet.idRubropago)
@@ -37,18 +41,19 @@ UNION -- qwery para mostrar cobro de rentas diablo cargador
 (SELECT count(pagos_cargrenta.id) AS numCargR, rubrospago.descripcion,sum(pagos_cargrenta.importe) AS totCargR
 FROM pagos_cargrenta
 INNER JOIN rubrospago
-ON pagos_cargrenta.idRubropago = rubrospago.id AND pagos_cargrenta.fecha = $P{fechCorte})
+ON pagos_cargrenta.idRubropago = rubrospago.id AND pagos_cargrenta.idCancelacion = 0 AND pagos_cargrenta.idTurno = $P{fechCorte})
 UNION
  -- qwery para mostrar cobros infracciones
 (SELECT count(pagos_infrac.folio) AS numInfrac, 'Infracciones',IF(pagos_infrac.descuento IS NULL, sum(pagos_infrac.monto), sum(pagos_infrac.monto - pagos_infrac.descuento ))  AS totInfrac
 FROM pagos_infrac
-WHERE pagos_infrac.fechapag = $P{fechCorte})
+LEFT OUTER JOIN pagos_infraccancel
+ON pagos_infraccancel.idFolio = pagos_infrac.folio WHERE pagos_infraccancel.idFolio IS null AND pagos_infrac.idTurno = $P{fechCorte})
 UNION
 -- qwery para mostrar cobros diarios
-(SELECT count(*),otros_rubros.nombre,sum(otros_ventadet.cant * otros_ventadet.precio) AS totCarg
+(SELECT count(*),otros_rubros.nombre,TRUNCATE(sum(otros_ventadet.cant * otros_ventadet.precio),2) AS totCarg
 FROM otros_venta
 INNER JOIN otros_ventadet
-ON otros_venta.id = otros_ventadet.idVenta AND otros_venta.fecha = $P{fechCorte}
+ON otros_venta.id = otros_ventadet.idVenta AND otros_venta.idCancelacion = 0 AND otros_venta.idTurno = $P{fechCorte}
 INNER JOIN otros_catalogo
 ON otros_ventadet.idProd = otros_catalogo.id
 INNER JOIN otros_rubros
@@ -59,7 +64,7 @@ UNION
 UNION
 (SELECT 1,gastos_caja.concepto,gastos_caja.monto
 FROM gastos_caja
-WHERE fecha = $P{fechCorte})
+WHERE idTurno = $P{fechCorte})
 ;]]>
 	</queryString>
 	<field name="numera" class="java.lang.String"/>
@@ -89,7 +94,7 @@ WHERE fecha = $P{fechCorte})
 	<pageHeader>
 		<band height="62" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="57" height="13" uuid="6877f7c5-93c4-4fe1-9ffa-31dd25ce4217"/>
+				<reportElement x="0" y="0" width="57" height="12" uuid="6877f7c5-93c4-4fe1-9ffa-31dd25ce4217"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
@@ -103,14 +108,14 @@ WHERE fecha = $P{fechCorte})
 				<text><![CDATA[Cajero(a):]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="23" width="57" height="12" uuid="ddfb8062-8f97-44ca-8bd4-77daaf371fed"/>
+				<reportElement x="0" y="24" width="57" height="12" uuid="ddfb8062-8f97-44ca-8bd4-77daaf371fed"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Apertura:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="34" width="57" height="12" uuid="0511f8d0-344a-4620-abea-9b096d7b7370"/>
+				<reportElement x="0" y="36" width="57" height="12" uuid="0511f8d0-344a-4620-abea-9b096d7b7370"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
@@ -123,7 +128,10 @@ WHERE fecha = $P{fechCorte})
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="62" y="0" width="100" height="13" uuid="12f63db3-4442-46ce-b06d-ce3867a383e9"/>
+				<reportElement x="58" y="0" width="100" height="12" uuid="12f63db3-4442-46ce-b06d-ce3867a383e9"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{fechCorte}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -131,6 +139,27 @@ WHERE fecha = $P{fechCorte})
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[---------COBROS VARIOS--------]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="59" y="12" width="157" height="12" uuid="58821c5f-bd35-4361-8eb5-1547b04fc9e4"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{namCajero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="24" width="158" height="12" uuid="758c0285-8618-4d80-b6f9-c84b79468836"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechApert}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="59" y="36" width="157" height="12" uuid="b9ef2908-5e7c-4680-8253-06d8a49b3968"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechCierre}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<detail>
@@ -163,12 +192,8 @@ WHERE fecha = $P{fechCorte})
 	</detail>
 	<lastPageFooter>
 		<band height="52">
-			<textField>
-				<reportElement x="75" y="39" width="100" height="13" uuid="5ae0df9b-569e-481c-9fff-4f45966bd81c"/>
-				<textFieldExpression><![CDATA[$P{fechCorte}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="0" y="39" width="75" height="13" uuid="e3b2f72e-59cf-47ae-9a2f-3a23d09fd129"/>
+				<reportElement x="0" y="39" width="83" height="13" uuid="e3b2f72e-59cf-47ae-9a2f-3a23d09fd129"/>
 				<text><![CDATA[TOTAL CAJA:]]></text>
 			</staticText>
 			<staticText>
@@ -180,7 +205,7 @@ WHERE fecha = $P{fechCorte})
 				<text><![CDATA[TOTAL COBROS:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="75" height="13" uuid="6f823241-66f1-4350-9af2-9853181fa4a7"/>
+				<reportElement x="0" y="0" width="83" height="13" uuid="6f823241-66f1-4350-9af2-9853181fa4a7"/>
 				<text><![CDATA[SALDO INICIAL:]]></text>
 			</staticText>
 			<line>
@@ -189,6 +214,34 @@ WHERE fecha = $P{fechCorte})
 					<pen lineStyle="Dotted" lineColor="#999999"/>
 				</graphicElement>
 			</line>
+			<textField>
+				<reportElement x="83" y="1" width="100" height="13" uuid="7db951b1-a96b-44e5-9140-a97db921b585"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{saldInicial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="83" y="14" width="100" height="13" uuid="b84a543a-43e8-4455-a635-e0df05b50164"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totCobros}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="83" y="26" width="100" height="13" uuid="9c4ecc95-1aeb-4a1d-b561-ba035e406cd5"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totGastos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="83" y="39" width="100" height="13" uuid="7dec30f2-ad3f-4373-a597-0572fea18246"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totCajaAll}]]></textFieldExpression>
+			</textField>
 		</band>
 	</lastPageFooter>
 </jasperReport>

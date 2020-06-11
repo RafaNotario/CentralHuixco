@@ -615,13 +615,11 @@ public class login extends javax.swing.JFrame {
             pass=txtContraseña.getText();
             idReturn = func1.validaLoginUsers(user,pass);//es el id del usuario
             datosUserSys= func1.getnombreUsuario(idReturn);//obtenemos todos los datos del usuario
-            
             if(idReturn > -1 && idReturn < 5000 && !datosUserSys[0].equals("NO-DATA")){
                 jLabUserNombre.setText(datosUserSys[2]);
                 jLaidUSer.setText(datosUserSys[0]);
-                
-                arrTurns = func1.getTurnoData(Integer.parseInt(datosUserSys[6]));
-                if(arrTurns[4] == null){
+            //    arrTurns = func1.getTurnoData(Integer.parseInt(datosUserSys[6]));
+                if(!datosUserSys[6].equals("0")){
               //      JOptionPane.showMessageDialog(null, "En turno");
                     func1.limpiar(jPanTrabajo);
                     inicioButton(true);//habilitar todos los botones del menucontent

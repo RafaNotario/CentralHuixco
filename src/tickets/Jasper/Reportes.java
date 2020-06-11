@@ -6,6 +6,7 @@
 package tickets.Jasper;
 
 import Controller.controlInserts;
+import Controller.funciones;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -18,6 +19,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,6 +44,8 @@ public class Reportes {
         ConexionDBOriginal con2 = new ConexionDBOriginal();
         JButton b1 = new JButton("CerrarTurno");
         controlInserts contrR = new controlInserts();
+        funciones funcRep = new funciones();
+        
         public Reportes(){
       //      creListenerButton();
         }
@@ -49,13 +54,10 @@ void imprim() throws JRException{
         Connection cn = con2.conexion();
       String  var = "C:/central/src/tickets/Jasper/ticket1.jasper";
       JasperReport reporte = null;
-
-
       reporte = (JasperReport) JRLoader.loadObjectFromFile(var);
       JasperPrint jp = JasperFillManager.fillReport(reporte, null, cn);
-
          JasperPrintManager.printReport(jp, false);
-}//@endimrpim
+}//@end imprim
 
  public void imprim80MM(String param,String[] datas, boolean print){//pago semanal de area
         Connection cn = con2.conexion();
@@ -283,16 +285,28 @@ void imprim() throws JRException{
 }//@imprim80MM_CargRent
  
  // REPORTE PARA CORTE DE CAJA
-  public void imprim80MM_corteCaja(String param, boolean print){
+  public void imprim80MM_corteCaja(String param, boolean print, String[] datas){
         Connection cn = con2.conexion();
         String  var = "C:/central/src/tickets/Jasper/ticket80MM_CorteCaja.jasper";
         JasperReport reporte = null;
             try {
                  Map parametro = new HashMap();
                 parametro.put("fechCorte",param);
+                parametro.put("namCajero",datas[0]);
+                parametro.put("fechApert",datas[1]);
+                parametro.put("fechCierre",datas[2]);
+                parametro.put("saldInicial",datas[3]);
+                parametro.put("totCobros",datas[4]);
+                parametro.put("totGastos",datas[5]);
+                parametro.put("totCajaAll",datas[6]);
+                
                 reporte = (JasperReport) JRLoader.loadObjectFromFile(var);
                 JasperPrint jp = JasperFillManager.fillReport(reporte, parametro, cn);
-
+                //linea para mandar a imprimir
+                if(print){
+                    
+                    JasperPrintManager.printReport(jp, false);
+                }else{
                 net.sf.jasperreports.swing.JRViewer jv = new net.sf.jasperreports.swing.JRViewer(jp);
                 JFrame  jf = new JFrame();
                 
@@ -309,18 +323,8 @@ void imprim() throws JRException{
                     jf.setLocation(300,100);
                     jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     jf.setTitle("CORTE DE CAJA");
-                
-                //linea para mandar a imprimir
-  /*              if(print){
-                    
-                    JasperPrintManager.printReport(jp, false);
-                }else{
-                    JasperViewer jv = new JasperViewer(jp,false);
-                    jv.setZoomRatio(new Float(1.5));
-                   jv.setVisible(true);
-                   jv.setTitle("Central Huixcolotla");
                 }
-     */       
+           
             }  catch (JRException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
@@ -486,22 +490,24 @@ void imprim() throws JRException{
                         try {
                             if(cn != null) cn.close();
                         } catch (SQLException ex) {
-                            System.err.println( ex.getMessage() );    
+                            System.err.println( ex.getMessage() );    //XFX AMD Radeon HD 5450
                         }
                     }
            return totalesAreaSem;
     }//@end getTickOthers
           
-         public void creListenerButton(int idT,String nUser){
+         public void creListenerButton(int idT,String nUser,String idUse){
              b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cierraTurno(idT,nUser);
+                cierraTurno(idT,nUser,idUse);
             }
         });
           }
           
-          private void cierraTurno(int idTurno, String userN){
+          private void cierraTurno(int idTurno, String userN,String idUS){
+               String[] infoUser = funcRep.getnombreUsuario(Integer.parseInt(idUS));
+              
                int dialogButton = JOptionPane.YES_NO_OPTION;
                 int dialogResult = JOptionPane.showConfirmDialog (null, "<html> "
                         + "Seguro que desea cerrar el turno de:<h1> "+userN+" </h1>? </html>","Eliminar",dialogButton);
@@ -509,6 +515,30 @@ void imprim() throws JRException{
                     java.util.Date date = new Date(); //finally
                     String timeDate = new java.sql.Timestamp(date.getTime()).toString();
                     contrR.f5CancelTypesAll("turnos", "ffinal", Integer.toString(idTurno), timeDate);
+                    contrR.f5CancelTypesAll("usuarios", "turno", idUS, "0");
+                    
+                    String[] turns = funcRep.getTurnoData(idTurno);
+                    
+                     String[] paramDats = new String[7];
+        
+        paramDats[0] = infoUser[1];
+        paramDats[1] = turns[3];
+        paramDats[2] = turns[4];
+        paramDats[3] = turns[2];
+        paramDats[4] = sumCorteCaj(infoUser[6]);
+        paramDats[5] = funcRep.totalturno(6,infoUser[6]);
+        
+        BigDecimal salInic = new BigDecimal(turns[2]);
+        BigDecimal Cobros = new BigDecimal(paramDats[4]);
+        BigDecimal gastosCaj = new BigDecimal(paramDats[5]);
+        
+        paramDats[6] = funcRep.getDifference(funcRep.getSum(Cobros, salInic), gastosCaj).toString();
+        
+        imprim80MM_corteCaja(infoUser[6],true,paramDats);
+                    
+                    
+                    
+                    
                     JOptionPane.showMessageDialog(null, "turno cerrado correctamente");
                     System.exit(0);
                 } else {
@@ -516,11 +546,23 @@ void imprim() throws JRException{
                 }
           }
           
+      private String sumCorteCaj(String idTurnon){
+              String most = "";
+              BigDecimal totAreas = new BigDecimal(funcRep.totalturno(0, idTurnon));
+              BigDecimal totAmbus = new BigDecimal(funcRep.totalturno(1, idTurnon));
+              BigDecimal totCarg= new BigDecimal(funcRep.totalturno(2, idTurnon));
+              BigDecimal totCargRent = new BigDecimal(funcRep.totalturno(3, idTurnon));
+              BigDecimal totInfrc = new BigDecimal(funcRep.totalturno(4, idTurnon));
+              BigDecimal totOthsVenta = new BigDecimal(funcRep.totalturno(5, idTurnon));
+return most = funcRep.getSum(totAreas, funcRep.getSum(totAmbus, funcRep.getSum(totCarg, funcRep.getSum(totCargRent, funcRep.getSum(totInfrc, totOthsVenta))))).toString();
+          }
+
+          
 public static void main(String []argv) throws JRException{
         Reportes rP = new Reportes();
-        String[] dat = rP.getTickOthers("2");
-        rP.imprim80MM_corteCaja("2020-03-28",false);
-        System.out.println("Y atermino");
+        //String[] dat = rP.getTickOthers("2");
+        //rP.imprim80MM_corteCaja("2020-03-28",false);
+//        System.out.println("Y atermino "+rP.sumCorteCaj("910"));
     }
     
 }

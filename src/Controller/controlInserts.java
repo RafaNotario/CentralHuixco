@@ -353,7 +353,6 @@ public void guardadetailTicketArea(String[] param){
         public String[][] matrizgetTicketsDia(String fech, String idTurno){
         Connection cn = con2.conexion();
           String sql ="",aux;
-          
           if(idTurno.isEmpty()){
               sql = "(SELECT  pagos_areas.id,DATE_FORMAT(pagos_areas.hora, \"%H : %i\") AS hor,'Pago Areas',areas.nombre,pagos_areas.total\n" +
                         "FROM pagos_areas\n" +
@@ -390,41 +389,42 @@ public void guardadetailTicketArea(String[] param){
                         "INNER JOIN cargadores\n" +
                         "ON pagos_cargrenta.idCarg = cargadores.id AND pagos_cargrenta.fecha = '"+fech+"' ORDER BY pagos_cargrenta.id DESC)\n" +
                         ";";  
-          }else{
+          }
+          if(fech.isEmpty()){
                       sql = "(SELECT pagos_areas.id,DATE_FORMAT(pagos_areas.hora, \"%H : %i\") AS hor,'Pago Areas',areas.nombre,pagos_areas.total\n" +
                             "FROM pagos_areas\n" +
                             "INNER JOIN areas\n" +
-                            "ON areas.id = pagos_areas.idArea AND pagos_areas.fecha = '"+fech+"' AND pagos_areas.idTurno = "+idTurno+"\n" +
+                            "ON areas.id = pagos_areas.idArea AND  pagos_areas.idTurno = "+idTurno+"\n" +
                             "ORDER BY pagos_areas.id DESC)\n" +
                             "UNION\n" +
                             "(SELECT pagos_amb.id,DATE_FORMAT(pagos_amb.hora, \"%H : %i\") AS hor,'Pago Ambulantes',ambulantes.nombre,pagos_amb.total\n" +
                             "FROM pagos_amb\n" +
                             "INNER JOIN ambulantes\n" +
-                            "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.fecha = '"+fech+"' AND pagos_amb.idTurno = "+idTurno+"\n" +
+                            "ON ambulantes.id = pagos_amb.idAmb AND  pagos_amb.idTurno = "+idTurno+"\n" +
                             "ORDER BY pagos_amb.id DESC)\n" +
                             "UNION\n" +
                             "(SELECT pagos_carg.id,DATE_FORMAT(pagos_carg.hora, \"%H : %i\") AS hor,'Pago Cargadores',cargadores.nombre,pagos_carg.total\n" +
                             "FROM pagos_carg\n" +
                             "INNER JOIN cargadores\n" +
-                            "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.fecha = '"+fech+"' AND pagos_carg.idTurno = "+idTurno+"\n" +
+                            "ON cargadores.id = pagos_carg.idcarg AND  pagos_carg.idTurno = "+idTurno+"\n" +
                             "ORDER BY pagos_carg.id DESC)\n" +
                             "UNION\n" +
                             "(SELECT pagos_infrac.folio,DATE_FORMAT(pagos_infrac.horapag, \"%H : %i\") AS hor,'Pago Infraccion',pagos_infrac.quienpaga,pagos_infrac.monto - pagos_infrac.descuento\n" +
                             "FROM pagos_infrac\n" +
-                            "WHERE pagos_infrac.fechapag = '"+fech+"' AND pagos_infrac.idTurno = "+idTurno+")\n" +
+                            "WHERE pagos_infrac.idTurno = "+idTurno+")\n" +
                             "UNION\n" +
                             "(SELECT otros_venta.id,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
                             "IF(otros_venta.tipoPersona = 0,'Varios Amb.',IF(otros_venta.tipoPersona = 1,'Varios Carg.', IF(otros_venta.tipoPersona = 2,'Varios Cte.','NADON') ) ) AS quees,\n" +
                             "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
                             "        otros_venta.efectivo\n" +
                             "FROM otros_venta\n" +
-                            "WHERE otros_venta.fecha = '"+fech+"' AND otros_venta.idTurno = "+idTurno+"\n" +
+                            "WHERE  otros_venta.idTurno = "+idTurno+"\n" +
                             ")\n" +
                             "UNION\n" +
                             "(SELECT pagos_cargrenta.id,DATE_FORMAT(pagos_cargrenta.hora, \"%H : %i\") AS hor,'Pago Renta Carg',cargadores.nombre,pagos_cargrenta.importe\n" +
                             "FROM pagos_cargrenta\n" +
                             "INNER JOIN cargadores\n" +
-                            "ON pagos_cargrenta.idCarg = cargadores.id AND pagos_cargrenta.fecha = '"+fech+"' AND pagos_cargrenta.idTurno = "+idTurno+"\n" +
+                            "ON pagos_cargrenta.idCarg = cargadores.id  AND pagos_cargrenta.idTurno = "+idTurno+"\n" +
                             "ORDER BY pagos_cargrenta.id DESC\n" +
                             ");";
                       }
@@ -801,7 +801,6 @@ public void guardCliente(String[] param){
             }//finally catch
 } //@end guardCliente
 
-
 public void guardadetailOthsPays(List<String> param){
      Connection cn = con2.conexion();
             PreparedStatement pps=null;
@@ -952,7 +951,6 @@ SQL="UPDATE pagos_infrac SET folio = ?, fecha = ?, tipodoc = ?,documento = ?, mo
                 JOptionPane.showMessageDialog(null,"Sin data a eliminar");
 }
        
-       
        /*METODO PARA ACTUALIZAR DATOS DE INFRACCIONAL HACER UN PAGO*/ 
               public void payInfracc(List<String> param,String fol){
              Connection cn = con2.conexion();
@@ -1027,7 +1025,6 @@ SQL="UPDATE pagos_infrac SET idTurno = ?, fechapag = ?, horapag = ?,quienpaga = 
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
             }finally{
- //               System.out.println( "cierra conexion a la base de datos" );    
                 try {
                     if(pps != null) pps.close();                
                     if(cn !=null) cn.close();
@@ -1201,11 +1198,12 @@ pps = cn.prepareStatement(SQL);
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();
          System.out.println("Ultimo pagado: "+contrl.regLastTicket(19));
-        String[][] mat = contrl.matrizgetAmbuSemana("258","6");
+       // String[][] mat = contrl.matrizgetAmbuSemana("258","6");
         String[] arr = contrl.regpagosambdet(16865,6);
         for (int i = 0; i < arr.length; i++) {
-            System.out.println("["+arr[i]+"]");
+       //     System.out.println("["+arr[i]+"]");
     }
+        contrl.f5CancelTypesAll("usuarios","turno","2","930");
     // System.out.println(contrl.getpagosAmbulante("258","6"));
 }
 
