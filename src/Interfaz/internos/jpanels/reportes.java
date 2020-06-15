@@ -85,6 +85,10 @@ public class reportes extends javax.swing.JPanel {
         jPanel8 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jCmBoxIdCancel = new javax.swing.JComboBox<>();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
@@ -108,7 +112,7 @@ public class reportes extends javax.swing.JPanel {
         jDialCalendarMantenim.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jDialCalendarMantenim.setTitle("Elija semana");
         jDialCalendarMantenim.setResizable(false);
-        jDialCalendarMantenim.setSize(new java.awt.Dimension(450, 290));
+        jDialCalendarMantenim.setSize(new java.awt.Dimension(450, 300));
         jDialCalendarMantenim.setType(java.awt.Window.Type.UTILITY);
 
         jCalendar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -211,7 +215,7 @@ public class reportes extends javax.swing.JPanel {
         jSplitPane1.setRightComponent(jPanel6);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Cajero:");
+        jLabel1.setText("Cajero(a):");
 
         jCmbBCajeros.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jCmbBCajeros.addActionListener(new java.awt.event.ActionListener() {
@@ -315,7 +319,7 @@ public class reportes extends javax.swing.JPanel {
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addContainerGap(237, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Corte de caja", new javax.swing.ImageIcon(getClass().getResource("/images/caja-registradora.png")), jPanel1); // NOI18N
@@ -334,6 +338,11 @@ public class reportes extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -350,7 +359,7 @@ public class reportes extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         jSplitPane2.setLeftComponent(jPanel7);
@@ -374,7 +383,7 @@ public class reportes extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -382,26 +391,60 @@ public class reportes extends javax.swing.JPanel {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         jSplitPane2.setRightComponent(jPanel8);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Cuenta:");
+
+        jButton10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton10.setText("Esta Semana");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        jButton11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton11.setText("Otra Semana");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCmBoxIdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCmBoxIdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cancelaciones", new javax.swing.ImageIcon(getClass().getResource("/images/exit.png")), jPanel2); // NOI18N
@@ -462,7 +505,7 @@ public class reportes extends javax.swing.JPanel {
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ingresos", new javax.swing.ImageIcon(getClass().getResource("/images/dinero-cobros.png")), jPanel3); // NOI18N
@@ -547,7 +590,7 @@ public class reportes extends javax.swing.JPanel {
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Egresos", new javax.swing.ImageIcon(getClass().getResource("/images/nomina.png")), jPanel4); // NOI18N
@@ -583,9 +626,15 @@ public class reportes extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
-        String var = datCtrl.getFechaCal(jCalendar1);
+        String var = datCtrl.getFechaCal(jCalendar1),
+                tittol = jDialCalendarMantenim.getTitle();
         semanaAct = func.getSemanTableAct(var);
-        getIntervalTurns(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+        if(tittol.equals("Corte de caja"))
+            getIntervalTurns(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+        
+        if(tittol.equals("Cancelaciones"))
+            getIntervalTurns2(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+
         jDialCalendarMantenim.dispose();
     }//GEN-LAST:event_jButton42ActionPerformed
 
@@ -593,6 +642,7 @@ public class reportes extends javax.swing.JPanel {
         jDialCalendarMantenim.setLocationRelativeTo(this);
         jDialCalendarMantenim.setVisible(true);
         jDialCalendarMantenim.setEnabled(true);
+        jDialCalendarMantenim.setTitle("Corte de caja");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTabViewTurnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabViewTurnosMouseClicked
@@ -646,7 +696,6 @@ public class reportes extends javax.swing.JPanel {
                     }else{
                         JOptionPane.showMessageDialog(null, "Debe elegir un Turno");
                     }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -691,6 +740,31 @@ public class reportes extends javax.swing.JPanel {
                 }
         }
     }//GEN-LAST:event_jTabDetailTurnosMouseClicked
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+                getIntervalTurns2(0,"","","");
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+       jDialCalendarMantenim.setLocationRelativeTo(this);
+        jDialCalendarMantenim.setVisible(true);
+        jDialCalendarMantenim.setEnabled(true);
+        jDialCalendarMantenim.setTitle("Cancelaciones");
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        if(evt.getClickCount() > 1){
+        int numTurn = jTable2.getSelectedRow();
+                    if(numTurn > -1){
+                        buscarTurn = jTable2.getValueAt(numTurn, 0).toString();
+                        jLabViewFolio.setText(buscarTurn);
+                        String[][] mat = contrl.matrizgetTicketsDiaCancel("",buscarTurn);
+                        jTable1.setModel(new TModel(mat, cabAreasPays));
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Debe elegir un Turno");
+                    }
+        }
+    }//GEN-LAST:event_jTable2MouseClicked
 
         //funcion para busqueda automatica de otros conceptos
         void getIntervalTurns(int opc, String idUsers,String fech1,String fech2){
@@ -750,7 +824,7 @@ public class reportes extends javax.swing.JPanel {
                     }
                     jTabViewTurnos.setModel(modelo);
                 } catch (SQLException ex) {
-                    Logger.getLogger(internoCaja.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(reportes.class.getName()).log(Level.SEVERE, null, ex);
                 }finally{
                      try {
                             if(rs != null) rs.close();              
@@ -761,12 +835,84 @@ public class reportes extends javax.swing.JPanel {
                  }
     }//@endgetProductsOthers
         
+          //funcion para busqueda automatica de otros conceptos
+        void getIntervalTurns2(int opc, String idUsers,String fech1,String fech2){
+                Connection cn = con2.conexion();
+                DefaultTableModel modelo = new DefaultTableModel()
+                { 
+                    @Override
+                    public boolean isCellEditable (int fila, int columna) {
+                        return false;
+                    }
+                };
+                String consul="";
+                if(opc == 0){
+                    consul ="SELECT  turnos.id,usuarios.nombre,turnos.finicial,turnos.ffinal\n" +
+                            "FROM turnos\n" +
+                            "INNER JOIN usuarios\n" +
+                            "ON turnos.idusuario = usuarios.id AND turnos.finicial BETWEEN (SELECT semanas.finicial FROM semanas WHERE CURDATE() BETWEEN finicial AND ffinal)\n" +
+                            "AND (SELECT semanas.ffinal FROM semanas WHERE CURDATE() BETWEEN finicial AND ffinal)\n" +
+                            "ORDER BY turnos.id DESC;";
+                }
+                if(opc == 1){
+                    consul = "SELECT  turnos.id,usuarios.nombre,turnos.finicial,turnos.ffinal\n" +
+                        "FROM turnos\n" +
+                        "INNER JOIN usuarios\n" +
+                        "ON turnos.idusuario = usuarios.id AND turnos.finicial BETWEEN '"+fech1+"' AND '"+fech2+"' \n" +
+                        "ORDER BY turnos.id DESC;";
+                }
+                 //consul = "SELECT id, nombre from ambulantes WHERE id LIKE '"+var+"%'  OR nombre LIKE '"+var+"%' ORDER BY id";
+                        modelo.addColumn("#Turno");       
+                        modelo.addColumn("Cajero");
+                        modelo.addColumn("Inicio");
+                        modelo.addColumn("Finalizado");
+
+                jTable2.setModel(modelo);
+                TableColumnModel columnModel = jTable2.getColumnModel();
+              jTable2.getColumnModel().getColumn(0).setPreferredWidth(80);
+                jTable2.getColumnModel().getColumn(0).setMaxWidth(150);
+                jTable2.getColumnModel().getColumn(0).setMinWidth(50);
+
+                 jTable2.getColumnModel().getColumn(1).setPreferredWidth(180);
+                jTable2.getColumnModel().getColumn(1).setMaxWidth(250);
+                jTable2.getColumnModel().getColumn(1).setMinWidth(180);
+
+                String datos[] =  new String[4];//tenia 4
+                Statement st = null;
+                ResultSet rs = null;
+                try {
+                    st = cn.createStatement();
+                    rs = st.executeQuery(consul);
+
+                    while(rs.next()){
+                        datos[0] =rs.getString(1);
+                        datos[1] = rs.getString(2);
+                        datos[2] = rs.getString(3);
+                        datos[3] = rs.getString(4);
+                        modelo.addRow(datos);
+                    }
+                    jTable2.setModel(modelo);
+                } catch (SQLException ex) {
+                    Logger.getLogger(reportes.class.getName()).log(Level.SEVERE, null, ex);
+                }finally{
+                     try {
+                            if(rs != null) rs.close();              
+                            if(st != null) st.close();                
+                            if(cn !=null) cn.close();
+                     } catch (SQLException ex) {
+                     }
+                 }
+    }//@endgetProductsOthers
         
     private void llenacombCajeros(){
             Connection cn = con2.conexion();
             idCajeros.clear();
             jCmbBCajeros.removeAllItems();
             jCmbBCajeros.addItem("Todos");
+            
+            jCmBoxIdCancel.removeAllItems();
+            jCmBoxIdCancel.addItem("Todos"); 
+            
             String consul = "SELECT id, nombre from usuarios WHERE id > 0 ORDER BY nombre";
             Statement st = null;
             ResultSet rs = null;
@@ -776,9 +922,10 @@ public class reportes extends javax.swing.JPanel {
                 while (rs.next()) {
                     idCajeros.add(rs.getString(1));
                     jCmbBCajeros.addItem(rs.getString(2));
+                    jCmBoxIdCancel.addItem(rs.getString(2));
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(internoCaja.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(reportes.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 try {
                     if (st != null) {
@@ -809,6 +956,8 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -819,6 +968,7 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private com.toedter.calendar.JCalendar jCalendar1;
+    private javax.swing.JComboBox<String> jCmBoxIdCancel;
     private javax.swing.JComboBox<String> jCmbBCajeros;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
@@ -827,6 +977,7 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JLabel jLabViewFolio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

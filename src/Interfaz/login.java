@@ -51,6 +51,7 @@ public class login extends javax.swing.JFrame {
        inicioButton(false);//deshabilitar botones de menu
         jPanMontApert.setVisible(false);
          letreroSems();
+          jButton12.setEnabled(false);
     }
 
     /**
@@ -513,6 +514,11 @@ public class login extends javax.swing.JFrame {
 
         jButton12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton12.setText("RESPALDO");
+        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton12MouseClicked(evt);
+            }
+        });
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
@@ -809,13 +815,18 @@ public class login extends javax.swing.JFrame {
             }
             irs.close();
             br.close();
-
             JOptionPane.showMessageDialog(null, "Archivo generado correctamente.", "Verificar", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error no se genero el archivo por el siguiente motivo:" + e.getMessage(), "Verificar", JOptionPane.ERROR_MESSAGE);
         }
-
+        jButton12.setEnabled(false);
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
+        if(evt.getClickCount() > 1){
+             jButton12.setEnabled(true);
+        }
+    }//GEN-LAST:event_jButton12MouseClicked
 
     /**
      * @param args the command line arguments
@@ -866,7 +877,7 @@ public class login extends javax.swing.JFrame {
         jButton6.setVisible(false);
         jButton4.setEnabled(act);
         jButton8.setEnabled(act);    
-        jButton12.setEnabled(act);
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

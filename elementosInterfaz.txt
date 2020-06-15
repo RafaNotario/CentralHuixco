@@ -367,4 +367,39 @@ totCobros
 totGastos
 totCajaAll
 
+/*	jPanel configuracion.java*/
+	txtSemanaCargad
+	txtCoastAnCargad
+	txtCoastSemestCargad
+	txtCoastTrimestCargad
+	txtCoastRentCargad
 
+	jTabTarifsResguard
+	jTabTarifsAmbus
+
+--- JDIALOG PARA MODIFICAR COSTO DE TARIFAS
+	jDialModifiResguardInfo
+
+	txtDialF5IdTarif
+	txtDialF5TarifnAME
+	txtDialF5Semanal
+	txtDialF5Anual
+	txtDialF5Semestral
+	txtDialF5Trimestral
+	
+	jLabAnual
+	jLabSemest
+	jLabTrimest
+
+/*--- JPANEL REPORTES.JAVA */
+--	corte de caja
+	jCmbBCajeros
+	jLabViewFolio
+	jTabViewTurnos
+	jTabDetailTurnos
+	
+
+
+
+	
+	

@@ -1340,6 +1340,131 @@ pps = cn.prepareStatement(SQL);
             }//finally catch
         }
        
+       //regresa matrizde vista tickets del dia
+        public String[][] matrizgetTicketsDiaCancel(String fech, String idTurno){
+        Connection cn = con2.conexion();
+          String sql ="",aux;
+          if(idTurno.isEmpty()){
+              sql = "(SELECT  pagos_areas.id,DATE_FORMAT(pagos_areas.hora, \"%H : %i\") AS hor,'Pago Areas',areas.nombre,pagos_areas.total\n" +
+                        "FROM pagos_areas\n" +
+                        "INNER JOIN areas\n" +
+                        "ON areas.id = pagos_areas.idArea AND pagos_areas.fecha = '"+fech+"'\n" +
+                        "ORDER BY pagos_areas.id DESC)\n" +
+                        "UNION\n" +
+                        "(SELECT pagos_amb.id,DATE_FORMAT(pagos_amb.hora, \"%H : %i\") AS hor,'Pago Ambulantes',ambulantes.nombre,pagos_amb.total\n" +
+                        "FROM pagos_amb\n" +
+                        "INNER JOIN ambulantes\n" +
+                        "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.fecha = '"+fech+"'\n" +
+                        "ORDER BY pagos_amb.id DESC)\n" +
+                        "UNION\n" +
+                        "(SELECT  pagos_carg.id,DATE_FORMAT(pagos_carg.hora, \"%H : %i\") AS hor,'Pago Cargadores',cargadores.nombre,pagos_carg.total\n" +
+                        "FROM pagos_carg\n" +
+                        "INNER JOIN cargadores\n" +
+                        "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.fecha = '"+fech+"'\n" +
+                        "ORDER BY pagos_carg.id DESC)\n" +
+                        "UNION\n" +
+                        "(SELECT  pagos_infrac.folio,DATE_FORMAT(pagos_infrac.horapag, \"%H : %i\") AS hor,'Pago Infraccion',pagos_infrac.quienpaga,pagos_infrac.monto - pagos_infrac.descuento\n" +
+                        "FROM pagos_infrac\n" +
+                        "WHERE pagos_infrac.fechapag = '"+fech+"')\n" +
+                        "UNION\n" +
+                        "(SELECT otros_venta.id,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
+                        "IF(otros_venta.tipoPersona = 0,'Varios Amb.',IF(otros_venta.tipoPersona = 1,'Varios Carg.', IF(otros_venta.tipoPersona = 2,'Varios Cte.','NADON') ) ) AS quees,\n" +
+                        "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
+                        "        otros_venta.efectivo\n" +
+                        "FROM otros_venta\n" +
+                        "WHERE otros_venta.fecha = '"+fech+"'\n" +
+                        ")\n" +
+                        "UNION\n" +
+                        "(SELECT  pagos_cargrenta.id,DATE_FORMAT(pagos_cargrenta.hora, \"%H : %i\") AS hor,'Pago Renta Carg',cargadores.nombre,pagos_cargrenta.importe\n" +
+                        "FROM pagos_cargrenta\n" +
+                        "INNER JOIN cargadores\n" +
+                        "ON pagos_cargrenta.idCarg = cargadores.id AND pagos_cargrenta.fecha = '"+fech+"' ORDER BY pagos_cargrenta.id DESC)\n" +
+                        ";";  
+          }
+          if(fech.isEmpty()){
+                      sql = "(SELECT pagos_areas.id,DATE_FORMAT(pagos_areas.hora, \"%H : %i\") AS hor,'Pago Areas',areas.nombre,pagos_areas.total\n" +
+                            "FROM pagos_areas\n" +
+                            "INNER JOIN areas\n" +
+                            "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion <> 0 AND pagos_areas.idTurno = "+idTurno+"\n" +
+                            "ORDER BY pagos_areas.id DESC)\n" +
+                            "UNION\n" +
+                            "(SELECT pagos_amb.id,DATE_FORMAT(pagos_amb.hora, \"%H : %i\") AS hor,'Pago Ambulantes',ambulantes.nombre,pagos_amb.total\n" +
+                            "FROM pagos_amb\n" +
+                            "INNER JOIN ambulantes\n" +
+                            "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idCancelacion <> 0 AND pagos_amb.idTurno = "+idTurno+"\n" +
+                            "ORDER BY pagos_amb.id DESC)\n" +
+                            "UNION\n" +
+                            "(SELECT pagos_carg.id,DATE_FORMAT(pagos_carg.hora, \"%H : %i\") AS hor,'Pago Cargadores',cargadores.nombre,pagos_carg.total\n" +
+                            "FROM pagos_carg\n" +
+                            "INNER JOIN cargadores\n" +
+                            "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion <> 0 AND pagos_carg.idTurno = "+idTurno+"\n" +
+                            "ORDER BY pagos_carg.id DESC)\n" +
+                            "UNION\n" +
+                            "(SELECT pagos_infrac.folio,DATE_FORMAT(pagos_infrac.horapag, \"%H : %i\") AS hor,'Pago Infraccion',pagos_infrac.quienpaga,pagos_infrac.monto - pagos_infrac.descuento\n" +
+                            "FROM pagos_infrac LEFT OUTER JOIN pagos_infraccancel ON pagos_infraccancel.idFolio = pagos_infrac.folio\n" +
+                            "WHERE pagos_infraccancel.idFolio IS NOT NULL AND pagos_infrac.idTurno = "+idTurno+")\n" +
+                            "UNION\n" +
+                            "(SELECT otros_venta.id,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
+                            "IF(otros_venta.tipoPersona = 0,'Varios Amb.',IF(otros_venta.tipoPersona = 1,'Varios Carg.', IF(otros_venta.tipoPersona = 2,'Varios Cte.','NADON') ) ) AS quees,\n" +
+                            "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
+                            "        otros_venta.efectivo\n" +
+                            "FROM otros_venta\n" +
+                            "WHERE otros_venta.idCancelacion  <> 0 AND otros_venta.idTurno = "+idTurno+"\n" +
+                            ")\n" +
+                            "UNION\n" +
+                            "(SELECT pagos_cargrenta.id,DATE_FORMAT(pagos_cargrenta.hora, \"%H : %i\") AS hor,'Pago Renta Carg',cargadores.nombre,pagos_cargrenta.importe\n" +
+                            "FROM pagos_cargrenta\n" +
+                            "INNER JOIN cargadores\n" +
+                            "ON pagos_cargrenta.idCarg = cargadores.id AND pagos_cargrenta.idCancelacion <> 0 AND pagos_cargrenta.idTurno = "+idTurno+"\n" +
+                            "ORDER BY pagos_cargrenta.id DESC\n" +
+                            ");";
+                      }
+             int i =0,cantFilas=0, cont=1,cantColumnas=0;
+             String[][] mat=null, mat2=null;
+              int[] arrIdPedido = null;//int para usar hashMap
+            Statement st = null;
+            ResultSet rs = null;            
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                cantColumnas = rs.getMetaData().getColumnCount();
+               if(rs.last()){//Nos posicionamos al final
+                    cantFilas = rs.getRow();//sacamos la cantidad de filas/registros
+                    rs.beforeFirst();//nos posicionamos antes del inicio (como viene por defecto)
+                }
+               mat = new String[cantFilas][cantColumnas];
+               //aqui iria crear matriz
+                while(rs.next())
+                {//es necesario el for para llenar dinamicamente la lista, ya que varia el numero de columnas de las tablas
+                 
+                      for (int x=1;x<= rs.getMetaData().getColumnCount();x++) {
+                           // System.out.print("| "+rs.getString(x)+" |");
+                             mat[i][x-1]=rs.getString(x);
+                      //System.out.print(x+" -> "+rs.getString(x));                   
+                      }//for
+                       i++;
+                }//whilE
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{               
+//             System.out.println("cierra conexion a la base de datos");    
+             try {        
+                 if(st != null) st.close();                
+                 if(cn !=null) cn.close();
+             } catch (SQLException ex) {
+                 JOptionPane.showMessageDialog(null,ex.getMessage()); 
+             }
+         }//finally        
+           if (cantFilas == 0){
+                mat=null;
+                mat = new String[1][cantColumnas];
+                for (int j = 0; j < mat[0].length; j++) {
+                     mat[0][j]="NO DATA";
+                }
+           }
+return mat;            
+}//@endmatrizgetTicketsDia
+       
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();
          System.out.println("Ultimo pagado: "+contrl.regLastTicket(19));
