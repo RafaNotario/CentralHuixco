@@ -8,6 +8,10 @@ package Controller;
 import conexion.ConexionDBOriginal;
 import java.math.BigDecimal;
 import Controller.datesControl;
+import Interfaz.internos.jpanels.internoCaja;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -1036,6 +1040,54 @@ public class funciones {
            return nAmb;
     }//@end getnombreTarifa
           
+          public String[] getAllDataCargad(String id){
+            Connection cn = con2.conexion();
+            String[] idUser = new String[15];
+            String sql = "";
+            sql = "SELECT * FROM cargadores WHERE id = '"+id+"'";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idUser[0]=rs.getString(1);
+                        idUser[1]=rs.getString(2);
+                        idUser[2]=rs.getString(3);
+                        idUser[3]=rs.getString(4);
+                        idUser[4]=rs.getString(5);
+                        idUser[5]=rs.getString(6);
+                        idUser[6]=rs.getString(7);
+                        idUser[7]=rs.getString(8);
+                        idUser[8]=rs.getString(9);
+                        idUser[9]=rs.getString(10);
+                        idUser[10]=rs.getString(11);
+                        idUser[11]=rs.getString(12);
+                        idUser[12]=rs.getString(13);
+                        idUser[13]=rs.getString(14);
+                        idUser[14]=rs.getString(15);
+                    }else{
+                        for (int j = 0; j < idUser.length; j++) {
+                            idUser[j] = "NO-DATA";
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idUser;
+    }//@end getAllDataCargad
+          
+          
          public String totalturno(int opc, String idT){
           Connection cn = con2.conexion();
           String nAmb = "";
@@ -1114,8 +1166,268 @@ public class funciones {
                     }
            return nAmb;
          }
+         
+          public String[] getTarifCargad(){
+            Connection cn = con2.conexion();
+            String[] idUser = new String[8];
+            String sql = "";
+            sql = "SELECT * FROM tarifas WHERE rubro = 0; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idUser[0]=rs.getString(1);
+                        idUser[1]=rs.getString(2);
+                        idUser[2]=rs.getString(3);
+                        idUser[3]=rs.getString(4);
+                        idUser[4]=rs.getString(5);
+                        idUser[5]=rs.getString(6);
+                        idUser[6]=rs.getString(7);
+                        idUser[7]=rs.getString(8);
+                    }else{
+                        for (int j = 0; j < idUser.length; j++) {
+                            idUser[j] = "NO-DATA";
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idUser;
+    }//@end getTarifCargad
                
-       public static void main(String args[]){
+          
+        public String[] getTarifRentCargad(){
+            Connection cn = con2.conexion();
+            String[] idUser = new String[8];
+            String sql = "";
+            sql = "SELECT * FROM tarifas WHERE rubro = 2; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idUser[0]=rs.getString(1);
+                        idUser[1]=rs.getString(2);
+                        idUser[2]=rs.getString(3);
+                        idUser[3]=rs.getString(4);
+                        idUser[4]=rs.getString(5);
+                        idUser[5]=rs.getString(6);
+                        idUser[6]=rs.getString(7);
+                        idUser[7]=rs.getString(8);
+                    }else{
+                        for (int j = 0; j < idUser.length; j++) {
+                            idUser[j] = "NO-DATA";
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idUser;
+    }//@end getTarifCargad
+                    
+    //metodo para llenar combo de Resgurados vehiculo
+         public String[][] getResgVehiculo() {
+            Connection cn = con2.conexion();
+            int i =0,cantFilas=0, cont=1,cantColumnas=0;
+             String[][] mat=null;
+            String consul = "SELECT id, descripcion, derechoSemanal from tarifas where rubro = 3 ORDER BY id";
+            Statement st = null;
+            ResultSet rs = null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(consul);
+                cantColumnas = rs.getMetaData().getColumnCount();
+               if(rs.last()){//Nos posicionamos al final
+                    cantFilas = rs.getRow();//sacamos la cantidad de filas/registros
+                    rs.beforeFirst();//nos posicionamos antes del inicio (como viene por defecto)
+                }
+                mat = new String[cantFilas][cantColumnas];
+               //aqui iria crear matriz
+            while(rs.next())
+                {//es necesario el for para llenar dinamicamente la lista, ya que varia el numero de columnas de las tablas
+                      for (int x=1;x<= rs.getMetaData().getColumnCount();x++) {
+                           // System.out.print("| "+rs.getString(x)+" |");
+                             mat[i][x-1]=rs.getString(x);
+                      //System.out.print(x+" -> "+rs.getString(x));                   
+                      }//for
+                       i++;
+                }//whilE
+            } catch (SQLException ex) {
+                Logger.getLogger(internoCaja.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    if (st != null) {st.close(); }
+                    if (cn != null) { cn.close(); }
+                } catch (SQLException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }//finally
+           if (cantFilas == 0){
+                mat=null;
+                mat = new String[1][cantColumnas];
+                for (int j = 0; j < mat[0].length; j++) {
+                     mat[0][j]="NO DATA";
+                }
+           }
+        return mat;
+        }//Llena getResgVehiculo
+         
+/*      METODOS PARA HACER RPORTES DE JPANEL REPORTES*/
+//obtener arr de semana de dia actual
+          public String[] getSemanTableAct(String fech){
+            Connection cn = con2.conexion();
+            String[] idUser = new String[5];
+            String sql = "";
+            sql = "SELECT * FROM semanas WHERE '"+fech+"' BETWEEN finicial AND ffinal; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idUser[0]=rs.getString(1);
+                        idUser[1]=rs.getString(2);
+                        idUser[2]=rs.getString(3);
+                        idUser[3]=rs.getString(4);
+                        idUser[4]=rs.getString(5);
+                    }else{
+                        for (int j = 0; j < idUser.length; j++) {
+                            idUser[j] = "NO-DATA";
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idUser;
+    }//@end getSemanTableAct
+         
+          //metodo para llenar combo de Resgurados vehiculo
+         public String[][] getGastosCajTurn(String fech, String idTurn) {
+            Connection cn = con2.conexion();
+            int i =0,cantFilas=0, cont=1,cantColumnas=0;
+             String[][] mat=null;
+            String consul = "";
+        if(idTurn.isEmpty()){
+        consul = "SELECT gastos_caja.id,gastos_caja.hora,rubroscaja.concepto,gastos_caja.monto\n" +
+                "FROM central.gastos_caja\n" +
+                "INNER JOIN central.rubroscaja\n" +
+                "ON gastos_caja.idRubrocaja = rubroscaja.id AND gastos_caja.fecha = '"+fech+"' ;";
+        }else{
+        consul = "SELECT gastos_caja.id,gastos_caja.hora,rubroscaja.concepto,gastos_caja.monto\n" +
+                "FROM central.gastos_caja\n" +
+                "INNER JOIN central.rubroscaja\n" +
+                "ON gastos_caja.idRubrocaja = rubroscaja.id AND gastos_caja.idTurno = '"+idTurn+"';";            
+        }
+            Statement st = null;
+            ResultSet rs = null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(consul);
+                cantColumnas = rs.getMetaData().getColumnCount();
+               if(rs.last()){//Nos posicionamos al final
+                    cantFilas = rs.getRow();//sacamos la cantidad de filas/registros
+                    rs.beforeFirst();//nos posicionamos antes del inicio (como viene por defecto)
+                }
+                mat = new String[cantFilas][cantColumnas];
+               //aqui iria crear matriz
+            while(rs.next())
+                {//es necesario el for para llenar dinamicamente la lista, ya que varia el numero de columnas de las tablas
+                      for (int x=1;x<= rs.getMetaData().getColumnCount();x++) {
+                           // System.out.print("| "+rs.getString(x)+" |");
+                             mat[i][x-1]=rs.getString(x);
+                      //System.out.print(x+" -> "+rs.getString(x));                   
+                      }//for
+                       i++;
+                }//whilE
+            } catch (SQLException ex) {
+                Logger.getLogger(internoCaja.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    if (st != null) {st.close(); }
+                    if (cn != null) { cn.close(); }
+                } catch (SQLException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }//finally
+           if (cantFilas == 0){
+                mat=null;
+                mat = new String[1][cantColumnas];
+                for (int j = 0; j < mat[0].length; j++) {
+                     mat[0][j]="NO DATA";
+                }
+           }
+        return mat;
+        }//Llena getResgVehiculo
+          
+               public String cargaConfig() {//List
+                File archivo = null;
+                FileReader fr = null;
+                BufferedReader br = null;
+                 String ruta="C:/central/respaldo.txt";//2700 los 4; solo dos: 1850del, 1450traseros, 
+                 //List<String> contentL=new ArrayList<String>();
+                 String cadena="",rgresa="";  
+                try {
+                 // Apertura del fichero y creacion de BufferedReader para poder
+                 // hacer una lectura comoda (disponer del metodo readLine()).     
+                fr = new FileReader(ruta);
+                br = new BufferedReader(fr);
+                while((cadena = br.readLine())!=null) {
+                    //contentL.add(cadena.trim());
+                    rgresa=cadena.trim();
+                }
+                br.close();
+                }catch(Exception e){
+                 e.printStackTrace();
+              }finally{
+                 // En el finally cerramos el fichero, para asegurarnos
+                 // que se cierra tanto si todo va bien como si salta 
+                 // una excepcion.
+                 try{                    
+                    if( null != fr){   
+                       fr.close();     
+                    }                  
+                 }catch (Exception e2){ 
+                    e2.printStackTrace();
+                 }
+              }
+
+                return rgresa;
+    }
+         
+         public static void main(String args[]){
            BigDecimal amountOne = new BigDecimal(250);//monto a cobrar
            BigDecimal amountTwo = new BigDecimal(100.00);//cantidad recivida
            

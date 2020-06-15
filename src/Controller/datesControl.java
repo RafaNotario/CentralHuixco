@@ -38,6 +38,14 @@ public class datesControl {
     SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
     
     SimpleDateFormat formatoPrueba = new SimpleDateFormat("yyyy/MM/dd");
+    SimpleDateFormat formatGuion = new SimpleDateFormat("yyyy-MM-dd");
+     //****USO DE FECHAS
+    public String setDateActualGuion(){
+    //        DateFormat df = DateFormat.getDateInstance();
+        Date fechaAct = new Date();    
+    //        jDateChooser1.setDate(fechaAct);
+            return formatGuion.format(fechaAct);
+    }
     
     public Date StringDate(String fecha){//tenia: java.util.Date
     //    SimpleDateFormat formato_texto = new SimpleDateFormat("dd/MM/yyyy");

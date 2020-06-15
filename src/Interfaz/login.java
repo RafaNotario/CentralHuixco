@@ -14,8 +14,14 @@ import Interfaz.internos.jpanels.areas;
 import Interfaz.internos.jpanels.cargadores;
 import Interfaz.internos.jpanels.ambulantes;
 import Controller.datesControl;
+import Interfaz.internos.jpanels.configuracion;
+import Interfaz.internos.jpanels.reportes;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
@@ -33,6 +39,8 @@ public class login extends javax.swing.JFrame {
     areas Ar = null;
     cargadores cargA = null;
     ambulantes ambA = null;
+    reportes repos = null;
+    configuracion config = null;
  
  int idReturn = 5000;//Variable para obtener id de usuario del sistema
  String[] datosUserSys = null;//arreglo para obtener todos los datos de usuario del sistema
@@ -92,6 +100,7 @@ public class login extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jButton12 = new javax.swing.JButton();
         jLabUserNombre = new javax.swing.JLabel();
         jLaidUSer = new javax.swing.JLabel();
 
@@ -470,6 +479,11 @@ public class login extends javax.swing.JFrame {
         jButton4.setAlignmentY(0.0F);
         jButton4.setBorder(null);
         jButton4.setBorderPainted(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ambulantes.png"))); // NOI18N
@@ -489,8 +503,21 @@ public class login extends javax.swing.JFrame {
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/configura.png"))); // NOI18N
         jButton8.setText("Configuracion");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jButton12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton12.setText("RESPALDO");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanMenuPrincipalLayout = new javax.swing.GroupLayout(jPanMenuPrincipal);
         jPanMenuPrincipal.setLayout(jPanMenuPrincipalLayout);
@@ -511,9 +538,11 @@ public class login extends javax.swing.JFrame {
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton8)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanMenuPrincipalLayout.setVerticalGroup(
             jPanMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -538,6 +567,10 @@ public class login extends javax.swing.JFrame {
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(927, 927, 927))
+            .addGroup(jPanMenuPrincipalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLayeredPane1.setLayer(jPanTrabajo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -736,6 +769,54 @@ public class login extends javax.swing.JFrame {
             jPanTrabajo.setEnabled(true);    
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+            func1.limpiar(jPanTrabajo);
+            config = new configuracion();
+            jPanTrabajo.setLayout(new GridLayout(1,1));
+            jPanTrabajo.add(config);
+            jPanTrabajo.validate();
+            jPanTrabajo.setVisible(true);
+            jPanTrabajo.setEnabled(true);    
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+            func1.limpiar(jPanTrabajo);
+            repos = new reportes();
+            jPanTrabajo.setLayout(new GridLayout(1,1));
+            jPanTrabajo.add(repos);
+            jPanTrabajo.validate();
+            jPanTrabajo.setVisible(true);
+            jPanTrabajo.setEnabled(true);            // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+       try {
+            Runtime runtime = Runtime.getRuntime();//Escritorio
+            //File backupFile = new File(String.valueOf(RealizarBackupMySQL.getSelectedFile().toString())+".sql");
+            // File backupFile = new File("C:\\Users\\monit\\Documents\\CENTRAL DE ABASTOS\\autoGenerate.sql");
+            //C:\Program Files\MySQL\MySQL Server 8.0\bin
+            File backupFile = new File(func1.cargaConfig() + "autoGenerate" + dCon.setDateActualGuion() + ".sql");
+            InputStreamReader irs;
+            BufferedReader br;
+            try (FileWriter fw = new FileWriter(backupFile)) {
+                Process child = runtime.exec("C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin\\mysqldump --routines=TRUE --password=0ehn4TNU5I --user=root --databases central");// | gzip> respadmin_DCR.sql.gz
+                irs = new InputStreamReader(child.getInputStream());
+                br = new BufferedReader(irs);
+                String line;
+                while ((line = br.readLine()) != null) {
+                    fw.write(line + "\n");
+                }
+            }
+            irs.close();
+            br.close();
+
+            JOptionPane.showMessageDialog(null, "Archivo generado correctamente.", "Verificar", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error no se genero el archivo por el siguiente motivo:" + e.getMessage(), "Verificar", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_jButton12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -782,15 +863,17 @@ public class login extends javax.swing.JFrame {
         jButton3.setEnabled(act);
         jButton1.setEnabled(act);
         jButton5.setEnabled(act);
-        jButton6.setEnabled(false);
-        jButton4.setEnabled(false);
-        jButton8.setEnabled(false);    
+        jButton6.setVisible(false);
+        jButton4.setEnabled(act);
+        jButton8.setEnabled(act);    
+        jButton12.setEnabled(act);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

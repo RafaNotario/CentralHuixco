@@ -535,10 +535,6 @@ void imprim() throws JRException{
         paramDats[6] = funcRep.getDifference(funcRep.getSum(Cobros, salInic), gastosCaj).toString();
         
         imprim80MM_corteCaja(infoUser[6],true,paramDats);
-                    
-                    
-                    
-                    
                     JOptionPane.showMessageDialog(null, "turno cerrado correctamente");
                     System.exit(0);
                 } else {

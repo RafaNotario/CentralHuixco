@@ -4144,14 +4144,14 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLayeredPane3" min="-2" pref="153" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jButton40" max="32767" attributes="0"/>
                                   <Component id="jButton41" min="-2" pref="32" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="255" max="-2" attributes="0"/>
+                              <EmptySpace pref="255" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jButton36" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
                                   <Component id="txtTotalCarg" alignment="0" max="32767" attributes="0"/>
@@ -4159,7 +4159,7 @@
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="jButton37" min="-2" pref="41" max="-2" attributes="0"/>
                           </Group>
                       </Group>

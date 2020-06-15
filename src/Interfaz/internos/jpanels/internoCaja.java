@@ -3826,7 +3826,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(255, 255, 255)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
                     .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtTotalCarg)
@@ -5512,7 +5512,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanCargadores, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                .addComponent(jPanCargadores, javax.swing.GroupLayout.PREFERRED_SIZE, 638, Short.MAX_VALUE)
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -7007,8 +7007,14 @@ if(!dto.isEmpty() && !toI.isEmpty()){
                                 enviaData.add(dscto);
                                 enviaData.add(efectV);
                                 contrl.payInfracc(enviaData,jLabFolio.getText());
-                                contrl.matrizgetTicketsDia("",infoUser[6]);
-                                  rP.imprim80MM_Infrac(jLabFolio.getText(),true);
+                               // contrl.matrizgetTicketsDia("",infoUser[6]);
+                                
+                                String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
+                                jTabviewPays.setModel(new TModel(mat, cabAreasPays));
+                                tamColViwePays();
+                                
+                                
+                                rP.imprim80MM_Infrac(jLabFolio.getText(),true);
                                 limpiPayInfrac();
                                 jFramCobroInfrac.dispose();
                 }else{
@@ -7405,7 +7411,8 @@ if(selec > -1){
                 String fech = datCtrl.setDateActual(),
                         ora = datCtrl.getHour(),
                        mostTic = jTabviewPays.getValueAt(fila, 0).toString(),
-                       concepto = jTabviewPays.getValueAt(fila, 2).toString();
+                       concepto = jTabviewPays.getValueAt(fila, 2).toString(),
+                        aux = jTabviewPays.getValueAt(fila, 4).toString();
                
                  arregCan[0] = Integer.toString((ultCanc+1));
                  arregCan[1] = User; 
@@ -7426,8 +7433,17 @@ if(selec > -1){
                         contrl.guardInCancelaciones(arregCan);
                         contrl.f5CancelTypesAll("pagos_carg","idCancelacion",mostTic,arregCan[0]);
                     }
-                    if(concepto.equals("Pago Infraccion")){                    
-                        JOptionPane.showMessageDialog(null, "Pendiente cancelacion infracciones");
+                    if(concepto.equals("Pago Infraccion")){   
+                        String[] arrCancInfracc = new String[7];
+                        arrCancInfracc[0] = mostTic;
+                        arrCancInfracc[1] = infoUser[6];
+                        arrCancInfracc[2] = User;
+                        arrCancInfracc[3] = fech;
+                        arrCancInfracc[4] = ora;
+                        arrCancInfracc[5] = desc;
+                        arrCancInfracc[6] = aux;
+                        
+                        contrl.guardInCancelInfracc(arrCancInfracc);
                     }
                     if(concepto.equals("Varios Amb.") || concepto.equals("Varios Cte.") || concepto.equals("Varios Carg.")){                    
                         contrl.guardInCancelaciones(arregCan);
@@ -7621,7 +7637,6 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
     }//GEN-LAST:event_jTabviewPaysMousePressed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        String fechCort = datCtrl.getFecha(jDateChoCorte);
         String[] turns = func.getTurnoData(Integer.parseInt(infoUser[6]));
         String[] paramDats = new String[7];
         
@@ -7726,52 +7741,7 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
             }
     }//Llena llenacombogetcuentaGasto 
         
-//metodo para llenar combo de Resgurados.vehiculo
-         private String[][] getResgVehiculo() {
-            Connection cn = con2.conexion();
-            int i =0,cantFilas=0, cont=1,cantColumnas=0;
-             String[][] mat=null;
-            String consul = "SELECT id, descripcion, derechoSemanal from tarifas where rubro = 3 ORDER BY id";
-            Statement st = null;
-            ResultSet rs = null;
-            try {
-                st = cn.createStatement();
-                rs = st.executeQuery(consul);
-                cantColumnas = rs.getMetaData().getColumnCount();
-               if(rs.last()){//Nos posicionamos al final
-                    cantFilas = rs.getRow();//sacamos la cantidad de filas/registros
-                    rs.beforeFirst();//nos posicionamos antes del inicio (como viene por defecto)
-                }
-                mat = new String[cantFilas][cantColumnas];
-               //aqui iria crear matriz
-            while(rs.next())
-                {//es necesario el for para llenar dinamicamente la lista, ya que varia el numero de columnas de las tablas
-                      for (int x=1;x<= rs.getMetaData().getColumnCount();x++) {
-                           // System.out.print("| "+rs.getString(x)+" |");
-                             mat[i][x-1]=rs.getString(x);
-                      //System.out.print(x+" -> "+rs.getString(x));                   
-                      }//for
-                       i++;
-                }//whilE
-            } catch (SQLException ex) {
-                Logger.getLogger(internoCaja.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    if (st != null) {st.close(); }
-                    if (cn != null) { cn.close(); }
-                } catch (SQLException ex) {
-                    System.err.println(ex.getMessage());
-                }
-            }//finally
-           if (cantFilas == 0){
-                mat=null;
-                mat = new String[1][cantColumnas];
-                for (int j = 0; j < mat[0].length; j++) {
-                     mat[0][j]="NO DATA";
-                }
-           }
-        return mat;
-        }//Llena getResgVehiculo
+
         
        //funcion para busqueda automatica ambulantes
         void mostrarTabla1(String var){
@@ -8234,7 +8204,7 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
 
         void inicaComboAmbu(){
            jCBoxResguardosOpc.removeAllItems();
-            matResgVehiculo = getResgVehiculo();//obtenemos las cuotas de cada veiculo para ambulante
+            matResgVehiculo = func.getResgVehiculo();//obtenemos las cuotas de cada veiculo para ambulante
             for (int i = 0; i < matResgVehiculo.length; i++) {
                 for (int j = 0; j < matResgVehiculo[0].length; j++) {
                     if(j==1){
@@ -8528,8 +8498,8 @@ aux = func.percentage(coast, dscto).toString();
             
             if(jCkBoxInscripcion.isSelected()){
                 int eligio = jComBInscripc.getSelectedIndex()+8;
-                String tarifInCarg = jLabCoastTarifa.getText(),
-                        dtoCrag = jLabDstoInscripcion.getText();
+                String tarifInCarg = jLabCoastTarifa.getText(),//jLabCoastTarifa
+                        dtoCrag = jLabDescto.getText();
                 coast = new BigDecimal(tarifInCarg);
                 dscto = new BigDecimal(dtoCrag);
                 aux = func.percentage(coast, dscto).toString();
@@ -8823,14 +8793,15 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
       
       public void comoNewRentCarg(){
           Calendar cal  = Calendar.getInstance();
+          String[] coastRentCarg = func.getTarifRentCargad(); //datos costo renta de cargador
          cal.setTime(datCtrl.cargafecha());
          dCCFechIniRentCarg.setSelectedDate(cal);
          dCCFechFinRentCarg.setSelectedDate(cal);
           txtnumDaysrentdiab.setText("1");
           txtNumDiabRent.setText("1");
-          jLabTarifRentCarg.setText("30.00");
+          jLabTarifRentCarg.setText(coastRentCarg[3]);
           jLabCondonacRentDiab.setText("0.00");
-          jLabImportRentDiab.setText("30.00");
+          jLabImportRentDiab.setText(coastRentCarg[3]);
       }
       
              //funcion para busqueda automatica ambulantes
@@ -8977,7 +8948,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
         consul = "SELECT gastos_caja.id,gastos_caja.hora,rubroscaja.concepto,gastos_caja.monto\n" +
                 "FROM central.gastos_caja\n" +
                 "INNER JOIN central.rubroscaja\n" +
-                "ON gastos_caja.idRubrocaja = rubroscaja.id AND gastos_caja.fecha = '"+fech+"' AND gastos_caja.idTurno = '"+idTurn+"';";            
+                "ON gastos_caja.idRubrocaja = rubroscaja.id AND gastos_caja.idTurno = '"+idTurn+"';";            
         }
             modelo.addColumn("Folio");
         modelo.addColumn("Hora");

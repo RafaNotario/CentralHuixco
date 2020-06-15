@@ -5,6 +5,8 @@
  */
 package Interfaz.internos.jpanels;
 
+import Controller.controlInserts;
+import Interfaz.altaCargadores;
 import conexion.ConexionDBOriginal;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -23,25 +25,22 @@ import renderTable.TModel;
  */
 public class cargadores extends javax.swing.JPanel {
         ConexionDBOriginal con2 = new ConexionDBOriginal();
-        
+         controlInserts contrl = new controlInserts();
         String[] cabAreasPays = {"#ID", "Nombre", "Direccion", "Telefono","Diablito","Ultima Sem. Pag","Sem. Adeudo","Venc. Inscrip"};
 
-    /**
-     * Creates new form cargadores
-     */
     public cargadores() {
         initComponents();
         
         cargaDataCargadores();
-        
-        jTable1.getParent().addComponentListener(new ComponentAdapter() {
+        jButton3.setEnabled(false);
+        jTabViewAllCargad.getParent().addComponentListener(new ComponentAdapter() {
     @Override
     public void componentResized(final ComponentEvent e) {
-        if (jTable1.getPreferredSize().width < jTable1.getParent().getWidth()) {
+        if (jTabViewAllCargad.getPreferredSize().width < jTabViewAllCargad.getParent().getWidth()) {
            // System.out.println("Resize"+jTable1.getParent().getWidth());
-            jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_ALL_COLUMNS);
+            jTabViewAllCargad.setAutoResizeMode(jTabViewAllCargad.AUTO_RESIZE_ALL_COLUMNS);
         } else {
-            jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
+            jTabViewAllCargad.setAutoResizeMode(jTabViewAllCargad.AUTO_RESIZE_OFF);
         }
     }
 });
@@ -67,22 +66,42 @@ public class cargadores extends javax.swing.JPanel {
         jComboBox2 = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JSeparator();
         jButton7 = new javax.swing.JButton();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        txtBusqCargad = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTabViewAllCargad = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/informacion.png"))); // NOI18N
         jButton1.setText("Información");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/IconNewUser.png"))); // NOI18N
         jButton2.setText("Alta");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/abajo.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Actualizar.png"))); // NOI18N
         jButton4.setText("Actualizar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/print32x32.png"))); // NOI18N
 
@@ -93,23 +112,43 @@ public class cargadores extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Mostrar");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activos" }));
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Activos", "Dados de Baja" }));
         jComboBox1.setOpaque(false);
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
+        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Propio", "Renta" }));
         jComboBox2.setOpaque(false);
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search-what.png"))); // NOI18N
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre" }));
-
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtBusqCargad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtBusqCargad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusqCargadKeyReleased(evt);
+            }
+        });
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/goma-de-borrar.png"))); // NOI18N
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTabViewAllCargad.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"2", "ABEL BAUTISTA PALACIOS", "", null, "2.19 -16", "4", null},
                 {null, null, null, null, null, null, null},
@@ -120,27 +159,35 @@ public class cargadores extends javax.swing.JPanel {
                 "No.", "Nombre", "Dirección", "Telefono", "Ult. Sem. Pag.", "Sem. Adeudo", "Venc. Inscripción"
             }
         ));
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jTable1.setRowHeight(22);
-        jTable1.setRowMargin(2);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(3).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(150);
-            jTable1.getColumnModel().getColumn(3).setMaxWidth(200);
-            jTable1.getColumnModel().getColumn(4).setMinWidth(120);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(140);
-            jTable1.getColumnModel().getColumn(4).setMaxWidth(240);
-            jTable1.getColumnModel().getColumn(5).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(80);
-            jTable1.getColumnModel().getColumn(5).setMaxWidth(150);
-            jTable1.getColumnModel().getColumn(6).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(6).setPreferredWidth(120);
-            jTable1.getColumnModel().getColumn(6).setMaxWidth(250);
+        jTabViewAllCargad.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTabViewAllCargad.setRowHeight(22);
+        jTabViewAllCargad.setRowMargin(2);
+        jTabViewAllCargad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTabViewAllCargadMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTabViewAllCargad);
+        if (jTabViewAllCargad.getColumnModel().getColumnCount() > 0) {
+            jTabViewAllCargad.getColumnModel().getColumn(0).setMinWidth(80);
+            jTabViewAllCargad.getColumnModel().getColumn(0).setPreferredWidth(80);
+            jTabViewAllCargad.getColumnModel().getColumn(0).setMaxWidth(80);
+            jTabViewAllCargad.getColumnModel().getColumn(3).setMinWidth(80);
+            jTabViewAllCargad.getColumnModel().getColumn(3).setPreferredWidth(150);
+            jTabViewAllCargad.getColumnModel().getColumn(3).setMaxWidth(200);
+            jTabViewAllCargad.getColumnModel().getColumn(4).setMinWidth(120);
+            jTabViewAllCargad.getColumnModel().getColumn(4).setPreferredWidth(140);
+            jTabViewAllCargad.getColumnModel().getColumn(4).setMaxWidth(240);
+            jTabViewAllCargad.getColumnModel().getColumn(5).setMinWidth(80);
+            jTabViewAllCargad.getColumnModel().getColumn(5).setPreferredWidth(80);
+            jTabViewAllCargad.getColumnModel().getColumn(5).setMaxWidth(150);
+            jTabViewAllCargad.getColumnModel().getColumn(6).setMinWidth(100);
+            jTabViewAllCargad.getColumnModel().getColumn(6).setPreferredWidth(120);
+            jTabViewAllCargad.getColumnModel().getColumn(6).setMaxWidth(250);
         }
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -167,19 +214,20 @@ public class cargadores extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBusqCargad, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(110, 110, 110))
         );
         layout.setVerticalGroup(
@@ -198,32 +246,210 @@ public class cargadores extends javax.swing.JPanel {
                     .addComponent(jSeparator2)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3)
-                    .addComponent(jTextField1)
+                    .addComponent(txtBusqCargad)
                     .addComponent(jComboBox2)
                     .addComponent(jComboBox1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(296, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int fila = jTabViewAllCargad.getSelectedRow();
+        if(fila > -1){
+            String varBus = jTabViewAllCargad.getValueAt(fila, 0).toString();
+             altaCargadores altCarg = new altaCargadores(varBus);
+            altCarg.setVisible(true);
+            altCarg.setEnabled(true);
+            altCarg.validate();
+        }else{
+            JOptionPane.showMessageDialog(null,"no data View");
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTabViewAllCargadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabViewAllCargadMousePressed
+           if (evt.getClickCount() > 1) {
+                  jButton1.doClick();
+              }
+    }//GEN-LAST:event_jTabViewAllCargadMousePressed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        cargaDataCargadores();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+            altaCargadores altamb = new altaCargadores("1");
+            altamb.setVisible(true);
+            altamb.setEnabled(true);
+            altamb.jButton2.doClick();
+            altamb.validate();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        int opc = jComboBox1.getSelectedIndex();
+        if(opc > -1)
+        {
+            if(opc == 0){//TODOS
+                 jButton3.setEnabled(false);
+                 String[][] mat = matrizgetAmbsAll(0,"");
+                 jTabViewAllCargad.setModel(new TModel(mat, cabAreasPays)); 
+            }
+            if(opc == 1){//ACTIVOS
+                String[][] mat = matrizgetAmbsAll(1,"");
+                 jTabViewAllCargad.setModel(new TModel(mat, cabAreasPays)); 
+                 jButton3.setEnabled(true);
+                 jButton3.setIcon(null);
+                 jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/abajo.png")));
+            }
+            if(opc == 2){//DADOS DE BAJA
+                String[][] mat = matrizgetAmbsAll(2,"");
+                 jTabViewAllCargad.setModel(new TModel(mat, cabAreasPays)); 
+                  jButton3.setEnabled(true);
+                 jButton3.setIcon(null);
+                 jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arriba.png")));
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No Registros");
+        }
+            jLabel2.setText(Integer.toString(jTabViewAllCargad.getRowCount()));
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+       int opcDiab = jComboBox2.getSelectedIndex();
+
+            if(opcDiab == 0){//TODOS
+                 String[][] mat = matrizgetAmbsAll(3,"");
+                 jTabViewAllCargad.setModel(new TModel(mat, cabAreasPays)); 
+            }
+            if(opcDiab == 1){//ACTIVOS
+                String[][] mat = matrizgetAmbsAll(4,"");
+                 jTabViewAllCargad.setModel(new TModel(mat, cabAreasPays)); 
+            }
+          
+            jLabel2.setText(Integer.toString(jTabViewAllCargad.getRowCount()));
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void txtBusqCargadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusqCargadKeyReleased
+         int opc = jComboBox1.getSelectedIndex();
+         String var = txtBusqCargad.getText();
+            if(!var.isEmpty()){
+                
+            if(opc == 0){//TODOS
+                 String[][] mat = matrizgetAmbsAll(-1,var);
+                 jTabViewAllCargad.setModel(new TModel(mat, cabAreasPays)); 
+            }
+            if(opc == 1){//ACTIVOS
+                String[][] mat = matrizgetAmbsAll(-2,var);
+                 jTabViewAllCargad.setModel(new TModel(mat, cabAreasPays)); 
+            }
+            if(opc == 2){//BAJA TEMPORAL
+                String[][] mat = matrizgetAmbsAll(-3,var);
+                 jTabViewAllCargad.setModel(new TModel(mat, cabAreasPays)); 
+            }
+           
+            }
+              jLabel2.setText(Integer.toString(jTabViewAllCargad.getRowCount()));
+    }//GEN-LAST:event_txtBusqCargadKeyReleased
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int fila = jTabViewAllCargad.getSelectedRow();
+        int opc = jComboBox1.getSelectedIndex();
+        if(fila > -1){
+            if(opc == 1)
+             contrl.f5ActualAmbu(1,0,jTabViewAllCargad.getValueAt(fila, 0).toString());
+            if(opc == 2)
+             contrl.f5ActualAmbu(1,1,jTabViewAllCargad.getValueAt(fila, 0).toString());
+            
+            jButton4.doClick();
+            jComboBox1.setSelectedIndex(0);
+        }else{
+            JOptionPane.showMessageDialog(null,"no data View");
+        } 
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    txtBusqCargad.setText("");
+    }//GEN-LAST:event_jButton8ActionPerformed
+
  protected void cargaDataCargadores(){
-            String[][] mat = matrizgetAmbsAll();
-             jTable1.setModel(new TModel(mat, cabAreasPays));        
+            String[][] mat = matrizgetAmbsAll(0,"");
+             jTabViewAllCargad.setModel(new TModel(mat, cabAreasPays));        
     }
  
      //regresa matrizde vista tickets del dia
-        public String[][] matrizgetAmbsAll(){
+        public String[][] matrizgetAmbsAll(int opc,String param){
         Connection cn = con2.conexion();
           String sql ="",aux;
-              sql = "SELECT cargadores.id,cargadores.nombre,cargadores.direccion,cargadores.telefono,if(cargadores.diablo = 0,'Propio','Rentado') as diab,\n" +
-                "(SELECT CONCAT(semanas.anio, \" - \", semanas.semana) FROM semanas where cargadores.ultimaSem = semanas.id) AS ultSem,\n" +
-                "(cast( (SELECT semanas.id FROM semanas WHERE curdate() BETWEEN finicial AND ffinal) as signed ) - cast(cargadores.ultimaSem as SIGNED) ) AS adeud,\n" +
-                "cargadores.vigMembresia\n" +
-                "FROM cargadores\n" +
-                "ORDER BY cargadores.id;";      
+          switch (opc){
+               case -3://DADOS DE BAJA + busqieda por nombre apell
+                      sql = "SELECT cargadores.id,cargadores.nombre,cargadores.direccion,cargadores.telefono,if(cargadores.diablo = 0,'Propio','Rentado') as diab,\n" +
+                      "(SELECT CONCAT(semanas.anio, \" - \", semanas.semana) FROM semanas where cargadores.ultimaSem = semanas.id) AS ultSem,\n" +
+                      "(cast( (SELECT semanas.id FROM semanas WHERE curdate() BETWEEN finicial AND ffinal) as signed ) - cast(cargadores.ultimaSem as SIGNED) ) AS adeud,\n" +
+                      "cargadores.vigMembresia\n" +
+                      "FROM cargadores WHERE cargadores.activo = 0 AND (cargadores.id LIKE '"+param+"%' OR cargadores.nombre LIKE '"+param+"%' )\n" +
+                      "ORDER BY cargadores.id;";    
+                  break;
+               case -2://activos + busqieda por nombre apell
+                      sql = "SELECT cargadores.id,cargadores.nombre,cargadores.direccion,cargadores.telefono,if(cargadores.diablo = 0,'Propio','Rentado') as diab,\n" +
+                      "(SELECT CONCAT(semanas.anio, \" - \", semanas.semana) FROM semanas where cargadores.ultimaSem = semanas.id) AS ultSem,\n" +
+                      "(cast( (SELECT semanas.id FROM semanas WHERE curdate() BETWEEN finicial AND ffinal) as signed ) - cast(cargadores.ultimaSem as SIGNED) ) AS adeud,\n" +
+                      "cargadores.vigMembresia\n" +
+                      "FROM cargadores WHERE cargadores.activo > 0 AND (cargadores.id LIKE '"+param+"%' OR cargadores.nombre LIKE '"+param+"%' )\n" +
+                      "ORDER BY cargadores.id;";    
+                  break;
+               case -1://todos + busqieda por nombre apell
+                      sql = "SELECT cargadores.id,cargadores.nombre,cargadores.direccion,cargadores.telefono,if(cargadores.diablo = 0,'Propio','Rentado') as diab,\n" +
+                      "(SELECT CONCAT(semanas.anio, \" - \", semanas.semana) FROM semanas where cargadores.ultimaSem = semanas.id) AS ultSem,\n" +
+                      "(cast( (SELECT semanas.id FROM semanas WHERE curdate() BETWEEN finicial AND ffinal) as signed ) - cast(cargadores.ultimaSem as SIGNED) ) AS adeud,\n" +
+                      "cargadores.vigMembresia\n" +
+                      "FROM cargadores WHERE (cargadores.id LIKE '"+param+"%' OR cargadores.nombre LIKE '"+param+"%' )\n" +
+                      "ORDER BY cargadores.id;";    
+                  break;
+                case 0 : //todos cargadores
+                    sql = "SELECT cargadores.id,cargadores.nombre,cargadores.direccion,cargadores.telefono,if(cargadores.diablo = 0,'Propio','Rentado') as diab,\n" +
+                      "(SELECT CONCAT(semanas.anio, \" - \", semanas.semana) FROM semanas where cargadores.ultimaSem = semanas.id) AS ultSem,\n" +
+                      "(cast( (SELECT semanas.id FROM semanas WHERE curdate() BETWEEN finicial AND ffinal) as signed ) - cast(cargadores.ultimaSem as SIGNED) ) AS adeud,\n" +
+                      "cargadores.vigMembresia\n" +
+                      "FROM cargadores\n" +
+                      "ORDER BY cargadores.id;";    
+                    break;
+                case 1://activos cargadores
+                    sql = "SELECT cargadores.id,cargadores.nombre,cargadores.direccion,cargadores.telefono,if(cargadores.diablo = 0,'Propio','Rentado') as diab,\n" +
+                      "(SELECT CONCAT(semanas.anio, \" - \", semanas.semana) FROM semanas where cargadores.ultimaSem = semanas.id) AS ultSem,\n" +
+                      "(cast( (SELECT semanas.id FROM semanas WHERE curdate() BETWEEN finicial AND ffinal) as signed ) - cast(cargadores.ultimaSem as SIGNED) ) AS adeud,\n" +
+                      "cargadores.vigMembresia\n" +
+                      "FROM cargadores WHERE cargadores.activo > 0 \n" +
+                      "ORDER BY cargadores.id;";
+                break;
+          case 2://dados de baja cargadores
+                    sql = "SELECT cargadores.id,cargadores.nombre,cargadores.direccion,cargadores.telefono,if(cargadores.diablo = 0,'Propio','Rentado') as diab,\n" +
+                      "(SELECT CONCAT(semanas.anio, \" - \", semanas.semana) FROM semanas where cargadores.ultimaSem = semanas.id) AS ultSem,\n" +
+                      "(cast( (SELECT semanas.id FROM semanas WHERE curdate() BETWEEN finicial AND ffinal) as signed ) - cast(cargadores.ultimaSem as SIGNED) ) AS adeud,\n" +
+                      "cargadores.vigMembresia\n" +
+                      "FROM cargadores WHERE cargadores.activo = 0 \n" +
+                      "ORDER BY cargadores.id;";
+                break;
+                          case 3://diablito propio
+                    sql = "SELECT cargadores.id,cargadores.nombre,cargadores.direccion,cargadores.telefono,if(cargadores.diablo = 0,'Propio','Rentado') as diab,\n" +
+                      "(SELECT CONCAT(semanas.anio, \" - \", semanas.semana) FROM semanas where cargadores.ultimaSem = semanas.id) AS ultSem,\n" +
+                      "(cast( (SELECT semanas.id FROM semanas WHERE curdate() BETWEEN finicial AND ffinal) as signed ) - cast(cargadores.ultimaSem as SIGNED) ) AS adeud,\n" +
+                      "cargadores.vigMembresia\n" +
+                      "FROM cargadores WHERE cargadores.diablo = 0 \n" +
+                      "ORDER BY cargadores.id;";
+                break;
+                          case 4://diablito rentado
+                    sql = "SELECT cargadores.id,cargadores.nombre,cargadores.direccion,cargadores.telefono,if(cargadores.diablo = 0,'Propio','Rentado') as diab,\n" +
+                      "(SELECT CONCAT(semanas.anio, \" - \", semanas.semana) FROM semanas where cargadores.ultimaSem = semanas.id) AS ultSem,\n" +
+                      "(cast( (SELECT semanas.id FROM semanas WHERE curdate() BETWEEN finicial AND ffinal) as signed ) - cast(cargadores.ultimaSem as SIGNED) ) AS adeud,\n" +
+                      "cargadores.vigMembresia\n" +
+                      "FROM cargadores WHERE cargadores.diablo = 1 \n" +
+                      "ORDER BY cargadores.id;";
+                break;
+                
+          };
              int i =0,cantFilas=0, cont=1,cantColumnas=0;
              String[][] mat=null, mat2=null;
               int[] arrIdPedido = null;//int para usar hashMap
@@ -282,12 +508,12 @@ return mat;
     private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTabViewAllCargad;
+    private javax.swing.JTextField txtBusqCargad;
     // End of variables declaration//GEN-END:variables
 }

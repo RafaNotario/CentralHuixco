@@ -355,6 +355,8 @@ jLabObserva
 	jButton3
 	jButton1
 	jButton4
+	
+	txtBusqParam
 
 /* parametros corte de caja*/
 namCajero
@@ -364,3 +366,5 @@ saldInicial
 totCobros
 totGastos
 totCajaAll
+
+
