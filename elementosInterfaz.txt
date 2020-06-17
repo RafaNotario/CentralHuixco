@@ -24,7 +24,12 @@ jLabObserva
 @jPanambulantes
 	txtBuscAmbulante
 	jTabDatosAmbulante
+	
+	jLabIdAmbu
 	jLabNomAmb
+	jLabDirecc1
+	jLabGiro1
+	jLabObserva1
 
 	jDialogBajAltAmb
 	txtMotivBaja
@@ -397,9 +402,12 @@ totCajaAll
 	jLabViewFolio
 	jTabViewTurnos
 	jTabDetailTurnos
+
+--	Ingresos
+	jCBoxEsIngreso
+	jCBoxEsRubroDet
+	jTabViewIngresosAll
+	jLabLetrero
 	
-
-
-
 	
 	

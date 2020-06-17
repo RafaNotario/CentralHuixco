@@ -5611,7 +5611,8 @@ txtResultAmbu.setText(aux);
         jPanCargadores.setVisible(false);
         jPanVarios.setVisible(false);
         jPanTransitoInfraccion.setVisible(false);
-        jPanAreascobros .setVisible(true);       
+        jPanAreascobros .setVisible(true);  
+        jCmBxgetAreas.requestFocus(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -5620,7 +5621,7 @@ txtResultAmbu.setText(aux);
         jPanVarios.setVisible(false);
         jPanTransitoInfraccion.setVisible(false);
         jPanAreascobros .setVisible(false); 
-        
+        txtBuscAmbulante.requestFocus(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -5629,7 +5630,7 @@ txtResultAmbu.setText(aux);
         jPanVarios.setVisible(false);
         jPanTransitoInfraccion.setVisible(false);
         jPanAreascobros .setVisible(false); 
-
+        txtBuscCargadores.requestFocus(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -5639,7 +5640,7 @@ txtResultAmbu.setText(aux);
         jPanTransitoInfraccion.setVisible(true);
         mostrarTabInfrac("folio","");
         jPanAreascobros .setVisible(false); 
-        
+        txtInFilterBusq.requestFocus(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -5648,7 +5649,7 @@ txtResultAmbu.setText(aux);
         jPanVarios.setVisible(true);
         jPanTransitoInfraccion.setVisible(false);
         jPanAreascobros .setVisible(false); 
-
+        txtBusqOtros.requestFocus(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
@@ -5659,6 +5660,14 @@ txtResultAmbu.setText(aux);
     }//GEN-LAST:event_jButton40ActionPerformed
 
     private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
+           if( jCkBoxInscripcion.isSelected() ){
+           jCkBoxInscripcion.doClick();
+       }
+       
+       if( jCkBoxSemanas.isSelected() ){
+           jCkBoxSemanas.doClick();
+       }
+       
      jPanRentCargador.setVisible(true);
      jPanCargadorInscr.setVisible(false);
      jPanSemCargad.setVisible(false);
@@ -5671,6 +5680,8 @@ txtResultAmbu.setText(aux);
             auxD = func.percentage(tari, condo).toString();
         jLabImportRentDiab.setText(func.getDifference(tari,new BigDecimal(auxD)).toString());
         txtTotalCarg.setText(jLabImportRentDiab.getText());
+        
+
     }//GEN-LAST:event_jButton41ActionPerformed
 
     private void jLaFechFinMantenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLaFechFinMantenMousePressed
@@ -5727,6 +5738,8 @@ txtResultAmbu.setText(aux);
             jPanDataambView1.setVisible(true);
             txtBuscAmbulante.setText("");
             txtBuscAmbulante.requestFocus(true);
+            
+            jCheckSemPaysAmb.doClick();
     }
     }//GEN-LAST:event_jTabDatosAmbulanteKeyPressed
 
@@ -5768,6 +5781,7 @@ txtResultAmbu.setText(aux);
             txtBuscCargadores.setText("");
             txtBuscCargadores.requestFocus(true);
             mostrarJpanCargadores(datasCarg);
+            jCkBoxSemanas.doClick();
         }
     }//GEN-LAST:event_jTabCargadoresViewKeyPressed
 
@@ -6181,6 +6195,8 @@ txtResultAmbu.setText(aux);
            
            case "Cargadores":
                cobraCargadores();
+               jPanDataambView2.setVisible(false);
+               
            break;
 
             case "Otros":
@@ -6188,6 +6204,9 @@ txtResultAmbu.setText(aux);
            break;
            case "Cargadores Renta":
                cobraRentCarg();
+                   jButton40.doClick();
+          jPanDataambView2.setVisible(false);
+          txtBuscCargadores.requestFocus(true);
            break;
         };
         JOptionPane.showMessageDialog(null, "Cobrar: "+var);
@@ -6314,7 +6333,7 @@ jCBoxResguardosOpc.setEnabled(true);
           //calculamos la cantidad a dscontar %de cant          
                     BigDecimal amounPorcint =  func.percentage(amTarif, amountFour);
 auxtot = func.getDifference( func.multiplicaAmount(amTarif, amountTres), func.multiplicaAmount(amountTres, amounPorcint) ).toString();
- jLabImporteResguard.setText(auxtot);
+jLabImporteResguard.setText(auxtot);
                        BigDecimal amountFive = new BigDecimal(auxtot);//cantidad recivida
 txtResultAmbu.setText(func.getSum(amountTwo, amountFive).toString());
 jCBoxResguardosOpc.setEnabled(true);
@@ -6355,6 +6374,7 @@ jCBoxResguardosOpc.setEnabled(true);
                     jLabImporteInscripcion.setText(auxtot);
                     BigDecimal amountFive = new BigDecimal(auxtot);//cantidad recivida
                     txtResultAmbu.setText(func.getSum(amountFour,amountFive).toString());
+                      jCBoxDuracInscripc.setSelectedIndex(0);
             }else{      
                 if(jCheckInscripPaysAmb.isSelected()){
                     jCBoxDuracInscripc.setEnabled(true);
@@ -6364,6 +6384,8 @@ jCBoxResguardosOpc.setEnabled(true);
                     txtResultAmbu.setText(func.getSum(amountFour, amountsix).toString());
                     jDateChoInscripcion.setEnabled(true);
                    jDateChoInscripcion.setDate(datCtrl.StringDate(jLabVigenciaView.getText().replace('-', '/')));
+                   jCBoxDuracInscripc.setSelectedIndex(0);
+                   
                 }else{
                     jCBoxDuracInscripc.setEnabled(false);
                     BigDecimal amountTres = new BigDecimal(jLabImporteInscripcion.getText());//cantidad recivida
@@ -6371,6 +6393,8 @@ jCBoxResguardosOpc.setEnabled(true);
                     jDateChoInscripcion.setEnabled(false);
                  }
            }
+           
+       
     }//GEN-LAST:event_jCheckInscripPaysAmbActionPerformed
 
     private void jCheckSemPaysAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckSemPaysAmbActionPerformed
@@ -7675,7 +7699,7 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
         int opc = jCombBOpcBusqGastos.getSelectedIndex();
         if(opc == 1){
          String fechin = datCtrl.getFecha(jDateChoGastos);
-            mostrarGastosDia(fechin,"");
+            mostrarGastosDia("",infoUser[6]);
         }
     }//GEN-LAST:event_jButton44ActionPerformed
 
@@ -7962,6 +7986,9 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
                 jLabTarifResguard.setText(arr[3]);
                 jlabImportResguard.setText(arr[3]);
             }
+            
+            jChecMantSem.doClick();
+            jChecBasura.doClick();
           }//mostrarJpanNew
           
         /*** METODO PARA CARGAR DINAMICAMENTE DATOS EN JPANELES ambulantes*/
@@ -8170,12 +8197,21 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
 	jButResguardSubstarct.setEnabled(false);
 	jButResguardMoore.setEnabled(false);            
         txtResultSum.setText("0.00");
+        
+ 
+        jLabLastMantenim.setText("--");
+        jLabLastBasura.setText("--");
+        jLabLastPolicia.setText("--");
+        jLabLastResguardo.setText("--");
+        
+               jCmBxgetAreas.requestFocus(true);
+               
         String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
      jTabviewPays.setModel(new TModel(mat, cabAreasPays));
-     tamColViwePays();
+     tamColViwePays();//para ajustar el tamaño de las columnas de vista tickets dia
         }
         
-        public void inhabilitaAmbus(){
+        public void inhabilitaAmbus(){//limpiar todod despues de guardar
             jCheckSemPaysAmb.setSelected(false);
             jCheckResguardAmb.setSelected(false);
             jCheckInscripPaysAmb.setSelected(false);
@@ -8196,7 +8232,16 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
             
         txtResultAmbu.setText("0.00");
         
-        String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
+        jLabIdAmbu.setText("--");
+        jLabNomAmb.setText("--");
+        jLabDirecc1.setText("--");
+        jLabGiro1.setText("--");
+        jLabObserva1.setText("--");
+        jPanTableBusqView.setVisible(false);
+        
+        txtBuscAmbulante.requestFocus(true);
+        
+         String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
          jTabviewPays.setModel(new TModel(mat, cabAreasPays));
          tamColViwePays();
 //        llenacombogetAreas();
@@ -8536,6 +8581,7 @@ tamColViwePays();
            String[] dat = rP.getTickPagoCargad(arr[0]);
          rP.imprim80MMCargad(arr[0], dat,true);
            limpiPreDatCargad();
+           txtBuscCargadores.requestFocus(true);
     }//@endCobroCargadores
         
         
@@ -8677,6 +8723,8 @@ protected void cobraRentCarg(){
 	jDatChoIncripcion.setEnabled(false);
 	jComBInscripc.setEnabled(false);
                     txtTotalCarg.setText("0.00");
+                    
+                   
         }
         
         public void limpiaOthsPays(){
@@ -8802,6 +8850,8 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
           jLabTarifRentCarg.setText(coastRentCarg[3]);
           jLabCondonacRentDiab.setText("0.00");
           jLabImportRentDiab.setText(coastRentCarg[3]);
+          
+
       }
       
              //funcion para busqueda automatica ambulantes
@@ -8945,7 +8995,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
                 "INNER JOIN central.rubroscaja\n" +
                 "ON gastos_caja.idRubrocaja = rubroscaja.id AND gastos_caja.fecha = '"+fech+"' ;";
         }else{
-        consul = "SELECT gastos_caja.id,gastos_caja.hora,rubroscaja.concepto,gastos_caja.monto\n" +
+        consul = "SELECT gastos_caja.id,gastos_caja.hora,gastos_caja.concepto,gastos_caja.monto\n" +
                 "FROM central.gastos_caja\n" +
                 "INNER JOIN central.rubroscaja\n" +
                 "ON gastos_caja.idRubrocaja = rubroscaja.id AND gastos_caja.idTurno = '"+idTurn+"';";            

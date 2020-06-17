@@ -35,6 +35,10 @@ public class reportes extends javax.swing.JPanel {
     
     String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"},
             cabGastCajas = {"#Folio", "Hora", "Concepto", "Importe"};
+    String[] arrAreas = {"Mant. semanal","Basura semanal","Policia semanal","Resguardo semanal"};//2,3,4,5
+    String[] arrAmbus = {"Semana Ambulantes","Resguardo Ambulantes","Semana Ambulantes","Resguardo Ambulantes"};// 6,7,8,9
+    String[] arrCargad = {"Inscripción Anual","Inscripción Semestral","Semana cargadores","Renta diaria de diablo"};// 8,9,11,12
+    String[] arrOtros = {"VARIOS","FERTILIZANTE","RENTA DE ESPACIOS","EXPLANADA","BAÑOS","CREDENCIALES"};// 1,2,3,4,5,6 otros_rubros
     
     List<String> idCajeros = new ArrayList<String>();
     String[] semanaAct = null;
@@ -91,11 +95,20 @@ public class reportes extends javax.swing.JPanel {
         jButton11 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        jTabViewIngresosAll = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jCBoxEsIngreso = new javax.swing.JComboBox<>();
+        jCBoxEsRubroDet = new javax.swing.JComboBox<>();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel9 = new javax.swing.JLabel();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JSeparator();
+        jButton15 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
+        jSeparator6 = new javax.swing.JSeparator();
+        jLabLetrero = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox<>();
@@ -449,7 +462,8 @@ public class reportes extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Cancelaciones", new javax.swing.ImageIcon(getClass().getResource("/images/exit.png")), jPanel2); // NOI18N
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        jTabViewIngresosAll.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTabViewIngresosAll.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -460,7 +474,8 @@ public class reportes extends javax.swing.JPanel {
                 "#Ticket", "Fecha", "Hora", "Concepto", "Semana", "Nombre"
             }
         ));
-        jScrollPane5.setViewportView(jTable5);
+        jTabViewIngresosAll.setRowHeight(25);
+        jScrollPane5.setViewportView(jTabViewIngresosAll);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -470,9 +485,44 @@ public class reportes extends javax.swing.JPanel {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Rubro");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Areas", "Ambulantes", "Cargadores", "Otros Rubros" }));
+        jCBoxEsIngreso.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jCBoxEsIngreso.setMaximumRowCount(5);
+        jCBoxEsIngreso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Areas", "Ambulantes", "Cargadores", "Transito", "Varios" }));
+        jCBoxEsIngreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBoxEsIngresoActionPerformed(evt);
+            }
+        });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel9.setText("<html>\nPor fecha <br>\nde cobro.\n</html>");
+        jLabel9.setAutoscrolls(true);
+
+        jButton13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton13.setText("Semana");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        jButton14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton14.setText("Fecha");
+
+        jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jButton15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton15.setText("Imprimir");
+
+        jButton16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton16.setText("Excel");
+
+        jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jLabLetrero.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabLetrero.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -488,31 +538,68 @@ public class reportes extends javax.swing.JPanel {
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(254, Short.MAX_VALUE))
+                            .addComponent(jCBoxEsIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCBoxEsRubroDet, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabLetrero, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator6)
+                    .addComponent(jSeparator4)
+                    .addComponent(jSeparator5)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCBoxEsIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCBoxEsRubroDet, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabLetrero, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(6, 6, 6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(236, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ingresos", new javax.swing.ImageIcon(getClass().getResource("/images/dinero-cobros.png")), jPanel3); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Ingreso");
+        jLabel6.setText("Egreso");
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Gastos" }));
 
@@ -616,7 +703,7 @@ public class reportes extends javax.swing.JPanel {
             }    
             if(getElig > 0){
                 idUser = idCajeros.get(getElig - 1);
-                JOptionPane.showMessageDialog(null, "id es"+idUser);
+               // JOptionPane.showMessageDialog(null, "id es"+idUser);
             }            
         }
     }//GEN-LAST:event_jCmbBCajerosActionPerformed
@@ -634,7 +721,28 @@ public class reportes extends javax.swing.JPanel {
         
         if(tittol.equals("Cancelaciones"))
             getIntervalTurns2(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
-
+        
+        if(tittol.equals("Ingresos")){
+            int opc = jCBoxEsIngreso.getSelectedIndex();
+            jLabLetrero.setText("Semana "+semanaAct[2]+" : del "+semanaAct[3]+" al "+semanaAct[4]);
+            getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);
+/*
+            switch(opc){
+                case 0 :
+                break;
+                case 1 :
+                break;
+                case 2 :
+                break;
+                case 3 :
+                break;
+                case 4 :
+                break;
+            };
+    */        
+        }
+        
+            
         jDialCalendarMantenim.dispose();
     }//GEN-LAST:event_jButton42ActionPerformed
 
@@ -766,6 +874,23 @@ public class reportes extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTable2MouseClicked
 
+    private void jCBoxEsIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBoxEsIngresoActionPerformed
+        int eligio = jCBoxEsIngreso.getSelectedIndex();
+        if(eligio > -1){
+            cragaDinRubros(eligio);        
+        }else{
+            JOptionPane.showMessageDialog(null, "No esxite opcion");
+        }
+
+    }//GEN-LAST:event_jCBoxEsIngresoActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+       jDialCalendarMantenim.setLocationRelativeTo(this);
+        jDialCalendarMantenim.setVisible(true);
+        jDialCalendarMantenim.setEnabled(true);
+        jDialCalendarMantenim.setTitle("Ingresos");
+    }//GEN-LAST:event_jButton13ActionPerformed
+
         //funcion para busqueda automatica de otros conceptos
         void getIntervalTurns(int opc, String idUsers,String fech1,String fech2){
                 Connection cn = con2.conexion();
@@ -781,16 +906,16 @@ public class reportes extends javax.swing.JPanel {
                     consul ="SELECT  turnos.id,usuarios.nombre,turnos.finicial,turnos.ffinal\n" +
                             "FROM turnos\n" +
                             "INNER JOIN usuarios\n" +
-                            "ON turnos.idusuario = usuarios.id AND turnos.finicial BETWEEN (SELECT semanas.finicial FROM semanas WHERE CURDATE() BETWEEN finicial AND ffinal)\n" +
-                            "AND (SELECT semanas.ffinal FROM semanas WHERE CURDATE() BETWEEN finicial AND ffinal)\n" +
+                            "ON turnos.idusuario = usuarios.id AND date(turnos.finicial) BETWEEN date((SELECT semanas.finicial FROM semanas WHERE CURDATE() BETWEEN finicial AND ffinal) )\n" +
+                            "AND date((SELECT semanas.ffinal FROM semanas WHERE CURDATE() BETWEEN date(finicial) AND date(ffinal) ) )\n" +
                             "ORDER BY turnos.id DESC;";
                 }
                 if(opc == 1){
                     consul = "SELECT  turnos.id,usuarios.nombre,turnos.finicial,turnos.ffinal\n" +
                         "FROM turnos\n" +
                         "INNER JOIN usuarios\n" +
-                        "ON turnos.idusuario = usuarios.id AND turnos.finicial BETWEEN '"+fech1+"' AND '"+fech2+"' \n" +
-                        "ORDER BY turnos.id DESC;";
+                        "ON turnos.idusuario = usuarios.id AND (date(turnos.finicial) >= '"+fech1+"' AND date(turnos.finicial) <= '"+fech2+"')\n" +
+                        "ORDER BY turnos.id;";
                 }
                  //consul = "SELECT id, nombre from ambulantes WHERE id LIKE '"+var+"%'  OR nombre LIKE '"+var+"%' ORDER BY id";
                         modelo.addColumn("#Turno");       
@@ -850,15 +975,15 @@ public class reportes extends javax.swing.JPanel {
                     consul ="SELECT  turnos.id,usuarios.nombre,turnos.finicial,turnos.ffinal\n" +
                             "FROM turnos\n" +
                             "INNER JOIN usuarios\n" +
-                            "ON turnos.idusuario = usuarios.id AND turnos.finicial BETWEEN (SELECT semanas.finicial FROM semanas WHERE CURDATE() BETWEEN finicial AND ffinal)\n" +
-                            "AND (SELECT semanas.ffinal FROM semanas WHERE CURDATE() BETWEEN finicial AND ffinal)\n" +
+                            "ON turnos.idusuario = usuarios.id AND turnos.finicial BETWEEN (SELECT semanas.finicial FROM semanas WHERE CURDATE() BETWEEN date(finicial) AND date(ffinal) )\n" +
+                            "AND (SELECT semanas.ffinal FROM semanas WHERE CURDATE() BETWEEN date(finicial) AND date(ffinal) )\n" +
                             "ORDER BY turnos.id DESC;";
                 }
                 if(opc == 1){
                     consul = "SELECT  turnos.id,usuarios.nombre,turnos.finicial,turnos.ffinal\n" +
                         "FROM turnos\n" +
                         "INNER JOIN usuarios\n" +
-                        "ON turnos.idusuario = usuarios.id AND turnos.finicial BETWEEN '"+fech1+"' AND '"+fech2+"' \n" +
+                        "ON turnos.idusuario = usuarios.id AND (date(turnos.finicial) >= '"+fech1+"' AND date(turnos.finicial) <= '"+fech2+"') \n" +
                         "ORDER BY turnos.id DESC;";
                 }
                  //consul = "SELECT id, nombre from ambulantes WHERE id LIKE '"+var+"%'  OR nombre LIKE '"+var+"%' ORDER BY id";
@@ -940,6 +1065,127 @@ public class reportes extends javax.swing.JPanel {
             }
     }
     
+    // obtener cada lapso de semanas ingresos
+         void getIntervalIngresos(int opc, String idUsers,String fech1,String fech2){
+                Connection cn = con2.conexion();
+                DefaultTableModel modelo = new DefaultTableModel()
+                { 
+                    @Override
+                    public boolean isCellEditable (int fila, int columna) {
+                        return false;
+                    }
+                };
+                String consul="";
+                if(opc == 0){
+                    consul ="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areas.total\n" +
+                        "FROM pagos_areas\n" +
+                        "INNER JOIN areas\n" +
+                        "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND pagos_areas.fecha BETWEEN '"+fech1+"' AND '"+fech2+"'\n" +
+                        "INNER JOIN pagos_areasdet\n" +
+                        "ON pagos_areas.id = pagos_areasdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
+                        "INNER JOIN rubrospago\n" +
+                        "on pagos_areasdet.idRubroPago = rubrospago.id	\n" +
+                        "group BY pagos_areas.id;";
+                }
+                if(opc == 1){
+                    consul = "SELECT pagos_ambdet.idTicket,pagos_amb.fecha,pagos_amb.hora,rubrospago.descripcion,ambulantes.nombre,pagos_amb.total\n" +
+                    "FROM pagos_amb\n" +
+                    "INNER JOIN ambulantes\n" +
+                    "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idCancelacion = 0 AND pagos_amb.fecha BETWEEN '"+fech1+"' AND '"+fech2+"'\n" +
+                    "INNER JOIN pagos_ambdet\n" +
+                    "ON pagos_amb.id = pagos_ambdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
+                    "INNER JOIN rubrospago\n" +
+                    "on pagos_ambdet.idRubropago = rubrospago.id	\n" +
+                    "GROUP BY pagos_amb.id;";
+                }
+                if(opc == 2){
+                    consul = "(SELECT pagos_cargdet.idTicket,pagos_carg.fecha,pagos_carg.hora,rubrospago.descripcion,cargadores.nombre,pagos_carg.total\n" +
+                "FROM pagos_carg\n" +
+                "INNER JOIN cargadores\n" +
+                "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion = 0 AND pagos_carg.fecha BETWEEN '"+fech1+"' AND '"+fech2+"'\n" +
+                "INNER JOIN pagos_cargdet\n" +
+                "ON pagos_carg.id = pagos_cargdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
+                "INNER JOIN rubrospago\n" +
+                "on pagos_cargdet.idRubropago = rubrospago.id	\n" +
+                "group by pagos_carg.id)\n" +
+                "UNION\n" +
+                "-- QWERY pagos_rentacarg\n" +
+                "(SELECT pagos_cargrenta.id,pagos_cargrenta.fecha,pagos_cargrenta.hora,'Renta diaria de diablo',cargadores.nombre,pagos_cargrenta.importe\n" +
+                "FROM pagos_cargrenta\n" +
+                "INNER JOIN cargadores\n" +
+                "ON cargadores.id = pagos_cargrenta.idCarg AND pagos_cargrenta.idCancelacion = 0 AND pagos_cargrenta.fecha BETWEEN '"+fech1+"' AND '"+fech2+"'\n" +
+                "group by pagos_cargrenta.id);";
+                }
+                if(opc == 3){
+                    consul = "SELECT pagos_infrac.folio,pagos_infrac.fechapag,pagos_infrac.horapag,\"Pago Infraccion\",pagos_infrac.quienpaga,\n" +
+                "IF(pagos_infrac.descuento IS NULL, pagos_infrac.monto, pagos_infrac.monto - pagos_infrac.descuento )  AS totInfrac\n" +
+                "FROM pagos_infrac\n" +
+                "LEFT OUTER JOIN pagos_infraccancel\n" +
+                "ON pagos_infraccancel.idFolio = pagos_infrac.folio WHERE pagos_infraccancel.idFolio IS null AND pagos_infrac.fechapag BETWEEN '"+fech1+"' AND '"+fech2+"' \n" +
+                ";";
+                }
+                if(opc == 4){
+                    consul = "SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS hor,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
+                "IF(otros_venta.tipoPersona = 0,'Varios Amb.',IF(otros_venta.tipoPersona = 1,'Varios Carg.', IF(otros_venta.tipoPersona = 2,'Varios Cte.','NADON') ) ) AS quees,\n" +
+                "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
+                "        otros_venta.efectivo\n" +
+                "FROM otros_venta\n" +
+                "WHERE otros_venta.idCancelacion = 0 AND otros_venta.fecha BETWEEN '"+fech1+"' AND '"+fech2+"';";
+                }                
+                 //consul = "SELECT id, nombre from ambulantes WHERE id LIKE '"+var+"%'  OR nombre LIKE '"+var+"%' ORDER BY id";
+                        modelo.addColumn("#Ticket");       
+                        modelo.addColumn("Fecha");
+                        modelo.addColumn("Hora");
+                        modelo.addColumn("Rubro");
+                        modelo.addColumn("Nombre");
+                        modelo.addColumn("Total");
+
+                jTabViewIngresosAll.setModel(modelo);
+                TableColumnModel columnModel = jTabViewIngresosAll.getColumnModel();
+              jTabViewIngresosAll.getColumnModel().getColumn(0).setPreferredWidth(80);
+                jTabViewIngresosAll.getColumnModel().getColumn(0).setMaxWidth(150);
+                jTabViewIngresosAll.getColumnModel().getColumn(0).setMinWidth(50);
+
+                 jTabViewIngresosAll.getColumnModel().getColumn(1).setPreferredWidth(80);
+                jTabViewIngresosAll.getColumnModel().getColumn(1).setMaxWidth(150);
+                jTabViewIngresosAll.getColumnModel().getColumn(1).setMinWidth(50);
+
+                 jTabViewIngresosAll.getColumnModel().getColumn(2).setPreferredWidth(80);
+                jTabViewIngresosAll.getColumnModel().getColumn(2).setMaxWidth(150);
+                jTabViewIngresosAll.getColumnModel().getColumn(2).setMinWidth(50);
+                
+                  jTabViewIngresosAll.getColumnModel().getColumn(5).setPreferredWidth(80);
+                jTabViewIngresosAll.getColumnModel().getColumn(5).setMaxWidth(150);
+                jTabViewIngresosAll.getColumnModel().getColumn(5).setMinWidth(50);
+                
+                String datos[] =  new String[6];//tenia 4
+                Statement st = null;
+                ResultSet rs = null;
+                try {
+                    st = cn.createStatement();
+                    rs = st.executeQuery(consul);
+
+                    while(rs.next()){
+                        datos[0] =rs.getString(1);
+                        datos[1] = rs.getString(2);
+                        datos[2] = rs.getString(3);
+                        datos[3] = rs.getString(4);
+                        datos[4] = rs.getString(5);
+                        datos[5] = rs.getString(6);
+                        modelo.addRow(datos);
+                    }
+                    jTabViewIngresosAll.setModel(modelo);
+                } catch (SQLException ex) {
+                    Logger.getLogger(reportes.class.getName()).log(Level.SEVERE, null, ex);
+                }finally{
+                     try {
+                            if(rs != null) rs.close();              
+                            if(st != null) st.close();                
+                            if(cn !=null) cn.close();
+                     } catch (SQLException ex) {
+                     }
+                 }
+    }//@endgetProductsOthers   
  
     
 private String sumCorteCaj(String idTurnon){
@@ -953,11 +1199,53 @@ private String sumCorteCaj(String idTurnon){
 return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, func.getSum(totCargRent, func.getSum(totInfrc, totOthsVenta))))).toString();
           }
     
+public void cragaDinRubros(int opc){
+
+switch(opc){
+    case 0://areas
+        jCBoxEsRubroDet.removeAllItems();
+        jCBoxEsRubroDet.addItem("Todos");
+        for (int i = 0; i < arrAreas.length; i++) {
+            jCBoxEsRubroDet.addItem(arrAreas[i]);
+        }
+    break;
+    case 1://Ambulantes
+        jCBoxEsRubroDet.removeAllItems();
+        jCBoxEsRubroDet.addItem("Todos");
+        for (int i = 0; i < arrAmbus.length; i++) {
+            jCBoxEsRubroDet.addItem(arrAmbus[i]);
+        }
+    break;
+    case 2://Cargadores
+        jCBoxEsRubroDet.removeAllItems();
+        jCBoxEsRubroDet.addItem("Todos");
+        for (int i = 0; i < arrCargad.length; i++) {
+            jCBoxEsRubroDet.addItem(arrCargad[i]);
+        }
+    break;
+    case 3://Infracciones
+        jCBoxEsRubroDet.removeAllItems();
+        jCBoxEsRubroDet.addItem("Todos");
+    break;
+    case 4://Otros Varios
+        jCBoxEsRubroDet.removeAllItems();
+        jCBoxEsRubroDet.addItem("Todos");
+        for (int i = 0; i < arrOtros.length; i++) {
+            jCBoxEsRubroDet.addItem(arrOtros[i]);
+        }
+    break;
+}; 
+    
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -967,13 +1255,14 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox<String> jCBoxEsIngreso;
+    private javax.swing.JComboBox<String> jCBoxEsRubroDet;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JComboBox<String> jCmBoxIdCancel;
     private javax.swing.JComboBox<String> jCmbBCajeros;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JDialog jDialCalendarMantenim;
+    private javax.swing.JLabel jLabLetrero;
     private javax.swing.JLabel jLabViewFolio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -982,6 +1271,7 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -998,14 +1288,17 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JTable jTabDetailTurnos;
+    private javax.swing.JTable jTabViewIngresosAll;
     private javax.swing.JTable jTabViewTurnos;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     // End of variables declaration//GEN-END:variables
 }

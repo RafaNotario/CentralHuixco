@@ -1346,7 +1346,7 @@ public class funciones {
                 "INNER JOIN central.rubroscaja\n" +
                 "ON gastos_caja.idRubrocaja = rubroscaja.id AND gastos_caja.fecha = '"+fech+"' ;";
         }else{
-        consul = "SELECT gastos_caja.id,gastos_caja.hora,rubroscaja.concepto,gastos_caja.monto\n" +
+        consul = "SELECT gastos_caja.id,gastos_caja.hora,gastos_caja.concepto,gastos_caja.monto\n" +
                 "FROM central.gastos_caja\n" +
                 "INNER JOIN central.rubroscaja\n" +
                 "ON gastos_caja.idRubrocaja = rubroscaja.id AND gastos_caja.idTurno = '"+idTurn+"';";            
