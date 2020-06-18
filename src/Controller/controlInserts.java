@@ -18,10 +18,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 
-/**
- *
- * @author monit
- */
+
 public class controlInserts {
 
     ConexionDBOriginal con2 = new ConexionDBOriginal();
@@ -944,6 +941,8 @@ SQL="UPDATE pagos_infrac SET folio = ?, fecha = ?, tipodoc = ?,documento = ?, mo
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }//catch
             }//finally 
+                
+                if(table.equals("cargadores")){guardLugDispCargad(id);}
                 } else {
                     JOptionPane.showMessageDialog(null,"No se borro el registro: "+id);
                 }
@@ -1264,13 +1263,13 @@ pps = cn.prepareStatement(SQL);
 
        //metodos para operaciones con cargadores
             //guarda Ambulante o actualiza MAMALONA LOGIC FUCK
-     public void guardF5Cargad(List<String> param, String idT){
+     public void guardF5Cargad(List<String> param, String idT, int opcs){
      Connection cn = con2.conexion();
             PreparedStatement pps=null;
             String SQL="",band="";      
             try {
-          if(idT.isEmpty()){
- SQL="INSERT INTO cargadores (nombre,direccion,telefono,obs,diablo,condMemb,condDerecho,condMotivo,ultimaSem) VALUES (?,?,?,?,?,?,?,?,?)";                           
+if(opcs == 0){// 0 = nuevo cragador
+ SQL="INSERT INTO cargadores (id,nombre,direccion,telefono,obs,diablo,condMemb,condDerecho,condMotivo,ultimaSem) VALUES (?,?,?,?,?,?,?,?,?,?)";                           
   pps = cn.prepareStatement(SQL);
                 pps.setString(1, param.get(0));
                 pps.setString(2, param.get(1));
@@ -1281,20 +1280,24 @@ pps = cn.prepareStatement(SQL);
                 pps.setString(7, param.get(6));
                 pps.setString(8, param.get(7));
                 pps.setString(9, param.get(8));
+                pps.setString(10, param.get(9));
                 band = "creado";
-          }else{
+          }
+if(opcs == 1){//1 = Actualiza cargador
 SQL="UPDATE cargadores SET nombre=?,direccion=?,telefono=?,obs=?,diablo=?,condMemb=?,condDerecho=?,condMotivo=? WHERE id = '"+idT+"'; ";              
 pps = cn.prepareStatement(SQL);
-                pps.setString(1, param.get(0));
-                pps.setString(2, param.get(1));
-                pps.setString(3, param.get(2));
-                pps.setString(4, param.get(3));
-                pps.setString(5, param.get(4));
-                pps.setString(6, param.get(5));
-                pps.setString(7, param.get(6));
-                pps.setString(8, param.get(7));
+                pps.setString(1, param.get(1));
+                pps.setString(2, param.get(2));
+                pps.setString(3, param.get(3));
+                pps.setString(4, param.get(4));
+                pps.setString(5, param.get(5));
+                pps.setString(6, param.get(6));
+                pps.setString(7, param.get(7));
+                pps.setString(8, param.get(8));
                 band="actualizado";
-          }      
+          }
+
+
                 pps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Cargador "+band+" correctamente.");
             } catch (SQLException ex) {
@@ -1465,6 +1468,30 @@ pps = cn.prepareStatement(SQL);
 return mat;            
 }//@endmatrizgetTicketsDia
        
+               //metodo para guardar nueva infraccion
+       public void guardLugDispCargad(String param){
+     Connection cn = con2.conexion();
+            PreparedStatement pps=null;
+            String SQL="";        
+                SQL="INSERT INTO cargadores_lugares (id) VALUES (?)";                           
+            try {
+                pps = cn.prepareStatement(SQL);
+                pps.setString(1, param);
+                pps.executeUpdate();
+          //      JOptionPane.showMessageDialog(null, "Infraccion creada correctamente.");
+            } catch (SQLException ex) {
+                Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
+            }finally{
+                try {
+                    if(pps != null) pps.close();                
+                    if(cn !=null) cn.close();
+                    } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,ex.getMessage() );    
+                    }
+            }//finally catch
+} //@end guardLugDispCargad
+        
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();
          System.out.println("Ultimo pagado: "+contrl.regLastTicket(19));

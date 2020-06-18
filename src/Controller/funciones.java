@@ -1423,26 +1423,58 @@ public class funciones {
                     e2.printStackTrace();
                  }
               }
-
                 return rgresa;
     }
          
-         public static void main(String args[]){
+                       //OBTENER ULTIMO GASTO DE CAJA REALIZADO
+          public String getNumReutilizarCargad(){
+            Connection cn = con2.conexion();
+            String idTurno = "-1";
+            String sql = "";
+            sql = "SELECT id FROM cargadores_lugares ORDER BY id LIMIT 1; ";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idTurno = rs.getString(1);
+                    }else{
+                         idTurno = "-1";
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idTurno;
+    }//@end getNumReutilizarCargad
+               
+               public static void main(String args[]){
            BigDecimal amountOne = new BigDecimal(250);//monto a cobrar
            BigDecimal amountTwo = new BigDecimal(100.00);//cantidad recivida
            
            funciones fn =  new funciones();
               java.util.Date date = new Date();
                 String[] prue = fn.getAllDataAmb("56");
+                System.out.println("reutilizar: "+fn.getNumReutilizarCargad());  
+                
                // for (int i = 0; i < prue.length; i++) {
-               System.out.println("datas turno: "+fn.totalturno(0,"919"));
+             /*  System.out.println("datas turno: "+fn.totalturno(0,"919"));
                System.out.println("datas turno: "+fn.totalturno(1,"919"));               
                System.out.println("datas turno: "+fn.totalturno(2,"919"));               
                System.out.println("datas turno: "+fn.totalturno(3,"919"));               
                System.out.println("datas turno: "+fn.totalturno(4,"919"));               
                System.out.println("datas turno: "+fn.totalturno(5,"919"));               
 
-               System.out.println("datas turno: "+fn.totalturno(6,"919"));               
+               System.out.println("datas turno: "+fn.totalturno(6,"919"));  */             
           // }
  
           //   System.out.println("pay ultimo CLIENTE sera "+(var+1));

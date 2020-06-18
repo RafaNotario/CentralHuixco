@@ -28,7 +28,12 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import renderTable.TModel;
 import tickets.Jasper.Reportes;
 import Interfaz.internos.jpanels.infracc_rw_DB;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.util.Calendar;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 
 
@@ -96,13 +101,14 @@ public internoCaja(String usuarioN) {
 jCBBusqTicketall.setSelectedIndex(0);    
 /*Gstos Caja*/
 llenacombogetcuentaGasto();
-mostrarGastosDia(datCtrl.setDateActual(),infoUser[6]);
+mostrarGastosDia("",infoUser[6]);
 
 //Cargadores fechas renta
 dCCFechIniRentCarg.setDateFormat(formatoPrueba);
 dCCFechFinRentCarg.setDateFormat(formatoPrueba);
 
 jDateChoCorte.setDate(datCtrl.cargafecha());
+
 
 jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         new KeyAdapter(){
@@ -114,6 +120,28 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     bandC =0;
            }
     }} );
+
+/*   
+               this.addKeyListener(new KeyListener(){
+                   @Override
+              public void keyPressed(KeyEvent e){
+                if(e.getKeyCode()==KeyEvent.VK_F5){
+                    JOptionPane.showMessageDialog(null, "Has pulsado Enter");
+                }
+           
+                if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
+                    System.exit(0);
+                }
+            }
+            public void keyTyped(KeyEvent e){
+                //Aqui no funcionara
+            }
+
+            public void keyReleased(KeyEvent e){
+                JOptionPane.showMessageDialog(null, "oprimio");
+            }
+        });
+*/
  }
 
     /**
@@ -1591,6 +1619,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         );
 
         setPreferredSize(new java.awt.Dimension(1329, 921));
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estación", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
@@ -1736,8 +1769,10 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         );
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setAutoscrolls(true);
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(0, 0));
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(432, 450));
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(432, 450));
 
         jPanInterncoborstivk.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1789,12 +1824,12 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
             jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtBusqTickAll, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                .addComponent(txtBusqTickAll, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane5Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jDatChoFechBusqtick, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                    .addComponent(jDatChoFechBusqtick, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jLayeredPane5Layout.setVerticalGroup(
@@ -1805,7 +1840,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
             .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane5Layout.createSequentialGroup()
                     .addComponent(jDatChoFechBusqtick, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jTabviewPays.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1869,11 +1904,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCBBusqTicketall, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                     .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2008,14 +2043,14 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jCombBOpcBusqGastos)
                     .addComponent(jLabel81, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Gastos", jPanInternGastos);
@@ -2042,6 +2077,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jCheckResguardAmb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckResguardAmbActionPerformed(evt);
+            }
+        });
+        jCheckResguardAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCheckResguardAmbKeyReleased(evt);
             }
         });
 
@@ -2104,6 +2144,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 jButMinusResgSemfinActionPerformed(evt);
             }
         });
+        jButMinusResgSemfin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jButMinusResgSemfinKeyReleased(evt);
+            }
+        });
 
         txtResgFinAmb.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtResgFinAmb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -2114,6 +2159,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jButMostSemsPaysAmb2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButMostSemsPaysAmb2ActionPerformed(evt);
+            }
+        });
+        jButMostSemsPaysAmb2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jButMostSemsPaysAmb2KeyReleased(evt);
             }
         });
 
@@ -2205,12 +2255,22 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 jButMinusResgPaysAmbActionPerformed(evt);
             }
         });
+        jButMinusResgPaysAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jButMinusResgPaysAmbKeyReleased(evt);
+            }
+        });
 
         jButMostSemsPaysAmb1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButMostSemsPaysAmb1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mas.png"))); // NOI18N
         jButMostSemsPaysAmb1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButMostSemsPaysAmb1ActionPerformed(evt);
+            }
+        });
+        jButMostSemsPaysAmb1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jButMostSemsPaysAmb1KeyReleased(evt);
             }
         });
 
@@ -2232,6 +2292,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jCBoxResguardosOpc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBoxResguardosOpcActionPerformed(evt);
+            }
+        });
+        jCBoxResguardosOpc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCBoxResguardosOpcKeyReleased(evt);
             }
         });
 
@@ -2324,6 +2389,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jCheckInscripPaysAmb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckInscripPaysAmbActionPerformed(evt);
+            }
+        });
+        jCheckInscripPaysAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCheckInscripPaysAmbKeyReleased(evt);
             }
         });
 
@@ -2435,12 +2505,22 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         );
 
         jDateChoInscripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jDateChoInscripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jDateChoInscripcionKeyReleased(evt);
+            }
+        });
 
         jCBoxDuracInscripc.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jCBoxDuracInscripc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Anual", "Semestral", "Trimestral" }));
         jCBoxDuracInscripc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBoxDuracInscripcActionPerformed(evt);
+            }
+        });
+        jCBoxDuracInscripc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCBoxDuracInscripcKeyReleased(evt);
             }
         });
 
@@ -2490,6 +2570,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jCheckSemPaysAmb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckSemPaysAmbActionPerformed(evt);
+            }
+        });
+        jCheckSemPaysAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCheckSemPaysAmbKeyReleased(evt);
             }
         });
 
@@ -2550,6 +2635,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 jButMinusSemsPaysAmbActionPerformed(evt);
             }
         });
+        jButMinusSemsPaysAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jButMinusSemsPaysAmbKeyReleased(evt);
+            }
+        });
 
         txtSemFinAmb.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtSemFinAmb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -2560,6 +2650,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jButMostSemsPaysAmb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButMostSemsPaysAmbActionPerformed(evt);
+            }
+        });
+        jButMostSemsPaysAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jButMostSemsPaysAmbKeyReleased(evt);
             }
         });
 
@@ -2857,6 +2952,9 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtBuscAmbulanteKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscAmbulanteKeyReleased(evt);
+            }
         });
 
         jButton26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search-what.png"))); // NOI18N
@@ -3015,7 +3113,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addContainerGap(69, Short.MAX_VALUE))
         );
 
-        dCCFechIniRentCarg.setCurrentView(new datechooser.view.appearance.AppearancesList("custom",
+        dCCFechIniRentCarg.setCurrentView(new datechooser.view.appearance.AppearancesList("Swing",
             new datechooser.view.appearance.ViewAppearance("custom",
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
                     new java.awt.Color(0, 0, 0),
@@ -3066,13 +3164,55 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         }
     });
 
-    dCCFechFinRentCarg.setCalendarPreferredSize(new java.awt.Dimension(340, 230));
-    dCCFechFinRentCarg.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 13));
-    dCCFechFinRentCarg.setNavigateFont(new java.awt.Font("Tahoma", java.awt.Font.BOLD, 13));
-    dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
-        public void onCommit(datechooser.events.CommitEvent evt) {
-            dCCFechFinRentCargOnCommit(evt);
-        }
+    dCCFechFinRentCarg.setCurrentView(new datechooser.view.appearance.AppearancesList("Swing",
+        new datechooser.view.appearance.ViewAppearance("custom",
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                new java.awt.Color(0, 0, 0),
+                new java.awt.Color(0, 0, 255),
+                false,
+                true,
+                new datechooser.view.appearance.swing.ButtonPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                new java.awt.Color(0, 0, 0),
+                new java.awt.Color(0, 0, 255),
+                true,
+                true,
+                new datechooser.view.appearance.swing.ButtonPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                new java.awt.Color(0, 0, 255),
+                new java.awt.Color(0, 0, 255),
+                false,
+                true,
+                new datechooser.view.appearance.swing.ButtonPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                new java.awt.Color(128, 128, 128),
+                new java.awt.Color(0, 0, 255),
+                false,
+                true,
+                new datechooser.view.appearance.swing.LabelPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                new java.awt.Color(0, 0, 0),
+                new java.awt.Color(0, 0, 255),
+                false,
+                true,
+                new datechooser.view.appearance.swing.LabelPainter()),
+            new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                new java.awt.Color(0, 0, 0),
+                new java.awt.Color(255, 0, 0),
+                false,
+                false,
+                new datechooser.view.appearance.swing.ButtonPainter()),
+            (datechooser.view.BackRenderer)null,
+            false,
+            true)));
+dCCFechFinRentCarg.setCalendarPreferredSize(new java.awt.Dimension(340, 230));
+dCCFechFinRentCarg.setFieldFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 13));
+dCCFechFinRentCarg.setNavigateFont(new java.awt.Font("Tahoma", java.awt.Font.BOLD, 13));
+dCCFechFinRentCarg.setCurrentNavigateIndex(0);
+dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
+    public void onCommit(datechooser.events.CommitEvent evt) {
+        dCCFechFinRentCargOnCommit(evt);
+    }
     });
 
     javax.swing.GroupLayout jPanRentCargadorLayout = new javax.swing.GroupLayout(jPanRentCargador);
@@ -3820,9 +3960,9 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addComponent(txtBuscCargadores))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanCargadoresLayout.createSequentialGroup()
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -3832,7 +3972,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                         .addComponent(txtTotalCarg)
                         .addComponent(jLabel125, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanCargadoresLayout.createSequentialGroup()
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addContainerGap(214, Short.MAX_VALUE))
         .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -5559,7 +5699,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
             .addGap(0, 0, 0)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addContainerGap())
     );
     layout.setVerticalGroup(
@@ -5649,7 +5789,8 @@ txtResultAmbu.setText(aux);
         jPanVarios.setVisible(true);
         jPanTransitoInfraccion.setVisible(false);
         jPanAreascobros .setVisible(false); 
-        txtBusqOtros.requestFocus(true);
+       txtBusqOtros.requestFocus(true);
+ 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
@@ -6103,7 +6244,6 @@ txtResultAmbu.setText(aux);
                 jLabSemsPaysBasura.setText("0");
                 jlabImportBasura.setText("0.00");
             }
-            
     }//GEN-LAST:event_jChecBasuraActionPerformed
 
     private void jChecPoliciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChecPoliciaActionPerformed
@@ -6218,9 +6358,15 @@ txtResultAmbu.setText(aux);
 
     private void txtEfectKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEfectKeyReleased
             int var = evt.getKeyCode();
-//             System.out.println("Oprimio #"+ var);
+            //System.out.println("Oprimio #"+ var);
+         if(var == 27 ){
+                    jFramePays.dispose();
+                    txtBuscAmbulante.requestFocus(true);
+            }else{
+         
             if ( (var > 47 && var < 58) || (var > 95 && var < 106) || var == 10 || var ==8 || var ==127 || var == 37 || var == 39
                     || var == 46 || var == 110) {//si oprime numero o Enter
+
                 String difer = txtEfect.getText(),
                         total = txtTotCobro.getText();
                 BigDecimal amountOne = new BigDecimal(total);
@@ -6237,14 +6383,17 @@ txtResultAmbu.setText(aux);
                     jButton7.doClick();
                     jFramePays.dispose();
             }  
+  
                 }else{
                      txtCambio.setText(func.getDifference(amountTwo, amountOne).toString());
                      jButton7.setEnabled(false);
                 }
             }else{
-                     JOptionPane.showMessageDialog(null, "Solo acepta numeros");
+                    // JOptionPane.showMessageDialog(null, "Solo acepta numeros");
                      txtEfect.setText(txtTotCobro.getText());
              }
+            
+         }
     }//GEN-LAST:event_txtEfectKeyReleased
 
     private void txtCambioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCambioKeyReleased
@@ -7034,7 +7183,11 @@ if(!dto.isEmpty() && !toI.isEmpty()){
                                // contrl.matrizgetTicketsDia("",infoUser[6]);
                                 
                                 String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
-                                jTabviewPays.setModel(new TModel(mat, cabAreasPays));
+                                DefaultTableModel modelo = new TModel(mat, cabAreasPays);
+        jTabviewPays.setModel(modelo);
+        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        jTabviewPays.setRowSorter(ordenon);
+//                                jTabviewPays.setModel(new TModel(mat, cabAreasPays));
                                 tamColViwePays();
                                 
                                 
@@ -7539,7 +7692,7 @@ if(selec > -1){
                     }
                     limpiaguardGasto();
                     jDialAltaGastos.dispose();
-                    mostrarGastosDia(fech, infoUser[6]);
+                    mostrarGastosDia("", infoUser[6]);
                 }else{
                     JOptionPane.showMessageDialog(null, "Campo Concepto y Obs no pueden ser vacios");
                 }
@@ -7583,7 +7736,7 @@ if(selec > -1){
                     String mostTic = jTabViewGastos.getValueAt(fila, 0).toString()
                           ;
                     contrl.elimaRow("gastos_caja","id",mostTic); 
-                    mostrarGastosDia(datCtrl.setDateActual(),infoUser[6]);
+                    mostrarGastosDia("",infoUser[6]);
                 }else{
                     JOptionPane.showMessageDialog(null, "Debe elegir que mostrar");
                 }
@@ -7607,8 +7760,14 @@ if(selec > -1){
         int opc = jCBBusqTicketall.getSelectedIndex();
         if(opc == 1){
          String fechin = datCtrl.getFecha(jDatChoFechBusqtick);
-            String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
-         jTabviewPays.setModel(new TModel(mat, cabAreasPays));
+
+         String[][] mat = contrl.matrizgetTicketsDia(fechin,"");
+         DefaultTableModel modelo = new TModel(mat, cabAreasPays);
+         jTabviewPays.setModel(modelo);
+         TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+         jTabviewPays.setRowSorter(ordenon);
+        
+//         jTabviewPays.setModel(new TModel(mat, cabAreasPays));
          tamColViwePays();
 //para cargar gastos de la misma fecha de busqueda    
           jCombBOpcBusqGastos.setSelectedIndex(1);
@@ -7699,9 +7858,94 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
         int opc = jCombBOpcBusqGastos.getSelectedIndex();
         if(opc == 1){
          String fechin = datCtrl.getFecha(jDateChoGastos);
-            mostrarGastosDia("",infoUser[6]);
+            mostrarGastosDia(fechin,"");
         }
     }//GEN-LAST:event_jButton44ActionPerformed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+     if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+          JOptionPane.showMessageDialog(null, "ora");
+       }
+        
+    }//GEN-LAST:event_formKeyReleased
+
+    private void txtBuscAmbulanteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscAmbulanteKeyReleased
+         if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton22.doClick();
+                }
+    }//GEN-LAST:event_txtBuscAmbulanteKeyReleased
+
+    private void jCheckResguardAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCheckResguardAmbKeyReleased
+        if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton22.doClick();
+                }
+    }//GEN-LAST:event_jCheckResguardAmbKeyReleased
+
+    private void jButMinusSemsPaysAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMinusSemsPaysAmbKeyReleased
+         if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton22.doClick();
+                }
+    }//GEN-LAST:event_jButMinusSemsPaysAmbKeyReleased
+
+    private void jButMostSemsPaysAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMostSemsPaysAmbKeyReleased
+         if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton22.doClick();
+                }
+    }//GEN-LAST:event_jButMostSemsPaysAmbKeyReleased
+
+    private void jCheckSemPaysAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCheckSemPaysAmbKeyReleased
+         if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton22.doClick();
+                }
+    }//GEN-LAST:event_jCheckSemPaysAmbKeyReleased
+
+    private void jButMinusResgPaysAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMinusResgPaysAmbKeyReleased
+                if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton22.doClick();
+                }
+    }//GEN-LAST:event_jButMinusResgPaysAmbKeyReleased
+
+    private void jButMostSemsPaysAmb1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMostSemsPaysAmb1KeyReleased
+                if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton22.doClick();
+                }
+    }//GEN-LAST:event_jButMostSemsPaysAmb1KeyReleased
+
+    private void jButMinusResgSemfinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMinusResgSemfinKeyReleased
+                if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton22.doClick();
+                }
+    }//GEN-LAST:event_jButMinusResgSemfinKeyReleased
+
+    private void jButMostSemsPaysAmb2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMostSemsPaysAmb2KeyReleased
+                if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton22.doClick();
+                }
+    }//GEN-LAST:event_jButMostSemsPaysAmb2KeyReleased
+
+    private void jCBoxResguardosOpcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCBoxResguardosOpcKeyReleased
+                if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton22.doClick();
+                }
+    }//GEN-LAST:event_jCBoxResguardosOpcKeyReleased
+
+    private void jCheckInscripPaysAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCheckInscripPaysAmbKeyReleased
+                if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton22.doClick();
+                }
+    }//GEN-LAST:event_jCheckInscripPaysAmbKeyReleased
+
+    private void jDateChoInscripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDateChoInscripcionKeyReleased
+                if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton22.doClick();
+                }
+    }//GEN-LAST:event_jDateChoInscripcionKeyReleased
+
+    private void jCBoxDuracInscripcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCBoxDuracInscripcKeyReleased
+                if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton22.doClick();
+                }
+    }//GEN-LAST:event_jCBoxDuracInscripcKeyReleased
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -8207,7 +8451,12 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
                jCmBxgetAreas.requestFocus(true);
                
         String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
-     jTabviewPays.setModel(new TModel(mat, cabAreasPays));
+        DefaultTableModel modelo = new TModel(mat, cabAreasPays);
+        jTabviewPays.setModel(modelo);
+        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        jTabviewPays.setRowSorter(ordenon);
+     
+    // JOptionPane.showMessageDialog(null, "Esla primera llenada");
      tamColViwePays();//para ajustar el tamaño de las columnas de vista tickets dia
         }
         
@@ -8242,7 +8491,11 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
         txtBuscAmbulante.requestFocus(true);
         
          String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
-         jTabviewPays.setModel(new TModel(mat, cabAreasPays));
+        DefaultTableModel modelo = new TModel(mat, cabAreasPays);
+        jTabviewPays.setModel(modelo);
+        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        jTabviewPays.setRowSorter(ordenon);           
+//         jTabviewPays.setModel(new TModel(mat, cabAreasPays));
          tamColViwePays();
 //        llenacombogetAreas();
         }
@@ -8369,9 +8622,14 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
             }
            }while( j <= contadorGuard);
 
-            String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);//solo regresara lo registrado durante ese turno
-             jTabviewPays.setModel(new TModel(mat, cabAreasPays));    
-             tamColViwePays();
+        String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);//solo regresara lo registrado durante ese turno
+        DefaultTableModel modelo = new TModel(mat, cabAreasPays);
+        jTabviewPays.setModel(modelo);
+        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        jTabviewPays.setRowSorter(ordenon);        
+//            jTabviewPays.setModel(new TModel(mat, cabAreasPays));    
+
+            tamColViwePays();
             String[] dat = rP.getUltimPagoarea(arr[0]);
             rP.imprim80MM(arr[0], dat,true);   
             inhabilitaAreas();
@@ -8475,9 +8733,15 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
                     j++;
             }
            }while( j <= contadorGuard);
-            String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
-             jTabviewPays.setModel(new TModel(mat, cabAreasPays));       
-             tamColViwePays();
+         
+        String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
+        DefaultTableModel modelo = new TModel(mat, cabAreasPays);
+        jTabviewPays.setModel(modelo);
+        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        jTabviewPays.setRowSorter(ordenon);            
+//            jTabviewPays.setModel(new TModel(mat, cabAreasPays));
+
+            tamColViwePays();
             String[] dat = rP.getTickPagoAmbu(arr[0]);
             rP.imprim80MMAmbus(arr[0], dat,true);   
              inhabilitaAmbus();
@@ -8571,15 +8835,19 @@ aux = func.percentage(coast, dscto).toString();
                  contrl.f5postGuardCarg(idAmbu,guardP[7],"vigMembresia");
                     j++;
            }
-  
 }while( j <= contadorGuard);//<- while para controlar el numero total de inserciones
 
-            String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
-             jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
-tamColViwePays();
+        String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
+        DefaultTableModel modelo = new TModel(mat, cabAreasPays);
+        jTabviewPays.setModel(modelo);
+        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        jTabviewPays.setRowSorter(ordenon);            
+//             jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
 
-           String[] dat = rP.getTickPagoCargad(arr[0]);
-         rP.imprim80MMCargad(arr[0], dat,true);
+        tamColViwePays();
+
+        String[] dat = rP.getTickPagoCargad(arr[0]);
+        rP.imprim80MMCargad(arr[0], dat,true);
            limpiPreDatCargad();
            txtBuscCargadores.requestFocus(true);
     }//@endCobroCargadores
@@ -8642,7 +8910,12 @@ protected void cobraOtrosPays(){
         }
           
           String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
-          jTabviewPays.setModel(new TModel(mat, cabAreasPays)); 
+          DefaultTableModel modelo = new TModel(mat, cabAreasPays);
+        jTabviewPays.setModel(modelo);
+        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        jTabviewPays.setRowSorter(ordenon);
+        
+//          jTabviewPays.setModel(new TModel(mat, cabAreasPays)); 
           
           String[] dat = rP.getTickOthers(arr[0]);
           rP.imprim80MMOthers(arr[0],dat,true);
@@ -8696,7 +8969,12 @@ protected void cobraRentCarg(){
            }
            comoNewRentCarg();
           String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
-          jTabviewPays.setModel(new TModel(mat, cabAreasPays));  
+          //jTabviewPays.setModel(new TModel(mat, cabAreasPays));  
+          DefaultTableModel modelo = new TModel(mat, cabAreasPays);
+          jTabviewPays.setModel(modelo);
+          TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        jTabviewPays.setRowSorter(ordenon);
+          
           tamColViwePays();
          
     }//@end cobraRentCarg
@@ -9531,4 +9809,6 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JTextField txtnumDaysrentdiab;
     private javax.swing.JTextField txtsolict;
     // End of variables declaration//GEN-END:variables
+
+
 }

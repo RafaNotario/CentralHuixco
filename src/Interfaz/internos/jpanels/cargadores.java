@@ -33,6 +33,7 @@ public class cargadores extends javax.swing.JPanel {
         
         cargaDataCargadores();
         jButton3.setEnabled(false);
+        jButton9.setVisible(false);
         jTabViewAllCargad.getParent().addComponentListener(new ComponentAdapter() {
     @Override
     public void componentResized(final ComponentEvent e) {
@@ -71,6 +72,7 @@ public class cargadores extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabViewAllCargad = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        jButton9 = new javax.swing.JButton();
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/informacion.png"))); // NOI18N
         jButton1.setText("Información");
@@ -189,6 +191,16 @@ public class cargadores extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jButton9.setBackground(new java.awt.Color(204, 51, 0));
+        jButton9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(255, 255, 255));
+        jButton9.setText("Baja Definitiva");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -227,30 +239,33 @@ public class cargadores extends javax.swing.JPanel {
                         .addComponent(txtBusqCargad, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(110, 110, 110))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator1)
-                    .addComponent(jSeparator2)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBusqCargad)
-                    .addComponent(jComboBox2)
-                    .addComponent(jComboBox1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSeparator1)
+                        .addComponent(jSeparator2)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBusqCargad)
+                        .addComponent(jComboBox2)
+                        .addComponent(jComboBox1)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(296, Short.MAX_VALUE))
@@ -264,10 +279,11 @@ public class cargadores extends javax.swing.JPanel {
              altaCargadores altCarg = new altaCargadores(varBus);
             altCarg.setVisible(true);
             altCarg.setEnabled(true);
+            altCarg.setTitle("Info");
             altCarg.validate();
         }else{
             JOptionPane.showMessageDialog(null,"no data View");
-        }        // TODO add your handling code here:
+        } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTabViewAllCargadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabViewAllCargadMousePressed
@@ -284,8 +300,11 @@ public class cargadores extends javax.swing.JPanel {
             altaCargadores altamb = new altaCargadores("1");
             altamb.setVisible(true);
             altamb.setEnabled(true);
+            altamb.setTitle("Nuevo");
             altamb.jButton2.doClick();
+            
             altamb.validate();
+            
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -295,7 +314,8 @@ public class cargadores extends javax.swing.JPanel {
             if(opc == 0){//TODOS
                  jButton3.setEnabled(false);
                  String[][] mat = matrizgetAmbsAll(0,"");
-                 jTabViewAllCargad.setModel(new TModel(mat, cabAreasPays)); 
+                 jTabViewAllCargad.setModel(new TModel(mat, cabAreasPays));
+                 jButton9.setVisible(false);
             }
             if(opc == 1){//ACTIVOS
                 String[][] mat = matrizgetAmbsAll(1,"");
@@ -303,6 +323,7 @@ public class cargadores extends javax.swing.JPanel {
                  jButton3.setEnabled(true);
                  jButton3.setIcon(null);
                  jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/abajo.png")));
+                 jButton9.setVisible(false);
             }
             if(opc == 2){//DADOS DE BAJA
                 String[][] mat = matrizgetAmbsAll(2,"");
@@ -310,6 +331,7 @@ public class cargadores extends javax.swing.JPanel {
                   jButton3.setEnabled(true);
                  jButton3.setIcon(null);
                  jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arriba.png")));
+                 jButton9.setVisible(true);
             }
         }else{
             JOptionPane.showMessageDialog(null, "No Registros");
@@ -373,6 +395,17 @@ public class cargadores extends javax.swing.JPanel {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
     txtBusqCargad.setText("");
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+               int fila = jTabViewAllCargad.getSelectedRow();
+        if(fila > -1){
+            String varBus = jTabViewAllCargad.getValueAt(fila, 0).toString();
+             contrl.elimaRow("cargadores","id",varBus);
+             jButton4.doClick();
+        }else{
+            JOptionPane.showMessageDialog(null,"no data View");
+        }     
+    }//GEN-LAST:event_jButton9ActionPerformed
 
  protected void cargaDataCargadores(){
             String[][] mat = matrizgetAmbsAll(0,"");
@@ -506,6 +539,7 @@ return mat;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

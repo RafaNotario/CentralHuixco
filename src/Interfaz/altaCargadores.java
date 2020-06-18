@@ -431,12 +431,13 @@ public class altaCargadores extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPaniNIpAYSaMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -460,6 +461,7 @@ public class altaCargadores extends javax.swing.JFrame {
         limpiaCamps();
         jPaniNIpAYSaMB.setVisible(true);
         llenainiSemana();
+        txtfolAmb.setText(func.getNumReutilizarCargad());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -478,8 +480,11 @@ public class altaCargadores extends javax.swing.JFrame {
               descInsc = txtDsctoCargadInscripc.getText(),
               descSem = txtDsctoCargadSeman.getText(),
               motivDesc = txtMotivInscripc.getText(),
-              aPartirPaySem = txtOcultIniSem.getText()
+              aPartirPaySem = txtOcultIniSem.getText(),
+                titulon = this.getTitle()
         ;
+        JOptionPane.showMessageDialog(null, "titulo"+titulon);
+         contenData.add(foli);
           contenData.add((nam.isEmpty()) ? "" : nam);   
           contenData.add((dir.isEmpty()) ? "" : dir);   
           contenData.add((tel.isEmpty()) ? "" : tel);   
@@ -490,11 +495,15 @@ public class altaCargadores extends javax.swing.JFrame {
           contenData.add(motivDesc);
            contenData.add(aPartirPaySem);
   if(!nam.isEmpty() && !obs.isEmpty()){
-            contrl.guardF5Cargad(contenData, foli);
-            if(foli.isEmpty())// is new user
-                limpiaCamps();
-            else//actualiza
-                this.dispose();
+            if(titulon.equals("Nuevo")){
+                contrl.guardF5Cargad(contenData, foli,0);//0 = nuevo
+                contrl.elimaRow("cargadores_lugares", "id", foli);
+            }
+           if(titulon.equals("Info")){
+                contrl.guardF5Cargad(contenData, foli,1);//0 = nuevo
+            }
+           
+            this.dispose();
   }else{
       JOptionPane.showMessageDialog(null, "Debe ingresar por lo menos Nombre y Obs");
   }
@@ -749,7 +758,7 @@ return mat;
     private javax.swing.JTextField txtObsAmb;
     private javax.swing.JTextField txtOcultIniSem;
     private javax.swing.JTextField txtTelAmb;
-    private javax.swing.JTextField txtfolAmb;
+    public javax.swing.JTextField txtfolAmb;
     private javax.swing.JTextField txtiniSemPaysAmb;
     // End of variables declaration//GEN-END:variables
 }
