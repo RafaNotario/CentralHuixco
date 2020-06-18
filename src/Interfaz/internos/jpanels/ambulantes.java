@@ -297,6 +297,11 @@ return mat;
         });
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/goma-de-borrar.png"))); // NOI18N
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jTabViewAllAmbs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -542,6 +547,10 @@ return mat;
             JOptionPane.showMessageDialog(null,"no data View");
         }
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        txtBusqParam.setText("");
+    }//GEN-LAST:event_jButton8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

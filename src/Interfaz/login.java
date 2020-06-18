@@ -307,6 +307,11 @@ public class login extends javax.swing.JFrame {
                 txtMontoaper1FocusGained(evt);
             }
         });
+        txtMontoaper1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtMontoaper1KeyReleased(evt);
+            }
+        });
 
         txtMontoaper2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         txtMontoaper2.setText("0.0");
@@ -827,6 +832,13 @@ public class login extends javax.swing.JFrame {
              jButton12.setEnabled(true);
         }
     }//GEN-LAST:event_jButton12MouseClicked
+
+    private void txtMontoaper1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoaper1KeyReleased
+         int var = evt.getKeyCode();
+            if(var == KeyEvent.VK_ENTER){
+                jButton10.doClick();
+            }
+    }//GEN-LAST:event_txtMontoaper1KeyReleased
 
     /**
      * @param args the command line arguments

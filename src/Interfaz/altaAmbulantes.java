@@ -6,6 +6,7 @@ import Controller.controlInserts;
 import Controller.datesControl;
 import Controller.funciones;
 import conexion.ConexionDBOriginal;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -140,15 +141,40 @@ public class altaAmbulantes extends javax.swing.JFrame {
         txtfolAmb.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         txtNombAmb.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtNombAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombAmbKeyReleased(evt);
+            }
+        });
 
         txtDirAmb.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDirAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDirAmbKeyReleased(evt);
+            }
+        });
 
         txtObsAmb.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtObsAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtObsAmbKeyReleased(evt);
+            }
+        });
 
         txtTelAmb.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTelAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTelAmbKeyReleased(evt);
+            }
+        });
 
         jCBoxGirosAmb.setEditable(true);
         jCBoxGirosAmb.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCBoxGirosAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCBoxGirosAmbKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -224,6 +250,11 @@ public class altaAmbulantes extends javax.swing.JFrame {
                 jCBoxTarifaAmbActionPerformed(evt);
             }
         });
+        jCBoxTarifaAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCBoxTarifaAmbKeyReleased(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -240,12 +271,27 @@ public class altaAmbulantes extends javax.swing.JFrame {
                 jCBoxResgAmbActionPerformed(evt);
             }
         });
+        jCBoxResgAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCBoxResgAmbKeyReleased(evt);
+            }
+        });
 
         txtDsctoAmbSem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDsctoAmbSem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDsctoAmbSemKeyReleased(evt);
+            }
+        });
 
         txtCoastInscAmb.setEditable(false);
         txtCoastInscAmb.setBackground(new java.awt.Color(255, 255, 255));
         txtCoastInscAmb.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtCoastInscAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCoastInscAmbKeyReleased(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -258,11 +304,26 @@ public class altaAmbulantes extends javax.swing.JFrame {
         txtCoastSemAmb.setEditable(false);
         txtCoastSemAmb.setBackground(new java.awt.Color(255, 255, 255));
         txtCoastSemAmb.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtCoastSemAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCoastSemAmbKeyReleased(evt);
+            }
+        });
 
         txtDsctoAmbIns.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDsctoAmbIns.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDsctoAmbInsKeyReleased(evt);
+            }
+        });
 
         txtDsctoResgAmb.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtDsctoResgAmb.setText("0");
+        txtDsctoResgAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDsctoResgAmbKeyReleased(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -282,6 +343,11 @@ public class altaAmbulantes extends javax.swing.JFrame {
 
         txtCoastResgAmb.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtCoastResgAmb.setText("0");
+        txtCoastResgAmb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCoastResgAmbKeyReleased(evt);
+            }
+        });
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -438,6 +504,11 @@ public class altaAmbulantes extends javax.swing.JFrame {
                 jButMantenSubstractActionPerformed(evt);
             }
         });
+        jButMantenSubstract.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jButMantenSubstractKeyReleased(evt);
+            }
+        });
 
         txtiniSemPaysAmb.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtiniSemPaysAmb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -452,6 +523,11 @@ public class altaAmbulantes extends javax.swing.JFrame {
         jButMantenMoore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButMantenMooreActionPerformed(evt);
+            }
+        });
+        jButMantenMoore.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jButMantenMooreKeyReleased(evt);
             }
         });
 
@@ -616,7 +692,7 @@ public class altaAmbulantes extends javax.swing.JFrame {
           contenData.add(descSem);   
           contenData.add(descResg);   
           contenData.add(aPartirPaySem);   
-  if(!nam.isEmpty() && !obs.isEmpty()){
+  if(!nam.isEmpty() ){
             contrl.guardF5Ambu(contenData, foli);
             if(foli.isEmpty())// is new user
                 limpiaCamps();
@@ -656,6 +732,164 @@ public class altaAmbulantes extends javax.swing.JFrame {
         txtiniSemPaysAmb.setText(arr[2]);
         jLaFechIniPayAmb.setText(aux);
     }//GEN-LAST:event_jButMantenMooreActionPerformed
+
+    private void txtNombAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombAmbKeyReleased
+     int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_txtNombAmbKeyReleased
+
+    private void txtDirAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDirAmbKeyReleased
+             int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_txtDirAmbKeyReleased
+
+    private void txtObsAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObsAmbKeyReleased
+             int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_txtObsAmbKeyReleased
+
+    private void jCBoxGirosAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCBoxGirosAmbKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBoxGirosAmbKeyReleased
+
+    private void txtTelAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelAmbKeyReleased
+             int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_txtTelAmbKeyReleased
+
+    private void jCBoxTarifaAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCBoxTarifaAmbKeyReleased
+            int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_jCBoxTarifaAmbKeyReleased
+
+    private void txtCoastSemAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCoastSemAmbKeyReleased
+             int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_txtCoastSemAmbKeyReleased
+
+    private void txtDsctoAmbSemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDsctoAmbSemKeyReleased
+             int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_txtDsctoAmbSemKeyReleased
+
+    private void txtCoastInscAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCoastInscAmbKeyReleased
+             int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_txtCoastInscAmbKeyReleased
+
+    private void txtDsctoAmbInsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDsctoAmbInsKeyReleased
+             int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_txtDsctoAmbInsKeyReleased
+
+    private void txtCoastResgAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCoastResgAmbKeyReleased
+             int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_txtCoastResgAmbKeyReleased
+
+    private void jCBoxResgAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCBoxResgAmbKeyReleased
+             int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_jCBoxResgAmbKeyReleased
+
+    private void txtDsctoResgAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDsctoResgAmbKeyReleased
+            int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_txtDsctoResgAmbKeyReleased
+
+    private void jButMantenSubstractKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMantenSubstractKeyReleased
+             int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_jButMantenSubstractKeyReleased
+
+    private void jButMantenMooreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMantenMooreKeyReleased
+            int var = evt.getKeyCode();
+          if(var == 27 ){
+                 this.dispose();
+            }else{
+            if(var == KeyEvent.VK_ENTER){
+                jButton1.doClick();
+            }
+          }
+    }//GEN-LAST:event_jButMantenMooreKeyReleased
 
     /**
      * @param args the command line arguments

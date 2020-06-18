@@ -922,14 +922,20 @@ SQL="UPDATE pagos_infrac SET folio = ?, fecha = ?, tipodoc = ?,documento = ?, mo
             PreparedStatement preparedStmt = null;
             if(!id.isEmpty()){
                 int dialogButton = JOptionPane.YES_NO_OPTION;
-                int dialogResult = JOptionPane.showConfirmDialog (null, "<html> "
+                int dialogResult = JOptionPane.YES_OPTION;
+                if(!table.equals("cargadores_lugares")){
+                dialogResult = JOptionPane.showConfirmDialog (null, "<html> "
                         + "Seguro que desea eliminar el registro con ID:<h1> "+id+" </h1>? </html>","Eliminar",dialogButton);
+                }
+                
                 if(dialogResult == JOptionPane.YES_OPTION){
                 try {
                 String query = "delete from "+table+" where "+campo+" = '"+id+"' ";
                 preparedStmt = cn.prepareStatement(query);
                 preparedStmt.execute();
-                JOptionPane.showMessageDialog(null, "Eliminado Correctamente");
+                  if(!table.equals("cargadores_lugares")){
+                        JOptionPane.showMessageDialog(null, "Eliminado Correctamente");
+                  }
             } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);

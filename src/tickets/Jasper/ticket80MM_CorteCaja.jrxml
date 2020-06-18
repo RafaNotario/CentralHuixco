@@ -80,24 +80,45 @@ WHERE idTurno = $P{fechCorte})
 	<field name="descrip" class="java.lang.String"/>
 	<field name="totl" class="java.math.BigDecimal"/>
 	<title>
-		<band height="95" splitType="Stretch">
+		<band height="134" splitType="Stretch">
 			<image scaleImage="FillFrame">
-				<reportElement x="10" y="0" width="194" height="79" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
+				<reportElement x="20" y="0" width="165" height="86" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
 				<imageExpression><![CDATA["C:\\central\\src\\images\\logo80MM.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="31" y="78" width="131" height="13" forecolor="#3333FF" uuid="2b292a92-0302-46b2-bfec-0232a67d2289"/>
+				<reportElement x="31" y="119" width="131" height="12" forecolor="#3333FF" uuid="2b292a92-0302-46b2-bfec-0232a67d2289"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[corte de caja]]></text>
+				<text><![CDATA[CORTE DE CAJA]]></text>
 			</staticText>
 			<line>
-				<reportElement x="10" y="91" width="195" height="1" uuid="c1e4c872-16ba-4809-939e-9cfa42c4d990"/>
+				<reportElement x="10" y="131" width="195" height="1" uuid="c1e4c872-16ba-4809-939e-9cfa42c4d990"/>
 				<graphicElement>
 					<pen lineStyle="Double" lineColor="#999999"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement x="0" y="86" width="204" height="12" forecolor="#3333FF" uuid="043412af-7cce-479d-97ba-f9fe63b9a121"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OFICINA CENTRAL DE COBRANZA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="96" width="204" height="12" forecolor="#3333FF" uuid="a644653d-ad8e-4342-b08b-86092823e498"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CENTRAL DE ABASTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="106" width="204" height="12" forecolor="#3333FF" uuid="62e851df-b93f-430a-8212-ce05a3f27e0c"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HUIXCOLOTLA PUEBLA]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
@@ -137,9 +158,9 @@ WHERE idTurno = $P{fechCorte})
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="58" y="0" width="100" height="12" uuid="12f63db3-4442-46ce-b06d-ce3867a383e9"/>
+				<reportElement x="58" y="0" width="137" height="12" uuid="12f63db3-4442-46ce-b06d-ce3867a383e9"/>
 				<textElement>
-					<font size="9"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{fechCorte}]]></textFieldExpression>
 			</textField>
@@ -208,20 +229,20 @@ WHERE idTurno = $P{fechCorte})
 	<lastPageFooter>
 		<band height="52">
 			<staticText>
-				<reportElement x="0" y="39" width="83" height="13" uuid="e3b2f72e-59cf-47ae-9a2f-3a23d09fd129"/>
-				<text><![CDATA[TOTAL CAJA:]]></text>
+				<reportElement x="0" y="39" width="95" height="13" uuid="e3b2f72e-59cf-47ae-9a2f-3a23d09fd129"/>
+				<text><![CDATA[TOTAL CAJA       $:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="26" width="83" height="13" uuid="a4cfc605-abec-40cc-910e-fa1f50bb1e1e"/>
-				<text><![CDATA[TOTAL GASTOS:]]></text>
+				<reportElement x="0" y="26" width="95" height="13" uuid="a4cfc605-abec-40cc-910e-fa1f50bb1e1e"/>
+				<text><![CDATA[TOTAL GASTOS $:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="13" width="83" height="13" uuid="2e0c5541-f7c2-452c-8115-9880ca48c9fa"/>
-				<text><![CDATA[TOTAL COBROS:]]></text>
+				<reportElement x="0" y="13" width="95" height="13" uuid="2e0c5541-f7c2-452c-8115-9880ca48c9fa"/>
+				<text><![CDATA[TOTAL COBROS $:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="83" height="13" uuid="6f823241-66f1-4350-9af2-9853181fa4a7"/>
-				<text><![CDATA[SALDO INICIAL:]]></text>
+				<reportElement x="0" y="0" width="95" height="13" uuid="6f823241-66f1-4350-9af2-9853181fa4a7"/>
+				<text><![CDATA[SALDO INICIAL   $:]]></text>
 			</staticText>
 			<line>
 				<reportElement x="14" y="0" width="195" height="1" uuid="ba8fa49b-b347-43bd-8f11-7226ab7c7332"/>
@@ -230,28 +251,28 @@ WHERE idTurno = $P{fechCorte})
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="83" y="1" width="100" height="13" uuid="7db951b1-a96b-44e5-9140-a97db921b585"/>
+				<reportElement x="95" y="1" width="100" height="13" uuid="7db951b1-a96b-44e5-9140-a97db921b585"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{saldInicial}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="83" y="14" width="100" height="13" uuid="b84a543a-43e8-4455-a635-e0df05b50164"/>
+				<reportElement x="95" y="14" width="100" height="13" uuid="b84a543a-43e8-4455-a635-e0df05b50164"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{totCobros}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="83" y="26" width="100" height="13" uuid="9c4ecc95-1aeb-4a1d-b561-ba035e406cd5"/>
+				<reportElement x="95" y="26" width="100" height="13" uuid="9c4ecc95-1aeb-4a1d-b561-ba035e406cd5"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{totGastos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="83" y="39" width="100" height="13" uuid="7dec30f2-ad3f-4373-a597-0572fea18246"/>
+				<reportElement x="95" y="39" width="100" height="13" uuid="7dec30f2-ad3f-4373-a597-0572fea18246"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>

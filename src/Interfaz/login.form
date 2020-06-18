@@ -580,6 +580,7 @@
                       </Properties>
                       <Events>
                         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtMontoaper1FocusGained"/>
+                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMontoaper1KeyReleased"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtMontoaper2">

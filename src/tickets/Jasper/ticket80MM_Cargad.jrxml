@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="226" whenNoDataType="AllSectionsNoDetail" columnWidth="204" leftMargin="11" rightMargin="11" topMargin="0" bottomMargin="10" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="297" whenNoDataType="AllSectionsNoDetail" columnWidth="204" leftMargin="11" rightMargin="11" topMargin="0" bottomMargin="10" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -34,28 +34,49 @@ ON pagos_cargdet.idSemana = semanas.id;]]>
 	<field name="resty" class="java.math.BigDecimal"/>
 	<field name="inc" class="java.lang.String"/>
 	<title>
-		<band height="87" splitType="Stretch">
+		<band height="133" splitType="Stretch">
 			<image scaleImage="FillFrame">
-				<reportElement x="10" y="0" width="195" height="79" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
+				<reportElement x="10" y="0" width="195" height="87" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
 				<imageExpression><![CDATA["C:\\central\\src\\images\\logo80MM.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="33" y="74" width="147" height="13" forecolor="#3333FF" uuid="2b292a92-0302-46b2-bfec-0232a67d2289"/>
+				<reportElement x="33" y="120" width="147" height="13" forecolor="#3333FF" uuid="2b292a92-0302-46b2-bfec-0232a67d2289"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Pago de Cargador]]></text>
 			</staticText>
 			<line>
-				<reportElement x="10" y="85" width="195" height="1" uuid="c1e4c872-16ba-4809-939e-9cfa42c4d990"/>
+				<reportElement x="10" y="131" width="195" height="1" uuid="c1e4c872-16ba-4809-939e-9cfa42c4d990"/>
 				<graphicElement>
 					<pen lineStyle="Double" lineColor="#999999"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement x="0" y="87" width="192" height="12" forecolor="#3333FF" uuid="1115ceb2-1fe0-47f7-bae0-c0dda022a72d"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OFICINA CENTRAL DE COBRANZA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="98" width="192" height="12" forecolor="#3333FF" uuid="f6f2edde-113f-4427-ae3d-ba04300860be"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CENTRAL DE ABASTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="108" width="192" height="12" forecolor="#3333FF" uuid="a65bb04a-798b-4163-9e88-2a52f5e7339b"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HUIXCOLOTLA, PUE.]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="60" splitType="Stretch">
+		<band height="75" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="57" height="13" uuid="6877f7c5-93c4-4fe1-9ffa-31dd25ce4217"/>
 				<textElement>
@@ -78,20 +99,20 @@ ON pagos_cargdet.idSemana = semanas.id;]]>
 				<text><![CDATA[Comerciante:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="47" width="57" height="12" uuid="0511f8d0-344a-4620-abea-9b096d7b7370"/>
+				<reportElement x="0" y="59" width="57" height="12" uuid="0511f8d0-344a-4620-abea-9b096d7b7370"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Atendio:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="10" y="59" width="195" height="1" uuid="5982a3a7-ceb5-439f-8f08-f06aa0da8003"/>
+				<reportElement x="10" y="73" width="195" height="1" uuid="5982a3a7-ceb5-439f-8f08-f06aa0da8003"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#999999"/>
 				</graphicElement>
 			</line>
-			<textField>
-				<reportElement x="56" y="47" width="149" height="12" uuid="fde2777c-c97d-4a2d-9735-921bb0252c82"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="56" y="59" width="149" height="12" uuid="fde2777c-c97d-4a2d-9735-921bb0252c82"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
@@ -100,11 +121,11 @@ ON pagos_cargdet.idSemana = semanas.id;]]>
 			<textField>
 				<reportElement x="56" y="0" width="100" height="12" uuid="c8de3081-1efd-4022-9cff-70053a8241fe"/>
 				<textElement>
-					<font size="9" isBold="true"/>
+					<font size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{numTicket}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="56" y="36" width="149" height="12" uuid="580a18b7-626e-415a-ba26-15375d40a532"/>
 				<textElement>
 					<font size="9"/>
@@ -126,16 +147,16 @@ ON pagos_cargdet.idSemana = semanas.id;]]>
 				<text><![CDATA[Numero:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="58" y="24" width="100" height="12" uuid="8b43ce9f-a976-4c08-abce-543d7152501f"/>
+				<reportElement x="58" y="24" width="100" height="13" uuid="8b43ce9f-a976-4c08-abce-543d7152501f"/>
 				<textElement>
-					<font size="9"/>
+					<font size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{numCargador}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="42" splitType="Stretch">
+		<band height="41" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="57" height="12" uuid="08c02400-4ce2-4cfe-a6da-7d6c246a7f9c"/>
 				<textElement>
@@ -244,63 +265,63 @@ ON pagos_cargdet.idSemana = semanas.id;]]>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="69">
+		<band height="79">
 			<staticText>
-				<reportElement x="0" y="5" width="57" height="12" uuid="2852f6ce-ff4f-4dfe-afc1-77f02b76f971"/>
+				<reportElement x="0" y="9" width="57" height="12" uuid="2852f6ce-ff4f-4dfe-afc1-77f02b76f971"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[TOTAL:         $]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="17" width="57" height="12" uuid="cba7a00d-616c-4024-9c04-9136cb994ef0"/>
+				<reportElement x="0" y="21" width="57" height="12" uuid="cba7a00d-616c-4024-9c04-9136cb994ef0"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[EFECTIVO:  $]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="29" width="57" height="12" uuid="cd78c522-1279-4052-9fac-8d8c3d434301"/>
+				<reportElement x="0" y="33" width="57" height="12" uuid="cd78c522-1279-4052-9fac-8d8c3d434301"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[CAMBIO:      $]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="45" width="216" height="24" uuid="ffc79fd8-d3ad-4493-a68b-b11070f0a2b9"/>
+				<reportElement x="0" y="49" width="216" height="24" uuid="ffc79fd8-d3ad-4493-a68b-b11070f0a2b9"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[CONSERVE ESTE COMPROBANTE PARA CUALQUIER ACLARACION]]></text>
 			</staticText>
 			<line>
-				<reportElement x="10" y="2" width="195" height="1" uuid="ba8fa49b-b347-43bd-8f11-7226ab7c7332"/>
+				<reportElement x="10" y="6" width="195" height="1" uuid="ba8fa49b-b347-43bd-8f11-7226ab7c7332"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="10" y="42" width="195" height="1" uuid="5df74da7-e743-45c1-8e60-202ae65f3fd7"/>
+				<reportElement x="10" y="46" width="195" height="1" uuid="5df74da7-e743-45c1-8e60-202ae65f3fd7"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="57" y="5" width="100" height="12" uuid="32b07bf7-3a12-4bad-88b0-a78e94493ae1"/>
+				<reportElement x="57" y="9" width="100" height="12" uuid="32b07bf7-3a12-4bad-88b0-a78e94493ae1"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{paramTotal}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="57" y="17" width="100" height="12" uuid="97f06051-70c4-4c64-ada0-eb9361570cb9"/>
+				<reportElement x="57" y="21" width="100" height="12" uuid="97f06051-70c4-4c64-ada0-eb9361570cb9"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{paramEfectiv}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="57" y="29" width="100" height="12" uuid="b519dc70-1296-45ef-a64d-d51cdea7c498"/>
+				<reportElement x="57" y="33" width="100" height="12" uuid="b519dc70-1296-45ef-a64d-d51cdea7c498"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>

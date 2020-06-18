@@ -118,7 +118,13 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                if(var == KeyEvent.VK_ENTER ){
                     mostrarJpanNew();
                     bandC =0;
-           }
+             }
+               
+                if(var==KeyEvent.VK_F5){
+                    jButton15.doClick();
+                }
+            
+        
     }} );
 
 /*   
@@ -1824,13 +1830,10 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
             jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtBusqTickAll, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(txtBusqTickAll, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane5Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jDatChoFechBusqtick, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addComponent(jDatChoFechBusqtick, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
         );
         jLayeredPane5Layout.setVerticalGroup(
             jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1840,7 +1843,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
             .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane5Layout.createSequentialGroup()
                     .addComponent(jDatChoFechBusqtick, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jTabviewPays.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1879,10 +1882,10 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCBBusqTicketall, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLayeredPane5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanInterncoborstivkLayout.createSequentialGroup()
                 .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanInterncoborstivkLayout.createSequentialGroup()
@@ -1904,7 +1907,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCBBusqTicketall, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3113,6 +3116,12 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addContainerGap(69, Short.MAX_VALUE))
         );
 
+        txtNumDiabRent.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNumDiabRentKeyReleased(evt);
+            }
+        });
+
         dCCFechIniRentCarg.setCurrentView(new datechooser.view.appearance.AppearancesList("Swing",
             new datechooser.view.appearance.ViewAppearance("custom",
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
@@ -3286,6 +3295,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
             jCkBoxInscripcionActionPerformed(evt);
         }
     });
+    jCkBoxInscripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jCkBoxInscripcionKeyReleased(evt);
+        }
+    });
 
     jLabel53.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel53.setText("Vigencia:-");
@@ -3403,9 +3417,19 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
             jComBInscripcActionPerformed(evt);
         }
     });
+    jComBInscripc.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jComBInscripcKeyReleased(evt);
+        }
+    });
 
     jDatChoIncripcion.setDateFormatString("dd/MM/yyyy");
     jDatChoIncripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    jDatChoIncripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jDatChoIncripcionKeyReleased(evt);
+        }
+    });
 
     javax.swing.GroupLayout jPanCargadorInscrLayout = new javax.swing.GroupLayout(jPanCargadorInscr);
     jPanCargadorInscr.setLayout(jPanCargadorInscrLayout);
@@ -3454,6 +3478,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
     jCkBoxSemanas.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jCkBoxSemanasActionPerformed(evt);
+        }
+    });
+    jCkBoxSemanas.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jCkBoxSemanasKeyReleased(evt);
         }
     });
 
@@ -3596,12 +3625,22 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
             jButMinusSemsActionPerformed(evt);
         }
     });
+    jButMinusSems.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jButMinusSemsKeyReleased(evt);
+        }
+    });
 
     jButMooreSems.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
     jButMooreSems.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mas.png"))); // NOI18N
     jButMooreSems.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jButMooreSemsActionPerformed(evt);
+        }
+    });
+    jButMooreSems.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jButMooreSemsKeyReleased(evt);
         }
     });
 
@@ -3873,6 +3912,9 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
     txtBuscCargadores.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyPressed(java.awt.event.KeyEvent evt) {
             txtBuscCargadoresKeyPressed(evt);
+        }
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txtBuscCargadoresKeyReleased(evt);
         }
     });
 
@@ -4698,6 +4740,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
             jCmBxgetAreasActionPerformed(evt);
         }
     });
+    jCmBxgetAreas.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jCmBxgetAreasKeyReleased(evt);
+        }
+    });
 
     jPanMantenPay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
@@ -4711,6 +4758,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
     jChecMantSem.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jChecMantSemActionPerformed(evt);
+        }
+    });
+    jChecMantSem.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jChecMantSemKeyReleased(evt);
         }
     });
 
@@ -4771,6 +4823,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
             jButMantenSubstractActionPerformed(evt);
         }
     });
+    jButMantenSubstract.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jButMantenSubstractKeyReleased(evt);
+        }
+    });
 
     txtFinManten.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
     txtFinManten.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -4793,6 +4850,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
     jButMantenMoore.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jButMantenMooreActionPerformed(evt);
+        }
+    });
+    jButMantenMoore.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jButMantenMooreKeyReleased(evt);
         }
     });
 
@@ -4934,6 +4996,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
             jChecBasuraActionPerformed(evt);
         }
     });
+    jChecBasura.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jChecBasuraKeyReleased(evt);
+        }
+    });
 
     jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel13.setText("Ultimo Pago: -");
@@ -5055,6 +5122,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
             jButBasuraMooreActionPerformed(evt);
         }
     });
+    jButBasuraMoore.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jButBasuraMooreKeyReleased(evt);
+        }
+    });
 
     txtFinBasura.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
     txtFinBasura.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -5065,6 +5137,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
     jButBasuraSubstract.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jButBasuraSubstractActionPerformed(evt);
+        }
+    });
+    jButBasuraSubstract.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jButBasuraSubstractKeyReleased(evt);
         }
     });
 
@@ -5642,7 +5719,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(jPanambulantes, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                .addComponent(jPanambulantes, javax.swing.GroupLayout.PREFERRED_SIZE, 648, Short.MAX_VALUE)
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -5697,7 +5774,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, Short.MAX_VALUE)
             .addGap(0, 0, 0)
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addContainerGap())
@@ -6403,6 +6480,7 @@ txtResultAmbu.setText(aux);
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
      llenacombogetAreas();
      inhabilitaAreas();
+     jDatChoFechBusqtick.setDate(datCtrl.cargafecha());
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
@@ -6412,25 +6490,25 @@ txtResultAmbu.setText(aux);
                             concepto = jTabviewPays.getValueAt(fila, 2).toString();
                     if(concepto.equals("Pago Areas")){
                         String[] dat = rP.getUltimPagoarea(mostTic);
-                        rP.imprim80MM(mostTic, dat,false);
+                        rP.imprim80MM(mostTic, dat,true);
                     }
                     if(concepto.equals("Pago Ambulantes")){
                         String[] dat = rP.getTickPagoAmbu(mostTic);
-                        rP.imprim80MMAmbus(mostTic, dat,false);
+                        rP.imprim80MMAmbus(mostTic, dat,true);
                     }
                     if(concepto.equals("Pago Cargadores")){                    
                         String[] dat = rP.getTickPagoCargad(mostTic);
-                        rP.imprim80MMCargad(mostTic, dat,false);
+                        rP.imprim80MMCargad(mostTic, dat,true);
                     }
                     if(concepto.equals("Pago Infraccion")){                    
-                         rP.imprim80MM_Infrac(mostTic,false);
+                         rP.imprim80MM_Infrac(mostTic,true);
                     }
                     if(concepto.equals("Varios Amb.") || concepto.equals("Varios Cte.") || concepto.equals("Varios Carg.")){                    
                          String[] dat = rP.getTickOthers(mostTic);
-                         rP.imprim80MMOthers(mostTic,dat,false);
+                         rP.imprim80MMOthers(mostTic,dat,true);
                     }
                     if(concepto.equals("Pago Renta Carg")){                    
-                         rP.imprim80MM_CargRent(mostTic,false);
+                         rP.imprim80MM_CargRent(mostTic,true);
                     }
                 }else{
                     JOptionPane.showMessageDialog(null, "Debe elegir que mostrar");
@@ -6851,7 +6929,7 @@ txtResultAmbu.setText( func.getSum(totalAll, auxBig).toString() );
         totalGran =  new BigDecimal(totalCarg);
         importSemCargad =  new BigDecimal(importSems);
         if(jCkBoxSemanas.isSelected()){
-            System.out.println("comezar SemCargador:"+idSemCargad);
+      //      System.out.println("comezar SemCargador:"+idSemCargad);
             jButMinusSems.setEnabled(true);
             jButMooreSems.setEnabled(true);
             txtTotalCarg.setText(func.getSum(totalGran, importSemCargad).toString());
@@ -7815,7 +7893,35 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
 
     private void jTabviewPaysMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabviewPaysMousePressed
                   if (evt.getClickCount() > 1) {
-                  jButton17.doClick();
+            int fila = jTabviewPays.getSelectedRow();
+                if(fila >= 0){
+                    String mostTic = jTabviewPays.getValueAt(fila, 0).toString(),
+                            concepto = jTabviewPays.getValueAt(fila, 2).toString();
+                    if(concepto.equals("Pago Areas")){
+                        String[] dat = rP.getUltimPagoarea(mostTic);
+                        rP.imprim80MM(mostTic, dat,false);
+                    }
+                    if(concepto.equals("Pago Ambulantes")){
+                        String[] dat = rP.getTickPagoAmbu(mostTic);
+                        rP.imprim80MMAmbus(mostTic, dat,false);
+                    }
+                    if(concepto.equals("Pago Cargadores")){                    
+                        String[] dat = rP.getTickPagoCargad(mostTic);
+                        rP.imprim80MMCargad(mostTic, dat,false);
+                    }
+                    if(concepto.equals("Pago Infraccion")){                    
+                         rP.imprim80MM_Infrac(mostTic,false);
+                    }
+                    if(concepto.equals("Varios Amb.") || concepto.equals("Varios Cte.") || concepto.equals("Varios Carg.")){                    
+                         String[] dat = rP.getTickOthers(mostTic);
+                         rP.imprim80MMOthers(mostTic,dat,false);
+                    }
+                    if(concepto.equals("Pago Renta Carg")){                    
+                         rP.imprim80MM_CargRent(mostTic,false);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe elegir que mostrar");
+                }
               }
     }//GEN-LAST:event_jTabviewPaysMousePressed
 
@@ -7945,7 +8051,97 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
                 if(evt.getKeyCode()==KeyEvent.VK_F5){
                     jButton22.doClick();
                 }
+              
     }//GEN-LAST:event_jCBoxDuracInscripcKeyReleased
+
+    private void jCmBxgetAreasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCmBxgetAreasKeyReleased
+                   int var = evt.getKeyCode();
+     //      System.out.println("Oprimio #"+ var);
+    }//GEN-LAST:event_jCmBxgetAreasKeyReleased
+
+    private void jChecMantSemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jChecMantSemKeyReleased
+       if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton15.doClick();
+                }
+    }//GEN-LAST:event_jChecMantSemKeyReleased
+
+    private void jChecBasuraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jChecBasuraKeyReleased
+        if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton15.doClick();
+                }
+    }//GEN-LAST:event_jChecBasuraKeyReleased
+
+    private void jButMantenSubstractKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMantenSubstractKeyReleased
+       if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton15.doClick();
+                }
+    }//GEN-LAST:event_jButMantenSubstractKeyReleased
+
+    private void jButMantenMooreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMantenMooreKeyReleased
+       if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton15.doClick();
+                }
+    }//GEN-LAST:event_jButMantenMooreKeyReleased
+
+    private void jButBasuraSubstractKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButBasuraSubstractKeyReleased
+       if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton15.doClick();
+                }
+    }//GEN-LAST:event_jButBasuraSubstractKeyReleased
+
+    private void jButBasuraMooreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButBasuraMooreKeyReleased
+        if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton15.doClick();
+                }
+    }//GEN-LAST:event_jButBasuraMooreKeyReleased
+
+    private void txtBuscCargadoresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscCargadoresKeyReleased
+      if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton37.doClick();
+                }
+    }//GEN-LAST:event_txtBuscCargadoresKeyReleased
+
+    private void jCkBoxSemanasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCkBoxSemanasKeyReleased
+              if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton37.doClick();
+                }
+    }//GEN-LAST:event_jCkBoxSemanasKeyReleased
+
+    private void jButMinusSemsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMinusSemsKeyReleased
+              if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton37.doClick();
+                }
+    }//GEN-LAST:event_jButMinusSemsKeyReleased
+
+    private void jButMooreSemsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMooreSemsKeyReleased
+              if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton37.doClick();
+                }
+    }//GEN-LAST:event_jButMooreSemsKeyReleased
+
+    private void jCkBoxInscripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCkBoxInscripcionKeyReleased
+              if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton37.doClick();
+                }
+    }//GEN-LAST:event_jCkBoxInscripcionKeyReleased
+
+    private void jComBInscripcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComBInscripcKeyReleased
+              if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton37.doClick();
+                }
+    }//GEN-LAST:event_jComBInscripcKeyReleased
+
+    private void jDatChoIncripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDatChoIncripcionKeyReleased
+              if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton37.doClick();
+                }
+    }//GEN-LAST:event_jDatChoIncripcionKeyReleased
+
+    private void txtNumDiabRentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumDiabRentKeyReleased
+             if(evt.getKeyCode()==KeyEvent.VK_F5){
+                    jButton37.doClick();
+                }
+    }//GEN-LAST:event_txtNumDiabRentKeyReleased
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -8387,13 +8583,13 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
               jButton41.doClick();
           }
 
-          for (int i = 0; i < datAMB.length; i++) {
+ /*         for (int i = 0; i < datAMB.length; i++) {
               System.err.print("["+datAMB[i]+"]");
           }
           System.out.println("");
-            
+            */
           }//@endmostrarJpanCargadores
-   
+
       
     //metodo para llenar combo de areas
         private void llenaCBRubrosOths() {
@@ -9268,7 +9464,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
         };
         String consul="";
         if(idTurn.isEmpty()){
-        consul = "SELECT gastos_caja.id,gastos_caja.hora,rubroscaja.concepto,gastos_caja.monto\n" +
+        consul = "SELECT gastos_caja.id,gastos_caja.hora,gastos_caja.concepto,gastos_caja.monto\n" +
                 "FROM central.gastos_caja\n" +
                 "INNER JOIN central.rubroscaja\n" +
                 "ON gastos_caja.idRubrocaja = rubroscaja.id AND gastos_caja.fecha = '"+fech+"' ;";
