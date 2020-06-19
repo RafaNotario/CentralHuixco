@@ -1200,7 +1200,6 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
           }
     
 public void cragaDinRubros(int opc){
-
 switch(opc){
     case 0://areas
         jCBoxEsRubroDet.removeAllItems();
@@ -1235,7 +1234,6 @@ switch(opc){
         }
     break;
 }; 
-    
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

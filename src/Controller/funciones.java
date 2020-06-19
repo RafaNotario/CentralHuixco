@@ -520,13 +520,10 @@ public class funciones {
             Connection cn = con2.conexion();
            String[] lapso = new String[2];
             String sql = "";
-            
             if(qEs.equals("Ambulante"))
                 sql = "select ambulantes.direccion,ambulantes.obs FROM ambulantes WHERE ambulantes.id = '"+id+"';";
-
             if(qEs.equals("Cargador"))
                 sql = "select cargadores.direccion,cargadores.obs FROM cargadores WHERE cargadores.id = '"+id+"';";
-
             if(qEs.equals("Cliente"))
                 sql = "select clientes.direccion,clientes.obs FROM clientes WHERE clientes.id = '"+id+"';";
 
@@ -774,7 +771,7 @@ public class funciones {
            return existe;
     }
          
-                       //OBTENER ULTIMO PAGO OTROS_CATALOGO
+//OBTENER ULTIMO PAGO OTROS_CATALOGO
           public int getUltimOtrosCatalog(){
             Connection cn = con2.conexion();
             int idTurno = -1;
@@ -1457,28 +1454,146 @@ public class funciones {
            return idTurno;
     }//@end getNumReutilizarCargad
                
-               public static void main(String args[]){
+
+          /*////     OBTENER DATOS DE AMBULANTE para mostrar en panelInfo*/
+       public String[][] historPaysAmbs(int quees, String qBusca,String idBusq,String year){
+            Connection cn = con2.conexion();
+            int i =0,cantFilas=0, cont=1,cantColumnas=0;
+             String[][] mat=null;
+            String sql = "";
+            if(quees == 0){//areas
+             //   sql = "select ambulantes.direccion,ambulantes.obs FROM ambulantes WHERE ambulantes.id = '"+id+"';";
+            }
+            
+             if(quees == 1){//Ambulantes
+                switch(qBusca){
+                    case "Semanas":
+                        sql = "SELECT semanas.semana,pagos_amb.fecha,pagos_amb.id \n" +
+                                "FROM pagos_amb \n" +
+                                "INNER JOIN pagos_ambdet\n" +
+                                "ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_amb.idCancelacion = 0 AND date_format(pagos_amb.fecha,'%Y') = '"+year+"' AND pagos_ambdet.idRubropago = 6 AND pagos_amb.idAmb = '"+idBusq+"' \n" +
+                                "INNER JOIN semanas\n" +
+                                "ON pagos_ambdet.idSemana = semanas.id\n" +
+                                "GROUP BY pagos_amb.id order by semanas.id desc;";
+                    break;
+                    case "Resguardos":
+                        sql = "SELECT semanas.semana,pagos_amb.fecha,pagos_amb.id\n" +
+                            "FROM pagos_amb \n" +
+                            "INNER JOIN pagos_ambdet\n" +
+                            "ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_amb.idCancelacion = 0 AND date_format(pagos_amb.fecha,'%Y') = '"+year+"' AND pagos_ambdet.idRubropago = 7 AND pagos_amb.idAmb = '"+idBusq+"' \n" +
+                            "INNER JOIN semanas\n" +
+                            "ON pagos_ambdet.idSemana = semanas.id\n" +
+                            "GROUP BY pagos_amb.id order by semanas.id desc ;";
+                    break;
+                    case "Inscripciones":
+                        sql = "SELECT semanas.semana,pagos_amb.fecha,pagos_amb.id\n" +
+                                "FROM pagos_amb \n" +
+                                "INNER JOIN pagos_ambdet\n" +
+                                "ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_amb.idCancelacion = 0 AND date_format(pagos_amb.fecha,'%Y') = '"+year+"' AND (pagos_ambdet.idRubropago > 7 AND pagos_ambdet.idRubropago < 11) AND pagos_amb.idAmb = '"+idBusq+"' \n" +
+                                "INNER JOIN semanas\n" +
+                                "ON pagos_ambdet.idSemana = semanas.id\n" +
+                                "GROUP BY pagos_amb.id order by semanas.id desc;";//order by pagos_amb.fecha desc
+                    break;
+                };
+            }    
+             //    sql = "select cargadores.direccion,cargadores.obs FROM cargadores WHERE cargadores.id = '"+id+"';";
+            if(quees == 2){//Cargadores
+            //    sql = "select clientes.direccion,clientes.obs FROM clientes WHERE clientes.id = '"+id+"';";
+                switch(qBusca){
+                    case "Semanas":
+                        sql = "SELECT semanas.semana,pagos_carg.fecha,pagos_carg.id\n" +
+                                "FROM pagos_carg\n" +
+                                "INNER JOIN pagos_cargdet\n" +
+                                "ON pagos_carg.id = pagos_cargdet.idTicket AND pagos_carg.idCancelacion = 0 AND date_format(pagos_carg.fecha,'%Y') = '"+year+"' AND pagos_cargdet.idRubropago = 11 AND pagos_carg.idcarg = '"+idBusq+"' \n" +
+                                "INNER JOIN semanas\n" +
+                                "ON pagos_cargdet.idSemana = semanas.id\n" +
+                                "order by pagos_carg.fecha desc\n" +
+                                ";";
+                    break;
+                    case "Inscripciones":
+                        sql = "SELECT pagos_cargdet.fvenc,pagos_carg.fecha,pagos_carg.id\n" +
+                    "FROM pagos_carg\n" +
+                    "INNER JOIN pagos_cargdet\n" +
+                    "ON pagos_carg.id = pagos_cargdet.idTicket AND pagos_carg.idCancelacion = 0 AND date_format(pagos_carg.fecha,'%Y') = '"+year+"' AND  (pagos_cargdet.idRubropago > 7 AND pagos_cargdet.idRubropago < 11)  AND pagos_carg.idcarg = '"+idBusq+"' \n" +
+                    "ORDER BY pagos_carg.fecha desc\n" +
+                    ";";
+                    break;
+                    case "Rentas":
+                        sql = "SELECT pagos_cargrenta.numdiablo,pagos_cargrenta.fecha,pagos_cargrenta.id\n" +
+                "FROM pagos_cargrenta\n" +
+                "WHERE pagos_cargrenta.idCancelacion = 0 AND date_format(pagos_cargrenta.fecha,'%Y') = '"+year+"'  AND pagos_cargrenta.idRubropago = 12  AND pagos_cargrenta.idCarg = '"+idBusq+"'\n" +
+                "order by pagos_cargrenta.fecha DESC\n" +
+                ";";
+                    break;
+                };
+            }
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                cantColumnas = rs.getMetaData().getColumnCount();
+               if(rs.last()){//Nos posicionamos al final
+                    cantFilas = rs.getRow();//sacamos la cantidad de filas/registros
+                    rs.beforeFirst();//nos posicionamos antes del inicio (como viene por defecto)
+                }
+                mat = new String[cantFilas][cantColumnas];
+               //aqui iria crear matriz
+            while(rs.next())
+                {//es necesario el for para llenar dinamicamente la lista, ya que varia el numero de columnas de las tablas
+                      for (int x=1;x<= rs.getMetaData().getColumnCount();x++) {
+                           // System.out.print("| "+rs.getString(x)+" |");
+                             mat[i][x-1]=rs.getString(x);
+                      //System.out.print(x+" -> "+rs.getString(x));                   
+                      }//for
+                       i++;
+                }//whilE
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }//finally
+          if (cantFilas == 0){
+                mat=null;
+                mat = new String[1][cantColumnas];
+                for (int j = 0; j < mat[0].length; j++) {
+                     mat[0][j]="NO DATA";
+                }
+          }
+           return mat;
+    }//@end getAllOtros
+       
+       
+       public static void main(String args[]){
            BigDecimal amountOne = new BigDecimal(250);//monto a cobrar
            BigDecimal amountTwo = new BigDecimal(100.00);//cantidad recivida
-           
            funciones fn =  new funciones();
-              java.util.Date date = new Date();
-                String[] prue = fn.getAllDataAmb("56");
-                System.out.println("reutilizar: "+fn.getNumReutilizarCargad());  
+           java.util.Date date = new Date();
+           String[][] prue = fn.historPaysAmbs(1,"Semanas","745","2020");
+           for (int i = 0; i < prue.length; i++) {
+               for (int j = 0; j < prue[0].length; j++) {
+                   System.out.print("["+prue[i][j]+"]");
+               }
+               System.out.println("");
+           }
                 
-               // for (int i = 0; i < prue.length; i++) {
-             /*  System.out.println("datas turno: "+fn.totalturno(0,"919"));
+           
+           
+          // for (int i = 0; i < prue.length; i++) {
+         /*  System.out.println("datas turno: "+fn.totalturno(0,"919"));
                System.out.println("datas turno: "+fn.totalturno(1,"919"));               
                System.out.println("datas turno: "+fn.totalturno(2,"919"));               
                System.out.println("datas turno: "+fn.totalturno(3,"919"));               
                System.out.println("datas turno: "+fn.totalturno(4,"919"));               
                System.out.println("datas turno: "+fn.totalturno(5,"919"));               
-
                System.out.println("datas turno: "+fn.totalturno(6,"919"));  */             
           // }
- 
-          //   System.out.println("pay ultimo CLIENTE sera "+(var+1));
-         //System.out.println("PORCENTAJE: "+fn.percentage(amountOne, amountTwo));
+          //  System.out.println("pay ultimo CLIENTE sera "+(var+1));
+          //System.out.println("PORCENTAJE: "+fn.percentage(amountOne, amountTwo));
        }
            
 }

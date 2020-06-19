@@ -28,6 +28,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import renderTable.TModel;
 import tickets.Jasper.Reportes;
 import Interfaz.internos.jpanels.infracc_rw_DB;
+import Interfaz.vistaReimprAll;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
@@ -2963,6 +2964,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jButton26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search-what.png"))); // NOI18N
 
         jButton27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reloj.png"))); // NOI18N
+        jButton27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton27ActionPerformed(evt);
+            }
+        });
 
         txtResultAmbu.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         txtResultAmbu.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -3921,6 +3927,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
     jButton35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search-what.png"))); // NOI18N
 
     jButton36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reloj.png"))); // NOI18N
+    jButton36.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton36ActionPerformed(evt);
+        }
+    });
 
     txtTotalCarg.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
     txtTotalCarg.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -5719,7 +5730,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(jPanambulantes, javax.swing.GroupLayout.PREFERRED_SIZE, 648, Short.MAX_VALUE)
+                .addComponent(jPanambulantes, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -5774,7 +5785,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
             .addGap(0, 0, 0)
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addContainerGap())
@@ -8142,6 +8153,30 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
                     jButton37.doClick();
                 }
     }//GEN-LAST:event_txtNumDiabRentKeyReleased
+
+    private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
+            String nomb = jLabNomAmb.getText(),
+                    idBusq = jLabIdAmbu.getText();
+            vistaReimprAll altamb = new vistaReimprAll(1,idBusq);
+            altamb.setLocationRelativeTo(null);
+            altamb.setVisible(true);
+            altamb.setEnabled(true);
+            altamb.validate();
+            altamb.setTitle("Ambulante");
+            altamb.jLabNombre.setText(nomb);
+    }//GEN-LAST:event_jButton27ActionPerformed
+
+    private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton36ActionPerformed
+            String nomb = jLabNombreCargadores.getText(),
+            idBusq = jlabIdCargador.getText();
+            vistaReimprAll altamb = new vistaReimprAll(2,idBusq);
+            altamb.setLocationRelativeTo(null);
+            altamb.setVisible(true);
+            altamb.setEnabled(true);
+            altamb.validate();
+            altamb.setTitle("Cargador");
+            altamb.jLabNombre.setText(nomb);
+    }//GEN-LAST:event_jButton36ActionPerformed
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {

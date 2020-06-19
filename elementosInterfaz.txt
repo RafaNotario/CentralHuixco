@@ -408,6 +408,8 @@ totCajaAll
 	jCBoxEsRubroDet
 	jTabViewIngresosAll
 	jLabLetrero
-	
-	
-	
+/*   		- jFrame vistaReimpresionAll	*/	
+	jLabIconFinder
+	jLabNombre
+	jCmBOptions
+		
