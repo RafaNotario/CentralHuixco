@@ -7,11 +7,17 @@ package Interfaz.internos.jpanels;
 
 
 import Controller.controlInserts;
+import Controller.datesControl;
+import Controller.funciones;
 import Interfaz.altaAmbulantes;
 import conexion.ConexionDBOriginal;
+import java.awt.Desktop;
+import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,6 +25,10 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import renderTable.TModel;
 
 /**
@@ -28,10 +38,11 @@ import renderTable.TModel;
 public class ambulantes extends javax.swing.JPanel {
 
         ConexionDBOriginal con2 = new ConexionDBOriginal();
-         controlInserts contrl = new controlInserts();
+        controlInserts contrl = new controlInserts();
+        datesControl datCtrl = new datesControl();
         String[] cabAreasPays = {"#ID", "Nombre", "Direccion", "Telefono", "Giro","Tarifa","Ultima Sem. Pag","Sem. Adeudo","Venc. Inscrip"};
-       
-    /**
+        private final String ruta = System.getProperties().getProperty("user.dir");
+        /**
      * Creates new form ambulantes
      */
     public ambulantes() {
@@ -236,6 +247,7 @@ return mat;
         jButton9 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/informacion.png"))); // NOI18N
         jButton1.setText("Información");
@@ -271,6 +283,11 @@ return mat;
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/print32x32.png"))); // NOI18N
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excelicon.png"))); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -360,6 +377,8 @@ return mat;
 
         jLabel4.setText("Filas");
 
+        jProgressBar1.setStringPainted(true);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -401,6 +420,10 @@ return mat;
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1246, Short.MAX_VALUE))
                 .addGap(110, 110, 110))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,7 +452,9 @@ return mat;
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(224, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -552,6 +577,136 @@ return mat;
         txtBusqParam.setText("");
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        try{
+           Thread t;//Thread
+                t = new Thread(){
+                    public void run(){
+        Object var = null,var1 = null, var2 = null,var3 = null,var4 = null,var5 = null,var6 = null,var7 = null,var8 = null;
+
+                        XSSFWorkbook workbook = new XSSFWorkbook();
+                        XSSFSheet hoja = workbook.createSheet();
+                        
+                        XSSFRow fila = hoja.createRow(0);
+                        fila.createCell(0).setCellValue("Numero");
+                        fila.createCell(1).setCellValue("Nombre");
+                        fila.createCell(2).setCellValue("Direccion");
+                        fila.createCell(3).setCellValue("Telefono");
+                        fila.createCell(4).setCellValue("Giro");
+                        fila.createCell(5).setCellValue("Tarifa");
+                        fila.createCell(6).setCellValue("Ult. Sem Pag.");
+                        fila.createCell(7).setCellValue("Sem. Adeudo");
+                        fila.createCell(8).setCellValue("Venc. Inscrip");
+                        
+                        XSSFCellStyle style =workbook.createCellStyle();
+                        jProgressBar1.setMaximum(jTabViewAllAmbs.getRowCount());
+                        XSSFRow filas = null;
+                        Rectangle rect;
+                        
+                        
+                        
+                        for(int i=0;i<jTabViewAllAmbs.getRowCount();i++){
+                            rect =jTabViewAllAmbs.getCellRect(i, 0, true);
+                            
+                            try{
+                                jTabViewAllAmbs.scrollRectToVisible(rect);
+                                
+                            }catch(java.lang.ClassCastException e){ }//try
+                            jTabViewAllAmbs.setRowSelectionInterval(i, i);
+                            
+                            jProgressBar1.setValue((i+1));
+                            
+                            filas = hoja.createRow((i+1));//LO CREMAOS A PARTIR DE LA 5TA FILA
+                            //var2.isEmpty()) ? "/" : var2
+                            var = jTabViewAllAmbs.getValueAt(i, 0);
+                            if (var != null && !var.toString().isEmpty()) {
+                                 filas.createCell(0).setCellValue(var.toString());
+                            }else{
+                                filas.createCell(0).setCellValue("");
+                            }
+                            var1 = jTabViewAllAmbs.getValueAt(i, 1);
+                            if (var1 != null && !var1.toString().isEmpty()) {
+                                 filas.createCell(1).setCellValue(var1.toString());
+                            }else{
+                                filas.createCell(1).setCellValue("");
+                            }
+                            var2 = jTabViewAllAmbs.getValueAt(i, 2);
+                            if (var2 != null && !var2.toString().isEmpty()) {
+                                 filas.createCell(2).setCellValue(var2.toString());
+                            }else{
+                                filas.createCell(2).setCellValue("");
+                            }                           
+                            var3 = jTabViewAllAmbs.getValueAt(i, 3);
+                            if (var3 != null && !var3.toString().isEmpty()) {
+                                 filas.createCell(3).setCellValue(var3.toString());
+                            }else{
+                                filas.createCell(3).setCellValue("");
+                            }
+                            var4 = jTabViewAllAmbs.getValueAt(i, 4);
+                            if (var4 != null && !var4.toString().isEmpty()) {
+                                 filas.createCell(4).setCellValue(var4.toString());
+                            }else{
+                                filas.createCell(4).setCellValue("");
+                            }                    
+var5 = jTabViewAllAmbs.getValueAt(i, 5);
+                            if (var5 != null && !var5.toString().isEmpty()) {
+                                 filas.createCell(5).setCellValue(var5.toString());
+                            }else{
+                                filas.createCell(5).setCellValue("");
+                            }
+var6 = jTabViewAllAmbs.getValueAt(i, 6);
+                            if (var6 != null && !var6.toString().isEmpty()) {
+                                 filas.createCell(6).setCellValue(var6.toString());
+                            }else{
+                                filas.createCell(6).setCellValue("");
+                            }
+var7 = jTabViewAllAmbs.getValueAt(i, 7);
+                            if (var7 != null && !var7.toString().isEmpty()) {
+                                 filas.createCell(7).setCellValue(var7.toString());
+                            }else{
+                                filas.createCell(7).setCellValue("");
+                            }
+var8 = jTabViewAllAmbs.getValueAt(i, 8);
+                            if (var8 != null && !var8.toString().isEmpty()) {
+                                 filas.createCell(8).setCellValue(var8.toString());
+                            }else{
+                                filas.createCell(8).setCellValue("");
+                            }
+                            
+                            hoja.autoSizeColumn(0);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(1);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(2);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(3);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(4);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(5);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(6);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(7);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(8);//autoajustar celdas al ancho de los datos
+                            
+                            
+                        }//for1
+                        jProgressBar1.setValue(0);
+                        jProgressBar1.setString("Abrieno Excel");
+                        //jProgressBar1.setBorderPainted(true);
+                        
+                        try{
+                            //  workbook.write(new FileOutputStream(new File("prueba.xlsx")));
+                            // Desktop.getDesktop().open(new File("prueba.xlsx"));
+                            
+                            FileOutputStream word = new FileOutputStream("ambulantes"+datCtrl.setDateActualGuion()+".xlsx");
+                            workbook.write(word);
+                            word.close();
+                            File file = new File("ambulantes"+datCtrl.setDateActualGuion()+".xlsx");
+                            Desktop.getDesktop().open(file);
+                        }catch (Exception ex){
+                            Logger.getLogger(ambulantes.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }//try
+                };
+           t.start();
+       }catch(Exception e) {JOptionPane.showMessageDialog(null, e);} 
+    }//GEN-LAST:event_jButton6ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -567,6 +722,7 @@ return mat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

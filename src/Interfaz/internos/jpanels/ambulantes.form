@@ -56,6 +56,11 @@
               </Group>
               <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
+              <Component id="jProgressBar1" min="-2" pref="559" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -89,7 +94,9 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="570" max="-2" attributes="0"/>
-              <EmptySpace pref="285" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jProgressBar1" min="-2" pref="43" max="-2" attributes="0"/>
+              <EmptySpace pref="224" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -151,6 +158,9 @@
           <Image iconType="3" name="/images/excelicon.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
       <Properties>
@@ -358,6 +368,11 @@
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="text" type="java.lang.String" value="Filas"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JProgressBar" name="jProgressBar1">
+      <Properties>
+        <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
     </Component>
   </SubComponents>
