@@ -5,6 +5,7 @@
  */
 package Interfaz.internos.jpanels;
 
+import Controller.datesControl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +16,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import conexion.ConexionDBOriginal;
+import java.awt.Desktop;
+import java.awt.Rectangle;
+import java.io.File;
+import java.io.FileOutputStream;
+import javax.swing.JOptionPane;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 /**
@@ -24,6 +34,7 @@ import conexion.ConexionDBOriginal;
 public class areas extends javax.swing.JPanel {
 
 ConexionDBOriginal con2 = new ConexionDBOriginal();
+datesControl datCtrl = new datesControl();
 
 public areas() {
         initComponents();
@@ -47,7 +58,6 @@ public areas() {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabBodegasEn = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
@@ -59,6 +69,7 @@ public areas() {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jPanSociosView = new javax.swing.JPanel();
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -118,11 +129,13 @@ public areas() {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Actualizar.png"))); // NOI18N
         jButton3.setText("Actualizar");
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/print32x32.png"))); // NOI18N
-        jButton4.setText("Imprimir");
-
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excelicon.png"))); // NOI18N
         jButton5.setText("Excel");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabBodegasEn.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabBodegasEn.setText("Bodegas en CEBOLLAS");
@@ -183,6 +196,8 @@ public areas() {
             jTable2.getColumnModel().getColumn(6).setMaxWidth(120);
         }
 
+        jProgressBar1.setStringPainted(true);
+
         javax.swing.GroupLayout jPanAreasViewLayout = new javax.swing.GroupLayout(jPanAreasView);
         jPanAreasView.setLayout(jPanAreasViewLayout);
         jPanAreasViewLayout.setHorizontalGroup(
@@ -191,34 +206,39 @@ public areas() {
                 .addGap(21, 21, 21)
                 .addGroup(jPanAreasViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1120, Short.MAX_VALUE)
                     .addGroup(jPanAreasViewLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanAreasViewLayout.createSequentialGroup()
-                        .addComponent(jLabBodegasEn, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1120, Short.MAX_VALUE))
+                        .addGroup(jPanAreasViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanAreasViewLayout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanAreasViewLayout.createSequentialGroup()
+                                .addComponent(jLabBodegasEn, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(220, 220, 220))
+            .addGroup(jPanAreasViewLayout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanAreasViewLayout.setVerticalGroup(
             jPanAreasViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,9 +246,9 @@ public areas() {
                 .addContainerGap()
                 .addGroup(jPanAreasViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanAreasViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,7 +267,9 @@ public areas() {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(140, 140, 140))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(103, 103, 103))
         );
 
         jTabbedPane1.addTab("Areas", jPanAreasView);
@@ -304,6 +326,128 @@ public areas() {
             jLabBodegasEn.setText("Bodegas en "+nomA);
         }
     }//GEN-LAST:event_jTabViewInfoareasMouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+                try{
+           Thread t;//Thread
+                t = new Thread(){
+                    public void run(){
+        Object var = null,var1 = null, var2 = null,var3 = null,var4 = null,var5 = null,var6 = null,var7 = null,var8 = null;
+
+                        XSSFWorkbook workbook = new XSSFWorkbook();
+                        XSSFSheet hoja = workbook.createSheet();
+                        
+                        XSSFRow fila = hoja.createRow(0);
+                        fila.createCell(0).setCellValue("Numero");
+                        fila.createCell(1).setCellValue("Area");
+                        fila.createCell(2).setCellValue("Representante");
+                        fila.createCell(3).setCellValue("Tot. bodegas");
+                        fila.createCell(4).setCellValue("Bod. en uso");
+                        fila.createCell(5).setCellValue("Sup. Bodegas");
+                        fila.createCell(6).setCellValue("Sup. Estac.");
+                        fila.createCell(7).setCellValue("Sup. Total");
+                       
+                        XSSFCellStyle style =workbook.createCellStyle();
+                        jProgressBar1.setMaximum(jTabViewInfoareas.getRowCount());
+                        XSSFRow filas = null;
+                        Rectangle rect;
+                        
+                        
+                        
+                        for(int i=0;i<jTabViewInfoareas.getRowCount();i++){
+                            rect =jTabViewInfoareas.getCellRect(i, 0, true);
+                            
+                            try{
+                                jTabViewInfoareas.scrollRectToVisible(rect);
+                                
+                            }catch(java.lang.ClassCastException e){ }//try
+                            jTabViewInfoareas.setRowSelectionInterval(i, i);
+                            
+                            jProgressBar1.setValue((i+1));
+                            
+                            filas = hoja.createRow((i+1));//LO CREMAOS A PARTIR DE LA 5TA FILA
+                            //var2.isEmpty()) ? "/" : var2
+                            var = jTabViewInfoareas.getValueAt(i, 0);
+                            if (var != null && !var.toString().isEmpty()) {
+                                 filas.createCell(0).setCellValue(var.toString());
+                            }else{
+                                filas.createCell(0).setCellValue("");
+                            }
+                            var1 = jTabViewInfoareas.getValueAt(i, 1);
+                            if (var1 != null && !var1.toString().isEmpty()) {
+                                 filas.createCell(1).setCellValue(var1.toString());
+                            }else{
+                                filas.createCell(1).setCellValue("");
+                            }
+                            var2 = jTabViewInfoareas.getValueAt(i, 2);
+                            if (var2 != null && !var2.toString().isEmpty()) {
+                                 filas.createCell(2).setCellValue(var2.toString());
+                            }else{
+                                filas.createCell(2).setCellValue("");
+                            }                           
+                            var3 = jTabViewInfoareas.getValueAt(i, 3);
+                            if (var3 != null && !var3.toString().isEmpty()) {
+                                 filas.createCell(3).setCellValue(var3.toString());
+                            }else{
+                                filas.createCell(3).setCellValue("");
+                            }
+                            var4 = jTabViewInfoareas.getValueAt(i, 4);
+                            if (var4 != null && !var4.toString().isEmpty()) {
+                                 filas.createCell(4).setCellValue(var4.toString());
+                            }else{
+                                filas.createCell(4).setCellValue("");
+                            }                    
+var5 = jTabViewInfoareas.getValueAt(i, 5);
+                            if (var5 != null && !var5.toString().isEmpty()) {
+                                 filas.createCell(5).setCellValue(var5.toString());
+                            }else{
+                                filas.createCell(5).setCellValue("");
+                            }
+var6 = jTabViewInfoareas.getValueAt(i, 6);
+                            if (var6 != null && !var6.toString().isEmpty()) {
+                                 filas.createCell(6).setCellValue(var6.toString());
+                            }else{
+                                filas.createCell(6).setCellValue("");
+                            }
+var7 = jTabViewInfoareas.getValueAt(i, 7);
+                            if (var7 != null && !var7.toString().isEmpty()) {
+                                 filas.createCell(7).setCellValue(var7.toString());
+                            }else{
+                                filas.createCell(7).setCellValue("");
+                            }
+
+                            
+                            hoja.autoSizeColumn(0);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(1);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(2);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(3);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(4);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(5);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(6);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(7);//autoajustar celdas al ancho de los datos                            
+                            
+                        }//for1
+                        jProgressBar1.setValue(0);
+                        jProgressBar1.setString("Abrieno Excel");
+                        //jProgressBar1.setBorderPainted(true);
+                        
+                        try{
+                            //  workbook.write(new FileOutputStream(new File("prueba.xlsx")));
+                            // Desktop.getDesktop().open(new File("prueba.xlsx"));
+                            
+                            FileOutputStream word = new FileOutputStream("areas"+datCtrl.setDateActualGuion()+".xlsx");
+                            workbook.write(word);
+                            word.close();
+                            File file = new File("areas"+datCtrl.setDateActualGuion()+".xlsx");
+                            Desktop.getDesktop().open(file);
+                        }catch (Exception ex){
+                            Logger.getLogger(ambulantes.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }//try
+                };
+           t.start();
+       }catch(Exception e) {JOptionPane.showMessageDialog(null, e);} 
+    }//GEN-LAST:event_jButton5ActionPerformed
 
                //funcion para busqueda automatica ambulantes
         void mostrarTablaCargadores(){
@@ -383,7 +527,6 @@ public areas() {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -393,6 +536,7 @@ public areas() {
     private javax.swing.JLabel jLabBodegasEn;
     private javax.swing.JPanel jPanAreasView;
     private javax.swing.JPanel jPanSociosView;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTabViewInfoareas;

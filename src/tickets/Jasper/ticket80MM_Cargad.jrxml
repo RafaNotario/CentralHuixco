@@ -96,7 +96,7 @@ ON pagos_cargdet.idSemana = semanas.id;]]>
 				<textElement>
 					<font size="9"/>
 				</textElement>
-				<text><![CDATA[Comerciante:]]></text>
+				<text><![CDATA[Nombre:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="59" width="57" height="12" uuid="0511f8d0-344a-4620-abea-9b096d7b7370"/>

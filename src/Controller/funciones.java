@@ -1463,6 +1463,48 @@ public class funciones {
             String sql = "";
             if(quees == 0){//areas
              //   sql = "select ambulantes.direccion,ambulantes.obs FROM ambulantes WHERE ambulantes.id = '"+id+"';";
+                switch(qBusca){
+                    case "Mantenimiento":
+                        sql = "SELECT semanas.semana,pagos_areas.fecha,pagos_areas.id\n" +
+                                "FROM pagos_areas\n" +
+                                "INNER JOIN pagos_areasdet\n" +
+                                "ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areas.idCancelacion = 0 AND date_format(pagos_areas.fecha,'%Y') =  '"+year+"' AND pagos_areasdet.idRubropago = 2 AND pagos_areas.idArea = '"+idBusq+"' \n" +
+                                "INNER JOIN semanas\n" +
+                                "ON pagos_areasdet.idSemana = semanas.id\n" +
+                                "order by pagos_areas.fecha desc\n" +
+                                ";";
+                    break;
+                    case "Basura":
+                        sql = "SELECT semanas.semana,pagos_areas.fecha,pagos_areas.id\n" +
+                                "FROM pagos_areas\n" +
+                                "INNER JOIN pagos_areasdet\n" +
+                                "ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areas.idCancelacion = 0 AND date_format(pagos_areas.fecha,'%Y') =  '"+year+"'  AND pagos_areasdet.idRubropago = 3 AND pagos_areas.idArea = '"+idBusq+"'\n" +
+                                "INNER JOIN semanas\n" +
+                                "ON pagos_areasdet.idSemana = semanas.id\n" +
+                                "order by pagos_areas.fecha desc\n" +
+                                ";";//order by pagos_amb.fecha desc
+                    break;
+                    case "Policia":
+                        sql = "SELECT semanas.semana,pagos_areas.fecha,pagos_areas.id\n" +
+                                "FROM pagos_areas\n" +
+                                "INNER JOIN pagos_areasdet\n" +
+                                "ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areas.idCancelacion = 0 AND date_format(pagos_areas.fecha,'%Y') =  '"+year+"'  AND pagos_areasdet.idRubropago = 4 AND pagos_areas.idArea = '"+idBusq+"'\n" +
+                                "INNER JOIN semanas\n" +
+                                "ON pagos_areasdet.idSemana = semanas.id\n" +
+                                "order by pagos_areas.fecha desc\n" +
+                                ";";//order by pagos_amb.fecha desc
+                    break;
+                    case "Resguardo":
+                        sql = "SELECT semanas.semana,pagos_areas.fecha,pagos_areas.id\n" +
+                                "FROM pagos_areas\n" +
+                                "INNER JOIN pagos_areasdet\n" +
+                                "ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areas.idCancelacion = 0 AND date_format(pagos_areas.fecha,'%Y') =  '"+year+"'  AND pagos_areasdet.idRubropago = 5 AND pagos_areas.idArea = '"+idBusq+"'\n" +
+                                "INNER JOIN semanas\n" +
+                                "ON pagos_areasdet.idSemana = semanas.id\n" +
+                                "order by pagos_areas.fecha desc\n" +
+                                ";";//order by pagos_amb.fecha desc
+                    break;
+                };
             }
             
              if(quees == 1){//Ambulantes

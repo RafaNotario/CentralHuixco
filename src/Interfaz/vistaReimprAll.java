@@ -22,7 +22,7 @@ public class vistaReimprAll extends javax.swing.JFrame {
     static String idPersomn = "";
     String[] cabHistor = {"Semana","Fecha","Folio"};
     
-    String[] arrAreas = {"Todos","Mantenimiento","Basura"};//2,3,4,5
+    String[] arrAreas = {"Mantenimiento","Basura","Policia","Resguardo"};//2,3,4,5
     String[] arrAmbus ={"Semanas","Resguardos","Inscripciones"};// 6,7,8,9,10
     String[] arrCargad ={"Semanas","Inscripciones","Rentas"};// 8,9,11,12
 
@@ -176,7 +176,26 @@ public class vistaReimprAll extends javax.swing.JFrame {
        if(eligio > -1){
            switch(optins){
            case 0:    //Area
-               
+               if(eligio == 0){
+                   String[][] mat = func.historPaysAmbs(0,"Mantenimiento",idPersomn,Integer.toString(yearB));
+                   DefaultTableModel modelo = new TModel(mat, cabHistor);
+                    jTabViewsPays.setModel(modelo);
+               }
+               if(eligio == 1){
+                    String[][] mat = func.historPaysAmbs(0,"Basura",idPersomn,Integer.toString(yearB));
+                   DefaultTableModel modelo = new TModel(mat, cabHistor);
+                   jTabViewsPays.setModel(modelo);
+               }
+               if(eligio == 2){
+                   String[][] mat = func.historPaysAmbs(0,"Policia",idPersomn,Integer.toString(yearB));
+                   DefaultTableModel modelo = new TModel(mat, cabHistor);
+                   jTabViewsPays.setModel(modelo);
+               }           
+             if(eligio == 3){
+                   String[][] mat = func.historPaysAmbs(0,"Resguardo",idPersomn,Integer.toString(yearB));
+                   DefaultTableModel modelo = new TModel(mat, cabHistor);
+                   jTabViewsPays.setModel(modelo);
+               } 
            break;
            case 1:    //Ambulante
                if(eligio == 0){

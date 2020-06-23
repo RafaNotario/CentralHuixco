@@ -33,7 +33,7 @@ ON pagos_ambdet.idSemana = semanas.id;]]>
 	<field name="resty" class="java.math.BigDecimal"/>
 	<field name="inc" class="java.lang.String"/>
 	<title>
-		<band height="142" splitType="Stretch">
+		<band height="137" splitType="Stretch">
 			<image scaleImage="FillFrame">
 				<reportElement x="16" y="0" width="172" height="88" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
 				<imageExpression><![CDATA["C:\\central\\src\\images\\logo80MM.jpg"]]></imageExpression>
@@ -75,7 +75,7 @@ ON pagos_ambdet.idSemana = semanas.id;]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="71" splitType="Stretch">
+		<band height="76" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="47" height="13" uuid="6877f7c5-93c4-4fe1-9ffa-31dd25ce4217"/>
 				<textElement>
@@ -98,27 +98,27 @@ ON pagos_ambdet.idSemana = semanas.id;]]>
 				<text><![CDATA[Nombre:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="57" width="47" height="12" uuid="0511f8d0-344a-4620-abea-9b096d7b7370"/>
+				<reportElement x="0" y="63" width="47" height="12" uuid="0511f8d0-344a-4620-abea-9b096d7b7370"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Atendio:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="10" y="69" width="195" height="1" uuid="5982a3a7-ceb5-439f-8f08-f06aa0da8003"/>
+				<reportElement x="10" y="75" width="195" height="1" uuid="5982a3a7-ceb5-439f-8f08-f06aa0da8003"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="47" y="57" width="157" height="12" uuid="fde2777c-c97d-4a2d-9735-921bb0252c82"/>
+				<reportElement x="47" y="63" width="157" height="12" uuid="fde2777c-c97d-4a2d-9735-921bb0252c82"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{nombAtendio}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="47" y="0" width="109" height="12" uuid="c8de3081-1efd-4022-9cff-70053a8241fe"/>
+				<reportElement x="47" y="-1" width="109" height="12" uuid="c8de3081-1efd-4022-9cff-70053a8241fe"/>
 				<textElement>
 					<font size="9" isBold="false"/>
 				</textElement>
@@ -132,14 +132,14 @@ ON pagos_ambdet.idSemana = semanas.id;]]>
 				<textFieldExpression><![CDATA[$P{nombAmbu}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="47" y="12" width="156" height="12" uuid="c268e667-d646-44da-a16c-4c6741683c2f"/>
+				<reportElement x="47" y="11" width="156" height="12" uuid="c268e667-d646-44da-a16c-4c6741683c2f"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{fechHorTicAmb}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="47" y="24" width="110" height="13" uuid="20401251-2aa1-4014-baa6-fdcc51644853"/>
+				<reportElement x="47" y="22" width="110" height="13" uuid="20401251-2aa1-4014-baa6-fdcc51644853"/>
 				<textElement>
 					<font size="10" isBold="true"/>
 				</textElement>

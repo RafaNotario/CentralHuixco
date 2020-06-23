@@ -6,10 +6,15 @@
 package Interfaz.internos.jpanels;
 
 import Controller.controlInserts;
+import Controller.datesControl;
 import Interfaz.altaCargadores;
 import conexion.ConexionDBOriginal;
+import java.awt.Desktop;
+import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +22,10 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import renderTable.TModel;
 
 /**
@@ -26,6 +35,8 @@ import renderTable.TModel;
 public class cargadores extends javax.swing.JPanel {
         ConexionDBOriginal con2 = new ConexionDBOriginal();
          controlInserts contrl = new controlInserts();
+         datesControl datCtrl = new datesControl();
+         
         String[] cabAreasPays = {"#ID", "Nombre", "Direccion", "Telefono","Diablito","Ultima Sem. Pag","Sem. Adeudo","Venc. Inscrip"};
 
     public cargadores() {
@@ -59,7 +70,6 @@ public class cargadores extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
@@ -73,6 +83,7 @@ public class cargadores extends javax.swing.JPanel {
         jTabViewAllCargad = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/informacion.png"))); // NOI18N
         jButton1.setText("Información");
@@ -105,9 +116,12 @@ public class cargadores extends javax.swing.JPanel {
             }
         });
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/print32x32.png"))); // NOI18N
-
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excelicon.png"))); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -201,6 +215,8 @@ public class cargadores extends javax.swing.JPanel {
             }
         });
 
+        jProgressBar1.setStringPainted(true);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,9 +233,7 @@ public class cargadores extends javax.swing.JPanel {
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(46, 46, 46)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,6 +256,10 @@ public class cargadores extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(110, 110, 110))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(395, 395, 395)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,8 +271,7 @@ public class cargadores extends javax.swing.JPanel {
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jSeparator1)
                         .addComponent(jSeparator2)
@@ -268,7 +285,9 @@ public class cargadores extends javax.swing.JPanel {
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(248, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -407,6 +426,119 @@ public class cargadores extends javax.swing.JPanel {
         }     
     }//GEN-LAST:event_jButton9ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+               try{
+           Thread t;//Thread
+                t = new Thread(){
+                    public void run(){
+        Object var = null,var1 = null, var2 = null,var3 = null,var4 = null,var5 = null,var6 = null,var7 = null,var8 = null;
+                        XSSFWorkbook workbook = new XSSFWorkbook();
+                        XSSFSheet hoja = workbook.createSheet();
+//"#ID", "Nombre", "Direccion", "Telefono","Diablito","Ultima Sem. Pag","Sem. Adeudo","Venc. Inscrip"                        
+                        XSSFRow fila = hoja.createRow(0);
+                        fila.createCell(0).setCellValue("Numero");
+                        fila.createCell(1).setCellValue("Nombre");
+                        fila.createCell(2).setCellValue("Direccion");
+                        fila.createCell(3).setCellValue("Telefono");
+                        fila.createCell(4).setCellValue("Diablito");
+                        fila.createCell(5).setCellValue("Ult. Sem Pag.");
+                        fila.createCell(6).setCellValue("Sem. Adeudo");
+                        fila.createCell(7).setCellValue("Venc. Inscrip");
+                        
+                        XSSFCellStyle style =workbook.createCellStyle();
+                        jProgressBar1.setMaximum(jTabViewAllCargad.getRowCount());
+                        XSSFRow filas = null;
+                        Rectangle rect;
+                        for(int i=0;i<jTabViewAllCargad.getRowCount();i++){
+                            rect =jTabViewAllCargad.getCellRect(i, 0, true);
+                            try{
+                                jTabViewAllCargad.scrollRectToVisible(rect);
+                            }catch(java.lang.ClassCastException e){ }//try
+                            jTabViewAllCargad.setRowSelectionInterval(i, i);
+                            jProgressBar1.setValue((i+1));
+                            filas = hoja.createRow((i+1));//LO CREMAOS A PARTIR DE LA 5TA FILA
+                            //var2.isEmpty()) ? "/" : var2
+                            var = jTabViewAllCargad.getValueAt(i, 0);
+                            if (var != null && !var.toString().isEmpty()) {
+                                 filas.createCell(0).setCellValue(var.toString());
+                            }else{
+                                filas.createCell(0).setCellValue("");
+                            }
+                            var1 = jTabViewAllCargad.getValueAt(i, 1);
+                            if (var1 != null && !var1.toString().isEmpty()) {
+                                 filas.createCell(1).setCellValue(var1.toString());
+                            }else{
+                                filas.createCell(1).setCellValue("");
+                            }
+                            var2 = jTabViewAllCargad.getValueAt(i, 2);
+                            if (var2 != null && !var2.toString().isEmpty()) {
+                                 filas.createCell(2).setCellValue(var2.toString());
+                            }else{
+                                filas.createCell(2).setCellValue("");
+                            }                           
+                            var3 = jTabViewAllCargad.getValueAt(i, 3);
+                            if (var3 != null && !var3.toString().isEmpty()) {
+                                 filas.createCell(3).setCellValue(var3.toString());
+                            }else{
+                                filas.createCell(3).setCellValue("");
+                            }
+                            var4 = jTabViewAllCargad.getValueAt(i, 4);
+                            if (var4 != null && !var4.toString().isEmpty()) {
+                                 filas.createCell(4).setCellValue(var4.toString());
+                            }else{
+                                filas.createCell(4).setCellValue("");
+                            }                    
+var5 = jTabViewAllCargad.getValueAt(i, 5);
+                            if (var5 != null && !var5.toString().isEmpty()) {
+                                 filas.createCell(5).setCellValue(var5.toString());
+                            }else{
+                                filas.createCell(5).setCellValue("");
+                            }
+var6 = jTabViewAllCargad.getValueAt(i, 6);
+                            if (var6 != null && !var6.toString().isEmpty()) {
+                                 filas.createCell(6).setCellValue(var6.toString());
+                            }else{
+                                filas.createCell(6).setCellValue("");
+                            }
+var7 = jTabViewAllCargad.getValueAt(i, 7);
+                            if (var7 != null && !var7.toString().isEmpty()) {
+                                 filas.createCell(7).setCellValue(var7.toString());
+                            }else{
+                                filas.createCell(7).setCellValue("");
+                            }
+                            
+                            hoja.autoSizeColumn(0);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(1);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(2);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(3);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(4);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(5);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(6);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(7);//autoajustar celdas al ancho de los datos
+                            
+                        }//for1
+                        jProgressBar1.setValue(0);
+                        jProgressBar1.setString("Abrieno Excel");
+                        //jProgressBar1.setBorderPainted(true);
+                        
+                        try{
+                            //  workbook.write(new FileOutputStream(new File("prueba.xlsx")));
+                            // Desktop.getDesktop().open(new File("prueba.xlsx"));
+                            
+                            FileOutputStream word = new FileOutputStream("cargadores"+datCtrl.setDateActualGuion()+".xlsx");
+                            workbook.write(word);
+                            word.close();
+                            File file = new File("cargadores"+datCtrl.setDateActualGuion()+".xlsx");
+                            Desktop.getDesktop().open(file);
+                        }catch (Exception ex){
+                            Logger.getLogger(ambulantes.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }//try
+                };
+           t.start();
+       }catch(Exception e) {JOptionPane.showMessageDialog(null, e);} 
+    }//GEN-LAST:event_jButton6ActionPerformed
+
  protected void cargaDataCargadores(){
             String[][] mat = matrizgetAmbsAll(0,"");
              jTabViewAllCargad.setModel(new TModel(mat, cabAreasPays));        
@@ -535,7 +667,6 @@ return mat;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -544,6 +675,7 @@ return mat;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
