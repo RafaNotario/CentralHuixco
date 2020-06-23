@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="294" whenNoDataType="AllSectionsNoDetail" columnWidth="204" leftMargin="11" rightMargin="11" topMargin="0" bottomMargin="10" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="311" whenNoDataType="AllSectionsNoDetail" columnWidth="204" leftMargin="11" rightMargin="11" topMargin="0" bottomMargin="10" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -32,40 +32,40 @@ inner join usuarios on turnos.idusuario = usuarios.id;;]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<title>
-		<band height="145" splitType="Stretch">
+		<band height="161" splitType="Stretch">
 			<image scaleImage="FillFrame">
-				<reportElement x="10" y="0" width="195" height="95" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
+				<reportElement x="19" y="0" width="154" height="105" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
 				<imageExpression><![CDATA["C:\\central\\src\\images\\logo80MM.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="32" y="132" width="147" height="13" forecolor="#3333FF" uuid="2b292a92-0302-46b2-bfec-0232a67d2289"/>
+				<reportElement x="32" y="146" width="147" height="13" forecolor="#3333FF" uuid="2b292a92-0302-46b2-bfec-0232a67d2289"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Pago Renta Diaria de Diablito]]></text>
 			</staticText>
 			<line>
-				<reportElement x="4" y="144" width="195" height="1" uuid="c1e4c872-16ba-4809-939e-9cfa42c4d990"/>
+				<reportElement x="4" y="158" width="195" height="1" uuid="c1e4c872-16ba-4809-939e-9cfa42c4d990"/>
 				<graphicElement>
 					<pen lineStyle="Double" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="4" y="94" width="185" height="12" forecolor="#3333FF" uuid="355a20d2-bae7-415e-8433-84266655d977"/>
+				<reportElement x="4" y="105" width="185" height="12" forecolor="#3333FF" uuid="355a20d2-bae7-415e-8433-84266655d977"/>
 				<textElement>
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[OFICINA CENTRAL DE COBRANZA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4" y="107" width="185" height="12" forecolor="#3333FF" uuid="36a46a4a-d253-48aa-b826-a38ac0b4b045"/>
+				<reportElement x="4" y="118" width="185" height="12" forecolor="#3333FF" uuid="36a46a4a-d253-48aa-b826-a38ac0b4b045"/>
 				<textElement>
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CENTRAL DE ABASTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4" y="119" width="185" height="12" forecolor="#3333FF" uuid="8780508c-1b96-4d2b-8f34-bff957ea44aa"/>
+				<reportElement x="4" y="130" width="185" height="12" forecolor="#3333FF" uuid="8780508c-1b96-4d2b-8f34-bff957ea44aa"/>
 				<textElement>
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -74,7 +74,7 @@ inner join usuarios on turnos.idusuario = usuarios.id;;]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="70" splitType="Stretch">
+		<band height="80" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="3" width="55" height="13" uuid="6877f7c5-93c4-4fe1-9ffa-31dd25ce4217"/>
 				<textElement>
@@ -94,17 +94,17 @@ inner join usuarios on turnos.idusuario = usuarios.id;;]]>
 				<textElement>
 					<font size="9"/>
 				</textElement>
-				<text><![CDATA[CARGADOR:]]></text>
+				<text><![CDATA[NOMBRE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="50" width="55" height="12" uuid="0511f8d0-344a-4620-abea-9b096d7b7370"/>
+				<reportElement x="0" y="62" width="55" height="12" uuid="0511f8d0-344a-4620-abea-9b096d7b7370"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[ATENDIO:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="10" y="67" width="195" height="1" uuid="5982a3a7-ceb5-439f-8f08-f06aa0da8003"/>
+				<reportElement x="10" y="78" width="195" height="1" uuid="5982a3a7-ceb5-439f-8f08-f06aa0da8003"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#999999"/>
 				</graphicElement>
@@ -112,7 +112,7 @@ inner join usuarios on turnos.idusuario = usuarios.id;;]]>
 			<textField>
 				<reportElement x="56" y="3" width="100" height="12" uuid="c8de3081-1efd-4022-9cff-70053a8241fe"/>
 				<textElement>
-					<font size="9" isBold="true"/>
+					<font size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{numTicket}]]></textFieldExpression>
 			</textField>
@@ -133,28 +133,28 @@ inner join usuarios on turnos.idusuario = usuarios.id;;]]>
 			<textField>
 				<reportElement x="56" y="27" width="100" height="12" uuid="886b634f-efda-4422-8764-f2fea2357b4b"/>
 				<textElement>
-					<font size="9"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="56" y="51" width="148" height="12" uuid="4ddbd1c8-ed74-488d-92cc-be76bd775829"/>
+				<reportElement x="56" y="62" width="148" height="12" uuid="4ddbd1c8-ed74-488d-92cc-be76bd775829"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombUs}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="57" y="39" width="147" height="12" uuid="e58dd742-b914-4418-bb5e-e96d91cd50ac"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="57" y="39" width="147" height="11" uuid="e58dd742-b914-4418-bb5e-e96d91cd50ac"/>
 				<textElement>
-					<font size="9"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombCarg}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="62" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="6" width="60" height="12" uuid="08c02400-4ce2-4cfe-a6da-7d6c246a7f9c"/>
 				<textElement>
@@ -207,14 +207,14 @@ inner join usuarios on turnos.idusuario = usuarios.id;;]]>
 			<textField>
 				<reportElement x="64" y="31" width="100" height="12" uuid="8eda1d30-8dae-4f72-babc-7adc33c73388"/>
 				<textElement>
-					<font size="9"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{numdiablo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="69">
+		<band height="60">
 			<staticText>
 				<reportElement x="80" y="15" width="57" height="12" uuid="2852f6ce-ff4f-4dfe-afc1-77f02b76f971"/>
 				<textElement>

@@ -538,7 +538,7 @@ return mat;
         String sql = "SELECT pagos_amb.id\n" +
                         "FROM pagos_amb\n" +
                         "INNER JOIN ambulantes\n" +
-                        "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idAmb = '"+idAmbu+"'\n" +
+                        "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idCancelacion = 0 AND pagos_amb.idAmb = '"+idAmbu+"'\n" +
                         "INNER JOIN pagos_ambdet\n" +
                         "ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_ambdet.idRubroPago = '"+idRubro+"'\n" +
                         "ORDER BY pagos_amb.id desc limit 1;";
@@ -1026,7 +1026,7 @@ SQL="UPDATE pagos_infrac SET idTurno = ?, fechapag = ?, horapag = ?,quienpaga = 
                 pps.setString(1, val);
                 pps.executeUpdate();
                 if(table.equals("tarifas"))
-               JOptionPane.showMessageDialog(null, "Tarifa actualizada correctamente."+id);
+                    JOptionPane.showMessageDialog(null, "Tarifa actualizada correctamente."+id);
             } catch (SQLException ex) {
                 Logger.getLogger(controlInserts.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Error durante la transaccion.");
@@ -1500,14 +1500,16 @@ return mat;
         
     public static void main(String []argv){
         controlInserts contrl = new controlInserts();
-         System.out.println("Ultimo pagado: "+contrl.regLastTicket(19));
-       // String[][] mat = contrl.matrizgetAmbuSemana("258","6");
-        String[] arr = contrl.regpagosambdet(16865,6);
-        for (int i = 0; i < arr.length; i++) {
-       //     System.out.println("["+arr[i]+"]");
+     //  System.out.println("Ultimo pagado: "+contrl.regLastTicket(19));
+     // String[][] mat = contrl.matrizgetAmbuSemana("258","6");
+        contrl.f5CancelTypesAll("ambulantes","ultimaSem","154","55");
+        
+   //  contrl.f5CancelTypesAll("usuarios","turno","2","930");
+     System.out.println(contrl.getpagosAmbulante("904","6"));
+     String[] arr = contrl.regpagosambdet(Integer.parseInt(contrl.getpagosAmbulante("904","6")),6);
+     for (int i = 0; i < arr.length; i++) {
+            System.out.println("["+arr[i]+"]");
     }
-        contrl.f5CancelTypesAll("usuarios","turno","2","930");
-    // System.out.println(contrl.getpagosAmbulante("258","6"));
 }
 
 }

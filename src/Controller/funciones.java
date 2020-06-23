@@ -1567,6 +1567,37 @@ public class funciones {
            return mat;
     }//@end getAllOtros
        
+            public String getidUserConTicket(String colum,String table, String  id){
+            Connection cn = con2.conexion();
+            String idUser = "";
+            String sql = "";
+            sql = "SELECT "+colum+" FROM "+table+" WHERE id = '"+id+"'";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idUser =rs.getString(1);
+                    }else{
+                            idUser = "NO-DATA";
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idUser;
+    }//@end getidUserConTicket
+       
        
        public static void main(String args[]){
            BigDecimal amountOne = new BigDecimal(250);//monto a cobrar
@@ -1580,7 +1611,7 @@ public class funciones {
                }
                System.out.println("");
            }
-                
+                System.out.println(fn.getidUserConTicket("idAmb","pagos_amb","19757"));
            
            
           // for (int i = 0; i < prue.length; i++) {

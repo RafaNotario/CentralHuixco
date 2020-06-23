@@ -1444,6 +1444,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jLabel80.setText("Ingrese el motivo de la cancelación");
 
         txtCancelTick.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtCancelTick.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCancelTickKeyReleased(evt);
+            }
+        });
 
         jButton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         jButton24.setText("Cancelar");
@@ -5740,7 +5745,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanCargadores, javax.swing.GroupLayout.PREFERRED_SIZE, 638, Short.MAX_VALUE)
+                .addComponent(jPanCargadores, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -5969,6 +5974,7 @@ txtResultAmbu.setText(aux);
             txtBuscAmbulante.requestFocus(true);
             
             jCheckSemPaysAmb.doClick();
+           
     }
     }//GEN-LAST:event_jTabDatosAmbulanteKeyPressed
 
@@ -7691,14 +7697,24 @@ if(selec > -1){
                          contrl.guardInCancelaciones(arregCan);
                         contrl.f5CancelTypesAll("pagos_areas","idCancelacion",mostTic,arregCan[0]);
                     }
+
                     if(concepto.equals("Pago Ambulantes")){
-                           contrl.guardInCancelaciones(arregCan);
+                        contrl.guardInCancelaciones(arregCan);
                         contrl.f5CancelTypesAll("pagos_amb","idCancelacion",mostTic,arregCan[0]);
+                        
+                        String idambB = func.getidUserConTicket("idAmb","pagos_amb",mostTic);
+                        System.out.println("Cancelar de amb"+idambB);
+                        String[] arR = contrl.regpagosambdet(Integer.parseInt(contrl.getpagosAmbulante(idambB,"6")),6);
+                        System.out.println("IdSemana"+arR[3]);
+                        
+                        contrl.f5CancelTypesAll("ambulantes","ultimaSem",idambB,arR[3]);
                     }
+
                     if(concepto.equals("Pago Cargadores")){     
                         contrl.guardInCancelaciones(arregCan);
-                        contrl.f5CancelTypesAll("pagos_carg","idCancelacion",mostTic,arregCan[0]);
+                        contrl.f5CancelTypesAll("pagos_carg","idCancelacion",mostTic,arregCan[3]);
                     }
+
                     if(concepto.equals("Pago Infraccion")){   
                         String[] arrCancInfracc = new String[7];
                         arrCancInfracc[0] = mostTic;
@@ -7727,6 +7743,7 @@ if(selec > -1){
                     JOptionPane.showMessageDialog(null, "Debe elegir que mostrar");
           }//IFFILA >=0
          jDialCancelaciones.dispose();
+         jButton19.doClick();
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
@@ -8178,6 +8195,12 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
             altamb.jLabNombre.setText(nomb);
     }//GEN-LAST:event_jButton36ActionPerformed
 
+    private void txtCancelTickKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCancelTickKeyReleased
+          if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+                  jButton25.doClick();
+          }
+    }//GEN-LAST:event_txtCancelTickKeyReleased
+
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
             Connection cn = con2.conexion();
@@ -8259,11 +8282,9 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
                             "FROM central.ambulantes\n" +
                             "INNER JOIN central.giros\n" +
                             "ON ambulantes.idGiro = giros.id AND (ambulantes.id LIKE '"+var+"%'  OR ambulantes.nombre LIKE '"+var+"%') ORDER BY ambulantes.id;";   
-         
          //consul = "SELECT id, nombre from ambulantes WHERE id LIKE '"+var+"%'  OR nombre LIKE '"+var+"%' ORDER BY id";
                 modelo.addColumn("ID");
                 modelo.addColumn("NOMBRE");
-        
         jTabDatosAmbulante.setModel(modelo);
         TableColumnModel columnModel = jTabDatosAmbulante.getColumnModel();
         columnModel.getColumn(0).setPreferredWidth(20);
