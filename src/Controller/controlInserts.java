@@ -248,12 +248,21 @@ public String[] regPaysAreasdet(int idT, int idrub){
     return arr;
 }//FinRegpagosAreasdet
 
-public String[] regpagosambdet(int idT, int idrub){
+public String[] regpagosambdet(int opc, int idT, int idrub){
     int tic =0;
     Connection cn = con2.conexion();
         String[] arr = new String[8];
         String sql ="";
-        sql = "SELECT * FROM pagos_ambdet WHERE pagos_ambdet.idTicket = '"+idT+"' AND idRubropago = '"+idrub+"' ;";
+        
+        switch(opc){
+            case 0://ambulantes
+                sql = "SELECT * FROM pagos_ambdet WHERE pagos_ambdet.idTicket = '"+idT+"' AND idRubropago = '"+idrub+"' ;";
+                break;
+                
+            case 1://cargador
+                  sql = "SELECT * FROM pagos_cargdet WHERE pagos_cargdet.idTicket = '"+idT+"' AND idRubropago = '"+idrub+"' ;";
+                break;
+        };
         Statement st = null;
         ResultSet rs= null;
         try {
@@ -391,20 +400,20 @@ public void guardadetailTicketArea(String[] param){
                       sql = "(SELECT pagos_areas.id,DATE_FORMAT(pagos_areas.hora, \"%H : %i\") AS hor,'Pago Areas',areas.nombre,pagos_areas.total\n" +
                             "FROM pagos_areas\n" +
                             "INNER JOIN areas\n" +
-                            "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND pagos_areas.idTurno = "+idTurno+"\n" +
-                            "ORDER BY pagos_areas.id DESC)\n" +
+                            "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND pagos_areas.idTurno = "+idTurno+" \n" +
+                                 ")\n" +
                             "UNION\n" +
                             "(SELECT pagos_amb.id,DATE_FORMAT(pagos_amb.hora, \"%H : %i\") AS hor,'Pago Ambulantes',ambulantes.nombre,pagos_amb.total\n" +
                             "FROM pagos_amb\n" +
                             "INNER JOIN ambulantes\n" +
-                            "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idCancelacion = 0 AND pagos_amb.idTurno = "+idTurno+"\n" +
-                            "ORDER BY pagos_amb.id DESC)\n" +
+                            "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idCancelacion = 0 AND pagos_amb.idTurno = "+idTurno+" \n" +
+                             ")\n" +
                             "UNION\n" +
                             "(SELECT pagos_carg.id,DATE_FORMAT(pagos_carg.hora, \"%H : %i\") AS hor,'Pago Cargadores',cargadores.nombre,pagos_carg.total\n" +
                             "FROM pagos_carg\n" +
                             "INNER JOIN cargadores\n" +
-                            "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion = 0 AND pagos_carg.idTurno = "+idTurno+"\n" +
-                            "ORDER BY pagos_carg.id DESC)\n" +
+                            "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion = 0 AND pagos_carg.idTurno = "+idTurno+" \n" +
+                           ")\n" +
                             "UNION\n" +
                             "(SELECT pagos_infrac.folio,DATE_FORMAT(pagos_infrac.horapag, \"%H : %i\") AS hor,'Pago Infraccion',pagos_infrac.quienpaga,pagos_infrac.monto - pagos_infrac.descuento\n" +
                             "FROM pagos_infrac LEFT OUTER JOIN pagos_infraccancel ON pagos_infraccancel.idFolio = pagos_infrac.folio\n" +
@@ -415,15 +424,14 @@ public void guardadetailTicketArea(String[] param){
                             "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
                             "        otros_venta.efectivo\n" +
                             "FROM otros_venta\n" +
-                            "WHERE otros_venta.idCancelacion = 0 AND otros_venta.idTurno = "+idTurno+"\n" +
+                            "WHERE otros_venta.idCancelacion = 0 AND otros_venta.idTurno = "+idTurno+" \n" +
                             ")\n" +
                             "UNION\n" +
                             "(SELECT pagos_cargrenta.id,DATE_FORMAT(pagos_cargrenta.hora, \"%H : %i\") AS hor,'Pago Renta Carg',cargadores.nombre,pagos_cargrenta.importe\n" +
                             "FROM pagos_cargrenta\n" +
                             "INNER JOIN cargadores\n" +
-                            "ON pagos_cargrenta.idCarg = cargadores.id AND pagos_cargrenta.idCancelacion = 0 AND pagos_cargrenta.idTurno = "+idTurno+"\n" +
-                            "ORDER BY pagos_cargrenta.id DESC\n" +
-                            ");";
+                            "ON pagos_cargrenta.idCarg = cargadores.id AND pagos_cargrenta.idCancelacion = 0 AND pagos_cargrenta.idTurno = "+idTurno+" \n" +
+                            ") ORDER BY hor ;";
                       }
              int i =0,cantFilas=0, cont=1,cantColumnas=0;
              String[][] mat=null, mat2=null;
@@ -532,16 +540,33 @@ return mat;
 }//@endmatrizgetAmbuSemana
 
 ///*****METODOS PARA AMBULANTES
-   public String getpagosAmbulante(String idAmbu, String idRubro){
+   public String getpagosAmbulante(int opc, String idAmbu, String idRubro){
         Connection cn = con2.conexion();
         String regresaTick = "";
-        String sql = "SELECT pagos_amb.id\n" +
+        String sql = "";
+        switch(opc){
+            case 0://Ambulante
+        sql = "SELECT pagos_amb.id\n" +
                         "FROM pagos_amb\n" +
                         "INNER JOIN ambulantes\n" +
                         "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idCancelacion = 0 AND pagos_amb.idAmb = '"+idAmbu+"'\n" +
                         "INNER JOIN pagos_ambdet\n" +
                         "ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_ambdet.idRubroPago = '"+idRubro+"'\n" +
                         "ORDER BY pagos_amb.id desc limit 1;";
+        break;
+            
+            case 1://Cargador
+                sql = "SELECT pagos_carg.id\n" +
+                    "FROM pagos_carg\n" +
+                    "INNER JOIN cargadores\n" +
+                    "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion = 0 AND pagos_carg.idcarg =  '"+idAmbu+"'\n" +
+                    "INNER JOIN pagos_cargdet\n" +
+                    "ON pagos_carg.id = pagos_cargdet.idTicket AND pagos_cargdet.idRubropago = '"+idRubro+"'\n" +
+                    "ORDER BY pagos_carg.id desc limit 1;";
+                break;
+            
+        };
+
         Statement st = null;
         ResultSet rs= null;
         try {
@@ -1505,8 +1530,8 @@ return mat;
         contrl.f5CancelTypesAll("ambulantes","ultimaSem","154","55");
         
    //  contrl.f5CancelTypesAll("usuarios","turno","2","930");
-     System.out.println(contrl.getpagosAmbulante("904","6"));
-     String[] arr = contrl.regpagosambdet(Integer.parseInt(contrl.getpagosAmbulante("904","6")),6);
+     System.out.println("ultimo tic cargador no cancelao "+contrl.getpagosAmbulante(1,"745","11"));
+     String[] arr = contrl.regpagosambdet(0,Integer.parseInt(contrl.getpagosAmbulante(0,"904","6")),6);
      for (int i = 0; i < arr.length; i++) {
             System.out.println("["+arr[i]+"]");
     }

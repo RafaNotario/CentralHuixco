@@ -31,11 +31,13 @@ import Interfaz.internos.jpanels.infracc_rw_DB;
 import Interfaz.vistaReimprAll;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyListener;
 import java.util.Calendar;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
+import java.awt.Rectangle;
 
 
 /**
@@ -91,6 +93,7 @@ public internoCaja(String usuarioN) {
      
      llenacombogetAreas();
      inhabilitaAreas();//llena la ,matriz de vista dia de idTruno
+     desplazaCursorTab();
      AutoCompleteDecorator.decorate(jCmBxgetAreas);
      
      jCmBxgetAreas.setEditable(true);
@@ -118,35 +121,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     mostrarJpanNew();
                     bandC =0;
              }
-               
                 if(var==KeyEvent.VK_F5){
                     jButton15.doClick();
                 }
-            
-        
     }} );
 
-/*   
-               this.addKeyListener(new KeyListener(){
-                   @Override
-              public void keyPressed(KeyEvent e){
-                if(e.getKeyCode()==KeyEvent.VK_F5){
-                    JOptionPane.showMessageDialog(null, "Has pulsado Enter");
-                }
-           
-                if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
-                    System.exit(0);
-                }
-            }
-            public void keyTyped(KeyEvent e){
-                //Aqui no funcionara
-            }
-
-            public void keyReleased(KeyEvent e){
-                JOptionPane.showMessageDialog(null, "oprimio");
-            }
-        });
-*/
  }
 
     /**
@@ -1560,6 +1539,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         });
 
         jCombBTypeRubros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        jCombBTypeRubros.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jCombBTypeRubrosKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -1942,13 +1926,13 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                     .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Cobros", jPanInterncoborstivk);
@@ -2083,14 +2067,14 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jCombBOpcBusqGastos)
                     .addComponent(jLabel81, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Gastos", jPanInternGastos);
@@ -5775,7 +5759,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(jPanambulantes, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                .addComponent(jPanambulantes, javax.swing.GroupLayout.PREFERRED_SIZE, 648, Short.MAX_VALUE)
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -5785,7 +5769,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanCargadores, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                .addComponent(jPanCargadores, javax.swing.GroupLayout.PREFERRED_SIZE, 638, Short.MAX_VALUE)
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -5830,7 +5814,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, Short.MAX_VALUE)
             .addGap(0, 0, 0)
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addContainerGap())
@@ -7320,10 +7304,10 @@ if(!dto.isEmpty() && !toI.isEmpty()){
                                 String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
                                 DefaultTableModel modelo = new TModel(mat, cabAreasPays);
         jTabviewPays.setModel(modelo);
-        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        desplazaCursorTab();
+/*        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
         jTabviewPays.setRowSorter(ordenon);
-//                                jTabviewPays.setModel(new TModel(mat, cabAreasPays));
-                                tamColViwePays();
+*/                            tamColViwePays();
                                 
                                 
                                 rP.imprim80MM_Infrac(jLabFolio.getText(),true);
@@ -7514,6 +7498,7 @@ if(selec > -1){
         for (int i = 0; i < row; i++) {
             dtmAux.removeRow(0);
         }
+        txtTotOthers.setText("0.00");
         }else{
     JOptionPane.showMessageDialog(null, "Debe existir almenos un poducto agregado");
 }
@@ -7741,18 +7726,19 @@ if(selec > -1){
                     if(concepto.equals("Pago Ambulantes")){
                         contrl.guardInCancelaciones(arregCan);
                         contrl.f5CancelTypesAll("pagos_amb","idCancelacion",mostTic,arregCan[0]);
-                        
-                        String idambB = func.getidUserConTicket("idAmb","pagos_amb",mostTic);
-                        System.out.println("Cancelar de amb"+idambB);
-                        String[] arR = contrl.regpagosambdet(Integer.parseInt(contrl.getpagosAmbulante(idambB,"6")),6);
-                        System.out.println("IdSemana"+arR[3]);
-                        
+                                // BLOQUE PARA ACTUALIZAR  ambulantes.ultimaSem
+                        String idambB = func.getidUserConTicket("idAmb", "pagos_amb", mostTic);
+                        String[] arR = contrl.regpagosambdet(0,Integer.parseInt(contrl.getpagosAmbulante(0,idambB, "6")), 6);
                         contrl.f5CancelTypesAll("ambulantes","ultimaSem",idambB,arR[3]);
                     }
 
                     if(concepto.equals("Pago Cargadores")){     
                         contrl.guardInCancelaciones(arregCan);
-                        contrl.f5CancelTypesAll("pagos_carg","idCancelacion",mostTic,arregCan[3]);
+                        contrl.f5CancelTypesAll("pagos_carg","idCancelacion",mostTic,arregCan[0]);
+                        //bloque para actualizar cargadores.ultimaSem
+                    String idcargs = func.getidUserConTicket("idcarg","pagos_carg",mostTic);//get idcarg de ticket seleccionado
+                    String[] arRC = contrl.regpagosambdet(1,Integer.parseInt(contrl.getpagosAmbulante(1,idcargs, "11")), 11);
+                    contrl.f5CancelTypesAll("cargadores","ultimaSem",idcargs,arRC[3]);
                     }
 
                     if(concepto.equals("Pago Infraccion")){   
@@ -8236,9 +8222,16 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
     }//GEN-LAST:event_jButton36ActionPerformed
 
     private void txtCancelTickKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCancelTickKeyReleased
-          if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-                  jButton25.doClick();
-          }
+       int var = evt.getKeyCode();
+         if(var == 27 ){
+                    jDialCancelaciones.dispose();
+            }else{
+                if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+                          jButton25.doClick();
+                  }
+         }  
+        
+
     }//GEN-LAST:event_txtCancelTickKeyReleased
 
     private void jTabViewGastosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabViewGastosMouseClicked
@@ -8314,6 +8307,12 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
             altamb.setTitle("Area");
             altamb.jLabNombre.setText(nomb);
     }//GEN-LAST:event_jButton45ActionPerformed
+
+    private void jCombBTypeRubrosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCombBTypeRubrosKeyPressed
+        int var = evt.getKeyCode();
+         if(var == 27 )
+                    jDialAltaGastos.dispose();
+    }//GEN-LAST:event_jCombBTypeRubrosKeyPressed
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -8640,11 +8639,11 @@ consul = "SELECT id, nombre from cargadores WHERE cargadores.activo > 0 AND (id 
               jLabDstoSemanas.setText(tarifas[2]);
               jLabTarifaSemanas.setText(tarifas[5]);
 //Llenar campos de resguardo
- idresguardUltm=contrl.getpagosAmbulante(idAmb, "7");//rubropago=7, Resguardo ambulante
+ idresguardUltm=contrl.getpagosAmbulante(0,idAmb, "7");//rubropago=7, Resguardo ambulante
     if(tarifas[0].equals("0") || idresguardUltm.isEmpty() || idresguardUltm.equals("")  || idresguardUltm == null){
         jLabUltimaResguardPay.setText("N/A");
     }else{     
-     String[] arrResg = contrl.regpagosambdet(Integer.parseInt(idresguardUltm),7);
+     String[] arrResg = contrl.regpagosambdet(0,Integer.parseInt(idresguardUltm),7);
      
      txtIdResguardOcultoAmb.setText(arrResg[3]);
      numSemanaResguard= Integer.parseInt(arrResg[3]);
@@ -8816,9 +8815,10 @@ consul = "SELECT id, nombre from cargadores WHERE cargadores.activo > 0 AND (id 
         String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
         DefaultTableModel modelo = new TModel(mat, cabAreasPays);
         jTabviewPays.setModel(modelo);
-        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+desplazaCursorTab();
+/*        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
         jTabviewPays.setRowSorter(ordenon);
-     
+    */ 
     // JOptionPane.showMessageDialog(null, "Esla primera llenada");
      tamColViwePays();//para ajustar el tamaño de las columnas de vista tickets dia
         }
@@ -8856,9 +8856,10 @@ consul = "SELECT id, nombre from cargadores WHERE cargadores.activo > 0 AND (id 
          String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
         DefaultTableModel modelo = new TModel(mat, cabAreasPays);
         jTabviewPays.setModel(modelo);
-        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        desplazaCursorTab();
+/*        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
         jTabviewPays.setRowSorter(ordenon);           
-//         jTabviewPays.setModel(new TModel(mat, cabAreasPays));
+        */
          tamColViwePays();
 //        llenacombogetAreas();
         }
@@ -8988,9 +8989,10 @@ consul = "SELECT id, nombre from cargadores WHERE cargadores.activo > 0 AND (id 
         String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);//solo regresara lo registrado durante ese turno
         DefaultTableModel modelo = new TModel(mat, cabAreasPays);
         jTabviewPays.setModel(modelo);
-        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        desplazaCursorTab();
+/*        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
         jTabviewPays.setRowSorter(ordenon);        
-//            jTabviewPays.setModel(new TModel(mat, cabAreasPays));    
+*/
 
             tamColViwePays();
             String[] dat = rP.getUltimPagoarea(arr[0]);
@@ -9100,9 +9102,10 @@ consul = "SELECT id, nombre from cargadores WHERE cargadores.activo > 0 AND (id 
         String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
         DefaultTableModel modelo = new TModel(mat, cabAreasPays);
         jTabviewPays.setModel(modelo);
-        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        desplazaCursorTab();
+/*        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
         jTabviewPays.setRowSorter(ordenon);            
-//            jTabviewPays.setModel(new TModel(mat, cabAreasPays));
+*/
 
             tamColViwePays();
             String[] dat = rP.getTickPagoAmbu(arr[0]);
@@ -9203,9 +9206,11 @@ aux = func.percentage(coast, dscto).toString();
         String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
         DefaultTableModel modelo = new TModel(mat, cabAreasPays);
         jTabviewPays.setModel(modelo);
-        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        desplazaCursorTab();
+        
+/*        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
         jTabviewPays.setRowSorter(ordenon);            
-//             jTabviewPays.setModel(new TModel(mat, cabAreasPays));        
+*/
 
         tamColViwePays();
 
@@ -9275,10 +9280,10 @@ protected void cobraOtrosPays(){
           String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
           DefaultTableModel modelo = new TModel(mat, cabAreasPays);
         jTabviewPays.setModel(modelo);
-        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+        desplazaCursorTab();
+/*        TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
         jTabviewPays.setRowSorter(ordenon);
-        
-//          jTabviewPays.setModel(new TModel(mat, cabAreasPays)); 
+    */    
           
           String[] dat = rP.getTickOthers(arr[0]);
           rP.imprim80MMOthers(arr[0],dat,true);
@@ -9335,9 +9340,10 @@ protected void cobraRentCarg(){
           //jTabviewPays.setModel(new TModel(mat, cabAreasPays));  
           DefaultTableModel modelo = new TModel(mat, cabAreasPays);
           jTabviewPays.setModel(modelo);
-          TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
+          desplazaCursorTab();
+/*          TableRowSorter<TableModel> ordenon = new TableRowSorter<TableModel>(modelo);
         jTabviewPays.setRowSorter(ordenon);
-          
+    */      
           tamColViwePays();
          
     }//@end cobraRentCarg
@@ -9708,7 +9714,20 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
               BigDecimal totOthsVenta = new BigDecimal(func.totalturno(5, idTurnon));
 return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, func.getSum(totCargRent, func.getSum(totInfrc, totOthsVenta))))).toString();
           }
-        
+      
+      public void desplazaCursorTab(){
+          int rosN = jTabviewPays.getRowCount();
+          Rectangle rect;
+          if(rosN > 0){
+               for(int i=0;i<jTabviewPays.getRowCount();i++){
+                       rect =jTabviewPays.getCellRect(i, 0, true);
+                         jTabviewPays.scrollRectToVisible(rect);
+               }
+               jTabviewPays.getSelectionModel().setSelectionInterval (rosN-1, rosN-1);
+          }
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public datechooser.beans.DateChooserCombo dCCFechFinRentCarg;
     public datechooser.beans.DateChooserCombo dCCFechIniRentCarg;

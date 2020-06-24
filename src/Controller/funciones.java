@@ -1653,7 +1653,7 @@ public class funciones {
                }
                System.out.println("");
            }
-                System.out.println(fn.getidUserConTicket("idAmb","pagos_amb","19757"));
+                System.out.println(fn.getidUserConTicket("idcarg","pagos_carg","79345"));
            
            
           // for (int i = 0; i < prue.length; i++) {
