@@ -52,7 +52,7 @@ public class login extends javax.swing.JFrame {
        inicioButton(false);//deshabilitar botones de menu
         jPanMontApert.setVisible(false);
          letreroSems();
-          jButton12.setEnabled(false);
+         jButton12.setEnabled(false);
     }
 
     /**
@@ -801,6 +801,13 @@ public class login extends javax.swing.JFrame {
             jPanTrabajo.setEnabled(true);            // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void txtMontoaper1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoaper1KeyReleased
+         int var = evt.getKeyCode();
+            if(var == KeyEvent.VK_ENTER){
+                jButton10.doClick();
+            }
+    }//GEN-LAST:event_txtMontoaper1KeyReleased
+
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
        try {
             Runtime runtime = Runtime.getRuntime();//Escritorio
@@ -811,7 +818,7 @@ public class login extends javax.swing.JFrame {
             InputStreamReader irs;
             BufferedReader br;
             try (FileWriter fw = new FileWriter(backupFile)) {
-                Process child = runtime.exec("C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin\\mysqldump --routines=TRUE --password=0ehn4TNU5I --user=root --databases central");// | gzip> respadmin_DCR.sql.gz
+                Process child = runtime.exec("C:/Program Files/MySQL/MySQL Server 8.0/bin/mysqldump  --password=passo12345 --user=prueba --databases central");// | gzip> respadmin_DCR.sql.gz
                 irs = new InputStreamReader(child.getInputStream());
                 br = new BufferedReader(irs);
                 String line;
@@ -826,20 +833,15 @@ public class login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error no se genero el archivo por el siguiente motivo:" + e.getMessage(), "Verificar", JOptionPane.ERROR_MESSAGE);
         }
         jButton12.setEnabled(false);
+    
+
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
         if(evt.getClickCount() > 1){
-             jButton12.setEnabled(true);
+            jButton12.setEnabled(true);
         }
     }//GEN-LAST:event_jButton12MouseClicked
-
-    private void txtMontoaper1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoaper1KeyReleased
-         int var = evt.getKeyCode();
-            if(var == KeyEvent.VK_ENTER){
-                jButton10.doClick();
-            }
-    }//GEN-LAST:event_txtMontoaper1KeyReleased
 
     /**
      * @param args the command line arguments

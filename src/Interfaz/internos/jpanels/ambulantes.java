@@ -676,17 +676,10 @@ var8 = jTabViewAllAmbs.getValueAt(i, 8);
                             hoja.autoSizeColumn(6);//autoajustar celdas al ancho de los datos
                             hoja.autoSizeColumn(7);//autoajustar celdas al ancho de los datos
                             hoja.autoSizeColumn(8);//autoajustar celdas al ancho de los datos
-                            
-                            
                         }//for1
                         jProgressBar1.setValue(0);
                         jProgressBar1.setString("Abrieno Excel");
-                        //jProgressBar1.setBorderPainted(true);
-                        
                         try{
-                            //  workbook.write(new FileOutputStream(new File("prueba.xlsx")));
-                            // Desktop.getDesktop().open(new File("prueba.xlsx"));
-                            
                             FileOutputStream word = new FileOutputStream("ambulantes"+datCtrl.setDateActualGuion()+".xlsx");
                             workbook.write(word);
                             word.close();

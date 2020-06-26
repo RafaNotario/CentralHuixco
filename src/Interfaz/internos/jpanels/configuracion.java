@@ -4,12 +4,16 @@ package Interfaz.internos.jpanels;
 import Controller.controlInserts;
 import Controller.funciones;
 import conexion.ConexionDBOriginal;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -28,6 +32,9 @@ public class configuracion extends javax.swing.JPanel {
             arreRentCargad = null;
     
     String[][] matResg = null;
+    
+            String path = null,filename="";
+            
     public configuracion() {
         initComponents();
         llenaCampos();
@@ -713,10 +720,6 @@ public class configuracion extends javax.swing.JPanel {
         }  
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-   
-    }//GEN-LAST:event_jButton9ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
           jButton11.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -804,6 +807,10 @@ public class configuracion extends javax.swing.JPanel {
          jDialModifiResguardInfo.dispose();
          llenaCampos();
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     public void llenaCampos(){
         arreTarifCarg = funcConfig.getTarifCargad(); // datos de costo para cargador

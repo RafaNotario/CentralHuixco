@@ -38,6 +38,7 @@ import java.util.Calendar;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.Rectangle;
+import java.math.BigInteger;
 
 
 /**
@@ -603,9 +604,8 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jPopupMenu1.add(jMenuItem1);
 
         jDialCalendarMantenim.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jDialCalendarMantenim.setTitle("Elija semana");
         jDialCalendarMantenim.setResizable(false);
-        jDialCalendarMantenim.setSize(new java.awt.Dimension(450, 280));
+        jDialCalendarMantenim.setSize(new java.awt.Dimension(450, 290));
         jDialCalendarMantenim.setType(java.awt.Window.Type.UTILITY);
 
         jCalendar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -1325,10 +1325,25 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jLabel79.setText("Precio");
 
         txtDescripProd.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDescripProd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescripProdKeyPressed(evt);
+            }
+        });
 
         txtPrec.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtPrec.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecKeyPressed(evt);
+            }
+        });
 
         jCBRubroProd.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCBRubroProd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jCBRubroProdKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1382,6 +1397,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jButton21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         jButton21.setText("Cancelar");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jDialresProdOtherLayout = new javax.swing.GroupLayout(jDialresProdOther.getContentPane());
         jDialresProdOther.getContentPane().setLayout(jDialresProdOtherLayout);
@@ -2773,6 +2793,11 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
 
         jLabAumentaSemanas.setText("jLabel12");
         jLabAumentaSemanas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabAumentaSemanas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabAumentaSemanasMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
@@ -3685,6 +3710,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
     jLabFinSemsViews.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabFinSemsViews.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabFinSemsViews.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+    jLabFinSemsViews.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseReleased(java.awt.event.MouseEvent evt) {
+            jLabFinSemsViewsMouseReleased(evt);
+        }
+    });
 
     javax.swing.GroupLayout jPanSemCargadLayout = new javax.swing.GroupLayout(jPanSemCargad);
     jPanSemCargad.setLayout(jPanSemCargadLayout);
@@ -4868,9 +4898,6 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
     jLaFechFinManten.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLaFechFinManten.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
     jLaFechFinManten.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            jLaFechFinMantenMouseClicked(evt);
-        }
         public void mousePressed(java.awt.event.MouseEvent evt) {
             jLaFechFinMantenMousePressed(evt);
         }
@@ -5759,7 +5786,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(jPanambulantes, javax.swing.GroupLayout.PREFERRED_SIZE, 648, Short.MAX_VALUE)
+                .addComponent(jPanambulantes, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -5814,7 +5841,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
             .addGap(0, 0, 0)
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addContainerGap())
@@ -5943,9 +5970,7 @@ txtResultAmbu.setText(aux);
     }//GEN-LAST:event_jButton41ActionPerformed
 
     private void jLaFechFinMantenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLaFechFinMantenMousePressed
-        jDialCalendarMantenim.setLocationRelativeTo(this);
-        jDialCalendarMantenim.setVisible(true);
-        jDialCalendarMantenim.setEnabled(true);
+ 
     }//GEN-LAST:event_jLaFechFinMantenMousePressed
 
     private void jCalendar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCalendar1MouseClicked
@@ -5953,13 +5978,85 @@ txtResultAmbu.setText(aux);
         
     }//GEN-LAST:event_jCalendar1MouseClicked
 
-    private void jLaFechFinMantenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLaFechFinMantenMouseClicked
-         
-    }//GEN-LAST:event_jLaFechFinMantenMouseClicked
-
     private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
-        String var = datCtrl.getFechaCal(jCalendar1);
-        jLaFechFinManten.setText(var);
+        String tit = jDialCalendarMantenim.getTitle(),
+                iniSemPa = txtIdSemOcultoAmb.getText(),
+                auxFeclab ="",
+                totoalon =  txtResultAmbu.getText(),
+                multi="",multi1 ="",multi2="",resAmbu="",tot="";
+            String[] semsC = null;
+            BigDecimal auxBig,auxDecs;
+        if(tit.equals("Semanas Ambulante")){
+            String var = datCtrl.getFechaCal(jCalendar1);//obtener dtaos de semana segun fecha de calendar elegida
+            semsC = func.lapsoSemanasIni(var);//obtenemos datos de semana con la fecha seleccionada
+            idSemambu = Integer.parseInt(semsC[0]);//agrgamos idSemana obtenida
+       //     System.out.println("idSem con calendar = "+idSemambu);
+            auxFeclab = datCtrl.getWeekStartDate(semsC[3]) + " - "+ datCtrl.getWeekStartDate(semsC[4]);
+            jLabel74.setText(semsC[0]);
+            jLabAumentaSemanas.setText(auxFeclab);
+            int difer = Integer.parseInt(semsC[0]) - Integer.parseInt(iniSemPa);
+            txtSemFinAmb.setText(semsC[2]);
+            jLabContadorSemanas.setText(Integer.toString(difer));
+
+         /*obtenemos el producto del numero de tickets por semana que pagara*/
+                   
+                   multi1 = jLabDstoSemanas.getText();
+                   multi2 = jLabTarifaSemanas.getText();
+                   resAmbu = jLabImporteSemanas.getText();
+                   tot = txtResultAmbu.getText();
+                   BigDecimal amountOne = new BigDecimal(multi1);//monto a descontar
+                   BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                   BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
+                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida 
+                   BigDecimal contarSemsP = new  BigDecimal(Integer.toString(difer));
+//auxiliar para no tener tan anidado el llamado a funciones Bigdecimal por percentage        
+    auxDecs = func.percentage(amountTwo, amountOne);
+auxBig = func.getDifference(func.multiplicaAmount(amountTwo,contarSemsP ) , func.multiplicaAmount(auxDecs, contarSemsP)) ;
+jLabImporteSemanas.setText(auxBig.toString());//func.getSum(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString() 
+if(jCheckSemPaysAmb.isSelected())
+    txtResultAmbu.setText(auxBig.toString());
+else{if(jCheckResguardAmb.isSelected() || jCheckInscripPaysAmb.isSelected()){
+        txtResultAmbu.setText( func.getSum(totalAll,auxBig ).toString() );
+}}
+        }
+        
+        if(tit.equals("Semanas Cargador")){
+             iniSemPa = txtOcultiDSemana.getText();
+             
+            String var = datCtrl.getFechaCal(jCalendar1);//obtener dtaos de semana segun fecha de calendar elegida
+            semsC = func.lapsoSemanasIni(var);//obtenemos datos de semana con la fecha seleccionada
+            idSemCargad = Integer.parseInt(semsC[0]);//agrgamos idSemana obtenida
+       //     System.out.println("idSem con calendar = "+idSemambu);
+            auxFeclab = datCtrl.getWeekStartDate(semsC[3]) + " - "+ datCtrl.getWeekStartDate(semsC[4]);
+            jLabel112.setText(semsC[0]);
+            jLabFinSemsViews.setText(auxFeclab);
+            int difer = Integer.parseInt(semsC[0]) - Integer.parseInt(iniSemPa);
+            txtcontSemsFin.setText(semsC[2]);
+            jLabcontSemanas.setText(Integer.toString(difer));
+
+            /*obtenemos el producto del numero de tickets por semana que pagara*/
+                   multi1 = jLabDtoSemanas.getText();
+                   multi2 = jLabtarifSemanas.getText();
+                   resAmbu = jLabImportSemanasCargad.getText();
+                   tot = txtTotalCarg.getText();
+                   BigDecimal amountOne = new BigDecimal(multi1);//monto a descontar
+                   BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
+                   BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
+                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida 
+                   BigDecimal contarSemsP = new  BigDecimal(Integer.toString(difer));
+            
+//auxiliar para no tener tan anidado el llamado a funciones Bigdecimal por percentage        
+    auxDecs = func.percentage(amountTwo, amountOne);
+auxBig = func.getDifference(func.multiplicaAmount(amountTwo,contarSemsP ) , func.multiplicaAmount(auxDecs, contarSemsP)) ;
+jLabImportSemanasCargad.setText(auxBig.toString());//func.getSum(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString() 
+if(jCkBoxSemanas.isSelected())
+    txtTotalCarg.setText(auxBig.toString());
+else{
+    if( jCkBoxInscripcion.isSelected() ){
+        txtTotalCarg.setText( func.getSum(totalAll,auxBig ).toString() );
+    }
+}
+      }
         jDialCalendarMantenim.dispose();       
     }//GEN-LAST:event_jButton42ActionPerformed
 
@@ -7357,6 +7454,7 @@ if(!dto.isEmpty() && !toI.isEmpty()){
             jPanDataambView3.setVisible(true);
             txtBusqOtros.setText("");
             txtBusqConcept.requestFocus(true);
+            jButton34.setEnabled(true);
          }
     }//GEN-LAST:event_jTabVariosViewKeyPressed
 
@@ -7506,7 +7604,7 @@ if(selec > -1){
 
     private void jButton49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton49ActionPerformed
      int fila = jTabVistaVentaOthers.getRowCount();
-   
+      
         if(fila > 0){   
             jFramePays.setLocationRelativeTo(null);
             jFramePays.setVisible(true);
@@ -8313,6 +8411,61 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
          if(var == 27 )
                     jDialAltaGastos.dispose();
     }//GEN-LAST:event_jCombBTypeRubrosKeyPressed
+
+    private void txtDescripProdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripProdKeyPressed
+           int oprime = evt.getKeyCode();
+            if(oprime == 27 ){
+                    jDialresProdOther.dispose();
+            }else{
+                if(oprime == KeyEvent.VK_ENTER){
+                    jButton20.doClick();
+                }       
+            }
+    }//GEN-LAST:event_txtDescripProdKeyPressed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        jDialresProdOther.dispose();
+    }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jCBRubroProdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCBRubroProdKeyPressed
+          int oprime = evt.getKeyCode();
+            if(oprime == 27 ){
+                    jDialresProdOther.dispose();
+            }else{
+                if(oprime == KeyEvent.VK_ENTER){
+                    jButton20.doClick();
+                }       
+            }
+    }//GEN-LAST:event_jCBRubroProdKeyPressed
+
+    private void txtPrecKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecKeyPressed
+          int oprime = evt.getKeyCode();
+            if(oprime == 27 ){
+                    jDialresProdOther.dispose();
+            }else{
+                if(oprime == KeyEvent.VK_ENTER){
+                    jButton20.doClick();
+                }       
+            }
+    }//GEN-LAST:event_txtPrecKeyPressed
+
+    private void jLabAumentaSemanasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabAumentaSemanasMouseReleased
+        jDialCalendarMantenim.setLocationRelativeTo(this);
+        jDialCalendarMantenim.setVisible(true);
+        jDialCalendarMantenim.setEnabled(true);
+        jDialCalendarMantenim.setTitle("Semanas Ambulante");
+        jDialCalendarMantenim.setLocationRelativeTo(null);
+         jCalendar1.setDate(datCtrl.cargafecha());
+    }//GEN-LAST:event_jLabAumentaSemanasMouseReleased
+
+    private void jLabFinSemsViewsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabFinSemsViewsMouseReleased
+        jDialCalendarMantenim.setLocationRelativeTo(this);
+        jDialCalendarMantenim.setVisible(true);
+        jDialCalendarMantenim.setEnabled(true);
+        jDialCalendarMantenim.setTitle("Semanas Cargador");
+        jDialCalendarMantenim.setLocationRelativeTo(null);
+        jCalendar1.setDate(datCtrl.cargafecha());
+    }//GEN-LAST:event_jLabFinSemsViewsMouseReleased
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {

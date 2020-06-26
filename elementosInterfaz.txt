@@ -412,4 +412,11 @@ totCajaAll
 	jLabIconFinder
 	jLabNombre
 	jCmBOptions
-		
+	
+--	egresos
+		jDialFechonas
+	jLabel13
+	jDateChooser1
+	jLabel14
+	jDateChooser2
+	
