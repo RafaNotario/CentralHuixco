@@ -323,9 +323,9 @@ public class funciones {
 /*//// OBTENER DATOS DE AMBULANTE para mostrar en panelInfo*/
        public String[] getAmbus1(String idAmbu){
             Connection cn = con2.conexion();
-           String[] lapso = new String[4];
+           String[] lapso = new String[5];
             String sql = "";
-            sql = "SELECT ambulantes.direccion, giros.giro, ambulantes.obs,ambulantes.ultimaSem \n" +
+            sql = "SELECT ambulantes.direccion, giros.giro, ambulantes.obs,ambulantes.ultimaSem,ambulantes.idResg \n" +
                     "FROM ambulantes\n" +
                     "INNER JOIN giros\n" +
                     "ON ambulantes.idGiro = giros.id AND ambulantes.id = '"+idAmbu+"'; ";
@@ -676,7 +676,7 @@ public class funciones {
      public BigDecimal multiplicaAmount(BigDecimal aAmountOne, BigDecimal aAmountTwo){
             fAmountOne = rounded(aAmountOne);
             fAmountTwo = rounded(aAmountTwo);
-            System.out.println(fAmountOne+" -> "+fAmountTwo);
+//            System.out.println(fAmountOne+" -> "+fAmountTwo);
         return fAmountOne.multiply(fAmountTwo);
     }
      
@@ -1164,6 +1164,102 @@ public class funciones {
            return nAmb;
          }
          
+          public String totalLapsoFechas(int opc,String ribro, String fech1, String fech2){
+          Connection cn = con2.conexion();
+          String nAmb = "";
+            String sql = "";
+            switch (opc){
+                case 0://pagos_areas
+                    if(ribro.isEmpty()){
+                     sql = "SELECT sum(pagos_areasdet.importe) AS totl\n" +
+                            "FROM pagos_areas\n" +
+                            "INNER JOIN pagos_areasdet\n" +
+                            "ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areas.idCancelacion = 0 AND (pagos_areas.fecha >= '"+fech1+"' AND pagos_areas.fecha <= '"+fech2+"') \n" +
+                            ";";
+                    }else{
+                        
+                    }
+                break;
+                case 1:// pagos_amb
+                    if(ribro.isEmpty()){
+                     sql = "SELECT sum(pagos_ambdet.importe - pagos_ambdet.descuento) AS totl\n" +
+                            "FROM pagos_amb\n" +
+                            "INNER JOIN pagos_ambdet\n" +
+                            "ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_amb.idCancelacion = 0 AND (pagos_amb.fecha >= '"+fech1+"' AND pagos_amb.fecha <= '"+fech2+"') \n" +
+                            ";";
+                    }else{
+                        
+                    }
+                break;
+                case 2://pagos_carg
+                    if(ribro.isEmpty()){
+                     sql = "SELECT sum(pagos_cargdet.importe - pagos_cargdet.descuento) AS totCarg\n" +
+                            "FROM pagos_carg\n" +
+                            "INNER JOIN pagos_cargdet\n" +
+                            "ON pagos_carg.id = pagos_cargdet.idTicket  AND pagos_carg.idCancelacion = 0 AND (pagos_carg.fecha >= '"+fech1+"' AND pagos_carg.fecha <= '"+fech2+"') \n" +
+                            ";";
+                    }else{
+                        
+                    }
+                break;
+                case 3://pagos_cargrenta
+                    if(ribro.isEmpty()){
+                     sql = "SELECT sum(pagos_cargrenta.importe) AS totCargR\n" +
+                            "FROM pagos_cargrenta\n" +
+                            "WHERE pagos_cargrenta.idCancelacion = 0 AND (pagos_cargrenta.fecha  >= '"+fech1+"' AND pagos_cargrenta.fecha  <= '"+fech2+"') \n" +
+                            ";";
+                    }else{
+                        
+                    }
+                break;
+                case 4://pagos_infrac
+                     if(ribro.isEmpty()){
+                     sql = "SELECT sum(pagos_infrac.monto - pagos_infrac.descuento) \n" + //IF(pagos_infrac.descuento IS NULL, sum(pagos_infrac.monto), sum(pagos_infrac.monto - pagos_infrac.descuento ))  AS totInfrac
+                            "FROM pagos_infrac\n" +
+                            "LEFT OUTER JOIN pagos_infraccancel\n" +
+                            "ON pagos_infraccancel.idFolio = pagos_infrac.folio WHERE pagos_infraccancel.idFolio IS null AND (pagos_infrac.fechapag >= '"+fech1+"' AND pagos_infrac.fechapag <= '"+fech2+"') \n" +
+                            ";";
+                     }else{
+                         
+                     }
+                break;
+                case 5://otros_venta
+                     if(ribro.isEmpty()){
+                     sql = "SELECT TRUNCATE(sum(otros_ventadet.cant * otros_ventadet.precio),2) AS totCarg\n" +
+                        "FROM otros_venta\n" +
+                        "INNER JOIN otros_ventadet\n" +
+                        "ON otros_venta.id = otros_ventadet.idVenta AND otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '"+fech1+"' AND otros_venta.fecha <= '"+fech2+"')  \n" +
+                        ";";
+                     }else{
+                     }
+                break;
+         }
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0 && !(rs.getString(1) == null) ){
+                        nAmb = rs.getString(1);
+                    }else{
+                        nAmb = "-1";
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return nAmb;
+         }
+         
           public String[] getTarifCargad(){
             Connection cn = con2.conexion();
             String[] idUser = new String[8];
@@ -1471,7 +1567,7 @@ public class funciones {
                                 "ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areas.idCancelacion = 0 AND date_format(pagos_areas.fecha,'%Y') =  '"+year+"' AND pagos_areasdet.idRubropago = 2 AND pagos_areas.idArea = '"+idBusq+"' \n" +
                                 "INNER JOIN semanas\n" +
                                 "ON pagos_areasdet.idSemana = semanas.id\n" +
-                                "order by pagos_areas.fecha desc\n" +
+                                "order by semanas.id desc\n" +//pagos_areas.fecha
                                 ";";
                     break;
                     case "Basura":
@@ -1516,7 +1612,7 @@ public class funciones {
                                 "ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_amb.idCancelacion = 0 AND date_format(pagos_amb.fecha,'%Y') = '"+year+"' AND pagos_ambdet.idRubropago = 6 AND pagos_amb.idAmb = '"+idBusq+"' \n" +
                                 "INNER JOIN semanas\n" +
                                 "ON pagos_ambdet.idSemana = semanas.id\n" +
-                                "GROUP BY pagos_amb.id order by semanas.id desc;";
+                                "order by semanas.id DESC;";//pagos_amb.fecha
                     break;
                     case "Resguardos":
                         sql = "SELECT semanas.semana,pagos_amb.fecha,pagos_amb.id\n" +
@@ -1549,7 +1645,7 @@ public class funciones {
                                 "ON pagos_carg.id = pagos_cargdet.idTicket AND pagos_carg.idCancelacion = 0 AND date_format(pagos_carg.fecha,'%Y') = '"+year+"' AND pagos_cargdet.idRubropago = 11 AND pagos_carg.idcarg = '"+idBusq+"' \n" +
                                 "INNER JOIN semanas\n" +
                                 "ON pagos_cargdet.idSemana = semanas.id\n" +
-                                "order by pagos_carg.fecha desc\n" +
+                                "order by semanas.id desc\n" +//pagos_carg.fecha
                                 ";";
                     break;
                     case "Inscripciones":

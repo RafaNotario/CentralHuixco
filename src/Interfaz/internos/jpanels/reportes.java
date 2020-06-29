@@ -130,6 +130,11 @@ public class reportes extends javax.swing.JPanel {
         jButton16 = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JSeparator();
         jLabLetrero = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jProgressBar2 = new javax.swing.JProgressBar();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jCmBoxEgresos = new javax.swing.JComboBox<>();
@@ -456,7 +461,7 @@ public class reportes extends javax.swing.JPanel {
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(251, Short.MAX_VALUE))
+                .addContainerGap(253, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Corte de caja", new javax.swing.ImageIcon(getClass().getResource("/images/caja-registradora.png")), jPanel1); // NOI18N
@@ -581,7 +586,7 @@ public class reportes extends javax.swing.JPanel {
                     .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cancelaciones", new javax.swing.ImageIcon(getClass().getResource("/images/exit.png")), jPanel2); // NOI18N
@@ -589,10 +594,7 @@ public class reportes extends javax.swing.JPanel {
         jTabViewIngresosAll.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTabViewIngresosAll.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "#Ticket", "Fecha", "Hora", "Concepto", "Semana", "Nombre"
@@ -636,17 +638,41 @@ public class reportes extends javax.swing.JPanel {
         jButton14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconfinder_office-calendar_118811.png"))); // NOI18N
         jButton14.setText("Fecha");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jButton16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excelicon.png"))); // NOI18N
         jButton16.setText("Excel");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabLetrero.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabLetrero.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel15.setText("Registros:");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel16.setText("TOTAL $:");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel18.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -655,7 +681,6 @@ public class reportes extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1097, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -679,7 +704,19 @@ public class reportes extends javax.swing.JPanel {
                         .addGap(75, 75, 75)
                         .addComponent(jLabLetrero, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(77, 77, 77)
+                            .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1097, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -710,9 +747,17 @@ public class reportes extends javax.swing.JPanel {
                                 .addGap(8, 8, 8)
                                 .addComponent(jLabLetrero, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(6, 6, 6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ingresos", new javax.swing.ImageIcon(getClass().getResource("/images/dinero-cobros.png")), jPanel3); // NOI18N
@@ -902,31 +947,62 @@ public class reportes extends javax.swing.JPanel {
                 tittol = jDialCalendarMantenim.getTitle();
         semanaAct = func.getSemanTableAct(var);
         
-        if(tittol.equals("Corte de caja"))
+        if(tittol.equals("Corte de caja")){
             getIntervalTurns(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
         
-        if(tittol.equals("Cancelaciones"))
+        
+        }
+        
+        if(tittol.equals("Cancelaciones")){
             getIntervalTurns2(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+        
+        }
+        
         
         if(tittol.equals("Ingresos")){
             int opc = jCBoxEsIngreso.getSelectedIndex();
             jLabLetrero.setText("Semana "+semanaAct[2]+" : del "+semanaAct[3]+" al "+semanaAct[4]);
-            getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);
-/*
+           
+
             switch(opc){
                 case 0 :
+                     getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);//envia opcion,subopcion,lapso de semanas
+                     jLabel18.setText(sumCorteCajFechonas(semanaAct[3],semanaAct[4]));
                 break;
                 case 1 :
+                    getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);
+                    BigDecimal totAreas = new BigDecimal(func.totalLapsoFechas(0,"",semanaAct[3],semanaAct[4]));
+                    jLabel18.setText(totAreas.toString());
                 break;
                 case 2 :
-                break;
+                    getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);
+                    BigDecimal totambs = new BigDecimal(func.totalLapsoFechas(1,"",semanaAct[3],semanaAct[4]));
+                    jLabel18.setText(totambs.toString());
+                    break;
                 case 3 :
+                    getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);
+                    BigDecimal totcarg = new BigDecimal(func.totalLapsoFechas(2,"",semanaAct[3],semanaAct[4]));
+                    BigDecimal totcarg2 = new BigDecimal(func.totalLapsoFechas(3,"",semanaAct[3],semanaAct[4]));
+                    BigDecimal totcargAll = func.getSum(totcarg2, totcarg);
+                    jLabel18.setText(totcargAll.toString());
                 break;
                 case 4 :
-                break;
+                    getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);
+                    BigDecimal totInfrac = new BigDecimal(func.totalLapsoFechas(4,"",semanaAct[3],semanaAct[4]));
+                    jLabel18.setText(totInfrac.toString());
+                 break;
+                 case 5 :
+                    getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);
+                    BigDecimal totIOthers = new BigDecimal(func.totalLapsoFechas(5,"",semanaAct[3],semanaAct[4]));
+                    jLabel18.setText(totIOthers.toString());
+                 break;
             };
-    */        
+    
+            
+             jLabel17.setText(Integer.toString(jTabViewIngresosAll.getRowCount()));
         }
+        
+        
          if(tittol.equals("Egresos")){
               int opc = jCmBoxEgresos.getSelectedIndex();
               int idRibro = -1;
@@ -1140,13 +1216,14 @@ public class reportes extends javax.swing.JPanel {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
        String quees = jDialFechonas.getTitle();
        String fech1="", fech2="";
+       
        if(quees.equals("Egresos")){
             int opcois = jCmBoxEgresos.getSelectedIndex();
             int idRibron = -1;
            if(jRadioEspedific.isSelected()){
               
                int opciv = -1;
-               System.err.println("buscar :"+opciv);
+          //     System.err.println("buscar :"+opciv);
                fech1 = datCtrl.getFecha(jDateChooser1);
                 jLabel8.setText("Fecha "+fech1);
                 if(opcois == 0){//si es 0 = busca todos rubros
@@ -1174,23 +1251,73 @@ public class reportes extends javax.swing.JPanel {
                    getIntervalEgresos(idRibron,fech1,fech2);
                     jLabTOTEGRESOS.setText(getTOTALEGRESOS(idRibron,fech1,fech2));
               }
-                
            }
+                jLabel10.setText(Integer.toString(jTable6.getRowCount()));
        }
-    
+       
+       if(quees.equals("Ingresos")){
+            int opcois = jCBoxEsIngreso.getSelectedIndex();
+            
+            if(jRadioEspedific.isSelected()){
+                
+            }else{
+                 fech1 = datCtrl.getFecha(jDateChooser1);
+                 fech2 = datCtrl.getFecha(jDateChooser2); 
+                
+                 jLabLetrero.setText("Dias del "+fech1+" al "+fech2);
+            
+            switch(opcois){
+                case 0 :
+                     getIntervalIngresos(opcois,"",fech1,fech2);//envia opcion,subopcion,lapso de semanas
+                     jLabel18.setText(sumCorteCajFechonas(fech1,fech2));
+                break;
+                case 1 :
+                    getIntervalIngresos(opcois,"",fech1,fech2);
+                    BigDecimal totAreas = new BigDecimal(func.totalLapsoFechas(0,"",fech1,fech2));
+                    jLabel18.setText(totAreas.toString());
+                break;
+                case 2 :
+                    getIntervalIngresos(opcois,"",fech1,fech2);
+                    BigDecimal totambs = new BigDecimal(func.totalLapsoFechas(1,"",fech1,fech2));
+                    jLabel18.setText(totambs.toString());
+                    break;
+                case 3 :
+                    getIntervalIngresos(opcois,"",fech1,fech2);
+                    BigDecimal totcarg = new BigDecimal(func.totalLapsoFechas(2,"",fech1,fech2));
+                    BigDecimal totcarg2 = new BigDecimal(func.totalLapsoFechas(3,"",fech1,fech2));
+                    BigDecimal totcargAll = func.getSum(totcarg2, totcarg);
+                    jLabel18.setText(totcargAll.toString());
+                break;
+                case 4 :
+                    getIntervalIngresos(opcois,"",fech1,fech2);
+                    BigDecimal totInfrac = new BigDecimal(func.totalLapsoFechas(4,"",fech1,fech2));
+                    jLabel18.setText(totInfrac.toString());
+                 break;
+                 case 5 :
+                    getIntervalIngresos(opcois,"",fech1,fech2);
+                    BigDecimal totIOthers = new BigDecimal(func.totalLapsoFechas(5,"",fech1,fech2));
+                    jLabel18.setText(totIOthers.toString());
+                 break;
+            };
+             jLabel17.setText(Integer.toString(jTabViewIngresosAll.getRowCount())); 
+           
+       }
+       
+       }
+       
             jDialFechonas.dispose();
-            jLabel10.setText(Integer.toString(jTable6.getRowCount()));
+       
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jCmBoxEgresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmBoxEgresosActionPerformed
          int opc = jCmBoxEgresos.getHeight();
          String idRibro ="";
-         System.out.println("heid¿ght 4,"+opc);
+      //   System.out.println("heid¿ght 4,"+opc);
          if(opc > 0){
          opc = jCmBoxEgresos.getSelectedIndex();
          if(opc > 0)
              idRibro = idGastosEg.get(opc-1);
-              System.out.println("eligio pos 4:"+opc+"value = "+ idRibro);
+             // System.out.println("eligio pos 4:"+opc+"value = "+ idRibro);
          }
     }//GEN-LAST:event_jCmBoxEgresosActionPerformed
 
@@ -1218,9 +1345,6 @@ public class reportes extends javax.swing.JPanel {
                         jProgressBar1.setMaximum(jTable6.getRowCount());
                         XSSFRow filas = null;
                         Rectangle rect;
-                        
-                        
-                        
                         for(int i=0;i<jTable6.getRowCount();i++){
                             rect =jTable6.getCellRect(i, 0, true);
                             
@@ -1282,8 +1406,6 @@ var7 = jTable6.getValueAt(i, 7);
                             }else{
                                 filas.createCell(7).setCellValue("");
                             }
-
-                            
                             hoja.autoSizeColumn(0);//autoajustar celdas al ancho de los datos
                             hoja.autoSizeColumn(1);//autoajustar celdas al ancho de los datos
                             hoja.autoSizeColumn(2);//autoajustar celdas al ancho de los datos
@@ -1292,7 +1414,6 @@ var7 = jTable6.getValueAt(i, 7);
                             hoja.autoSizeColumn(5);//autoajustar celdas al ancho de los datos
                             hoja.autoSizeColumn(6);//autoajustar celdas al ancho de los datos
                             hoja.autoSizeColumn(7);//autoajustar celdas al ancho de los datos
-  
                         }//for1
                         jProgressBar1.setValue(0);
                         jProgressBar1.setString("Abrieno Excel");
@@ -1310,6 +1431,123 @@ var7 = jTable6.getValueAt(i, 7);
            t.start();
        }catch(Exception e) {JOptionPane.showMessageDialog(null, e);} 
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        jDialFechonas.setLocationRelativeTo(null);
+        jDialFechonas.setVisible(true);
+        jDialFechonas.setEnabled(true);
+        jDialFechonas.setTitle("Ingresos");
+        jDateChooser1.setDate(datCtrl.cargafecha());
+        jDateChooser2.setDate(datCtrl.cargafecha());
+        jRadioEspedific.setSelected(true);
+        jLabel13.setEnabled(true);
+            jDateChooser1.setEnabled(true);
+            jLabel14.setEnabled(false);
+            jDateChooser2.setEnabled(false);
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        int rows =  jTabViewIngresosAll.getRowCount();
+        if(rows >0){
+        try{
+           Thread t;//Thread
+                t = new Thread(){
+                    public void run(){
+        Object var = null,var1 = null, var2 = null,var3 = null,var4 = null,var5 = null,var6 = null,var7 = null,var8 = null;
+
+                        XSSFWorkbook workbook = new XSSFWorkbook();
+                        XSSFSheet hoja = workbook.createSheet();
+                        
+                        XSSFRow fila = hoja.createRow(0);
+                        fila.createCell(0).setCellValue("#Ticket");
+                        fila.createCell(1).setCellValue("Fecha");
+                        fila.createCell(2).setCellValue("Hora");
+                        fila.createCell(3).setCellValue("Rubro");
+                        fila.createCell(4).setCellValue("Area");
+                        fila.createCell(5).setCellValue("Total");
+                        
+                        XSSFCellStyle style =workbook.createCellStyle();
+                        jProgressBar2.setMaximum(jTabViewIngresosAll.getRowCount());
+                        XSSFRow filas = null;
+                        Rectangle rect;
+                        for(int i=0;i<jTabViewIngresosAll.getRowCount();i++){
+                            rect =jTabViewIngresosAll.getCellRect(i, 0, true);
+                            
+                            try{
+                                jTabViewIngresosAll.scrollRectToVisible(rect);
+                                
+                            }catch(java.lang.ClassCastException e){ }//try
+                            jTabViewIngresosAll.setRowSelectionInterval(i, i);
+                            
+                            jProgressBar2.setValue((i+1));
+                            
+                            filas = hoja.createRow((i+1));//LO CREMAOS A PARTIR DE LA 5TA FILA
+                            //var2.isEmpty()) ? "/" : var2
+                            var = jTabViewIngresosAll.getValueAt(i, 0);
+                            if (var != null && !var.toString().isEmpty()) {
+                                 filas.createCell(0).setCellValue(var.toString());
+                            }else{
+                                filas.createCell(0).setCellValue("");
+                            }
+                            var1 = jTabViewIngresosAll.getValueAt(i, 1);
+                            if (var1 != null && !var1.toString().isEmpty()) {
+                                 filas.createCell(1).setCellValue(var1.toString());
+                            }else{
+                                filas.createCell(1).setCellValue("");
+                            }
+                            var2 = jTabViewIngresosAll.getValueAt(i, 2);
+                            if (var2 != null && !var2.toString().isEmpty()) {
+                                 filas.createCell(2).setCellValue(var2.toString());
+                            }else{
+                                filas.createCell(2).setCellValue("");
+                            }                           
+                            var3 = jTabViewIngresosAll.getValueAt(i, 3);
+                            if (var3 != null && !var3.toString().isEmpty()) {
+                                 filas.createCell(3).setCellValue(var3.toString());
+                            }else{
+                                filas.createCell(3).setCellValue("");
+                            }
+                            var4 = jTabViewIngresosAll.getValueAt(i, 4);
+                            if (var4 != null && !var4.toString().isEmpty()) {
+                                 filas.createCell(4).setCellValue(var4.toString());
+                            }else{
+                                filas.createCell(4).setCellValue("");
+                            }                    
+var5 = jTabViewIngresosAll.getValueAt(i, 5);
+                            if (var5 != null && !var5.toString().isEmpty()) {
+                                 filas.createCell(5).setCellValue(var5.toString());
+                            }else{
+                                filas.createCell(5).setCellValue("");
+                            }
+
+                            hoja.autoSizeColumn(0);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(1);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(2);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(3);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(4);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(5);//autoajustar celdas al ancho de los datos
+                        }//for1
+                        jProgressBar2.setValue(0);
+                        jProgressBar2.setString("Abrieno Excel");
+                        try{
+                            FileOutputStream word = new FileOutputStream("areas"+datCtrl.setDateActualGuion()+".xlsx");
+                            workbook.write(word);
+                            word.close();
+                            File file = new File("areas"+datCtrl.setDateActualGuion()+".xlsx");
+                            Desktop.getDesktop().open(file);
+                        }catch (Exception ex){
+                            Logger.getLogger(ambulantes.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }//try
+                };
+           t.start();
+       }catch(Exception e) {JOptionPane.showMessageDialog(null, e);
+       } 
+        
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe exisitir algun registro en la tabla");
+        }
+    }//GEN-LAST:event_jButton16ActionPerformed
 
         //funcion para busqueda automatica de otros conceptos
         void getIntervalTurns(int opc, String idUsers,String fech1,String fech2){
@@ -1496,11 +1734,65 @@ var7 = jTable6.getValueAt(i, 7);
                     }
                 };
                 String consul="";
+                if(opc == 0){//opcion todas las areas lapso sem
+                    consul="(SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areas.total\n" +
+                        "FROM pagos_areas\n" +
+                        "INNER JOIN areas\n" +
+                        "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND (pagos_areas.fecha >= '"+fech1+"' AND pagos_areas.fecha <= '"+fech2+"')\n" +
+                        "INNER JOIN pagos_areasdet\n" +
+                        "ON pagos_areas.id = pagos_areasdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
+                        "INNER JOIN rubrospago\n" +
+                        "on pagos_areasdet.idRubroPago = rubrospago.id	\n" +
+                        "group BY pagos_areas.id)\n" +
+                        "UNION\n" +
+                        "(SELECT pagos_ambdet.idTicket,pagos_amb.fecha,pagos_amb.hora,rubrospago.descripcion,ambulantes.nombre,pagos_amb.total\n" +
+                        "FROM pagos_amb\n" +
+                        "INNER JOIN ambulantes\n" +
+                        "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idCancelacion = 0 AND (pagos_amb.fecha >= '"+fech1+"' AND pagos_amb.fecha <= '"+fech2+"')\n" +
+                        "INNER JOIN pagos_ambdet\n" +
+                        "ON pagos_amb.id = pagos_ambdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
+                        "INNER JOIN rubrospago\n" +
+                        "on pagos_ambdet.idRubropago = rubrospago.id	\n" +
+                        "GROUP BY pagos_amb.id)\n" +
+                        "UNION\n" +
+                        "(SELECT pagos_cargdet.idTicket,pagos_carg.fecha,pagos_carg.hora,rubrospago.descripcion,cargadores.nombre,pagos_carg.total\n" +
+                        "FROM pagos_carg\n" +
+                        "INNER JOIN cargadores\n" +
+                        "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion = 0 AND (pagos_carg.fecha >= '"+fech1+"' AND pagos_carg.fecha <= '"+fech2+"')\n" +
+                        "INNER JOIN pagos_cargdet\n" +
+                        "ON pagos_carg.id = pagos_cargdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
+                        "INNER JOIN rubrospago\n" +
+                        "on pagos_cargdet.idRubropago = rubrospago.id	\n" +
+                        "group by pagos_carg.id)\n" +
+                        "UNION\n" +
+                        "-- QWERY pagos_rentacarg\n" +
+                        "(SELECT pagos_cargrenta.id,pagos_cargrenta.fecha,pagos_cargrenta.hora,'Renta diaria de diablo',cargadores.nombre,pagos_cargrenta.importe\n" +
+                        "FROM pagos_cargrenta\n" +
+                        "INNER JOIN cargadores\n" +
+                        "ON cargadores.id = pagos_cargrenta.idCarg AND pagos_cargrenta.idCancelacion = 0 AND (pagos_cargrenta.fecha >= '"+fech1+"' AND pagos_cargrenta.fecha <= '"+fech2+"')\n" +
+                        "group by pagos_cargrenta.id)\n" +
+                        "UNION\n" +
+                        "(SELECT pagos_infrac.folio,pagos_infrac.fechapag,pagos_infrac.horapag,\"Pago Infraccion\",pagos_infrac.quienpaga,\n" +
+                        "	IF(pagos_infrac.descuento IS NULL, pagos_infrac.monto, pagos_infrac.monto - pagos_infrac.descuento )  AS totInfrac\n" +
+                        "FROM pagos_infrac\n" +
+                        "LEFT OUTER JOIN pagos_infraccancel\n" +
+                        "ON pagos_infraccancel.idFolio = pagos_infrac.folio WHERE pagos_infraccancel.idFolio IS null AND (pagos_infrac.fechapag >= '"+fech1+"' AND pagos_infrac.fechapag <= '"+fech2+"')\n" +
+                        ")\n" +
+                        "UNION\n" +
+                        "(SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS fr,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
+                        "IF(otros_venta.tipoPersona = 0,'Varios Amb.',IF(otros_venta.tipoPersona = 1,'Varios Carg.', IF(otros_venta.tipoPersona = 2,'Varios Cte.','NADON') ) ) AS quees,\n" +
+                        "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
+                        "        otros_venta.efectivo\n" +
+                        "FROM otros_venta\n" +
+                        "WHERE otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '"+fech1+"' AND otros_venta.fecha <= '"+fech2+"')\n" +
+                        ");";
+                }
+                
                 if(opc == 1){
                     consul ="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areas.total\n" +
                         "FROM pagos_areas\n" +
                         "INNER JOIN areas\n" +
-                        "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND pagos_areas.fecha BETWEEN '"+fech1+"' AND '"+fech2+"'\n" +
+                        "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND (pagos_areas.fecha >= '"+fech1+"' AND pagos_areas.fecha <= '"+fech2+"')\n" +
                         "INNER JOIN pagos_areasdet\n" +
                         "ON pagos_areas.id = pagos_areasdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
                         "INNER JOIN rubrospago\n" +
@@ -1511,7 +1803,7 @@ var7 = jTable6.getValueAt(i, 7);
                     consul = "SELECT pagos_ambdet.idTicket,pagos_amb.fecha,pagos_amb.hora,rubrospago.descripcion,ambulantes.nombre,pagos_amb.total\n" +
                     "FROM pagos_amb\n" +
                     "INNER JOIN ambulantes\n" +
-                    "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idCancelacion = 0 AND pagos_amb.fecha BETWEEN '"+fech1+"' AND '"+fech2+"'\n" +
+                    "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idCancelacion = 0 AND (pagos_amb.fecha >= '"+fech1+"' AND pagos_amb.fecha <= '"+fech2+"')\n" +
                     "INNER JOIN pagos_ambdet\n" +
                     "ON pagos_amb.id = pagos_ambdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
                     "INNER JOIN rubrospago\n" +
@@ -1522,7 +1814,7 @@ var7 = jTable6.getValueAt(i, 7);
                     consul = "(SELECT pagos_cargdet.idTicket,pagos_carg.fecha,pagos_carg.hora,rubrospago.descripcion,cargadores.nombre,pagos_carg.total\n" +
                 "FROM pagos_carg\n" +
                 "INNER JOIN cargadores\n" +
-                "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion = 0 AND pagos_carg.fecha BETWEEN '"+fech1+"' AND '"+fech2+"'\n" +
+                "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion = 0 AND (pagos_carg.fecha >= '"+fech1+"' AND pagos_carg.fecha <= '"+fech2+"')\n" +
                 "INNER JOIN pagos_cargdet\n" +
                 "ON pagos_carg.id = pagos_cargdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
                 "INNER JOIN rubrospago\n" +
@@ -1533,7 +1825,7 @@ var7 = jTable6.getValueAt(i, 7);
                 "(SELECT pagos_cargrenta.id,pagos_cargrenta.fecha,pagos_cargrenta.hora,'Renta diaria de diablo',cargadores.nombre,pagos_cargrenta.importe\n" +
                 "FROM pagos_cargrenta\n" +
                 "INNER JOIN cargadores\n" +
-                "ON cargadores.id = pagos_cargrenta.idCarg AND pagos_cargrenta.idCancelacion = 0 AND pagos_cargrenta.fecha BETWEEN '"+fech1+"' AND '"+fech2+"'\n" +
+                "ON cargadores.id = pagos_cargrenta.idCarg AND pagos_cargrenta.idCancelacion = 0 AND (pagos_cargrenta.fecha >= '"+fech1+"' AND pagos_cargrenta.fecha <= '"+fech2+"')\n" +
                 "group by pagos_cargrenta.id);";
                 }
                 if(opc == 4){
@@ -1541,7 +1833,7 @@ var7 = jTable6.getValueAt(i, 7);
                 "IF(pagos_infrac.descuento IS NULL, pagos_infrac.monto, pagos_infrac.monto - pagos_infrac.descuento )  AS totInfrac\n" +
                 "FROM pagos_infrac\n" +
                 "LEFT OUTER JOIN pagos_infraccancel\n" +
-                "ON pagos_infraccancel.idFolio = pagos_infrac.folio WHERE pagos_infraccancel.idFolio IS null AND pagos_infrac.fechapag BETWEEN '"+fech1+"' AND '"+fech2+"' \n" +
+                "ON pagos_infraccancel.idFolio = pagos_infrac.folio WHERE pagos_infraccancel.idFolio IS null AND (pagos_infrac.fechapag >= '"+fech1+"' AND pagos_infrac.fechapag <= '"+fech2+"') \n" +
                 ";";
                 }
                 if(opc == 5){
@@ -1550,7 +1842,7 @@ var7 = jTable6.getValueAt(i, 7);
                 "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
                 "        otros_venta.efectivo\n" +
                 "FROM otros_venta\n" +
-                "WHERE otros_venta.idCancelacion = 0 AND otros_venta.fecha BETWEEN '"+fech1+"' AND '"+fech2+"';";
+                "WHERE otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '"+fech1+"' AND otros_venta.fecha <= '"+fech2+"') ;";
                 }                
                  //consul = "SELECT id, nombre from ambulantes WHERE id LIKE '"+var+"%'  OR nombre LIKE '"+var+"%' ORDER BY id";
                         modelo.addColumn("#Ticket");       
@@ -1860,6 +2152,18 @@ switch(opc){
            return totol;
     }//@end getTOTALEGRESOS
 
+                 //totalLapsoFechas(int opc,String ribro, String fech1, String fech2)
+   private String sumCorteCajFechonas(String fech0,String fech1){
+              String most = "";
+              BigDecimal totAreas = new BigDecimal(func.totalLapsoFechas(0,"", fech0,fech1));
+              BigDecimal totAmbus = new BigDecimal(func.totalLapsoFechas(1,"",fech0,fech1));
+              BigDecimal totCarg= new BigDecimal(func.totalLapsoFechas(2,"",fech0,fech1));
+              BigDecimal totCargRent = new BigDecimal(func.totalLapsoFechas(3,"", fech0,fech1));
+              BigDecimal totInfrc = new BigDecimal(func.totalLapsoFechas(4,"", fech0,fech1));
+              BigDecimal totOthsVenta = new BigDecimal(func.totalLapsoFechas(5,"",fech0,fech1));
+return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, func.getSum(totCargRent, func.getSum(totInfrc, totOthsVenta))))).toString();
+          }
+            
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
@@ -1897,6 +2201,10 @@ switch(opc){
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1914,6 +2222,7 @@ switch(opc){
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioEspedific;
     private javax.swing.JScrollPane jScrollPane1;

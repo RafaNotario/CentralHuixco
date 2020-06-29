@@ -7,6 +7,7 @@ package Interfaz.internos.jpanels;
 
 import Controller.controlInserts;
 import Controller.datesControl;
+import Controller.funciones;
 import Interfaz.altaCargadores;
 import conexion.ConexionDBOriginal;
 import java.awt.Desktop;
@@ -32,13 +33,15 @@ import renderTable.TModel;
  *
  * @author monit
  */
+
 public class cargadores extends javax.swing.JPanel {
         ConexionDBOriginal con2 = new ConexionDBOriginal();
-         controlInserts contrl = new controlInserts();
-         datesControl datCtrl = new datesControl();
-         
-        String[] cabAreasPays = {"#ID", "Nombre", "Direccion", "Telefono","Diablito","Ultima Sem. Pag","Sem. Adeudo","Venc. Inscrip"};
+        controlInserts contrl = new controlInserts();
+        datesControl datCtrl = new datesControl();
+        funciones func = new funciones();
 
+        String[] cabAreasPays = {"#ID", "Nombre", "Direccion", "Telefono","Diablito","Ultima Sem. Pag","Sem. Adeudo","Venc. Inscrip"};
+      
     public cargadores() {
         initComponents();
         
@@ -66,6 +69,9 @@ public class cargadores extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialCalendarMantenim = new javax.swing.JDialog();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
+        jButton42 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -84,6 +90,52 @@ public class cargadores extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
+
+        jDialCalendarMantenim.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jDialCalendarMantenim.setResizable(false);
+        jDialCalendarMantenim.setSize(new java.awt.Dimension(450, 290));
+        jDialCalendarMantenim.setType(java.awt.Window.Type.UTILITY);
+
+        jCalendar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jCalendar1.setDecorationBordersVisible(true);
+        jCalendar1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCalendar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCalendar1MouseClicked(evt);
+            }
+        });
+
+        jButton42.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton42.setText("Seleccionar");
+        jButton42.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton42ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialCalendarMantenimLayout = new javax.swing.GroupLayout(jDialCalendarMantenim.getContentPane());
+        jDialCalendarMantenim.getContentPane().setLayout(jDialCalendarMantenimLayout);
+        jDialCalendarMantenimLayout.setHorizontalGroup(
+            jDialCalendarMantenimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialCalendarMantenimLayout.createSequentialGroup()
+                .addGroup(jDialCalendarMantenimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialCalendarMantenimLayout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDialCalendarMantenimLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        jDialCalendarMantenimLayout.setVerticalGroup(
+            jDialCalendarMantenimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialCalendarMantenimLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/informacion.png"))); // NOI18N
         jButton1.setText("Información");
@@ -399,14 +451,20 @@ public class cargadores extends javax.swing.JPanel {
         int fila = jTabViewAllCargad.getSelectedRow();
         int opc = jComboBox1.getSelectedIndex();
         if(fila > -1){
-            if(opc == 1)
+            if(opc == 1){
              contrl.f5ActualAmbu(1,0,jTabViewAllCargad.getValueAt(fila, 0).toString());
-            if(opc == 2)
-             contrl.f5ActualAmbu(1,1,jTabViewAllCargad.getValueAt(fila, 0).toString());
-            
-            jButton4.doClick();
-            jComboBox1.setSelectedIndex(0);
-        }else{
+             jButton4.doClick();
+             jComboBox1.setSelectedIndex(0);
+            }
+            if(opc == 2)//aqui va reactivacion
+            {        jDialCalendarMantenim.setLocationRelativeTo(this);
+                    jDialCalendarMantenim.setVisible(true);
+                    jDialCalendarMantenim.setEnabled(true);
+                    jDialCalendarMantenim.setTitle("Reactivacion de Cargador");
+                    jDialCalendarMantenim.setLocationRelativeTo(null);
+                    jCalendar1.setDate(datCtrl.cargafecha());
+            }
+            }else{
             JOptionPane.showMessageDialog(null,"no data View");
         } 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -539,6 +597,23 @@ var7 = jTabViewAllCargad.getValueAt(i, 7);
        }catch(Exception e) {JOptionPane.showMessageDialog(null, e);} 
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jCalendar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCalendar1MouseClicked
+
+    }//GEN-LAST:event_jCalendar1MouseClicked
+
+    private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
+        String varFecReact = datCtrl.getFechaCal(jCalendar1);//obtener dtaos de semana segun fecha de calendar elegida
+        int fila = jTabViewAllCargad.getSelectedRow(),
+                CONTADORmIN =-1;
+        String[] semsC = func.lapsoSemanasIni(varFecReact);
+        CONTADORmIN = Integer.parseInt(semsC[0]);
+        contrl.f5CancelTypesAll("cargadores","activo",jTabViewAllCargad.getValueAt(fila, 0).toString(),"1");//ponemos activo=1
+        contrl.f5CancelTypesAll("cargadores","ultimaSem",jTabViewAllCargad.getValueAt(fila, 0).toString(),Integer.toString(CONTADORmIN - 1));//ponemos activo=1
+        jDialCalendarMantenim.dispose();
+        jButton4.doClick();
+        jComboBox1.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton42ActionPerformed
+
  protected void cargaDataCargadores(){
             String[][] mat = matrizgetAmbsAll(0,"");
              jTabViewAllCargad.setModel(new TModel(mat, cabAreasPays));        
@@ -667,12 +742,15 @@ return mat;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton42;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JDialog jDialCalendarMantenim;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JProgressBar jProgressBar1;

@@ -521,7 +521,8 @@ public class altaCargadores extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         List<String> contenData = new ArrayList<String>();
-        int indCBGiros = jCBoxGirosAmb.getSelectedIndex();
+        int indCBGiros = jCBoxGirosAmb.getSelectedIndex(),
+                semMINS=-1;
         
         String foli = txtfolAmb.getText(),
               nam = txtNombAmb.getText(),
@@ -534,6 +535,7 @@ public class altaCargadores extends javax.swing.JFrame {
               aPartirPaySem = txtOcultIniSem.getText(),
                 titulon = this.getTitle()
         ;
+      
          contenData.add(foli);
           contenData.add((nam.isEmpty()) ? "" : nam);   
           contenData.add((dir.isEmpty()) ? "" : dir);   
@@ -543,7 +545,13 @@ public class altaCargadores extends javax.swing.JFrame {
           contenData.add(descInsc);   
           contenData.add(descSem); 
           contenData.add(motivDesc);
-           contenData.add(aPartirPaySem);
+          
+          if(jPaniNIpAYSaMB.isVisible()){
+                semMINS=Integer.parseInt(aPartirPaySem);
+                semMINS=semMINS-1;
+                contenData.add(Integer.toString(semMINS));
+          }
+           System.err.println("titulon carg midif= "+titulon);
   if(!nam.isEmpty() ){
             if(titulon.equals("Nuevo")){
                 contrl.guardF5Cargad(contenData, foli,0);//0 = nuevo

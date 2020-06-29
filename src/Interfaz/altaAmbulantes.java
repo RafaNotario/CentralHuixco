@@ -33,9 +33,12 @@ public class altaAmbulantes extends javax.swing.JFrame {
      String[][] matTarifs = null, matTarifsResg = null;
      static String idAmbP = "1";
      
-    public altaAmbulantes(String idParam ) {
+    
+   
+     public altaAmbulantes(String idParam ) {
         initComponents();
         this.idAmbP = idParam;
+       
         AutoCompleteDecorator.decorate(jCBoxGirosAmb);
         llenacomboGiros();
         llenaTarifas();
@@ -44,8 +47,8 @@ public class altaAmbulantes extends javax.swing.JFrame {
 
         jButton1.setVisible(false);
         jButton4.setVisible(false);
-        
-        jPaniNIpAYSaMB.setVisible(false);
+      
+           jPaniNIpAYSaMB.setVisible(false);
     }
 
     /**
@@ -104,7 +107,6 @@ public class altaAmbulantes extends javax.swing.JFrame {
         txtOcultIniSem = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Datos de Ambulante");
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
         setPreferredSize(new java.awt.Dimension(615, 600));
 
@@ -663,8 +665,8 @@ public class altaAmbulantes extends javax.swing.JFrame {
         List<String> contenData = new ArrayList<String>();
         int indCBGiros = jCBoxGirosAmb.getSelectedIndex(),
               indCBTarifs = jCBoxTarifaAmb.getSelectedIndex(),
-              indCBResg = jCBoxResgAmb.getSelectedIndex()
-              ;
+              indCBResg = jCBoxResgAmb.getSelectedIndex(),
+              semMINUSuno = 0;
         String foli = txtfolAmb.getText(),
               nam = txtNombAmb.getText(),
               dir = txtDirAmb.getText(),
@@ -677,6 +679,7 @@ public class altaAmbulantes extends javax.swing.JFrame {
               idTar = matTarifs[indCBTarifs][0],
               aPartirPaySem = txtOcultIniSem.getText()
         ;
+      
           contenData.add((nam.isEmpty()) ? "" : nam);   
           contenData.add((dir.isEmpty()) ? "" : dir);   
           contenData.add((tel.isEmpty()) ? "" : tel);   
@@ -691,13 +694,21 @@ public class altaAmbulantes extends javax.swing.JFrame {
           contenData.add(descInsc);   
           contenData.add(descSem);   
           contenData.add(descResg);   
-          contenData.add(aPartirPaySem);   
-  if(!nam.isEmpty() ){
+          
+          if(jPaniNIpAYSaMB.isVisible()){
+                semMINUSuno=Integer.parseInt(aPartirPaySem);
+                semMINUSuno=semMINUSuno-1;
+                contenData.add(Integer.toString(semMINUSuno));
+          }
+          
+          if(!nam.isEmpty() ){
             contrl.guardF5Ambu(contenData, foli);
             if(foli.isEmpty())// is new user
                 limpiaCamps();
             else//actualiza
                 this.dispose();
+            
+            
   }else{
       JOptionPane.showMessageDialog(null, "Debe ingresar por lo menos Nombre y Obs");
   }
