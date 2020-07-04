@@ -949,23 +949,18 @@ public class reportes extends javax.swing.JPanel {
         
         if(tittol.equals("Corte de caja")){
             getIntervalTurns(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
-        
-        
         }
         
         if(tittol.equals("Cancelaciones")){
             getIntervalTurns2(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
-        
         }
-        
         
         if(tittol.equals("Ingresos")){
             int opc = jCBoxEsIngreso.getSelectedIndex();
             jLabLetrero.setText("Semana "+semanaAct[2]+" : del "+semanaAct[3]+" al "+semanaAct[4]);
-           
 
             switch(opc){
-                case 0 :
+                case 0 ://Ingreso ver todos
                      getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);//envia opcion,subopcion,lapso de semanas
                      jLabel18.setText(sumCorteCajFechonas(semanaAct[3],semanaAct[4]));
                 break;
@@ -997,8 +992,6 @@ public class reportes extends javax.swing.JPanel {
                     jLabel18.setText(totIOthers.toString());
                  break;
             };
-    
-            
              jLabel17.setText(Integer.toString(jTabViewIngresosAll.getRowCount()));
         }
         
@@ -1388,24 +1381,28 @@ public class reportes extends javax.swing.JPanel {
                             }else{
                                 filas.createCell(4).setCellValue("");
                             }                    
-var5 = jTable6.getValueAt(i, 5);
+                            var5 = jTable6.getValueAt(i, 5);
                             if (var5 != null && !var5.toString().isEmpty()) {
                                  filas.createCell(5).setCellValue(var5.toString());
                             }else{
                                 filas.createCell(5).setCellValue("");
                             }
-var6 = jTable6.getValueAt(i, 6);
+                            var6 = jTable6.getValueAt(i, 6);
                             if (var6 != null && !var6.toString().isEmpty()) {
                                  filas.createCell(6).setCellValue(var6.toString());
                             }else{
                                 filas.createCell(6).setCellValue("");
                             }
-var7 = jTable6.getValueAt(i, 7);
+                            var7 = jTable6.getValueAt(i, 7);
                             if (var7 != null && !var7.toString().isEmpty()) {
                                  filas.createCell(7).setCellValue(var7.toString());
                             }else{
                                 filas.createCell(7).setCellValue("");
                             }
+/*
+
+*/
+                        }//for1
                             hoja.autoSizeColumn(0);//autoajustar celdas al ancho de los datos
                             hoja.autoSizeColumn(1);//autoajustar celdas al ancho de los datos
                             hoja.autoSizeColumn(2);//autoajustar celdas al ancho de los datos
@@ -1414,7 +1411,6 @@ var7 = jTable6.getValueAt(i, 7);
                             hoja.autoSizeColumn(5);//autoajustar celdas al ancho de los datos
                             hoja.autoSizeColumn(6);//autoajustar celdas al ancho de los datos
                             hoja.autoSizeColumn(7);//autoajustar celdas al ancho de los datos
-                        }//for1
                         jProgressBar1.setValue(0);
                         jProgressBar1.setString("Abrieno Excel");
                         try{
@@ -1453,7 +1449,6 @@ var7 = jTable6.getValueAt(i, 7);
            Thread t;//Thread
                 t = new Thread(){
                     public void run(){
-        Object var = null,var1 = null, var2 = null,var3 = null,var4 = null,var5 = null,var6 = null,var7 = null,var8 = null;
 
                         XSSFWorkbook workbook = new XSSFWorkbook();
                         XSSFSheet hoja = workbook.createSheet();
@@ -1470,70 +1465,31 @@ var7 = jTable6.getValueAt(i, 7);
                         jProgressBar2.setMaximum(jTabViewIngresosAll.getRowCount());
                         XSSFRow filas = null;
                         Rectangle rect;
+                        
                         for(int i=0;i<jTabViewIngresosAll.getRowCount();i++){
-                            rect =jTabViewIngresosAll.getCellRect(i, 0, true);
-                            
-                            try{
-                                jTabViewIngresosAll.scrollRectToVisible(rect);
-                                
+                             rect =jTabViewIngresosAll.getCellRect(i, 0, true);
+                              try{
+                               jTabViewIngresosAll.scrollRectToVisible(rect);
                             }catch(java.lang.ClassCastException e){ }//try
-                            jTabViewIngresosAll.setRowSelectionInterval(i, i);
-                            
+                               
                             jProgressBar2.setValue((i+1));
-                            
                             filas = hoja.createRow((i+1));//LO CREMAOS A PARTIR DE LA 5TA FILA
-                            //var2.isEmpty()) ? "/" : var2
-                            var = jTabViewIngresosAll.getValueAt(i, 0);
-                            if (var != null && !var.toString().isEmpty()) {
-                                 filas.createCell(0).setCellValue(var.toString());
-                            }else{
-                                filas.createCell(0).setCellValue("");
-                            }
-                            var1 = jTabViewIngresosAll.getValueAt(i, 1);
-                            if (var1 != null && !var1.toString().isEmpty()) {
-                                 filas.createCell(1).setCellValue(var1.toString());
-                            }else{
-                                filas.createCell(1).setCellValue("");
-                            }
-                            var2 = jTabViewIngresosAll.getValueAt(i, 2);
-                            if (var2 != null && !var2.toString().isEmpty()) {
-                                 filas.createCell(2).setCellValue(var2.toString());
-                            }else{
-                                filas.createCell(2).setCellValue("");
-                            }                           
-                            var3 = jTabViewIngresosAll.getValueAt(i, 3);
-                            if (var3 != null && !var3.toString().isEmpty()) {
-                                 filas.createCell(3).setCellValue(var3.toString());
-                            }else{
-                                filas.createCell(3).setCellValue("");
-                            }
-                            var4 = jTabViewIngresosAll.getValueAt(i, 4);
-                            if (var4 != null && !var4.toString().isEmpty()) {
-                                 filas.createCell(4).setCellValue(var4.toString());
-                            }else{
-                                filas.createCell(4).setCellValue("");
-                            }                    
-var5 = jTabViewIngresosAll.getValueAt(i, 5);
-                            if (var5 != null && !var5.toString().isEmpty()) {
-                                 filas.createCell(5).setCellValue(var5.toString());
-                            }else{
-                                filas.createCell(5).setCellValue("");
-                            }
-
-                            hoja.autoSizeColumn(0);//autoajustar celdas al ancho de los datos
-                            hoja.autoSizeColumn(1);//autoajustar celdas al ancho de los datos
-                            hoja.autoSizeColumn(2);//autoajustar celdas al ancho de los datos
-                            hoja.autoSizeColumn(3);//autoajustar celdas al ancho de los datos
-                            hoja.autoSizeColumn(4);//autoajustar celdas al ancho de los datos
-                            hoja.autoSizeColumn(5);//autoajustar celdas al ancho de los datos
+                                 filas.createCell(0).setCellValue(jTabViewIngresosAll.getValueAt(i, 0).toString());
+                                 filas.createCell(1).setCellValue(jTabViewIngresosAll.getValueAt(i, 1).toString());
+                                 filas.createCell(2).setCellValue(jTabViewIngresosAll.getValueAt(i, 2).toString());
+                                 filas.createCell(3).setCellValue(jTabViewIngresosAll.getValueAt(i, 3).toString());
+                                 filas.createCell(4).setCellValue(jTabViewIngresosAll.getValueAt(i, 4).toString());
+                                 filas.createCell(5).setCellValue(jTabViewIngresosAll.getValueAt(i, 5).toString());
                         }//for1
+                        hoja.autoSizeColumn(3);//autoajustar celdas al ancho de los datos
+                        hoja.autoSizeColumn(4);//autoajustar celdas al ancho de los datos
                         jProgressBar2.setValue(0);
                         jProgressBar2.setString("Abrieno Excel");
                         try{
-                            FileOutputStream word = new FileOutputStream("areas"+datCtrl.setDateActualGuion()+".xlsx");
+                            FileOutputStream word = new FileOutputStream("ingresos"+datCtrl.setDateActualGuion()+".xlsx");
                             workbook.write(word);
                             word.close();
-                            File file = new File("areas"+datCtrl.setDateActualGuion()+".xlsx");
+                            File file = new File("ingresos"+datCtrl.setDateActualGuion()+".xlsx");
                             Desktop.getDesktop().open(file);
                         }catch (Exception ex){
                             Logger.getLogger(ambulantes.class.getName()).log(Level.SEVERE, null, ex);
@@ -1913,7 +1869,11 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     
 public void cragaDinRubros(int opc){
 switch(opc){
+    case 0://todos deshabilitamos jComboRubros
+        jCBoxEsRubroDet.setEnabled(false);
+    break;
     case 1://areas
+        jCBoxEsRubroDet.setEnabled(true);
         jCBoxEsRubroDet.removeAllItems();
         jCBoxEsRubroDet.addItem("Todos");
         for (int i = 0; i < arrAreas.length; i++) {
@@ -1921,6 +1881,7 @@ switch(opc){
         }
     break;
     case 2://Ambulantes
+        jCBoxEsRubroDet.setEnabled(true);
         jCBoxEsRubroDet.removeAllItems();
         jCBoxEsRubroDet.addItem("Todos");
         for (int i = 0; i < arrAmbus.length; i++) {
@@ -1928,6 +1889,7 @@ switch(opc){
         }
     break;
     case 3://Cargadores
+        jCBoxEsRubroDet.setEnabled(true);
         jCBoxEsRubroDet.removeAllItems();
         jCBoxEsRubroDet.addItem("Todos");
         for (int i = 0; i < arrCargad.length; i++) {
@@ -1935,10 +1897,12 @@ switch(opc){
         }
     break;
     case 4://Infracciones
+        jCBoxEsRubroDet.setEnabled(true);
         jCBoxEsRubroDet.removeAllItems();
         jCBoxEsRubroDet.addItem("Todos");
     break;
     case 5://Otros Varios
+        jCBoxEsRubroDet.setEnabled(true);
         jCBoxEsRubroDet.removeAllItems();
         jCBoxEsRubroDet.addItem("Todos");
         for (int i = 0; i < arrOtros.length; i++) {

@@ -1736,6 +1736,37 @@ public class funciones {
            return idUser;
     }//@end getidUserConTicket
        
+     //valida si existe ese id en alguna tabla Aun no se usa
+         public boolean validainfracCancel(String idBusq){
+            Connection cn = con2.conexion();
+            boolean existe =false;
+            int num=0,i=1;
+            String sql = "";
+  
+                    sql = "SELECT '1' FROM pagos_infraccancel WHERE idFolio = '"+idBusq+"';";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        existe =true;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return existe;
+    }      
        
        public static void main(String args[]){
            BigDecimal amountOne = new BigDecimal(250);//monto a cobrar
@@ -1749,7 +1780,7 @@ public class funciones {
                }
                System.out.println("");
            }
-                System.out.println(fn.getidUserConTicket("idcarg","pagos_carg","79345"));
+                System.out.println("Esta cancel: "+fn.validainfracCancel("3209"));
            
            
           // for (int i = 0; i < prue.length; i++) {

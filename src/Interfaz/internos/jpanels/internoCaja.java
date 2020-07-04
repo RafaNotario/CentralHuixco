@@ -7442,8 +7442,11 @@ if(!dto.isEmpty() && !toI.isEmpty()){
                                 enviaData.add(namePag);
                                 enviaData.add(dscto);
                                 enviaData.add(efectV);
+                                
                                 contrl.payInfracc(enviaData,jLabFolio.getText());
-                               // contrl.matrizgetTicketsDia("",infoUser[6]);
+                                if(func.validainfracCancel(jLabFolio.getText())){
+                                     contrl.elimaRow("pagos_infraccancel","idFolio",jLabFolio.getText());
+                                }
                                 
                                 String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
                                 DefaultTableModel modelo = new TModel(mat, cabAreasPays);

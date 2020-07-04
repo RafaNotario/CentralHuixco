@@ -41,7 +41,7 @@ public int regLastTicket(int idT){
         try {
             st = cn.createStatement();
             rs = st.executeQuery(sql);
-            //rs.beforeFirst();
+            //rs.beforeFirst();DELETE
             while(rs.next())
             {
                 tic = rs.getInt(1);

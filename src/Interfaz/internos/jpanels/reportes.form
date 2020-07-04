@@ -75,9 +75,6 @@
     <Container class="javax.swing.JDialog" name="jDialFechonas">
       <Properties>
         <Property name="defaultCloseOperation" type="int" value="2"/>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[456, 300]"/>
-        </Property>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[456, 300]"/>
         </Property>
