@@ -543,7 +543,7 @@ return mat;
                     jButton4.doClick();
                     jComboBox1.setSelectedIndex(0);
             }
-             if(opc == 2){//aqui va reactivacion
+             if(opc >= 2){//aqui va reactivacion
                      jDialCalendarMantenim.setLocationRelativeTo(this);
                     jDialCalendarMantenim.setVisible(true);
                     jDialCalendarMantenim.setEnabled(true);
@@ -590,7 +590,10 @@ return mat;
              if(opc == 3){//BAJA PERMANENTE
                 String[][] mat = matrizgetAmbsAll(3,"");
                  jTabViewAllAmbs.setModel(new TModel(mat, cabAreasPays)); 
-                  jButton3.setEnabled(false);
+                  jButton3.setEnabled(true);
+                 jButton3.setIcon(null);
+                 jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arriba.png")));
+                  jButton9.setVisible(false);
             }
         }else{
             JOptionPane.showMessageDialog(null, "No Registros");

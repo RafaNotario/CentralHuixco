@@ -11,10 +11,6 @@ import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author A. Rafael Notario Rodriguez
- */
 public class ConexionDBOriginal {
 
     Connection cn;

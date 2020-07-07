@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="283" whenNoDataType="AllSectionsNoDetail" columnWidth="204" leftMargin="11" rightMargin="11" topMargin="0" bottomMargin="10" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="311" whenNoDataType="AllSectionsNoDetail" columnWidth="204" leftMargin="11" rightMargin="11" topMargin="0" bottomMargin="10" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -188,30 +188,30 @@ WHERE pagos_infrac.folio = $P{numTicket};]]>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="126">
+		<band height="154">
 			<staticText>
-				<reportElement x="0" y="67" width="57" height="12" uuid="2852f6ce-ff4f-4dfe-afc1-77f02b76f971"/>
+				<reportElement x="0" y="89" width="57" height="12" uuid="2852f6ce-ff4f-4dfe-afc1-77f02b76f971"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[TOTAL:         $]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="79" width="57" height="12" uuid="cba7a00d-616c-4024-9c04-9136cb994ef0"/>
+				<reportElement x="0" y="101" width="57" height="12" uuid="cba7a00d-616c-4024-9c04-9136cb994ef0"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[EFECTIVO:  $]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="91" width="57" height="12" uuid="cd78c522-1279-4052-9fac-8d8c3d434301"/>
+				<reportElement x="0" y="113" width="57" height="12" uuid="cd78c522-1279-4052-9fac-8d8c3d434301"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[CAMBIO:      $]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="103" width="216" height="23" uuid="ffc79fd8-d3ad-4493-a68b-b11070f0a2b9"/>
+				<reportElement x="0" y="131" width="216" height="23" uuid="ffc79fd8-d3ad-4493-a68b-b11070f0a2b9"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -224,34 +224,34 @@ WHERE pagos_infrac.folio = $P{numTicket};]]>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="10" y="102" width="195" height="1" uuid="5df74da7-e743-45c1-8e60-202ae65f3fd7"/>
+				<reportElement x="10" y="127" width="195" height="1" uuid="5df74da7-e743-45c1-8e60-202ae65f3fd7"/>
 				<graphicElement>
 					<pen lineStyle="Dotted" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="0" y="55" width="57" height="12" uuid="ecd43e14-f4ed-44e9-866d-20a440ff21af"/>
+				<reportElement x="0" y="77" width="57" height="12" uuid="ecd43e14-f4ed-44e9-866d-20a440ff21af"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[DESCTO:     $]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="43" width="57" height="12" uuid="d7c1eb2a-8d12-41f8-af11-b34e8c81ee8b"/>
+				<reportElement x="0" y="65" width="57" height="12" uuid="d7c1eb2a-8d12-41f8-af11-b34e8c81ee8b"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[IMPORTE:     $]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="31" width="57" height="12" uuid="482ac4d7-73a6-4a98-9208-d67750838ae9"/>
+				<reportElement x="0" y="53" width="57" height="12" uuid="482ac4d7-73a6-4a98-9208-d67750838ae9"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[FECHA:         ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="19" width="57" height="12" uuid="7ca41ca3-2a95-4d09-93ce-853bc1d1ea3f"/>
+				<reportElement x="0" y="19" width="45" height="12" uuid="7ca41ca3-2a95-4d09-93ce-853bc1d1ea3f"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -271,56 +271,56 @@ WHERE pagos_infrac.folio = $P{numTicket};]]>
 				<text><![CDATA[DATOS DEL PAGO]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="57" y="31" width="84" height="12" uuid="043cbeae-43fa-4f6e-b985-0cf79efa913e"/>
+				<reportElement x="57" y="53" width="84" height="12" uuid="043cbeae-43fa-4f6e-b985-0cf79efa913e"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{FECpAY}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="57" y="19" width="148" height="12" uuid="7404124e-872b-4ce5-8249-f0e2dda59d3f"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="45" y="19" width="160" height="12" uuid="7404124e-872b-4ce5-8249-f0e2dda59d3f"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{quienpaga}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="57" y="43" width="100" height="12" uuid="fa7c5a40-326f-4475-b589-548aa83eab04"/>
+				<reportElement x="57" y="65" width="100" height="12" uuid="fa7c5a40-326f-4475-b589-548aa83eab04"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="57" y="55" width="100" height="12" uuid="1c0b1ee1-0095-4f8a-9c93-96671a33c693"/>
+				<reportElement x="57" y="77" width="100" height="12" uuid="1c0b1ee1-0095-4f8a-9c93-96671a33c693"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="57" y="67" width="100" height="12" uuid="1e992596-ce90-4abd-916d-7ceedddd8609"/>
+				<reportElement x="57" y="89" width="100" height="12" uuid="1e992596-ce90-4abd-916d-7ceedddd8609"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TOT1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="57" y="79" width="100" height="12" uuid="d8d12015-e90a-4cfd-b8b9-76e8a23d3768"/>
+				<reportElement x="57" y="101" width="100" height="12" uuid="d8d12015-e90a-4cfd-b8b9-76e8a23d3768"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{efectivo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="57" y="91" width="100" height="12" uuid="69ba24c6-f379-4c54-893d-da4e3655d07d"/>
+				<reportElement x="57" y="113" width="100" height="12" uuid="69ba24c6-f379-4c54-893d-da4e3655d07d"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TOTFIN}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="141" y="31" width="62" height="12" uuid="3f581220-34f8-4ad0-8912-f67c96612547"/>
+				<reportElement x="141" y="53" width="62" height="12" uuid="3f581220-34f8-4ad0-8912-f67c96612547"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>

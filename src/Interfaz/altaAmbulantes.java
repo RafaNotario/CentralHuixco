@@ -654,6 +654,7 @@ public class altaAmbulantes extends javax.swing.JFrame {
         limpiaCamps();
         jPaniNIpAYSaMB.setVisible(true);
         llenainiSemana();
+        txtfolAmb.setText(Integer.toString(func.getUltAmbul() +1));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -702,7 +703,12 @@ public class altaAmbulantes extends javax.swing.JFrame {
           }
           
           if(!nam.isEmpty() ){
-            contrl.guardF5Ambu(contenData, foli);
+              String queHace = jButton1.getText();
+              if(queHace.equals("Guardar"))
+                    contrl.guardF5Ambu(0,contenData, foli);
+              if(queHace.equals("Modificar"))
+                    contrl.guardF5Ambu(1,contenData, foli);
+                  
             if(foli.isEmpty())// is new user
                 limpiaCamps();
             else//actualiza

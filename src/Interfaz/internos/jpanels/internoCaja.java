@@ -8446,7 +8446,7 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
     private void jButton45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton45ActionPerformed
           String nomb = jCmBxgetAreas.getSelectedItem().toString(),
               idBusq = conten.get(jCmBxgetAreas.getSelectedIndex());//idArea
-          System.out.println("IdArea: "+idBusq);
+     //     System.out.println("IdArea: "+idBusq);
             vistaReimprAll altamb = new vistaReimprAll(0,idBusq);
             altamb.setLocationRelativeTo(null);
             altamb.setVisible(true);

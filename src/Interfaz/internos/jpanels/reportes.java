@@ -944,7 +944,9 @@ public class reportes extends javax.swing.JPanel {
 
     private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
         String var = datCtrl.getFechaCal(jCalendar1),
-                tittol = jDialCalendarMantenim.getTitle();
+                tittol = jDialCalendarMantenim.getTitle()
+                ;
+        int subRbro = -1;
         semanaAct = func.getSemanTableAct(var);
         
         if(tittol.equals("Corte de caja")){
@@ -964,32 +966,79 @@ public class reportes extends javax.swing.JPanel {
                      getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);//envia opcion,subopcion,lapso de semanas
                      jLabel18.setText(sumCorteCajFechonas(semanaAct[3],semanaAct[4]));
                 break;
-                case 1 :
+                case 1 ://areas
+                    subRbro = jCBoxEsRubroDet.getSelectedIndex();
+if(subRbro == 0){
                     getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);
                     BigDecimal totAreas = new BigDecimal(func.totalLapsoFechas(0,"",semanaAct[3],semanaAct[4]));
                     jLabel18.setText(totAreas.toString());
-                break;
-                case 2 :
+}else{
+                    getIntervalIngresos(opc,Integer.toString((subRbro + 1)),semanaAct[3],semanaAct[4]);
+                    BigDecimal totAreas = new BigDecimal(func.totalLapsoFechas(0,Integer.toString((subRbro + 1)),semanaAct[3],semanaAct[4]));
+                    jLabel18.setText(totAreas.toString());
+}
+                    break;
+                case 2 ://ambulantes
+          subRbro = jCBoxEsRubroDet.getSelectedIndex();
+if(subRbro == 0){
                     getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);
                     BigDecimal totambs = new BigDecimal(func.totalLapsoFechas(1,"",semanaAct[3],semanaAct[4]));
                     jLabel18.setText(totambs.toString());
+}else{
+                    if(subRbro == 1)
+                        subRbro=6;//semana ambulantes
+                    if(subRbro == 2)
+                        subRbro=7;//Resguardo ambulantes
+                    if(subRbro == 3)
+                        subRbro=8;//Inscripciones ambulantes
+                    getIntervalIngresos(opc,Integer.toString(subRbro),semanaAct[3],semanaAct[4]);
+                    BigDecimal totambs = new BigDecimal(func.totalLapsoFechas(1,Integer.toString(subRbro),semanaAct[3],semanaAct[4]));
+                     jLabel18.setText(totambs.toString());
+}
                     break;
-                case 3 :
+                case 3 :// cargadores
+                    subRbro = jCBoxEsRubroDet.getSelectedIndex();
+if(subRbro == 0){
                     getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);
                     BigDecimal totcarg = new BigDecimal(func.totalLapsoFechas(2,"",semanaAct[3],semanaAct[4]));
                     BigDecimal totcarg2 = new BigDecimal(func.totalLapsoFechas(3,"",semanaAct[3],semanaAct[4]));
                     BigDecimal totcargAll = func.getSum(totcarg2, totcarg);
                     jLabel18.setText(totcargAll.toString());
+}else{
+                    if(subRbro == 1){
+                        subRbro=11;//semana cargadores
+                        BigDecimal totcarg = new BigDecimal(func.totalLapsoFechas(2,Integer.toString(subRbro),semanaAct[3],semanaAct[4]));
+                        jLabel18.setText(totcarg.toString());
+                    }
+                    if(subRbro == 2){
+                        subRbro=8;//8,9,10 -> inscripcion cargadores
+                        BigDecimal totcarg = new BigDecimal(func.totalLapsoFechas(2,Integer.toString(subRbro),semanaAct[3],semanaAct[4]));
+                        jLabel18.setText(totcarg.toString()); 
+                    }
+                    if(subRbro == 3){
+                        subRbro=12;//Renta  cargadores
+                        BigDecimal totcarg2 = new BigDecimal(func.totalLapsoFechas(3,"",semanaAct[3],semanaAct[4]));
+                        jLabel18.setText(totcarg2.toString());
+                    }
+                    getIntervalIngresos(opc,Integer.toString(subRbro),semanaAct[3],semanaAct[4]);
+}
                 break;
-                case 4 :
+                case 4 ://infracciones
                     getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);
                     BigDecimal totInfrac = new BigDecimal(func.totalLapsoFechas(4,"",semanaAct[3],semanaAct[4]));
                     jLabel18.setText(totInfrac.toString());
                  break;
-                 case 5 :
+                 case 5 ://otros_venta
+                 subRbro = jCBoxEsRubroDet.getSelectedIndex();
+if(subRbro == 0){                     
                     getIntervalIngresos(opc,"",semanaAct[3],semanaAct[4]);
                     BigDecimal totIOthers = new BigDecimal(func.totalLapsoFechas(5,"",semanaAct[3],semanaAct[4]));
                     jLabel18.setText(totIOthers.toString());
+}else{
+    getIntervalIngresos(opc,Integer.toString(subRbro),semanaAct[3],semanaAct[4]);
+    BigDecimal totIOthers = new BigDecimal(func.totalLapsoFechas(5,Integer.toString(subRbro),semanaAct[3],semanaAct[4]));
+     jLabel18.setText(totIOthers.toString());
+}
                  break;
             };
              jLabel17.setText(Integer.toString(jTabViewIngresosAll.getRowCount()));
@@ -1013,8 +1062,6 @@ public class reportes extends javax.swing.JPanel {
               }
               jLabel10.setText(Integer.toString(jTable6.getRowCount()));
          }
-        
-            
         jDialCalendarMantenim.dispose();
     }//GEN-LAST:event_jButton42ActionPerformed
 
@@ -1248,58 +1295,188 @@ public class reportes extends javax.swing.JPanel {
                 jLabel10.setText(Integer.toString(jTable6.getRowCount()));
        }
        
-       if(quees.equals("Ingresos")){
-            int opcois = jCBoxEsIngreso.getSelectedIndex();
-            
-            if(jRadioEspedific.isSelected()){
+       if(quees.equals("Ingresos")){//opcion entre fechas o lapso de fechas
+            int opcois = jCBoxEsIngreso.getSelectedIndex(),
+                    subRbro=-1;
+           
+if(jRadioEspedific.isSelected()){
+               fech1 = datCtrl.getFecha(jDateChooser1);
+  
+            jLabLetrero.setText("Día: "+fech1);
+
+            switch(opcois){
+                case 0 ://Ingreso ver todos
+                     getIntervalIngresos(opcois,"",fech1,fech1);//envia opcion,subopcion,lapso de semanas
+                     jLabel18.setText(sumCorteCajFechonas(fech1,fech1));
+                break;
+                case 1 ://areas
+                    subRbro = jCBoxEsRubroDet.getSelectedIndex();
+if(subRbro == 0){
+                    getIntervalIngresos(opcois,"",fech1,fech1);
+                    BigDecimal totAreas = new BigDecimal(func.totalLapsoFechas(0,"",fech1,fech1));
+                    jLabel18.setText(totAreas.toString());
+}else{
+                    getIntervalIngresos(opcois,Integer.toString((subRbro + 1)),fech1,fech1);
+                    BigDecimal totAreas = new BigDecimal(func.totalLapsoFechas(0,Integer.toString((subRbro + 1)),fech1,fech1));
+                    jLabel18.setText(totAreas.toString());
+}
+                    break;
+                case 2 ://ambulantes
+          subRbro = jCBoxEsRubroDet.getSelectedIndex();
+if(subRbro == 0){
+                    getIntervalIngresos(opcois,"",fech1,fech1);
+                    BigDecimal totambs = new BigDecimal(func.totalLapsoFechas(1,"",fech1,fech1));
+                    jLabel18.setText(totambs.toString());
+}else{
+                    if(subRbro == 1)
+                        subRbro=6;//semana ambulantes
+                    if(subRbro == 2)
+                        subRbro=7;//Resguardo ambulantes
+                    if(subRbro == 3)
+                        subRbro=8;//Inscripciones ambulantes
+                    getIntervalIngresos(opcois,Integer.toString(subRbro),fech1,fech1);
+                    BigDecimal totambs = new BigDecimal(func.totalLapsoFechas(1,Integer.toString(subRbro),fech1,fech1));
+                     jLabel18.setText(totambs.toString());
+}
+                    break;
+                case 3 :// cargadores
+                    subRbro = jCBoxEsRubroDet.getSelectedIndex();
+if(subRbro == 0){
+                    getIntervalIngresos(opcois,"",fech1,fech1);
+                    BigDecimal totcarg = new BigDecimal(func.totalLapsoFechas(2,"",fech1,fech1));
+                    BigDecimal totcarg2 = new BigDecimal(func.totalLapsoFechas(3,"",fech1,fech1));
+                    BigDecimal totcargAll = func.getSum(totcarg2, totcarg);
+                    jLabel18.setText(totcargAll.toString());
+}else{
+                    if(subRbro == 1){
+                        subRbro=11;//semana cargadores
+                        BigDecimal totcarg = new BigDecimal(func.totalLapsoFechas(2,Integer.toString(subRbro),fech1,fech1));
+                        jLabel18.setText(totcarg.toString());
+                    }
+                    if(subRbro == 2){
+                        subRbro=8;//8,9,10 -> inscripcion cargadores
+                        BigDecimal totcarg = new BigDecimal(func.totalLapsoFechas(2,Integer.toString(subRbro),fech1,fech1));
+                        jLabel18.setText(totcarg.toString()); 
+                    }
+                    if(subRbro == 3){
+                        subRbro=12;//Renta  cargadores
+                        BigDecimal totcarg2 = new BigDecimal(func.totalLapsoFechas(3,"",fech1,fech1));
+                        jLabel18.setText(totcarg2.toString());
+                    }
+                    getIntervalIngresos(opcois,Integer.toString(subRbro),fech1,fech1);
+}
+                break;
+                case 4 ://infracciones
+                    getIntervalIngresos(opcois,"",fech1,fech1);
+                    BigDecimal totInfrac = new BigDecimal(func.totalLapsoFechas(4,"",fech1,fech1));
+                    jLabel18.setText(totInfrac.toString());
+                 break;
+                 case 5 ://otros_venta
+                 subRbro = jCBoxEsRubroDet.getSelectedIndex();
+if(subRbro == 0){                     
+                    getIntervalIngresos(opcois,"",fech1,fech1);
+                    BigDecimal totIOthers = new BigDecimal(func.totalLapsoFechas(5,"",fech1,fech1));
+                    jLabel18.setText(totIOthers.toString());
+}else{
+    getIntervalIngresos(opcois,Integer.toString(subRbro),fech1,fech1);
+    BigDecimal totIOthers = new BigDecimal(func.totalLapsoFechas(5,Integer.toString(subRbro),fech1,fech1));
+     jLabel18.setText(totIOthers.toString());
+}
+                 break;
+            };
+             jLabel17.setText(Integer.toString(jTabViewIngresosAll.getRowCount()));
+               
+               
                 
-            }else{
+            }else{//HATA AQUI INGRESOS FILTROS EN 1 FECHONA
                  fech1 = datCtrl.getFecha(jDateChooser1);
                  fech2 = datCtrl.getFecha(jDateChooser2); 
-                
                  jLabLetrero.setText("Dias del "+fech1+" al "+fech2);
-            
             switch(opcois){
-                case 0 :
+                case 0 ://todos los rubros
                      getIntervalIngresos(opcois,"",fech1,fech2);//envia opcion,subopcion,lapso de semanas
                      jLabel18.setText(sumCorteCajFechonas(fech1,fech2));
+                     
                 break;
-                case 1 :
+                case 1 ://areas
+                    subRbro = jCBoxEsRubroDet.getSelectedIndex();
+if(subRbro == 0){
                     getIntervalIngresos(opcois,"",fech1,fech2);
                     BigDecimal totAreas = new BigDecimal(func.totalLapsoFechas(0,"",fech1,fech2));
                     jLabel18.setText(totAreas.toString());
+}else{
+                    getIntervalIngresos(opcois,Integer.toString((subRbro + 1)),fech1,fech2);
+                    BigDecimal totAreas = new BigDecimal(func.totalLapsoFechas(0,Integer.toString((subRbro + 1)),fech1,fech2));
+                    jLabel18.setText(totAreas.toString());
+}
                 break;
-                case 2 :
+                case 2 ://ambulantes
+          subRbro = jCBoxEsRubroDet.getSelectedIndex();
+if(subRbro == 0){
                     getIntervalIngresos(opcois,"",fech1,fech2);
                     BigDecimal totambs = new BigDecimal(func.totalLapsoFechas(1,"",fech1,fech2));
                     jLabel18.setText(totambs.toString());
+}else{
+                    if(subRbro == 1)
+                        subRbro=6;//semana ambulantes
+                    if(subRbro == 2)
+                        subRbro=7;//Resguardo ambulantes
+                    if(subRbro == 3)
+                        subRbro=8;//Inscripciones ambulantes
+                    getIntervalIngresos(opcois,Integer.toString(subRbro),fech1,fech2);
+                    BigDecimal totambs = new BigDecimal(func.totalLapsoFechas(1,Integer.toString(subRbro),fech1,fech2));
+                     jLabel18.setText(totambs.toString());
+}
                     break;
-                case 3 :
+                case 3 ://cargadores
+                    subRbro = jCBoxEsRubroDet.getSelectedIndex();
+if(subRbro == 0){
                     getIntervalIngresos(opcois,"",fech1,fech2);
                     BigDecimal totcarg = new BigDecimal(func.totalLapsoFechas(2,"",fech1,fech2));
                     BigDecimal totcarg2 = new BigDecimal(func.totalLapsoFechas(3,"",fech1,fech2));
                     BigDecimal totcargAll = func.getSum(totcarg2, totcarg);
                     jLabel18.setText(totcargAll.toString());
+}else{
+                    if(subRbro == 1){
+                        subRbro=11;//semana cargadores
+                        BigDecimal totcarg = new BigDecimal(func.totalLapsoFechas(2,Integer.toString(subRbro),fech1,fech2));
+                        jLabel18.setText(totcarg.toString());
+                    }
+                    if(subRbro == 2){
+                        subRbro=8;//8,9,10 -> inscripcion cargadores
+                        BigDecimal totcarg = new BigDecimal(func.totalLapsoFechas(2,Integer.toString(subRbro),fech1,fech2));
+                        jLabel18.setText(totcarg.toString()); 
+                    }
+                    if(subRbro == 3){
+                        subRbro=12;//Renta  cargadores
+                        BigDecimal totcarg2 = new BigDecimal(func.totalLapsoFechas(3,"",fech1,fech2));
+                        jLabel18.setText(totcarg2.toString());
+                    }
+                    getIntervalIngresos(opcois,Integer.toString(subRbro),fech1,fech2);
+}
                 break;
-                case 4 :
+                case 4 ://infracciones
                     getIntervalIngresos(opcois,"",fech1,fech2);
                     BigDecimal totInfrac = new BigDecimal(func.totalLapsoFechas(4,"",fech1,fech2));
                     jLabel18.setText(totInfrac.toString());
                  break;
-                 case 5 :
+                 case 5 ://otros pagos rubros
+                 subRbro = jCBoxEsRubroDet.getSelectedIndex();
+if(subRbro == 0){                     
                     getIntervalIngresos(opcois,"",fech1,fech2);
                     BigDecimal totIOthers = new BigDecimal(func.totalLapsoFechas(5,"",fech1,fech2));
                     jLabel18.setText(totIOthers.toString());
+}else{
+    getIntervalIngresos(opcois,Integer.toString(subRbro),fech1,fech2);
+    BigDecimal totIOthers = new BigDecimal(func.totalLapsoFechas(5,Integer.toString(subRbro),fech1,fech2));
+     jLabel18.setText(totIOthers.toString());
+}
                  break;
             };
              jLabel17.setText(Integer.toString(jTabViewIngresosAll.getRowCount())); 
-           
        }
-       
        }
-       
             jDialFechonas.dispose();
-       
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jCmBoxEgresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmBoxEgresosActionPerformed
@@ -1691,7 +1868,7 @@ public class reportes extends javax.swing.JPanel {
                 };
                 String consul="";
                 if(opc == 0){//opcion todas las areas lapso sem
-                    consul="(SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areas.total\n" +
+                    consul="(SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areasdet.importe\n" +
                         "FROM pagos_areas\n" +
                         "INNER JOIN areas\n" +
                         "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND (pagos_areas.fecha >= '"+fech1+"' AND pagos_areas.fecha <= '"+fech2+"')\n" +
@@ -1699,9 +1876,9 @@ public class reportes extends javax.swing.JPanel {
                         "ON pagos_areas.id = pagos_areasdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
                         "INNER JOIN rubrospago\n" +
                         "on pagos_areasdet.idRubroPago = rubrospago.id	\n" +
-                        "group BY pagos_areas.id)\n" +
+                        "ORDER BY pagos_areas.id)\n" +
                         "UNION\n" +
-                        "(SELECT pagos_ambdet.idTicket,pagos_amb.fecha,pagos_amb.hora,rubrospago.descripcion,ambulantes.nombre,pagos_amb.total\n" +
+                        "(SELECT pagos_ambdet.idTicket,pagos_amb.fecha,pagos_amb.hora,rubrospago.descripcion,ambulantes.nombre,(pagos_ambdet.importe - pagos_ambdet.descuento) AS totin\n" +
                         "FROM pagos_amb\n" +
                         "INNER JOIN ambulantes\n" +
                         "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idCancelacion = 0 AND (pagos_amb.fecha >= '"+fech1+"' AND pagos_amb.fecha <= '"+fech2+"')\n" +
@@ -1709,9 +1886,9 @@ public class reportes extends javax.swing.JPanel {
                         "ON pagos_amb.id = pagos_ambdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
                         "INNER JOIN rubrospago\n" +
                         "on pagos_ambdet.idRubropago = rubrospago.id	\n" +
-                        "GROUP BY pagos_amb.id)\n" +
+                        "ORDER BY pagos_amb.id)\n" +
                         "UNION\n" +
-                        "(SELECT pagos_cargdet.idTicket,pagos_carg.fecha,pagos_carg.hora,rubrospago.descripcion,cargadores.nombre,pagos_carg.total\n" +
+                        "(SELECT pagos_cargdet.idTicket,pagos_carg.fecha,pagos_carg.hora,rubrospago.descripcion,cargadores.nombre,(pagos_cargdet.importe - pagos_cargdet.descuento) AS totin\n" +
                         "FROM pagos_carg\n" +
                         "INNER JOIN cargadores\n" +
                         "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion = 0 AND (pagos_carg.fecha >= '"+fech1+"' AND pagos_carg.fecha <= '"+fech2+"')\n" +
@@ -1719,14 +1896,14 @@ public class reportes extends javax.swing.JPanel {
                         "ON pagos_carg.id = pagos_cargdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
                         "INNER JOIN rubrospago\n" +
                         "on pagos_cargdet.idRubropago = rubrospago.id	\n" +
-                        "group by pagos_carg.id)\n" +
+                        "ORDER BY pagos_carg.id)\n" +
                         "UNION\n" +
                         "-- QWERY pagos_rentacarg\n" +
                         "(SELECT pagos_cargrenta.id,pagos_cargrenta.fecha,pagos_cargrenta.hora,'Renta diaria de diablo',cargadores.nombre,pagos_cargrenta.importe\n" +
                         "FROM pagos_cargrenta\n" +
                         "INNER JOIN cargadores\n" +
                         "ON cargadores.id = pagos_cargrenta.idCarg AND pagos_cargrenta.idCancelacion = 0 AND (pagos_cargrenta.fecha >= '"+fech1+"' AND pagos_cargrenta.fecha <= '"+fech2+"')\n" +
-                        "group by pagos_cargrenta.id)\n" +
+                        "ORDER BY pagos_cargrenta.id)\n" +
                         "UNION\n" +
                         "(SELECT pagos_infrac.folio,pagos_infrac.fechapag,pagos_infrac.horapag,\"Pago Infraccion\",pagos_infrac.quienpaga,\n" +
                         "	IF(pagos_infrac.descuento IS NULL, pagos_infrac.monto, pagos_infrac.monto - pagos_infrac.descuento )  AS totInfrac\n" +
@@ -1744,19 +1921,32 @@ public class reportes extends javax.swing.JPanel {
                         ");";
                 }
                 
-                if(opc == 1){
-                    consul ="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areas.total\n" +
+                if(opc == 1){// solo areas
+      if(idUsers.isEmpty()){
+                    consul ="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areasdet.importe\n" +
                         "FROM pagos_areas\n" +
                         "INNER JOIN areas\n" +
                         "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND (pagos_areas.fecha >= '"+fech1+"' AND pagos_areas.fecha <= '"+fech2+"')\n" +
                         "INNER JOIN pagos_areasdet\n" +
-                        "ON pagos_areas.id = pagos_areasdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
+                        "ON pagos_areas.id = pagos_areasdet.idTicket\n" +
                         "INNER JOIN rubrospago\n" +
                         "on pagos_areasdet.idRubroPago = rubrospago.id	\n" +
-                        "group BY pagos_areas.id;";
+                        "ORDER BY pagos_areas.id;";
+                    }else{
+ consul ="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areasdet.importe\n" +
+                        "FROM pagos_areas\n" +
+                        "INNER JOIN areas\n" +
+                        "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND (pagos_areas.fecha >= '"+fech1+"' AND pagos_areas.fecha <= '"+fech2+"')\n" +
+                        "INNER JOIN pagos_areasdet\n" +
+                        "ON pagos_areas.id = pagos_areasdet.idTicket \n" +
+                        "INNER JOIN rubrospago\n" +
+                        "on pagos_areasdet.idRubroPago = rubrospago.id AND pagos_areasdet.idRubroPago = '"+idUsers+"'	\n" +
+                        "ORDER BY pagos_areas.id;";
+                    }
                 }
-                if(opc == 2){
-                    consul = "SELECT pagos_ambdet.idTicket,pagos_amb.fecha,pagos_amb.hora,rubrospago.descripcion,ambulantes.nombre,pagos_amb.total\n" +
+                if(opc == 2){//pagos de ambulantes
+      if(idUsers.isEmpty()){
+                    consul = "SELECT pagos_ambdet.idTicket,pagos_amb.fecha,pagos_amb.hora,rubrospago.descripcion,ambulantes.nombre,(pagos_ambdet.importe - pagos_ambdet.descuento) AS detallon\n" +
                     "FROM pagos_amb\n" +
                     "INNER JOIN ambulantes\n" +
                     "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idCancelacion = 0 AND (pagos_amb.fecha >= '"+fech1+"' AND pagos_amb.fecha <= '"+fech2+"')\n" +
@@ -1764,10 +1954,34 @@ public class reportes extends javax.swing.JPanel {
                     "ON pagos_amb.id = pagos_ambdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
                     "INNER JOIN rubrospago\n" +
                     "on pagos_ambdet.idRubropago = rubrospago.id	\n" +
-                    "GROUP BY pagos_amb.id;";
+                    "ORDER BY pagos_amb.id;";
+      }else{
+          if(idUsers.equals("8")){
+                    consul = "SELECT pagos_ambdet.idTicket,pagos_amb.fecha,pagos_amb.hora,rubrospago.descripcion,ambulantes.nombre,(pagos_ambdet.importe - pagos_ambdet.descuento) AS detallon\n" +
+                    "FROM pagos_amb\n" +
+                    "INNER JOIN ambulantes\n" +
+                    "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idCancelacion = 0 AND (pagos_amb.fecha >= '"+fech1+"' AND pagos_amb.fecha <= '"+fech2+"')\n" +
+                    "INNER JOIN pagos_ambdet\n" +
+                    "ON pagos_amb.id = pagos_ambdet.idTicket  AND pagos_ambdet.idRubropago >= '"+idUsers+"'\n" +
+                    "INNER JOIN rubrospago\n" +
+                    "on pagos_ambdet.idRubropago = rubrospago.id	\n" +
+                    "ORDER BY pagos_amb.id;";
+          }else{
+          consul = "SELECT pagos_ambdet.idTicket,pagos_amb.fecha,pagos_amb.hora,rubrospago.descripcion,ambulantes.nombre,(pagos_ambdet.importe - pagos_ambdet.descuento) AS detallon\n" +
+                    "FROM pagos_amb\n" +
+                    "INNER JOIN ambulantes\n" +
+                    "ON ambulantes.id = pagos_amb.idAmb AND pagos_amb.idCancelacion = 0 AND (pagos_amb.fecha >= '"+fech1+"' AND pagos_amb.fecha <= '"+fech2+"')\n" +
+                    "INNER JOIN pagos_ambdet\n" +
+                    "ON pagos_amb.id = pagos_ambdet.idTicket  AND pagos_ambdet.idRubropago = '"+idUsers+"'\n" +
+                    "INNER JOIN rubrospago\n" +
+                    "on pagos_ambdet.idRubropago = rubrospago.id \n" +
+                    "ORDER BY pagos_amb.id;";
+          }
+      }
                 }
-                if(opc == 3){
-                    consul = "(SELECT pagos_cargdet.idTicket,pagos_carg.fecha,pagos_carg.hora,rubrospago.descripcion,cargadores.nombre,pagos_carg.total\n" +
+                if(opc == 3){//pagos de cargadores
+      if(idUsers.isEmpty()){
+                    consul = "(SELECT pagos_cargdet.idTicket,pagos_carg.fecha,pagos_carg.hora,rubrospago.descripcion,cargadores.nombre,pagos_carg.total \n" +
                 "FROM pagos_carg\n" +
                 "INNER JOIN cargadores\n" +
                 "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion = 0 AND (pagos_carg.fecha >= '"+fech1+"' AND pagos_carg.fecha <= '"+fech2+"')\n" +
@@ -1775,16 +1989,48 @@ public class reportes extends javax.swing.JPanel {
                 "ON pagos_carg.id = pagos_cargdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
                 "INNER JOIN rubrospago\n" +
                 "on pagos_cargdet.idRubropago = rubrospago.id	\n" +
-                "group by pagos_carg.id)\n" +
+                "ORDER BY pagos_carg.id)\n" +
                 "UNION\n" +
                 "-- QWERY pagos_rentacarg\n" +
                 "(SELECT pagos_cargrenta.id,pagos_cargrenta.fecha,pagos_cargrenta.hora,'Renta diaria de diablo',cargadores.nombre,pagos_cargrenta.importe\n" +
                 "FROM pagos_cargrenta\n" +
                 "INNER JOIN cargadores\n" +
                 "ON cargadores.id = pagos_cargrenta.idCarg AND pagos_cargrenta.idCancelacion = 0 AND (pagos_cargrenta.fecha >= '"+fech1+"' AND pagos_cargrenta.fecha <= '"+fech2+"')\n" +
-                "group by pagos_cargrenta.id);";
+                "ORDER BY pagos_cargrenta.id);";
+      }else{
+           if(idUsers.equals("8")){
+           consul = "SELECT pagos_cargdet.idTicket,pagos_carg.fecha,pagos_carg.hora,rubrospago.descripcion,cargadores.nombre,(pagos_cargdet.importe - pagos_cargdet.descuento) AS totil\n" +
+                "FROM pagos_carg\n" +
+                "INNER JOIN cargadores\n" +
+                "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion = 0 AND (pagos_carg.fecha >= '"+fech1+"' AND pagos_carg.fecha <= '"+fech2+"')\n" +
+                "INNER JOIN pagos_cargdet\n" +
+                "ON pagos_carg.id = pagos_cargdet.idTicket  AND (pagos_cargdet.idRubroPago >= 8 AND pagos_cargdet.idRubroPago <= 10)\n" +
+                "INNER JOIN rubrospago\n" +
+                "on pagos_cargdet.idRubropago = rubrospago.id	\n" +
+                "ORDER BY pagos_carg.id; ";
+           }
+            if(idUsers.equals("11")){
+                consul = "SELECT pagos_cargdet.idTicket,pagos_carg.fecha,pagos_carg.hora,rubrospago.descripcion,cargadores.nombre,(pagos_cargdet.importe - pagos_cargdet.descuento) AS totil\n" +
+                "FROM pagos_carg\n" +
+                "INNER JOIN cargadores\n" +
+                "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion = 0 AND (pagos_carg.fecha >= '"+fech1+"' AND pagos_carg.fecha <= '"+fech2+"')\n" +
+                "INNER JOIN pagos_cargdet\n" +
+                "ON pagos_carg.id = pagos_cargdet.idTicket  AND pagos_cargdet.idRubroPago = '"+idUsers+"' \n" +
+                "INNER JOIN rubrospago\n" +
+                "on pagos_cargdet.idRubropago = rubrospago.id \n" +
+                "ORDER BY pagos_carg.id; ";
+            }
+            if(idUsers.equals("12")){
+                consul = "SELECT pagos_cargrenta.id,pagos_cargrenta.fecha,pagos_cargrenta.hora,'Renta diaria de diablo',cargadores.nombre,pagos_cargrenta.importe\n" +
+                "FROM pagos_cargrenta\n" +
+                "INNER JOIN cargadores\n" +
+                "ON cargadores.id = pagos_cargrenta.idCarg AND pagos_cargrenta.idCancelacion = 0 AND (pagos_cargrenta.fecha >= '"+fech1+"' AND pagos_cargrenta.fecha <= '"+fech2+"')\n" +
+                "ORDER BY pagos_cargrenta.id;";
+            }
+            
+      }
                 }
-                if(opc == 4){
+                if(opc == 4){//pagos de infracciones
                     consul = "SELECT pagos_infrac.folio,pagos_infrac.fechapag,pagos_infrac.horapag,\"Pago Infraccion\",pagos_infrac.quienpaga,\n" +
                 "IF(pagos_infrac.descuento IS NULL, pagos_infrac.monto, pagos_infrac.monto - pagos_infrac.descuento )  AS totInfrac\n" +
                 "FROM pagos_infrac\n" +
@@ -1792,14 +2038,30 @@ public class reportes extends javax.swing.JPanel {
                 "ON pagos_infraccancel.idFolio = pagos_infrac.folio WHERE pagos_infraccancel.idFolio IS null AND (pagos_infrac.fechapag >= '"+fech1+"' AND pagos_infrac.fechapag <= '"+fech2+"') \n" +
                 ";";
                 }
-                if(opc == 5){
-                    consul = "SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS hor,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
+                if(opc == 5){//pagos de otros venta
+if(idUsers.isEmpty()){
+consul = "SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS hor,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
                 "IF(otros_venta.tipoPersona = 0,'Varios Amb.',IF(otros_venta.tipoPersona = 1,'Varios Carg.', IF(otros_venta.tipoPersona = 2,'Varios Cte.','NADON') ) ) AS quees,\n" +
                 "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
                 "        otros_venta.efectivo\n" +
                 "FROM otros_venta\n" +
                 "WHERE otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '"+fech1+"' AND otros_venta.fecha <= '"+fech2+"') ;";
-                }                
+}else{
+
+consul="SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS hor1,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
+"otros_catalogo.descrip,\n" +
+"IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
+"        otros_venta.efectivo\n" +
+"FROM otros_venta\n" +
+"INNER JOIN otros_ventadet\n" +
+"ON otros_venta.id = otros_ventadet.idVenta AND otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '"+fech1+"' AND otros_venta.fecha <= '"+fech2+"')\n" +
+"INNER JOIN otros_catalogo\n" +
+"ON otros_catalogo.id = otros_ventadet.idProd\n" +
+"INNER JOIN otros_rubros\n" +
+"ON otros_rubros.id = otros_catalogo.idrubro  AND otros_rubros.id = '"+idUsers+"'\n" +
+";";
+}
+                }
                  //consul = "SELECT id, nombre from ambulantes WHERE id LIKE '"+var+"%'  OR nombre LIKE '"+var+"%' ORDER BY id";
                         modelo.addColumn("#Ticket");       
                         modelo.addColumn("Fecha");
@@ -1989,7 +2251,7 @@ switch(opc){
                 }  
                   if(opc > 10 && opc < 20){
                       int vari = opc -10;
-                      System.out.println("vari is : "+vari);
+//                      System.out.println("vari is : "+vari);
                     consul = "SELECT gastos_caja.id,DATE_FORMAT(gastos_caja.fecha, \"%d-%m-%Y\") AS fec,DATE_FORMAT(gastos_caja.hora, \"%H : %i\") AS hor,\n" +
                         "rubroscaja.concepto as RUBRO,gastos_caja.concepto,usuarios.nombre,gastos_caja.monto,gastos_caja.idTurno\n" +
                         "FROM central.gastos_caja\n" +

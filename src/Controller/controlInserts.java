@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+
 package Controller;
 
 import java.sql.Connection;
@@ -1208,12 +1205,12 @@ public void guardTickRentCarg(String[] param){
         }     //@end guardTickRentCarg
        
      //guarda Ambulante o actualiza MAMALONA LOGIC FUCK
-     public void guardF5Ambu(List<String> param, String idT){
+     public void guardF5Ambu(int opc,List<String> param, String idT){
      Connection cn = con2.conexion();
             PreparedStatement pps=null;
             String SQL="",band="";      
             try {
-          if(idT.isEmpty()){
+          if(opc == 0){
  SQL="INSERT INTO ambulantes (nombre,direccion,telefono,obs,idGiro,idTarifa,idResg,condMemb,condDerecho,condResg,ultimaSem) VALUES (?,?,?,?,?,?,?,?,?,?,?)";                           
   pps = cn.prepareStatement(SQL);
                 pps.setString(1, param.get(0));
@@ -1524,17 +1521,7 @@ return mat;
 } //@end guardLugDispCargad
         
     public static void main(String []argv){
-        controlInserts contrl = new controlInserts();
-     //  System.out.println("Ultimo pagado: "+contrl.regLastTicket(19));
-     // String[][] mat = contrl.matrizgetAmbuSemana("258","6");
-        contrl.f5CancelTypesAll("ambulantes","ultimaSem","154","55");
-        
-   //  contrl.f5CancelTypesAll("usuarios","turno","2","930");
-     System.out.println("ultimo tic cargador no cancelao "+contrl.getpagosAmbulante(1,"745","11"));
-     String[] arr = contrl.regpagosambdet(0,Integer.parseInt(contrl.getpagosAmbulante(0,"904","6")),6);
-     for (int i = 0; i < arr.length; i++) {
-            System.out.println("["+arr[i]+"]");
-    }
+
 }
 
 }
