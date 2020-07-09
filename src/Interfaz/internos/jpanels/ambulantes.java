@@ -58,7 +58,7 @@ public class ambulantes extends javax.swing.JPanel {
     @Override
     public void componentResized(final ComponentEvent e) {
         if (jTabViewAllAmbs.getPreferredSize().width < jTabViewAllAmbs.getParent().getWidth()) {
-            System.out.println("Resize"+jTabViewAllAmbs.getParent().getWidth());
+           // System.out.println("Resize"+jTabViewAllAmbs.getParent().getWidth());
             jTabViewAllAmbs.setAutoResizeMode(jTabViewAllAmbs.AUTO_RESIZE_ALL_COLUMNS);
         } else {
             jTabViewAllAmbs.setAutoResizeMode(jTabViewAllAmbs.AUTO_RESIZE_OFF);

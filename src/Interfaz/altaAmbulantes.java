@@ -968,10 +968,12 @@ public class altaAmbulantes extends javax.swing.JFrame {
         matTarifsResg = regTarifasResgToAmb();
         for (int i = 0; i < matTarifsResg.length; i++) {
             for (int j = 0; j < matTarifsResg[0].length; j++) {
+         //      System.out.print("["+matTarifsResg[i][j]+"]");
                 if(j == 2){
                     jCBoxResgAmb.addItem(matTarifsResg[i][j]);
                 }
             }
+           // System.out.println("");
         }
     }
     
@@ -990,8 +992,19 @@ public class altaAmbulantes extends javax.swing.JFrame {
         if(dats[7].equals("0")){
             jCBoxResgAmb.setSelectedIndex(0);
         }else{
-            jCBoxResgAmb.setSelectedIndex(Integer.parseInt(matTarifsResg[Integer.parseInt(dats[7]) -6][0]) -5);
-        }
+       for (int i = 0; i < matTarifsResg.length; i++) {
+            for (int j = 0; j < matTarifsResg[0].length; j++) {
+                if(j == 0){
+                    System.err.println(dats[7]+" == "+matTarifsResg[i][j+2]);
+                    if(dats[7].equals(matTarifsResg[i][j])){
+                        jCBoxResgAmb.setSelectedItem(matTarifsResg[i][j+2]);
+                    }
+                }
+            }
+             }
+            
+//            jCBoxResgAmb.setSelectedIndex(Integer.parseInt(matTarifsResg[Integer.parseInt(dats[7]) -6][0]) -5);
+        }//else si tiene algun idResguardo
         txtDsctoAmbSem.setText(dats[9]);
         txtDsctoAmbIns.setText(dats[8]);
         txtDsctoResgAmb.setText(dats[10]);

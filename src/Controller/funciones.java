@@ -1156,6 +1156,41 @@ public class funciones {
            return nAmb;
          }
          
+      public String totInfracPend(){
+          Connection cn = con2.conexion();
+          String nAmb = "";
+            String sql = "";
+                     sql = "SELECT sum(pagos_infrac.monto) AS totl\n" +
+                            "FROM pagos_infrac\n" +
+                            "WHERE pagos_infrac.idTurno = 0; "
+                            ;
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0 && !(rs.getString(1) == null) ){
+                        nAmb = rs.getString(1);
+                    }else{
+                        nAmb = "0";
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return nAmb;
+         }//@END totInfracPend
+         
+         
           public String totalLapsoFechas(int opc,String ribro, String fech1, String fech2){
           Connection cn = con2.conexion();
           String nAmb = "";
@@ -1277,7 +1312,7 @@ public class funciones {
                     if(rs.getRow() > 0 && !(rs.getString(1) == null) ){
                         nAmb = rs.getString(1);
                     }else{
-                        nAmb = "-1";
+                        nAmb = "0";
                     }
                 }
             } catch (SQLException ex) {
@@ -1374,7 +1409,7 @@ public class funciones {
                     if(rs.getRow() > 0 && !(rs.getString(1) == null) ){
                         nAmb = rs.getString(1);
                     }else{
-                        nAmb = "-1";
+                        nAmb = "0";
                     }
                 }
             } catch (SQLException ex) {
@@ -1787,7 +1822,7 @@ public class funciones {
                     ";";
                     break;
                     case "Rentas":
-                        sql = "SELECT pagos_cargrenta.numdiablo,pagos_cargrenta.fecha,pagos_cargrenta.id\n" +
+                        sql = "SELECT pagos_cargrenta.numdiablo,pagos_cargrenta.fecha,pagos_cargrenta.id,pagos_cargrenta.fecharenta\n" +
                 "FROM pagos_cargrenta\n" +
                 "WHERE pagos_cargrenta.idCancelacion = 0 AND date_format(pagos_cargrenta.fecha,'%Y') = '"+year+"'  AND pagos_cargrenta.idRubropago = 12  AND pagos_cargrenta.idCarg = '"+idBusq+"'\n" +
                 "order by pagos_cargrenta.fecha DESC\n" +
@@ -1926,8 +1961,40 @@ public class funciones {
                         }
                     }
            return idUser;
-    }//@end getIdClient
+    }//@end getUltAmbul
        
+        
+         // OBENER ULTIMO ID DE TABLA TARIFAS
+        public int getUltTarifResg(){
+            Connection cn = con2.conexion();
+            int idUser= -1;
+            String sql = "";
+            sql = "SELECT id FROM tarifas ORDER BY id DESC LIMIT 1";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idUser=rs.getInt(1);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idUser;
+    }//@end getUltTarifResg
+        
+        
        public static void main(String args[]){
        }
            

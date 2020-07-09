@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="311" whenNoDataType="AllSectionsNoDetail" columnWidth="204" leftMargin="11" rightMargin="11" topMargin="0" bottomMargin="10" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="340" whenNoDataType="AllSectionsNoDetail" columnWidth="204" leftMargin="11" rightMargin="11" topMargin="0" bottomMargin="10" whenResourceMissingType="Key" isIgnorePagination="true" uuid="58e557e0-99df-49d8-80e3-5b579b6a767b">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="47"/>
 	<parameter name="numTicket" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT  pagos_infrac.documento,DATE_FORMAT(pagos_infrac.fecha, "%d - %m - %Y ") AS OCURR,pagos_infrac.documento,pagos_infrac.motivo,
+		<![CDATA[SELECT  pagos_infrac.documento,DATE_FORMAT(pagos_infrac.fecha, "%d - %m - %Y ") AS OCURR,pagos_infrac.documento,pagos_infrac.motivo,pagos_infrac.obs,
                 pagos_infrac.vehiculo,pagos_infrac.quienpaga,if(pagos_infrac.tipoDoc = 0,"Licencia","Placa") AS typDoc,
 DATE_FORMAT(pagos_infrac.fechapag, "%d - %m - %Y ") AS FECpAY,
                 DATE_FORMAT(pagos_infrac.horapag, "%H : %i") AS hor,pagos_infrac.monto,pagos_infrac.descuento,pagos_infrac.monto - pagos_infrac.descuento AS TOT1,
@@ -18,6 +18,9 @@ WHERE pagos_infrac.folio = $P{numTicket};]]>
 	</field>
 	<field name="OCURR" class="java.lang.String"/>
 	<field name="motivo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="obs" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="vehiculo" class="java.lang.String">
@@ -41,40 +44,40 @@ WHERE pagos_infrac.folio = $P{numTicket};]]>
 	</field>
 	<field name="TOTFIN" class="java.math.BigDecimal"/>
 	<title>
-		<band height="116" splitType="Stretch">
+		<band height="145" splitType="Stretch">
 			<image scaleImage="FillFrame">
-				<reportElement x="10" y="0" width="195" height="79" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
+				<reportElement x="23" y="0" width="157" height="98" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
 				<imageExpression><![CDATA["C:\\central\\src\\images\\logo80MM.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="33" y="104" width="147" height="12" forecolor="#3333FF" uuid="2b292a92-0302-46b2-bfec-0232a67d2289"/>
+				<reportElement x="33" y="129" width="147" height="12" forecolor="#3333FF" uuid="2b292a92-0302-46b2-bfec-0232a67d2289"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Pago de Infracciones]]></text>
 			</staticText>
 			<line>
-				<reportElement x="10" y="115" width="195" height="1" uuid="c1e4c872-16ba-4809-939e-9cfa42c4d990"/>
+				<reportElement x="10" y="140" width="195" height="1" uuid="c1e4c872-16ba-4809-939e-9cfa42c4d990"/>
 				<graphicElement>
 					<pen lineStyle="Double" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="-1" y="75" width="204" height="11" forecolor="#3333FF" uuid="6f3c4adf-cd09-4398-b2aa-b1c8b218453e"/>
+				<reportElement x="-1" y="98" width="204" height="11" forecolor="#3333FF" uuid="6f3c4adf-cd09-4398-b2aa-b1c8b218453e"/>
 				<textElement textAlignment="Left">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[OFICINA CENTRAL DE COBRANZA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="85" width="204" height="11" forecolor="#3333FF" uuid="dbab98b5-faba-4fcd-8ab6-e4e6c597c62d"/>
+				<reportElement x="0" y="108" width="204" height="11" forecolor="#3333FF" uuid="dbab98b5-faba-4fcd-8ab6-e4e6c597c62d"/>
 				<textElement textAlignment="Left">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CENTRAL DE ABASTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="93" width="204" height="11" forecolor="#3333FF" uuid="77c45676-f0fd-4628-8b2b-d2ec178f2a44"/>
+				<reportElement x="0" y="116" width="204" height="11" forecolor="#3333FF" uuid="77c45676-f0fd-4628-8b2b-d2ec178f2a44"/>
 				<textElement textAlignment="Left">
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -114,30 +117,30 @@ WHERE pagos_infrac.folio = $P{numTicket};]]>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="83" splitType="Stretch">
+		<band height="116" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="71" width="57" height="12" uuid="429de9ca-2941-400e-8305-41ba27b3dac6"/>
+				<reportElement x="0" y="101" width="57" height="12" uuid="429de9ca-2941-400e-8305-41ba27b3dac6"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[NUMERO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="59" width="57" height="13" uuid="3dc81600-f973-46de-9ab2-0fe351807e67"/>
+				<reportElement x="0" y="89" width="57" height="13" uuid="3dc81600-f973-46de-9ab2-0fe351807e67"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[DOC:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-1" y="46" width="57" height="13" uuid="9a040f16-06ed-497a-aa08-e0ad56e219a0"/>
+				<reportElement x="-1" y="76" width="57" height="13" uuid="9a040f16-06ed-497a-aa08-e0ad56e219a0"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[VEH:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-1" y="16" width="57" height="11" uuid="8ac3d25a-0afd-439b-900c-f9474db33b06"/>
+				<reportElement x="-1" y="16" width="34" height="11" uuid="8ac3d25a-0afd-439b-900c-f9474db33b06"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -158,32 +161,46 @@ WHERE pagos_infrac.folio = $P{numTicket};]]>
 				<textFieldExpression><![CDATA[$F{OCURR}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="25" width="203" height="11" uuid="13df8db0-d337-496f-bea2-09f00603f2f0"/>
+				<reportElement x="35" y="16" width="169" height="11" uuid="13df8db0-d337-496f-bea2-09f00603f2f0"/>
 				<textElement>
-					<font size="8"/>
+					<font size="8" isItalic="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{motivo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="57" y="47" width="100" height="12" uuid="bab6ce68-e31c-42d4-84d2-d48248a6c6e0"/>
+				<reportElement x="57" y="77" width="100" height="12" uuid="bab6ce68-e31c-42d4-84d2-d48248a6c6e0"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{vehiculo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="57" y="60" width="100" height="12" uuid="0f9cbe08-f2d4-46eb-81bd-610863353472"/>
+				<reportElement x="57" y="90" width="100" height="12" uuid="0f9cbe08-f2d4-46eb-81bd-610863353472"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{typDoc}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="57" y="71" width="100" height="12" uuid="cdd9bac5-d819-4871-a0db-9e2b09a62776"/>
+				<reportElement x="57" y="101" width="100" height="12" uuid="cdd9bac5-d819-4871-a0db-9e2b09a62776"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{documento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="48" width="23" height="11" uuid="271dc2f1-4348-4d2c-84c8-b536ba2e436f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[OBS:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="24" y="48" width="180" height="11" uuid="b58682ea-7e52-44c6-ae4f-dc92e2685f93"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -251,7 +268,7 @@ WHERE pagos_infrac.folio = $P{numTicket};]]>
 				<text><![CDATA[FECHA:         ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="19" width="45" height="12" uuid="7ca41ca3-2a95-4d09-93ce-853bc1d1ea3f"/>
+				<reportElement x="0" y="19" width="40" height="12" uuid="7ca41ca3-2a95-4d09-93ce-853bc1d1ea3f"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>

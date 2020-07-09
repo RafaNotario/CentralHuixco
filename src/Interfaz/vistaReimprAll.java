@@ -20,7 +20,8 @@ public class vistaReimprAll extends javax.swing.JFrame {
     
     static int optins = -1;
     static String idPersomn = "";
-    String[] cabHistor = {"Semana","Fecha","Folio"};
+    String[] cabHistor = {"Semana","Fecha","Folio"},
+            cabHistorRentD = {"#Diablo","Fecha pago","#Ticket","Fecha renta"};
     
     String[] arrAreas = {"Mantenimiento","Basura","Policia","Resguardo"};//2,3,4,5
     String[] arrAmbus ={"Semanas","Resguardos","Inscripciones"};// 6,7,8,9,10
@@ -227,7 +228,7 @@ public class vistaReimprAll extends javax.swing.JFrame {
                }
                if(eligio == 2){
                    String[][] mat = func.historPaysAmbs(2,"Rentas",idPersomn,Integer.toString(yearB));
-                   DefaultTableModel modelo = new TModel(mat, cabHistor);
+                   DefaultTableModel modelo = new TModel(mat, cabHistorRentD);
                    jTabViewsPays.setModel(modelo);
                } 
            break;

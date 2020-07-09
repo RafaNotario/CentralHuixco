@@ -145,6 +145,7 @@ public class configuracion extends javax.swing.JPanel {
         txtDialF5TarifnAME.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         txtDialF5Semanal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDialF5Semanal.setPreferredSize(new java.awt.Dimension(100, 21));
 
         txtDialF5Anual.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -176,16 +177,15 @@ public class configuracion extends javax.swing.JPanel {
                     .addComponent(jLabSemest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDialModifiResguardInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDialF5TarifnAME)
                     .addGroup(jDialModifiResguardInfoLayout.createSequentialGroup()
-                        .addGroup(jDialModifiResguardInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jDialModifiResguardInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtDialF5IdTarif, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jDialModifiResguardInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtDialF5Trimestral, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                                .addComponent(txtDialF5Semestral, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtDialF5Anual, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtDialF5Semanal, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(0, 187, Short.MAX_VALUE)))
+                            .addComponent(txtDialF5Trimestral, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                            .addComponent(txtDialF5Semestral)
+                            .addComponent(txtDialF5Anual)
+                            .addComponent(txtDialF5Semanal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 187, Short.MAX_VALUE))
+                    .addComponent(txtDialF5TarifnAME))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialModifiResguardInfoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -398,6 +398,11 @@ public class configuracion extends javax.swing.JPanel {
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null}
             },
             new String [] {
@@ -414,6 +419,21 @@ public class configuracion extends javax.swing.JPanel {
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mas-color.png"))); // NOI18N
         jButton2.setText("Alta");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jButton2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton2KeyPressed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lapiz.png"))); // NOI18N
         jButton3.setText("Modificar");
@@ -446,7 +466,7 @@ public class configuracion extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -481,6 +501,16 @@ public class configuracion extends javax.swing.JPanel {
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mas-color.png"))); // NOI18N
         jButton5.setText("Alta");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/lapiz.png"))); // NOI18N
         jButton6.setText("Modificar");
@@ -511,9 +541,9 @@ public class configuracion extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -793,7 +823,6 @@ public class configuracion extends javax.swing.JPanel {
          
          if(titl.equals("Ambulantes")){
              String[] enviaPrices = new String[5];
-             
              insAn=txtDialF5Anual.getText();
              semestil=txtDialF5Semestral.getText();
              trimetron=txtDialF5Trimestral.getText();
@@ -804,6 +833,34 @@ public class configuracion extends javax.swing.JPanel {
              enviaPrices[4]=trimetron;
              contrlYaWey.f5AllTarifAmbs(enviaPrices);
          }
+         
+           if(titl.equals("New Resguardo")){
+                  String[] newResg = new String[5];
+                  newResg[0] =  idTar;
+                  newResg[1] = "3";
+                  newResg[2] =  txtDialF5TarifnAME.getText();
+                  newResg[3] = txtDialF5Semanal.getText();
+                  contrlYaWey.guardaNewTarifResg(newResg);
+                  jButton2.setEnabled(false);
+           }
+           
+           if(titl.equals("New Tarifa Ambulantes")){
+           String[] enviaPrices = new String[7];
+             insAn=txtDialF5Anual.getText();
+             semestil=txtDialF5Semestral.getText();
+             trimetron=txtDialF5Trimestral.getText();
+             enviaPrices[0]=idTar;
+             enviaPrices[1]="1";
+
+             enviaPrices[2]=txtDialF5TarifnAME.getText();
+             enviaPrices[3]=price;
+             enviaPrices[4]=insAn;
+             enviaPrices[5]=semestil;
+             enviaPrices[6]=trimetron;
+             contrlYaWey.guardaNewTarifAmbs(enviaPrices);
+             jButton5.setEnabled(false);
+           }
+         
          jDialModifiResguardInfo.dispose();
          llenaCampos();
     }//GEN-LAST:event_jButton12ActionPerformed
@@ -811,6 +868,52 @@ public class configuracion extends javax.swing.JPanel {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
 
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+            jDialModifiResguardInfo.setLocationRelativeTo(null);
+            jDialModifiResguardInfo.setVisible(true);
+            jDialModifiResguardInfo.setEnabled(true);
+            jDialModifiResguardInfo.setTitle("New Resguardo");
+            limpiajDialog();
+            int idTar = funcConfig.getUltTarifResg();
+            
+            txtDialF5IdTarif.setText(Integer.toString(idTar +1));
+                   ocultOpcF5(false);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
+
+    }//GEN-LAST:event_jButton2KeyPressed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        if(evt.getClickCount() > 1)
+            jButton2.setEnabled(true);
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+           int fila = jTabTarifsAmbus.getSelectedRow();
+   
+
+            jDialModifiResguardInfo.setLocationRelativeTo(null);
+            jDialModifiResguardInfo.setVisible(true);
+            jDialModifiResguardInfo.setEnabled(true);
+            jDialModifiResguardInfo.setTitle("New Tarifa Ambulantes");
+            
+             limpiajDialog();
+             int idTar = funcConfig.getUltTarifResg();
+                   
+                   ocultOpcF5(true);
+	txtDialF5IdTarif.setText(Integer.toString(idTar + 1));
+	
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+             if(evt.getClickCount() > 1)
+            jButton5.setEnabled(true);
+    }//GEN-LAST:event_jButton5MouseClicked
 
     public void llenaCampos(){
         arreTarifCarg = funcConfig.getTarifCargad(); // datos de costo para cargador
