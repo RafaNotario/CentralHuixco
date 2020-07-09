@@ -1925,14 +1925,14 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addGap(42, 42, 42))
             .addGroup(jPanInterncoborstivkLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanInterncoborstivkLayout.createSequentialGroup()
-                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanInterncoborstivkLayout.createSequentialGroup()
+                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanInterncoborstivkLayout.setVerticalGroup(
@@ -1946,13 +1946,13 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                     .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cobros", jPanInterncoborstivk);
@@ -2087,14 +2087,14 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jCombBOpcBusqGastos)
                     .addComponent(jLabel81, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Gastos", jPanInternGastos);
@@ -6000,8 +6000,10 @@ txtResultAmbu.setText(aux);
                 multi="",multi1 ="",multi2="",resAmbu="",tot="";
             String[] semsC = null;
             BigDecimal auxBig,auxDecs;
+            boolean band = false;
             
         if(tit.equals("Semanas Ambulante")){
+ 
             String var = datCtrl.getFechaCal(jCalendar1);//obtener dtaos de semana segun fecha de calendar elegida
             semsC = func.lapsoSemanasIni(var);//obtenemos datos de semana con la fecha seleccionada
             idSemambu = Integer.parseInt(semsC[0]);//agrgamos idSemana obtenida
@@ -6025,6 +6027,9 @@ txtResultAmbu.setText(aux);
     auxDecs = func.percentage(amountTwo, amountOne);
 auxBig = func.getDifference(func.multiplicaAmount(amountTwo,contarSemsP ) , func.multiplicaAmount(auxDecs, contarSemsP)) ;
 jLabImporteSemanas.setText(auxBig.toString());//func.getSum(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString() 
+
+
+
 if(jCheckSemPaysAmb.isSelected())
     txtResultAmbu.setText(auxBig.toString());
 else{if(jCheckResguardAmb.isSelected() || jCheckInscripPaysAmb.isSelected()){
@@ -8838,7 +8843,7 @@ consul = "SELECT id, nombre from cargadores WHERE cargadores.activo > 0 AND (id 
                     numSemanaResguard=0,
                     queResguar =-1
                     ;
-            
+         
             idTicultimaSem = datasAmbUltSem[3];//contrl.getpagosAmbulante(idAmb, "6");//ulimopago de #ambulante,Semana
             if(idTicultimaSem.isEmpty() || idTicultimaSem.equals("")  || idTicultimaSem == null){
                 JOptionPane.showMessageDialog(null, "Verificar ultima semana Ambualnte.");
@@ -8865,9 +8870,10 @@ consul = "SELECT id, nombre from cargadores WHERE cargadores.activo > 0 AND (id 
               jLabTarifaSemanas.setText(tarifas[5]);
 //Llenar campos de resguardo
  idresguardUltm=contrl.getpagosAmbulante(0,idAmb, "7");//rubropago=7, Resguardo ambulante
-    if(tarifas[0].equals("0") || idresguardUltm.isEmpty() || idresguardUltm.equals("")  || idresguardUltm == null){
+ if(tarifas[0].equals("0") || idresguardUltm.isEmpty() || idresguardUltm.equals("")  || idresguardUltm == null){
         jLabUltimaResguardPay.setText("N/A");
- queResguar = jCBoxResguardosOpc.getItemCount();
+if( !tarifas[0].equals("0")){
+        queResguar = jCBoxResguardosOpc.getItemCount();
 
 if(queResguar > 0){
     String[][] matsResg = func.getResgVehiculo();
@@ -8881,8 +8887,11 @@ if(queResguar > 0){
                 }
             }
              }
+       
+          jCheckResguardAmb.setSelected(true);
          }
-    }else{     
+        }//si tiene tarifa pero no tiene semanas hara este if
+    }else{
      String[] arrResg = contrl.regpagosambdet(0,Integer.parseInt(idresguardUltm),7);
      
      txtIdResguardOcultoAmb.setText(arrResg[3]);
@@ -8908,14 +8917,13 @@ if(queResguar > 0){
               jLabContSemsResguard.setText("1");
      jLabDstoResguard.setText(tarifas[3]);
 /*Codigo agregado para marcar o seleccionar las casillas segun resguardo*/         
-jCheckResguardAmb.setSelected(true);
 queResguar = jCBoxResguardosOpc.getItemCount();
 if(queResguar > 0){
     String[][] matsResg = func.getResgVehiculo();
        for (int i = 0; i < matsResg.length; i++) {
             for (int j = 0; j < matsResg[0].length; j++) {
                 if(j == 0){
-                  //  System.err.println(tarifas[0]+" == "+matsResg[i][j+1]);
+//                    System.err.println(tarifas[0]+" == "+matsResg[i][j+1]);
                     if(tarifas[0].equals(matsResg[i][j])){
                         jCBoxResguardosOpc.setSelectedItem(matsResg[i][j+1]);
                     }
@@ -8927,9 +8935,8 @@ if(queResguar > 0){
          jButMostSemsPaysAmb1.setEnabled(true);
          jButMinusResgSemfin.setEnabled(true);
          jButMostSemsPaysAmb2.setEnabled(true);
-    
+         jCheckResguardAmb.setSelected(true);
     }
-    
 
          if (tarifas[4] == null || tarifas[4].equals("0000-00-00") || tarifas[4].isEmpty()) {
               jLabel60.setText("N/A");
@@ -8943,7 +8950,6 @@ if(queResguar > 0){
           }
         jLabDstoInscripcion.setText(tarifas[1]);
           }//mostrarJpanAmbulantes
-      
         
         /*** METODO PARA CARGAR DINAMICAMENTE DATOS EN JPANELES cargadores*/
       protected void mostrarJpanCargadores(String[] datAMB){

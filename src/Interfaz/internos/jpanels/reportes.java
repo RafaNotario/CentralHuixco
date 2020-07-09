@@ -115,6 +115,8 @@ public class reportes extends javax.swing.JPanel {
         jCmBoxIdCancel = new javax.swing.JComboBox<>();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jLabTurnCancel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTabViewIngresosAll = new javax.swing.JTable();
@@ -196,7 +198,6 @@ public class reportes extends javax.swing.JPanel {
         );
 
         jDialFechonas.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jDialFechonas.setPreferredSize(new java.awt.Dimension(456, 300));
         jDialFechonas.setSize(new java.awt.Dimension(456, 300));
 
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -461,7 +462,7 @@ public class reportes extends javax.swing.JPanel {
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addContainerGap(254, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Corte de caja", new javax.swing.ImageIcon(getClass().getResource("/images/caja-registradora.png")), jPanel1); // NOI18N
@@ -469,6 +470,7 @@ public class reportes extends javax.swing.JPanel {
         jSplitPane2.setDividerLocation(650);
         jSplitPane2.setResizeWeight(0.5);
 
+        jTable2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -480,6 +482,7 @@ public class reportes extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable2.setRowHeight(25);
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable2MouseClicked(evt);
@@ -506,6 +509,7 @@ public class reportes extends javax.swing.JPanel {
 
         jSplitPane2.setLeftComponent(jPanel7);
 
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -517,6 +521,7 @@ public class reportes extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setRowHeight(25);
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -557,6 +562,13 @@ public class reportes extends javax.swing.JPanel {
             }
         });
 
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel19.setText("Turno:");
+
+        jLabTurnCancel.setFont(new java.awt.Font("Tahoma", 3, 16)); // NOI18N
+        jLabTurnCancel.setText("--");
+        jLabTurnCancel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -572,7 +584,11 @@ public class reportes extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabTurnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -583,10 +599,12 @@ public class reportes extends javax.swing.JPanel {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCmBoxIdCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabTurnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addGap(158, 158, 158))
         );
 
         jTabbedPane1.addTab("Cancelaciones", new javax.swing.ImageIcon(getClass().getResource("/images/exit.png")), jPanel2); // NOI18N
@@ -747,7 +765,7 @@ public class reportes extends javax.swing.JPanel {
                                 .addGap(8, 8, 8)
                                 .addComponent(jLabLetrero, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(6, 6, 6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -939,7 +957,21 @@ public class reportes extends javax.swing.JPanel {
     }//GEN-LAST:event_jCmbBCajerosActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        getIntervalTurns(0,"","","");
+   int getElig = jCmbBCajeros.getSelectedIndex();
+           String idUser = ""; 
+            semanaAct = func.getSemanTableAct(datCtrl.setDateActual());
+            
+        if(getElig > -1){
+            if(getElig == 0){
+                getIntervalTurns(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+            }    
+            if(getElig > 0){
+                idUser = idCajeros.get(getElig - 1);
+                System.err.println("Eligio user turno : "+ idUser);
+                getIntervalTurns(1,idUser,semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+            }            
+        }  
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
@@ -950,11 +982,33 @@ public class reportes extends javax.swing.JPanel {
         semanaAct = func.getSemanTableAct(var);
         
         if(tittol.equals("Corte de caja")){
-            getIntervalTurns(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+            int getElig = jCmbBCajeros.getSelectedIndex();
+          String idUser = "";
+        if(getElig > -1){
+            if(getElig == 0){
+                getIntervalTurns(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+            }    
+            if(getElig > 0){
+                idUser = idCajeros.get(getElig - 1);
+                System.err.println("Eligio user turno : "+ idUser);
+                getIntervalTurns(1,idUser,semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+            }            
+        }  
         }
         
         if(tittol.equals("Cancelaciones")){
-            getIntervalTurns2(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+       int getElig = jCmBoxIdCancel.getSelectedIndex();
+          String idUser ="";
+        if(getElig > -1){
+            if(getElig == 0){
+                getIntervalTurns2(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+            }    
+            if(getElig > 0){
+               idUser = idCajeros.get(getElig - 1);
+                System.err.println("Eligio user turno Cancel : "+ idUser);
+                getIntervalTurns2(1,idUser,semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+            }            
+        } 
         }
         
         if(tittol.equals("Ingresos")){
@@ -1169,7 +1223,22 @@ if(subRbro == 0){
     }//GEN-LAST:event_jTabDetailTurnosMouseClicked
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-                getIntervalTurns2(0,"","","");
+       int getElig = jCmBoxIdCancel.getSelectedIndex();
+           String idUser = ""; 
+            semanaAct = func.getSemanTableAct(datCtrl.setDateActual());
+            
+        if(getElig > -1){
+            if(getElig == 0){
+                getIntervalTurns2(1,"",semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+            }    
+            if(getElig > 0){
+                idUser = idCajeros.get(getElig - 1);
+//                System.err.println("Eligio user turno cancel : "+ idUser);
+                getIntervalTurns2(1,idUser,semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
+            }            
+        }  
+        
+       // getIntervalTurns(0,"","","")
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -1184,7 +1253,7 @@ if(subRbro == 0){
         int numTurn = jTable2.getSelectedRow();
                     if(numTurn > -1){
                         buscarTurn = jTable2.getValueAt(numTurn, 0).toString();
-                        jLabViewFolio.setText(buscarTurn);
+                        jLabTurnCancel.setText(buscarTurn);
                         String[][] mat = contrl.matrizgetTicketsDiaCancel("",buscarTurn);
                         jTable1.setModel(new TModel(mat, cabAreasPays));
                     }else{
@@ -1693,7 +1762,7 @@ if(subRbro == 0){
                     }
                 };
                 String consul="";
-                if(opc == 0){
+                if(opc == 0){//
                     consul ="SELECT  turnos.id,usuarios.nombre,turnos.finicial,turnos.ffinal\n" +
                             "FROM turnos\n" +
                             "INNER JOIN usuarios\n" +
@@ -1702,12 +1771,20 @@ if(subRbro == 0){
                             "ORDER BY turnos.id DESC;";
                 }
                 if(opc == 1){
+                    if(idUsers.isEmpty()){
                     consul = "SELECT  turnos.id,usuarios.nombre,turnos.finicial,turnos.ffinal\n" +
                         "FROM turnos\n" +
                         "INNER JOIN usuarios\n" +
                         "ON turnos.idusuario = usuarios.id AND (date(turnos.finicial) >= '"+fech1+"' AND date(turnos.finicial) <= '"+fech2+"')\n" +
                         "ORDER BY turnos.id;";
-                }
+                    }else{
+                        consul = "SELECT  turnos.id,usuarios.nombre,turnos.finicial,turnos.ffinal\n" +
+                        "FROM turnos\n" +
+                        "INNER JOIN usuarios\n" +
+                        "ON turnos.idusuario = usuarios.id AND turnos.idusuario = '"+idUsers+"' AND (date(turnos.finicial) >= '"+fech1+"' AND date(turnos.finicial) <= '"+fech2+"')\n" +
+                        "ORDER BY turnos.id;";
+                    }
+                    }
                  //consul = "SELECT id, nombre from ambulantes WHERE id LIKE '"+var+"%'  OR nombre LIKE '"+var+"%' ORDER BY id";
                         modelo.addColumn("#Turno");       
                         modelo.addColumn("Cajero");
@@ -1771,12 +1848,21 @@ if(subRbro == 0){
                             "ORDER BY turnos.id DESC;";
                 }
                 if(opc == 1){
+                    
+          if(idUsers.isEmpty()){
                     consul = "SELECT  turnos.id,usuarios.nombre,turnos.finicial,turnos.ffinal\n" +
-                        "FROM turnos\n" +
-                        "INNER JOIN usuarios\n" +
-                        "ON turnos.idusuario = usuarios.id AND (date(turnos.finicial) >= '"+fech1+"' AND date(turnos.finicial) <= '"+fech2+"') \n" +
-                        "ORDER BY turnos.id DESC;";
-                }
+                    "FROM turnos\n" +
+                    "INNER JOIN usuarios\n" +
+                    "ON turnos.idusuario = usuarios.id AND (date(turnos.finicial) >= '"+fech1+"' AND date(turnos.finicial) <= '"+fech2+"') \n" +
+                    "ORDER BY turnos.id DESC;";
+          }else{
+             consul = "SELECT  turnos.id,usuarios.nombre,turnos.finicial,turnos.ffinal\n" +
+                    "FROM turnos\n" +
+                    "INNER JOIN usuarios\n" +
+                    "ON turnos.idusuario = usuarios.id AND turnos.idusuario = '"+idUsers+"' AND (date(turnos.finicial) >= '"+fech1+"' AND date(turnos.finicial) <= '"+fech2+"') \n" +
+                    "ORDER BY turnos.id DESC;";
+          }   
+          }
                  //consul = "SELECT id, nombre from ambulantes WHERE id LIKE '"+var+"%'  OR nombre LIKE '"+var+"%' ORDER BY id";
                         modelo.addColumn("#Turno");       
                         modelo.addColumn("Cajero");
@@ -2420,6 +2506,7 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JDialog jDialFechonas;
     private javax.swing.JLabel jLabLetrero;
     private javax.swing.JLabel jLabTOTEGRESOS;
+    private javax.swing.JLabel jLabTurnCancel;
     private javax.swing.JLabel jLabViewFolio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2431,6 +2518,7 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

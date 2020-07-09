@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-
 public class login extends javax.swing.JFrame {
     controlInserts contrl = new controlInserts();
     datesControl dCon = new datesControl();
