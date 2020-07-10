@@ -995,7 +995,7 @@ public class altaAmbulantes extends javax.swing.JFrame {
        for (int i = 0; i < matTarifsResg.length; i++) {
             for (int j = 0; j < matTarifsResg[0].length; j++) {
                 if(j == 0){
-                    System.err.println(dats[7]+" == "+matTarifsResg[i][j+2]);
+                //    System.err.println(dats[7]+" == "+matTarifsResg[i][j+2]);
                     if(dats[7].equals(matTarifsResg[i][j])){
                         jCBoxResgAmb.setSelectedItem(matTarifsResg[i][j+2]);
                     }

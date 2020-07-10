@@ -1946,13 +1946,13 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                     .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         jTabbedPane1.addTab("Cobros", jPanInterncoborstivk);
@@ -2087,14 +2087,14 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jCombBOpcBusqGastos)
                     .addComponent(jLabel81, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Gastos", jPanInternGastos);
@@ -6035,6 +6035,8 @@ if(jCheckSemPaysAmb.isSelected())
 else{if(jCheckResguardAmb.isSelected() || jCheckInscripPaysAmb.isSelected()){
         txtResultAmbu.setText( func.getSum(totalAll,auxBig ).toString() );
 }}
+
+ txtBuscAmbulante.requestFocus(true);
         }
         
         if(tit.equals("Semanas Cargador")){
@@ -6070,6 +6072,8 @@ else{
         txtTotalCarg.setText( func.getSum(totalAll,auxBig ).toString() );
     }
 }
+
+ txtBuscAmbulante.requestFocus(true);
       }
         
       if(tit.equals("Resguardo Ambulante")){
@@ -6088,25 +6092,7 @@ else{
             txtResgFinAmb.setText(semsC[2]);
             
             jLabContSemsResguard.setText("1");
-         /*obtenemos el producto del numero de tickets por semana que pagara
-                   multi1 = jLabDstoResguard.getText();
-                   multi2 = jLabTarifaResguard.getText();
-                   resAmbu = jLabImporteResguard.getText();
-                   tot = txtResultAmbu.getText();
-                   
-                   BigDecimal amountOne = new BigDecimal(multi1);//monto a descontar
-                   BigDecimal amountTwo = new BigDecimal(multi2);//cantidad recivida
-                   BigDecimal amountAmbusMenos = new BigDecimal(resAmbu);//cantidad recivida
-                   BigDecimal totalAll = new BigDecimal(tot);//cantidad recivida 
-                   BigDecimal contarSemsP = new  BigDecimal(jLabContSemsResguard.getText());
-//auxiliar para no tener tan anidado el llamado a funciones Bigdecimal por percentage        
-/*    auxDecs = func.percentage(amountTwo, amountOne);
-auxBig = func.getDifference(func.multiplicaAmount(amountTwo,contarSemsP ) , func.multiplicaAmount(auxDecs, contarSemsP)) ;
-jLabImporteResguard.setText(auxBig.toString());//func.getSum(amountAmbusMenos, func.getDifference(amountTwo, amountOne)).toString() 
-if(jCheckResguardAmb.isSelected()){
-        txtResultAmbu.setText( func.getSum(totalAll,auxBig ).toString() );
-      }
-    */    
+            txtBuscAmbulante.requestFocus(true);
       }   
         
         jDialCalendarMantenim.dispose();       
@@ -6139,6 +6125,13 @@ if(jCheckResguardAmb.isSelected()){
          if(oprime == KeyEvent.VK_ENTER && fila > -1 ){
              String opc = jTabDatosAmbulante.getValueAt(fila, 0).toString();
              datasAmbUltSem = func.getAmbus1(opc);//arreglo para mostra info en jpanelInfo
+             //limpiar campos
+             jLabDstoSemanas.setText("0.00");
+             jLabTarifaSemanas.setText("0");
+             jLabDstoResguard.setText("0.00");
+             jLabTarifaResguard.setText("0");
+             jLabDstoInscripcion.setText("0.00");
+             
              mostrarJpanAmbulantes(opc);
   //           JOptionPane.showMessageDialog(null, "Obtener ultimo pago semana: "+opc);
             jLabIdAmbu.setText(jTabDatosAmbulante.getValueAt(fila, 0).toString());
@@ -6748,8 +6741,14 @@ if(jCheckResguardAmb.isSelected()){
 //func.getDifference(amountTwo, func.percentage(amountTwo, amountFour)).toString()
 jLabImporteResguard.setText(func.getDifference(amTarif, func.percentage(amTarif, amountFour)).toString() );
     importResguard = jLabImporteResguard.getText();
+   if(jCheckResguardAmb.isSelected())
 txtResultAmbu.setText( func.getSum(amountTwo,new BigDecimal(importResguard)).toString() );
+   else
+txtResultAmbu.setText( func.getDifference(amountTwo,new BigDecimal(importResguard)).toString() );
+       
 jCBoxResguardosOpc.setEnabled(true);
+    
+        
         }else{
                 if(jCheckResguardAmb.isSelected()){
                     jButMinusResgPaysAmb.setEnabled(true);
