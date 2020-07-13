@@ -1689,7 +1689,8 @@ if(subRbro == 0){
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        int rows =  jTabViewIngresosAll.getRowCount();
+        int rows =  jTabViewIngresosAll.getRowCount(),
+                opcionAr = jCBoxEsIngreso.getSelectedIndex();
         if(rows >0){
         try{
            Thread t;//Thread
@@ -1700,13 +1701,24 @@ if(subRbro == 0){
                         XSSFSheet hoja = workbook.createSheet();
                         
                         XSSFRow fila = hoja.createRow(0);
-                        fila.createCell(0).setCellValue("#Ticket");
-                        fila.createCell(1).setCellValue("Fecha");
-                        fila.createCell(2).setCellValue("Hora");
-                        fila.createCell(3).setCellValue("Rubro");
-                        fila.createCell(4).setCellValue("Area");
-                        fila.createCell(5).setCellValue("Total");
                         
+                        if(opcionAr == 1){
+                             fila.createCell(0).setCellValue("#Ticket");
+                            fila.createCell(1).setCellValue("Fecha");
+                            fila.createCell(2).setCellValue("Hora");
+                            fila.createCell(3).setCellValue("Rubro");
+                            fila.createCell(4).setCellValue("Area");
+                            fila.createCell(5).setCellValue("Ult. Semana");
+                            fila.createCell(6).setCellValue("Cajero(a)");
+                            fila.createCell(7).setCellValue("Total");
+                        }else{
+                            fila.createCell(0).setCellValue("#Ticket");
+                            fila.createCell(1).setCellValue("Fecha");
+                            fila.createCell(2).setCellValue("Hora");
+                            fila.createCell(3).setCellValue("Rubro");
+                            fila.createCell(4).setCellValue("Nombre");
+                            fila.createCell(5).setCellValue("Total");
+                        }
                         XSSFCellStyle style =workbook.createCellStyle();
                         jProgressBar2.setMaximum(jTabViewIngresosAll.getRowCount());
                         XSSFRow filas = null;
@@ -1720,15 +1732,28 @@ if(subRbro == 0){
                                
                             jProgressBar2.setValue((i+1));
                             filas = hoja.createRow((i+1));//LO CREMAOS A PARTIR DE LA 5TA FILA
+                            
+                            if(opcionAr == 1){
+                                 filas.createCell(0).setCellValue(jTabViewIngresosAll.getValueAt(i, 0).toString());
+                                 filas.createCell(1).setCellValue(jTabViewIngresosAll.getValueAt(i, 1).toString());
+                                 filas.createCell(2).setCellValue(jTabViewIngresosAll.getValueAt(i, 2).toString());
+                                 filas.createCell(3).setCellValue(jTabViewIngresosAll.getValueAt(i, 3).toString());
+                                 filas.createCell(4).setCellValue(jTabViewIngresosAll.getValueAt(i, 4).toString());
+                                 filas.createCell(5).setCellValue(jTabViewIngresosAll.getValueAt(i, 5).toString());                                
+                                 filas.createCell(6).setCellValue(jTabViewIngresosAll.getValueAt(i, 6).toString());                                
+                                 filas.createCell(7).setCellValue(jTabViewIngresosAll.getValueAt(i, 7).toString());                                
+                            }else{
                                  filas.createCell(0).setCellValue(jTabViewIngresosAll.getValueAt(i, 0).toString());
                                  filas.createCell(1).setCellValue(jTabViewIngresosAll.getValueAt(i, 1).toString());
                                  filas.createCell(2).setCellValue(jTabViewIngresosAll.getValueAt(i, 2).toString());
                                  filas.createCell(3).setCellValue(jTabViewIngresosAll.getValueAt(i, 3).toString());
                                  filas.createCell(4).setCellValue(jTabViewIngresosAll.getValueAt(i, 4).toString());
                                  filas.createCell(5).setCellValue(jTabViewIngresosAll.getValueAt(i, 5).toString());
-                        }//for1
+                            }
+                            }//for1
                         hoja.autoSizeColumn(3);//autoajustar celdas al ancho de los datos
                         hoja.autoSizeColumn(4);//autoajustar celdas al ancho de los datos
+                        hoja.autoSizeColumn(5);//autoajustar celdas al ancho de los datos
                         jProgressBar2.setValue(0);
                         jProgressBar2.setString("Abrieno Excel");
                         try{
@@ -2009,7 +2034,7 @@ if(subRbro == 0){
                 
                 if(opc == 1){// solo areas
       if(idUsers.isEmpty()){
-                    consul ="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areasdet.importe\n" +
+/*                    consul ="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areasdet.importe\n" +
                         "FROM pagos_areas\n" +
                         "INNER JOIN areas\n" +
                         "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND (pagos_areas.fecha >= '"+fech1+"' AND pagos_areas.fecha <= '"+fech2+"')\n" +
@@ -2018,15 +2043,42 @@ if(subRbro == 0){
                         "INNER JOIN rubrospago\n" +
                         "on pagos_areasdet.idRubroPago = rubrospago.id	\n" +
                         "ORDER BY pagos_areas.id;";
+*/                    
+                    consul ="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,semanas.semana,usuarios.nombre,pagos_areasdet.importe\n" +
+                        "FROM pagos_areas\n" +
+                        "INNER JOIN turnos ON pagos_areas.idTurno = turnos.id\n" +
+                        "INNER JOIN usuarios ON turnos.idusuario = usuarios.id\n" +
+                        "INNER JOIN areas\n" +
+                        "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND (pagos_areas.fecha >= '"+fech1+"' AND pagos_areas.fecha <= '"+fech2+"') \n" +
+                        "INNER JOIN pagos_areasdet\n" +
+                        "ON pagos_areas.id = pagos_areasdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
+                        "INNER JOIN rubrospago\n" +
+                        "on pagos_areasdet.idRubroPago = rubrospago.id\n" +
+                        "INNER JOIN semanas\n" +
+                        "ON semanas.id = pagos_areasdet.idSemana\n" +
+                        "ORDER BY pagos_areas.id;";
                     }else{
- consul ="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areasdet.importe\n" +
+/* consul ="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areasdet.importe\n" +
                         "FROM pagos_areas\n" +
                         "INNER JOIN areas\n" +
                         "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND (pagos_areas.fecha >= '"+fech1+"' AND pagos_areas.fecha <= '"+fech2+"')\n" +
                         "INNER JOIN pagos_areasdet\n" +
                         "ON pagos_areas.id = pagos_areasdet.idTicket \n" +
                         "INNER JOIN rubrospago\n" +
-                        "on pagos_areasdet.idRubroPago = rubrospago.id AND pagos_areasdet.idRubroPago = '"+idUsers+"'	\n" +
+                        "on pagos_areasdet.idRubroPago = rubrospago.id AND pagos_areasdet.idRubroPago = '"+idUsers+"' \n" +
+                        "ORDER BY pagos_areas.id;";
+ */consul="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,semanas.semana,usuarios.nombre,pagos_areasdet.importe\n" +
+                        "FROM pagos_areas\n" +
+                        "INNER JOIN turnos ON pagos_areas.idTurno = turnos.id\n" +
+                        "INNER JOIN usuarios ON turnos.idusuario = usuarios.id\n" +
+                        "INNER JOIN areas\n" +
+                        "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND (pagos_areas.fecha >= '"+fech1+"' AND pagos_areas.fecha <= '"+fech2+"')\n" +
+                        "INNER JOIN pagos_areasdet\n" +
+                        "ON pagos_areas.id = pagos_areasdet.idTicket \n" +
+                        "INNER JOIN rubrospago\n" +
+                        "on pagos_areasdet.idRubroPago = rubrospago.id AND pagos_areasdet.idRubroPago = '"+idUsers+"' \n" +
+                        "INNER JOIN semanas\n" +
+                        "ON semanas.id = pagos_areasdet.idSemana\n" +
                         "ORDER BY pagos_areas.id;";
                     }
                 }
@@ -2149,13 +2201,23 @@ consul="SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS ho
 }
                 }
                  //consul = "SELECT id, nombre from ambulantes WHERE id LIKE '"+var+"%'  OR nombre LIKE '"+var+"%' ORDER BY id";
+                 if(opc == 1){
                         modelo.addColumn("#Ticket");       
+                        modelo.addColumn("Fecha");
+                        modelo.addColumn("Hora");
+                        modelo.addColumn("Rubro");
+                        modelo.addColumn("Area");
+                        modelo.addColumn("Semana");
+                        modelo.addColumn("Cajero(a)");
+                        modelo.addColumn("Total");
+                 } else{
+                 modelo.addColumn("#Ticket");       
                         modelo.addColumn("Fecha");
                         modelo.addColumn("Hora");
                         modelo.addColumn("Rubro");
                         modelo.addColumn("Nombre");
                         modelo.addColumn("Total");
-
+                 }
                 jTabViewIngresosAll.setModel(modelo);
                 TableColumnModel columnModel = jTabViewIngresosAll.getColumnModel();
               jTabViewIngresosAll.getColumnModel().getColumn(0).setPreferredWidth(80);
@@ -2174,7 +2236,7 @@ consul="SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS ho
                 jTabViewIngresosAll.getColumnModel().getColumn(5).setMaxWidth(150);
                 jTabViewIngresosAll.getColumnModel().getColumn(5).setMinWidth(50);
                 
-                String datos[] =  new String[6];//tenia 4
+                String datos[] =  new String[8];//tenia 4
                 Statement st = null;
                 ResultSet rs = null;
                 try {
@@ -2188,6 +2250,11 @@ consul="SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS ho
                         datos[3] = rs.getString(4);
                         datos[4] = rs.getString(5);
                         datos[5] = rs.getString(6);
+                        if(opc == 1){
+                            datos[6] = rs.getString(7);
+                            datos[7] = rs.getString(8);
+                        }
+                        
                         modelo.addRow(datos);
                     }
                     jTabViewIngresosAll.setModel(modelo);
