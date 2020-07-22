@@ -1238,9 +1238,9 @@ public class funciones {
                 break;
                 case 2://pagos_carg
                     if(ribro.isEmpty()){
-                     sql = "SELECT sum(pagos_cargdet.importe - pagos_cargdet.descuento) AS totCarg\n" +
-                            "FROM pagos_carg\n" +
-                            "INNER JOIN pagos_cargdet\n" +
+                     sql = "SELECT sum(pagos_cargdet.importe - pagos_cargdet.descuento) AS totCarg\n" +//gdet.importe - pagos_cargdet.descuento) AS totCarg
+                            "FROM pagos_cargdet\n" +
+                            "INNER JOIN pagos_carg\n" +
                             "ON pagos_carg.id = pagos_cargdet.idTicket  AND pagos_carg.idCancelacion = 0 AND (pagos_carg.fecha >= '"+fech1+"' AND pagos_carg.fecha <= '"+fech2+"') \n" +
                             ";";
                     }else{

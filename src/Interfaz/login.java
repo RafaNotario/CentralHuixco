@@ -809,7 +809,7 @@ public class login extends javax.swing.JFrame {
             InputStreamReader irs;
             BufferedReader br;
             try (FileWriter fw = new FileWriter(backupFile)) {
-                Process child = runtime.exec("C:/Program Files/MySQL/MySQL Server 8.0/bin/mysqldump  --password=passo12345 --user=prueba --databases central");// | gzip> respadmin_DCR.sql.gz
+                Process child = runtime.exec("C:/Program Files/MySQL/MySQL Server 8.0/bin/mysqldump  --password=passo12345 --user=prueba --default-character-set=utf8mb4 --databases central");// | gzip> respadmin_DCR.sql.gz
                 irs = new InputStreamReader(child.getInputStream());
                 br = new BufferedReader(irs);
                 String line;

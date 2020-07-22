@@ -1497,7 +1497,7 @@ if(subRbro == 0){
                      jLabel18.setText(totambs.toString());
 }
                     break;
-                case 3 ://cargadores
+case 3 ://cargadores
                     subRbro = jCBoxEsRubroDet.getSelectedIndex();
 if(subRbro == 0){
                     getIntervalIngresos(opcois,"",fech1,fech2);
@@ -1551,12 +1551,10 @@ if(subRbro == 0){
     private void jCmBoxEgresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmBoxEgresosActionPerformed
          int opc = jCmBoxEgresos.getHeight();
          String idRibro ="";
-      //   System.out.println("heid¿ght 4,"+opc);
          if(opc > 0){
          opc = jCmBoxEgresos.getSelectedIndex();
          if(opc > 0)
              idRibro = idGastosEg.get(opc-1);
-             // System.out.println("eligio pos 4:"+opc+"value = "+ idRibro);
          }
     }//GEN-LAST:event_jCmBoxEgresosActionPerformed
 
@@ -1645,9 +1643,6 @@ if(subRbro == 0){
                             }else{
                                 filas.createCell(7).setCellValue("");
                             }
-/*
-
-*/
                         }//for1
                             hoja.autoSizeColumn(0);//autoajustar celdas al ancho de los datos
                             hoja.autoSizeColumn(1);//autoajustar celdas al ancho de los datos
@@ -1750,7 +1745,7 @@ if(subRbro == 0){
                                  filas.createCell(4).setCellValue(jTabViewIngresosAll.getValueAt(i, 4).toString());
                                  filas.createCell(5).setCellValue(jTabViewIngresosAll.getValueAt(i, 5).toString());
                             }
-                            }//for1
+                            }
                         hoja.autoSizeColumn(3);//autoajustar celdas al ancho de los datos
                         hoja.autoSizeColumn(4);//autoajustar celdas al ancho de los datos
                         hoja.autoSizeColumn(5);//autoajustar celdas al ancho de los datos
@@ -1770,7 +1765,6 @@ if(subRbro == 0){
            t.start();
        }catch(Exception e) {JOptionPane.showMessageDialog(null, e);
        } 
-        
         }else{
             JOptionPane.showMessageDialog(null, "Debe exisitir algun registro en la tabla");
         }
@@ -1999,17 +1993,16 @@ if(subRbro == 0){
                         "on pagos_ambdet.idRubropago = rubrospago.id	\n" +
                         "ORDER BY pagos_amb.id)\n" +
                         "UNION\n" +
-                        "(SELECT pagos_cargdet.idTicket,pagos_carg.fecha,pagos_carg.hora,rubrospago.descripcion,cargadores.nombre,(pagos_cargdet.importe - pagos_cargdet.descuento) AS totin\n" +
+                        "(SELECT pagos_carg.id,pagos_carg.fecha,pagos_carg.hora,rubrospago.descripcion,cargadores.nombre,pagos_carg.total\n" +
                         "FROM pagos_carg\n" +
                         "INNER JOIN cargadores\n" +
                         "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion = 0 AND (pagos_carg.fecha >= '"+fech1+"' AND pagos_carg.fecha <= '"+fech2+"')\n" +
                         "INNER JOIN pagos_cargdet\n" +
-                        "ON pagos_carg.id = pagos_cargdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
+                        "ON pagos_carg.id = pagos_cargdet.idTicket \n" +
                         "INNER JOIN rubrospago\n" +
                         "on pagos_cargdet.idRubropago = rubrospago.id	\n" +
-                        "ORDER BY pagos_carg.id)\n" +
+                        "GROUP BY pagos_carg.id ORDER BY pagos_carg.id)\n" +
                         "UNION\n" +
-                        "-- QWERY pagos_rentacarg\n" +
                         "(SELECT pagos_cargrenta.id,pagos_cargrenta.fecha,pagos_cargrenta.hora,'Renta diaria de diablo',cargadores.nombre,pagos_cargrenta.importe\n" +
                         "FROM pagos_cargrenta\n" +
                         "INNER JOIN cargadores\n" +
@@ -2024,26 +2017,21 @@ if(subRbro == 0){
                         ")\n" +
                         "UNION\n" +
                         "(SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS fr,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
-                        "IF(otros_venta.tipoPersona = 0,'Varios Amb.',IF(otros_venta.tipoPersona = 1,'Varios Carg.', IF(otros_venta.tipoPersona = 2,'Varios Cte.','NADON') ) ) AS quees,\n" +
-                        "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
-                        "        otros_venta.efectivo\n" +
-                        "FROM otros_venta\n" +
-                        "WHERE otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '"+fech1+"' AND otros_venta.fecha <= '"+fech2+"')\n" +
-                        ");";
+"otros_catalogo.descrip,\n" +
+                            "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
+                        " TRUNCATE( (otros_ventadet.cant * otros_ventadet.precio),2) AS totCarg\n" +
+                "FROM otros_venta\n" +
+"INNER JOIN otros_ventadet\n" +
+"ON otros_venta.id = otros_ventadet.idVenta AND otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '"+fech1+"' AND otros_venta.fecha <= '"+fech2+"')\n" +
+"INNER JOIN otros_catalogo\n" +
+"ON otros_catalogo.id = otros_ventadet.idProd\n" +
+"INNER JOIN otros_rubros\n" +
+"ON otros_rubros.id = otros_catalogo.idrubro \n" +
+");";
                 }
                 
                 if(opc == 1){// solo areas
       if(idUsers.isEmpty()){
-/*                    consul ="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areasdet.importe\n" +
-                        "FROM pagos_areas\n" +
-                        "INNER JOIN areas\n" +
-                        "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND (pagos_areas.fecha >= '"+fech1+"' AND pagos_areas.fecha <= '"+fech2+"')\n" +
-                        "INNER JOIN pagos_areasdet\n" +
-                        "ON pagos_areas.id = pagos_areasdet.idTicket\n" +
-                        "INNER JOIN rubrospago\n" +
-                        "on pagos_areasdet.idRubroPago = rubrospago.id	\n" +
-                        "ORDER BY pagos_areas.id;";
-*/                    
                     consul ="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,semanas.semana,usuarios.nombre,pagos_areasdet.importe\n" +
                         "FROM pagos_areas\n" +
                         "INNER JOIN turnos ON pagos_areas.idTurno = turnos.id\n" +
@@ -2058,16 +2046,7 @@ if(subRbro == 0){
                         "ON semanas.id = pagos_areasdet.idSemana\n" +
                         "ORDER BY pagos_areas.id;";
                     }else{
-/* consul ="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,pagos_areasdet.importe\n" +
-                        "FROM pagos_areas\n" +
-                        "INNER JOIN areas\n" +
-                        "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND (pagos_areas.fecha >= '"+fech1+"' AND pagos_areas.fecha <= '"+fech2+"')\n" +
-                        "INNER JOIN pagos_areasdet\n" +
-                        "ON pagos_areas.id = pagos_areasdet.idTicket \n" +
-                        "INNER JOIN rubrospago\n" +
-                        "on pagos_areasdet.idRubroPago = rubrospago.id AND pagos_areasdet.idRubroPago = '"+idUsers+"' \n" +
-                        "ORDER BY pagos_areas.id;";
- */consul="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,semanas.semana,usuarios.nombre,pagos_areasdet.importe\n" +
+                    consul="SELECT pagos_areasdet.idTicket,pagos_areas.fecha,pagos_areas.hora,rubrospago.descripcion,areas.nombre,semanas.semana,usuarios.nombre,pagos_areasdet.importe\n" +
                         "FROM pagos_areas\n" +
                         "INNER JOIN turnos ON pagos_areas.idTurno = turnos.id\n" +
                         "INNER JOIN usuarios ON turnos.idusuario = usuarios.id\n" +
@@ -2119,17 +2098,18 @@ if(subRbro == 0){
                 }
                 if(opc == 3){//pagos de cargadores
       if(idUsers.isEmpty()){
-                    consul = "(SELECT pagos_cargdet.idTicket,pagos_carg.fecha,pagos_carg.hora,rubrospago.descripcion,cargadores.nombre,pagos_carg.total \n" +
+                    consul =
+"(SELECT pagos_carg.id,pagos_carg.fecha,pagos_carg.hora,rubrospago.descripcion,cargadores.nombre,pagos_carg.total \n" +//pagos_carg.total (pagos_cargdet.importe - pagos_cargdet.descuento) AS totil
                 "FROM pagos_carg\n" +
                 "INNER JOIN cargadores\n" +
                 "ON cargadores.id = pagos_carg.idcarg AND pagos_carg.idCancelacion = 0 AND (pagos_carg.fecha >= '"+fech1+"' AND pagos_carg.fecha <= '"+fech2+"')\n" +
                 "INNER JOIN pagos_cargdet\n" +
-                "ON pagos_carg.id = pagos_cargdet.idTicket -- AND pagos_ambdet.idRubroPago = 8\n" +
+                "ON pagos_carg.id = pagos_cargdet.idTicket \n" +// AND (pagos_cargdet.idRubroPago >= 8 AND pagos_cargdet.idRubroPago <= 11)
                 "INNER JOIN rubrospago\n" +
-                "on pagos_cargdet.idRubropago = rubrospago.id	\n" +
-                "ORDER BY pagos_carg.id)\n" +
+                "ON pagos_cargdet.idRubropago = rubrospago.id \n" +
+                "GROUP BY pagos_carg.id "
+             + "ORDER BY pagos_carg.id)\n" +
                 "UNION\n" +
-                "-- QWERY pagos_rentacarg\n" +
                 "(SELECT pagos_cargrenta.id,pagos_cargrenta.fecha,pagos_cargrenta.hora,'Renta diaria de diablo',cargadores.nombre,pagos_cargrenta.importe\n" +
                 "FROM pagos_cargrenta\n" +
                 "INNER JOIN cargadores\n" +
@@ -2179,17 +2159,23 @@ if(subRbro == 0){
                 if(opc == 5){//pagos de otros venta
 if(idUsers.isEmpty()){
 consul = "SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS hor,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
-                "IF(otros_venta.tipoPersona = 0,'Varios Amb.',IF(otros_venta.tipoPersona = 1,'Varios Carg.', IF(otros_venta.tipoPersona = 2,'Varios Cte.','NADON') ) ) AS quees,\n" +
+                "otros_catalogo.descrip,\n" +
                 "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
-                "        otros_venta.efectivo\n" +
+                "TRUNCATE( (otros_ventadet.cant * otros_ventadet.precio),2) AS totCarg\n" +
                 "FROM otros_venta\n" +
-                "WHERE otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '"+fech1+"' AND otros_venta.fecha <= '"+fech2+"') ;";
-}else{
+"INNER JOIN otros_ventadet\n" +
+"ON otros_venta.id = otros_ventadet.idVenta AND otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '"+fech1+"' AND otros_venta.fecha <= '"+fech2+"')\n" +
+"INNER JOIN otros_catalogo\n" +
+"ON otros_catalogo.id = otros_ventadet.idProd\n" +
+"INNER JOIN otros_rubros\n" +
+"ON otros_rubros.id = otros_catalogo.idrubro \n" +
+";";
+        }else{
 
 consul="SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS hor1,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
 "otros_catalogo.descrip,\n" +
 "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
-"        otros_venta.efectivo\n" +
+"TRUNCATE( (otros_ventadet.cant * otros_ventadet.precio),2) AS totCarg\n" +
 "FROM otros_venta\n" +
 "INNER JOIN otros_ventadet\n" +
 "ON otros_venta.id = otros_ventadet.idVenta AND otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '"+fech1+"' AND otros_venta.fecha <= '"+fech2+"')\n" +
