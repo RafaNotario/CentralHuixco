@@ -118,10 +118,7 @@ public class funciones {
                 pps.setString(1, param.get(0));
                 pps.setString(2, param.get(1));
                 pps.setString(3,timeDate);
-       //        System.out.println("Guardare en TIMESTAMP: "+timeDate);
-               
                 pps.executeUpdate();
-      //          System.out.println("Turno creado correctamente.");
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error durante creacion de Turno.");
                 Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);               

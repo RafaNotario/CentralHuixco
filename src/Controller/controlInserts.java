@@ -142,7 +142,7 @@ public String[] regSemanas(int idS){
 }//FinRegSemanas
 
 /*---***  SEGUNDA FORMA PARA CARGAR ULTIMO PAGO AUNQUESEA DISTINTO TICKET*/
-/*Metodo que devuelve el ultimo ticket pagado y segun campo devuelto mostramos el jpanel*/
+/*Metodo que devuelve las tarifas a cobrar segun cada area*/
 public String[] regOpsareas(int idA){
     int tic =0;
     Connection cn = con2.conexion();
@@ -181,7 +181,7 @@ public int regLastTicket2(int idA,int idcuo){
         String sql = "SELECT  pagos_areas.id\n" +
                             "FROM pagos_areas\n" +
                             "INNER JOIN areas\n" +
-                            "ON areas.id = pagos_areas.idArea AND pagos_areas.idarea = '"+idA+"'\n" +
+                            "ON areas.id = pagos_areas.idArea AND pagos_areas.idCancelacion = 0 AND pagos_areas.idarea = '"+idA+"'\n" +
                             "INNER JOIN\n" +
                             "pagos_areasdet\n" +
                             "ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areasdet.idRubroPago = '"+idcuo+"'\n" +

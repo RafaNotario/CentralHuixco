@@ -125,7 +125,8 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 if(var==KeyEvent.VK_F5){
                     jButton15.doClick();
                 }
-    }} );
+        }
+        } );
 
  }
 
@@ -9173,7 +9174,6 @@ desplazaCursorTab();
                   arr[5] = total;
                   arr[6] = efectiv;
                contrl.guardaTicketArea(arr);//despues de guardar hay que refrescar todo y mostar el ultimo ticket
-
          if(jChecMantSem.isSelected())
                  contadorGuard+= Integer.parseInt(jLabSemsPaysManten.getText());
           if(jChecBasura.isSelected())
