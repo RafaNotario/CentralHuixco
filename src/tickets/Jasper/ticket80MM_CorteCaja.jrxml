@@ -67,7 +67,7 @@ INNER JOIN otros_catalogo
 ON otros_ventadet.idProd = otros_catalogo.id
 INNER JOIN otros_rubros
 ON otros_catalogo.idrubro = otros_rubros.id
-GROUP BY otros_rubros.id)
+)-- GROUP BY otros_venta.id
 UNION
 (SELECT 0,'---------GASTOS---------',0)
 UNION

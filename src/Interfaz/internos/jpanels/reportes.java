@@ -51,7 +51,6 @@ public class reportes extends javax.swing.JPanel {
     List<String> idCajeros = new ArrayList<String>();
     List<String> idGastosEg = new ArrayList<String>();
 
-    
     String[] semanaAct = null;
     
     String buscarTurn ="0";
@@ -294,6 +293,8 @@ public class reportes extends javax.swing.JPanel {
                 .addContainerGap(67, Short.MAX_VALUE))
         );
 
+        setPreferredSize(new java.awt.Dimension(1366, 700));
+
         jSplitPane1.setDividerLocation(650);
         jSplitPane1.setResizeWeight(0.5);
 
@@ -462,7 +463,7 @@ public class reportes extends javax.swing.JPanel {
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Corte de caja", new javax.swing.ImageIcon(getClass().getResource("/images/caja-registradora.png")), jPanel1); // NOI18N
@@ -545,6 +546,12 @@ public class reportes extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Cuenta:");
+
+        jCmBoxIdCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmBoxIdCancelActionPerformed(evt);
+            }
+        });
 
         jButton10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton10.setText("Esta Semana");
@@ -697,9 +704,9 @@ public class reportes extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -721,32 +728,35 @@ public class reportes extends javax.swing.JPanel {
                         .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(75, 75, 75)
                         .addComponent(jLabLetrero, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(77, 77, 77)
-                            .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1097, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(93, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5)
+                        .addGap(36, 36, 36)))
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
+                .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(147, 147, 147))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator6)
-                    .addComponent(jSeparator4)
-                    .addComponent(jSeparator5)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                        .addGap(496, 496, 496))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -755,27 +765,27 @@ public class reportes extends javax.swing.JPanel {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jCBoxEsRubroDet, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
-                                .addComponent(jLabLetrero, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(6, 6, 6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
-                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(204, Short.MAX_VALUE))
+                                .addComponent(jLabLetrero, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(225, 225, 225))))
         );
 
         jTabbedPane1.addTab("Ingresos", new javax.swing.ImageIcon(getClass().getResource("/images/dinero-cobros.png")), jPanel3); // NOI18N
@@ -1005,7 +1015,6 @@ public class reportes extends javax.swing.JPanel {
             }    
             if(getElig > 0){
                idUser = idCajeros.get(getElig - 1);
-                System.err.println("Eligio user turno Cancel : "+ idUser);
                 getIntervalTurns2(1,idUser,semanaAct[3],semanaAct[4]);//opc,idUser,fech1,fech2
             }            
         } 
@@ -1128,7 +1137,6 @@ if(subRbro == 0){
 
     private void jTabViewTurnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabViewTurnosMouseClicked
     //    int numTurn = jTabViewTurnos.getSelectedRow();
-        
             if(evt.getClickCount() > 1){
                 jButton1.doClick();/*
                     if(numTurn > -1){
@@ -1495,17 +1503,17 @@ if(subRbro == 0){
                     getIntervalIngresos(opcois,Integer.toString(subRbro),fech1,fech2);
                     BigDecimal totambs = new BigDecimal(func.totalLapsoFechas(1,Integer.toString(subRbro),fech1,fech2));
                      jLabel18.setText(totambs.toString());
-}
+            }
                     break;
-case 3 ://cargadores
+            case 3 ://cargadores
                     subRbro = jCBoxEsRubroDet.getSelectedIndex();
-if(subRbro == 0){
+                if(subRbro == 0){
                     getIntervalIngresos(opcois,"",fech1,fech2);
                     BigDecimal totcarg = new BigDecimal(func.totalLapsoFechas(2,"",fech1,fech2));
                     BigDecimal totcarg2 = new BigDecimal(func.totalLapsoFechas(3,"",fech1,fech2));
                     BigDecimal totcargAll = func.getSum(totcarg2, totcarg);
                     jLabel18.setText(totcargAll.toString());
-}else{
+                }else{
                     if(subRbro == 1){
                         subRbro=11;//semana cargadores
                         BigDecimal totcarg = new BigDecimal(func.totalLapsoFechas(2,Integer.toString(subRbro),fech1,fech2));
@@ -1706,6 +1714,16 @@ if(subRbro == 0){
                             fila.createCell(5).setCellValue("Ult. Semana");
                             fila.createCell(6).setCellValue("Cajero(a)");
                             fila.createCell(7).setCellValue("Total");
+                        }else if(opcionAr == 4){
+                            fila.createCell(0).setCellValue("#Ticket");
+                            fila.createCell(1).setCellValue("Placa/Documento");
+                            fila.createCell(2).setCellValue("Fecha");
+                            fila.createCell(3).setCellValue("Hora");
+                            fila.createCell(4).setCellValue("Rubro");
+                            fila.createCell(5).setCellValue("Nombre");
+                            fila.createCell(6).setCellValue("Motivo");
+                            fila.createCell(7).setCellValue("Observaciones");
+                            fila.createCell(8).setCellValue("Total");
                         }else{
                             fila.createCell(0).setCellValue("#Ticket");
                             fila.createCell(1).setCellValue("Fecha");
@@ -1737,6 +1755,16 @@ if(subRbro == 0){
                                  filas.createCell(5).setCellValue(jTabViewIngresosAll.getValueAt(i, 5).toString());                                
                                  filas.createCell(6).setCellValue(jTabViewIngresosAll.getValueAt(i, 6).toString());                                
                                  filas.createCell(7).setCellValue(jTabViewIngresosAll.getValueAt(i, 7).toString());                                
+                            }else if(opcionAr == 4){
+                                 filas.createCell(0).setCellValue(jTabViewIngresosAll.getValueAt(i, 0).toString());
+                                 filas.createCell(1).setCellValue(jTabViewIngresosAll.getValueAt(i, 1).toString());
+                                 filas.createCell(2).setCellValue(jTabViewIngresosAll.getValueAt(i, 2).toString());
+                                 filas.createCell(3).setCellValue(jTabViewIngresosAll.getValueAt(i, 3).toString());
+                                 filas.createCell(4).setCellValue(jTabViewIngresosAll.getValueAt(i, 4).toString());
+                                 filas.createCell(5).setCellValue(jTabViewIngresosAll.getValueAt(i, 5).toString());
+                                 filas.createCell(6).setCellValue(jTabViewIngresosAll.getValueAt(i, 6).toString());
+                                 filas.createCell(7).setCellValue(jTabViewIngresosAll.getValueAt(i, 7).toString());
+                                 filas.createCell(8).setCellValue(jTabViewIngresosAll.getValueAt(i, 8).toString());
                             }else{
                                  filas.createCell(0).setCellValue(jTabViewIngresosAll.getValueAt(i, 0).toString());
                                  filas.createCell(1).setCellValue(jTabViewIngresosAll.getValueAt(i, 1).toString());
@@ -1749,6 +1777,11 @@ if(subRbro == 0){
                         hoja.autoSizeColumn(3);//autoajustar celdas al ancho de los datos
                         hoja.autoSizeColumn(4);//autoajustar celdas al ancho de los datos
                         hoja.autoSizeColumn(5);//autoajustar celdas al ancho de los datos
+                        if(opcionAr == 4){
+                            hoja.autoSizeColumn(6);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(7);//autoajustar celdas al ancho de los datos
+                            hoja.autoSizeColumn(8);//autoajustar celdas al ancho de los datos
+                        }
                         jProgressBar2.setValue(0);
                         jProgressBar2.setString("Abrieno Excel");
                         try{
@@ -1769,6 +1802,10 @@ if(subRbro == 0){
             JOptionPane.showMessageDialog(null, "Debe exisitir algun registro en la tabla");
         }
     }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jCmBoxIdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmBoxIdCancelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCmBoxIdCancelActionPerformed
 
         //funcion para busqueda automatica de otros conceptos
         void getIntervalTurns(int opc, String idUsers,String fech1,String fech2){
@@ -2145,46 +2182,45 @@ if(subRbro == 0){
                 "ON cargadores.id = pagos_cargrenta.idCarg AND pagos_cargrenta.idCancelacion = 0 AND (pagos_cargrenta.fecha >= '"+fech1+"' AND pagos_cargrenta.fecha <= '"+fech2+"')\n" +
                 "ORDER BY pagos_cargrenta.id;";
             }
-            
-      }
+          }
                 }
-                if(opc == 4){//pagos de infracciones
-                    consul = "SELECT pagos_infrac.folio,pagos_infrac.fechapag,pagos_infrac.horapag,\"Pago Infraccion\",pagos_infrac.quienpaga,\n" +
-                "IF(pagos_infrac.descuento IS NULL, pagos_infrac.monto, pagos_infrac.monto - pagos_infrac.descuento )  AS totInfrac\n" +
-                "FROM pagos_infrac\n" +
-                "LEFT OUTER JOIN pagos_infraccancel\n" +
-                "ON pagos_infraccancel.idFolio = pagos_infrac.folio WHERE pagos_infraccancel.idFolio IS null AND (pagos_infrac.fechapag >= '"+fech1+"' AND pagos_infrac.fechapag <= '"+fech2+"') \n" +
-                ";";
+                if(opc == 4){ //pagos de infracciones
+                        consul = "SELECT pagos_infrac.folio, pagos_infrac.documento, pagos_infrac.fechapag, pagos_infrac.horapag, \"Pago Infraccion\",pagos_infrac.quienpaga,\n"
+                            + " pagos_infrac.motivo, pagos_infrac.obs, \n"
+                            + " IF(pagos_infrac.descuento IS NULL, pagos_infrac.monto, pagos_infrac.monto - pagos_infrac.descuento )  AS totInfrac \n"
+                            + " FROM pagos_infrac \n"
+                            + "LEFT OUTER JOIN pagos_infraccancel \n"
+                            + "ON pagos_infraccancel.idFolio = pagos_infrac.folio WHERE pagos_infraccancel.idFolio IS NULL AND (pagos_infrac.fechapag >= '" + fech1 + "' AND pagos_infrac.fechapag <= '" + fech2 + "') \n"
+                            + "ORDER BY pagos_infrac.fechapag DESC;";
                 }
-                if(opc == 5){//pagos de otros venta
-if(idUsers.isEmpty()){
-consul = "SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS hor,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
-                "otros_catalogo.descrip,\n" +
-                "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
-                "TRUNCATE( (otros_ventadet.cant * otros_ventadet.precio),2) AS totCarg\n" +
-                "FROM otros_venta\n" +
-"INNER JOIN otros_ventadet\n" +
-"ON otros_venta.id = otros_ventadet.idVenta AND otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '"+fech1+"' AND otros_venta.fecha <= '"+fech2+"')\n" +
-"INNER JOIN otros_catalogo\n" +
-"ON otros_catalogo.id = otros_ventadet.idProd\n" +
-"INNER JOIN otros_rubros\n" +
-"ON otros_rubros.id = otros_catalogo.idrubro \n" +
-";";
-        }else{
-
-consul="SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS hor1,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n" +
-"otros_catalogo.descrip,\n" +
-"IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n" +
-"TRUNCATE( (otros_ventadet.cant * otros_ventadet.precio),2) AS totCarg\n" +
-"FROM otros_venta\n" +
-"INNER JOIN otros_ventadet\n" +
-"ON otros_venta.id = otros_ventadet.idVenta AND otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '"+fech1+"' AND otros_venta.fecha <= '"+fech2+"')\n" +
-"INNER JOIN otros_catalogo\n" +
-"ON otros_catalogo.id = otros_ventadet.idProd\n" +
-"INNER JOIN otros_rubros\n" +
-"ON otros_rubros.id = otros_catalogo.idrubro  AND otros_rubros.id = '"+idUsers+"'\n" +
-";";
-}
+                if(opc == 5){ //pagos de otros venta
+                    if(idUsers.isEmpty()){
+                        consul = "SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS hor,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n"
+                                + "otros_catalogo.descrip,\n"
+                                + "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n"
+                                + "TRUNCATE( (otros_ventadet.cant * otros_ventadet.precio),2) AS totCarg\n"
+                                + "FROM otros_venta\n"
+                                + "INNER JOIN otros_ventadet\n"
+                                + "ON otros_venta.id = otros_ventadet.idVenta AND otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '" + fech1 + "' AND otros_venta.fecha <= '" + fech2 + "')\n"
+                                + "INNER JOIN otros_catalogo\n"
+                                + "ON otros_catalogo.id = otros_ventadet.idProd\n"
+                                + "INNER JOIN otros_rubros\n"
+                                + "ON otros_rubros.id = otros_catalogo.idrubro \n"
+                                + ";";
+                }else{
+                        consul = "SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS hor1,DATE_FORMAT(otros_venta.hora, \"%H : %i\") AS hor,\n"
+                                + "otros_catalogo.descrip,\n"
+                                + "IF(otros_venta.tipoPersona = 0, (SELECT ambulantes.nombre FROM ambulantes WHERE ambulantes.id = otros_venta.idPersona ) ,IF(otros_venta.tipoPersona = 1,(SELECT cargadores.nombre FROM cargadores WHERE cargadores.id = otros_venta.idPersona ), IF(otros_venta.tipoPersona = 2,(SELECT clientes.nombre from clientes WHERE clientes.id = otros_venta.idPersona),'NADON') ) ) AS namquees,\n"
+                                + "TRUNCATE( (otros_ventadet.cant * otros_ventadet.precio),2) AS totCarg\n"
+                                + "FROM otros_venta\n"
+                                + "INNER JOIN otros_ventadet\n"
+                                + "ON otros_venta.id = otros_ventadet.idVenta AND otros_venta.idCancelacion = 0 AND (otros_venta.fecha >= '" + fech1 + "' AND otros_venta.fecha <= '" + fech2 + "')\n"
+                                + "INNER JOIN otros_catalogo\n"
+                                + "ON otros_catalogo.id = otros_ventadet.idProd\n"
+                                + "INNER JOIN otros_rubros\n"
+                                + "ON otros_rubros.id = otros_catalogo.idrubro  AND otros_rubros.id = '" + idUsers + "'\n"
+                                + ";";
+                    }
                 }
                  //consul = "SELECT id, nombre from ambulantes WHERE id LIKE '"+var+"%'  OR nombre LIKE '"+var+"%' ORDER BY id";
                  if(opc == 1){
@@ -2196,8 +2232,18 @@ consul="SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS ho
                         modelo.addColumn("Semana");
                         modelo.addColumn("Cajero(a)");
                         modelo.addColumn("Total");
-                 } else{
-                 modelo.addColumn("#Ticket");       
+                 } else if(opc == 4){
+                        modelo.addColumn("#Ticket");       
+                        modelo.addColumn("Placa/Documento");       
+                        modelo.addColumn("Fecha de pago");
+                        modelo.addColumn("Hora");
+                        modelo.addColumn("Rubro");
+                        modelo.addColumn("Nombre");
+                        modelo.addColumn("Motivo");
+                        modelo.addColumn("Observaciones");
+                        modelo.addColumn("Total");
+                 }else{
+                        modelo.addColumn("#Ticket");       
                         modelo.addColumn("Fecha");
                         modelo.addColumn("Hora");
                         modelo.addColumn("Rubro");
@@ -2222,7 +2268,7 @@ consul="SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS ho
                 jTabViewIngresosAll.getColumnModel().getColumn(5).setMaxWidth(150);
                 jTabViewIngresosAll.getColumnModel().getColumn(5).setMinWidth(50);
                 
-                String datos[] =  new String[8];//tenia 4
+                String datos[] =  new String[9];//tenia 4
                 Statement st = null;
                 ResultSet rs = null;
                 try {
@@ -2236,9 +2282,12 @@ consul="SELECT otros_venta.id,DATE_FORMAT(otros_venta.fecha, \"%d-%m-%Y\") AS ho
                         datos[3] = rs.getString(4);
                         datos[4] = rs.getString(5);
                         datos[5] = rs.getString(6);
-                        if(opc == 1){
+                        if(opc == 1 || opc == 4){
                             datos[6] = rs.getString(7);
                             datos[7] = rs.getString(8);
+                        }
+                        if(opc == 4){
+                            datos[8] = rs.getString(9);
                         }
                         
                         modelo.addRow(datos);

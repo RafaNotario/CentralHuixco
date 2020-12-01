@@ -7,6 +7,7 @@ package Interfaz;
 
 import Controller.datesControl;
 import Controller.funciones;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import renderTable.TModel;
@@ -76,6 +77,11 @@ public class vistaReimprAll extends javax.swing.JFrame {
                 jCmBOptionsActionPerformed(evt);
             }
         });
+        jCmBOptions.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jCmBOptionsKeyReleased(evt);
+            }
+        });
 
         jYearChooser1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -85,6 +91,11 @@ public class vistaReimprAll extends javax.swing.JFrame {
         jYearChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jYearChooser1PropertyChange(evt);
+            }
+        });
+        jYearChooser1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jYearChooser1KeyReleased(evt);
             }
         });
 
@@ -101,6 +112,11 @@ public class vistaReimprAll extends javax.swing.JFrame {
         jTabViewsPays.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTabViewsPaysMousePressed(evt);
+            }
+        });
+        jTabViewsPays.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTabViewsPaysKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jTabViewsPays);
@@ -272,6 +288,24 @@ public class vistaReimprAll extends javax.swing.JFrame {
                 }
               }
     }//GEN-LAST:event_jTabViewsPaysMousePressed
+
+    private void jCmBOptionsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCmBOptionsKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_jCmBOptionsKeyReleased
+
+    private void jYearChooser1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jYearChooser1KeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_jYearChooser1KeyReleased
+
+    private void jTabViewsPaysKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTabViewsPaysKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_jTabViewsPaysKeyReleased
 
     /**
      * @param args the command line arguments

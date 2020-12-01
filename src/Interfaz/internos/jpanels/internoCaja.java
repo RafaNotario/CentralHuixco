@@ -39,6 +39,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.Rectangle;
 import java.math.BigInteger;
+import javax.swing.JTable;
 
 
 /**
@@ -70,6 +71,8 @@ public class internoCaja extends javax.swing.JPanel {
      
 String[] cabAreasPays = {"# Ticket", "Hora", "Concepto", "Nombre", "Monto"},
         cabInfraccionesView = {"Folio", "Fecha","Placa/Licencia", "Vehiculo","Importe"},
+        cabRentaDiab = {"Folio", "Fecha ticket","#Cargador", "Nombre","#Diablito","importe","Fecha Renta"},
+        
         tarifas=null,//para tener las tarifas a cobrar a los ambulnates
         datasCarg = null,//para tener los datos a usar de cargador, trifas, diablo popio, descuentos
         infoUser = null,
@@ -112,7 +115,8 @@ mostrarGastosDia("",infoUser[6]);
 dCCFechIniRentCarg.setDateFormat(formatoPrueba);
 dCCFechFinRentCarg.setDateFormat(formatoPrueba);
 
-
+agregarOyente();//para calendar de diablitos
+        
 jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         new KeyAdapter(){
         @Override
@@ -124,6 +128,10 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
              }
                 if(var==KeyEvent.VK_F5){
                     jButton15.doClick();
+                }
+                
+                if(var==KeyEvent.VK_F2){
+                    jButton45.doClick();
                 }
         }
         } );
@@ -235,6 +243,17 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         jCombBTypeRubros = new javax.swing.JComboBox<>();
         jButton39 = new javax.swing.JButton();
         jButton43 = new javax.swing.JButton();
+        rentasDiab = new javax.swing.JFrame();
+        jLabel85 = new javax.swing.JLabel();
+        jLabel107 = new javax.swing.JLabel();
+        jLabel108 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jCalendar2 = new com.toedter.calendar.JCalendar();
+        jLabel110 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel115 = new javax.swing.JLabel();
+        jLabel116 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -378,6 +397,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         txtNumDiabRent = new javax.swing.JTextField();
         dCCFechIniRentCarg = new datechooser.beans.DateChooserCombo();
         dCCFechFinRentCarg = new datechooser.beans.DateChooserCombo();
+        jButton46 = new javax.swing.JButton();
         jPanCargadorInscr = new javax.swing.JPanel();
         jPanel28 = new javax.swing.JPanel();
         jSeparator8 = new javax.swing.JSeparator();
@@ -1668,6 +1688,109 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        rentasDiab.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        rentasDiab.setTitle("Diablitos rentados");
+        rentasDiab.setBackground(new java.awt.Color(255, 255, 255));
+        rentasDiab.setSize(new java.awt.Dimension(700, 700));
+
+        jLabel85.setText("<html>\n  <style type=\"text/css\">\n  span {\n    color: purple;\n    background-color: #d8da3d \n}\n  </style>\n\n<h3>Elija una fecha del calendario para <span>visualizar los diablitos rentados</span>.\n</h3>\n</html>");
+
+        jLabel107.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel107.setText("Rentas del dia :");
+
+        jLabel108.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel108.setText("--");
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTable1.setRowHeight(23);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jCalendar2.setBackground(new java.awt.Color(204, 255, 255));
+        jCalendar2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jCalendar2.setToolTipText("Seleccione una fecha del calendario para visulizar las rentas del diablito.");
+        jCalendar2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        jLabel110.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel110.setText("Buscar por:");
+
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fecha de Pago", "Fecha de Renta" }));
+
+        jLabel115.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel115.setText("Importe: $");
+
+        jLabel116.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jLabel116.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel116.setText("0.0");
+
+        javax.swing.GroupLayout rentasDiabLayout = new javax.swing.GroupLayout(rentasDiab.getContentPane());
+        rentasDiab.getContentPane().setLayout(rentasDiabLayout);
+        rentasDiabLayout.setHorizontalGroup(
+            rentasDiabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rentasDiabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(rentasDiabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(rentasDiabLayout.createSequentialGroup()
+                        .addGroup(rentasDiabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(rentasDiabLayout.createSequentialGroup()
+                                .addComponent(jLabel85, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(rentasDiabLayout.createSequentialGroup()
+                                .addComponent(jLabel107, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel108, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(94, 94, 94)
+                                .addComponent(jLabel115, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel116, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(rentasDiabLayout.createSequentialGroup()
+                        .addComponent(jLabel110, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCalendar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(53, 53, 53))))
+        );
+        rentasDiabLayout.setVerticalGroup(
+            rentasDiabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rentasDiabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel85, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(rentasDiabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCalendar2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(rentasDiabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel110)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(rentasDiabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel107)
+                    .addComponent(jLabel108)
+                    .addComponent(jLabel115)
+                    .addComponent(jLabel116))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setPreferredSize(new java.awt.Dimension(1329, 921));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -1926,14 +2049,14 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addGap(42, 42, 42))
             .addGroup(jPanInterncoborstivkLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanInterncoborstivkLayout.createSequentialGroup()
-                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanInterncoborstivkLayout.createSequentialGroup()
+                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanInterncoborstivkLayout.setVerticalGroup(
@@ -1947,13 +2070,13 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                     .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cobros", jPanInterncoborstivk);
@@ -2060,9 +2183,9 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(5, 5, 5))
             .addGroup(jPanInternGastosLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanInternGastosLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel81, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCombBOpcBusqGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2088,14 +2211,14 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jCombBOpcBusqGastos)
                     .addComponent(jLabel81, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(237, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Gastos", jPanInternGastos);
@@ -3167,7 +3290,7 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                         .addComponent(jLabel113, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel114, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         txtNumDiabRent.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3278,6 +3401,16 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
     }
     });
 
+    jButton46.setBackground(new java.awt.Color(102, 255, 102));
+    jButton46.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    jButton46.setText("VER");
+    jButton46.setToolTipText("");
+    jButton46.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton46ActionPerformed(evt);
+        }
+    });
+
     javax.swing.GroupLayout jPanRentCargadorLayout = new javax.swing.GroupLayout(jPanRentCargador);
     jPanRentCargador.setLayout(jPanRentCargadorLayout);
     jPanRentCargadorLayout.setHorizontalGroup(
@@ -3303,35 +3436,40 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
                         .addComponent(dCCFechIniRentCarg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(dCCFechFinRentCarg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanRentCargadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton46, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap(50, Short.MAX_VALUE))
     );
     jPanRentCargadorLayout.setVerticalGroup(
         jPanRentCargadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanRentCargadorLayout.createSequentialGroup()
             .addGap(32, 32, 32)
-            .addGroup(jPanRentCargadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(dCCFechIniRentCarg, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(dCCFechFinRentCarg, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanRentCargadorLayout.createSequentialGroup()
+            .addGroup(jPanRentCargadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addGroup(jPanRentCargadorLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jButton46, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(9, 9, 9)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanRentCargadorLayout.createSequentialGroup()
+                    .addGap(32, 32, 32)
                     .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanRentCargadorLayout.createSequentialGroup()
-                    .addComponent(dCCFechIniRentCarg, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dCCFechFinRentCarg, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(jPanRentCargadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel84, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(txtnumDaysrentdiab, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(jPanRentCargadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel102, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(txtNumDiabRent, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanRentCargadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel84, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtnumDaysrentdiab, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanRentCargadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel102, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNumDiabRent, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGap(72, 72, 72))
-        .addGroup(jPanRentCargadorLayout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     jPanCargadorInscr.setBackground(new java.awt.Color(255, 255, 255));
@@ -3794,14 +3932,16 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
         jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jLayeredPane4Layout.createSequentialGroup()
             .addComponent(jPanSemCargad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 121, Short.MAX_VALUE))
+            .addGap(0, 122, Short.MAX_VALUE))
         .addGroup(jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane4Layout.createSequentialGroup()
-                .addContainerGap(129, Short.MAX_VALUE)
+                .addContainerGap(132, Short.MAX_VALUE)
                 .addComponent(jPanCargadorInscr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap()))
         .addGroup(jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanRentCargador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane4Layout.createSequentialGroup()
+                .addComponent(jPanRentCargador, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 14, Short.MAX_VALUE)))
     );
 
     jLabel50.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -4048,7 +4188,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
                 .addGroup(jPanCargadoresLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap(13, Short.MAX_VALUE))
         .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanCargadoresLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -4083,9 +4223,9 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
             .addContainerGap(214, Short.MAX_VALUE))
         .addGroup(jPanCargadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanCargadoresLayout.createSequentialGroup()
-                .addContainerGap(302, Short.MAX_VALUE)
+                .addContainerGap(296, Short.MAX_VALUE)
                 .addComponent(jLayeredPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE)))
+                .addContainerGap(263, Short.MAX_VALUE)))
     );
 
     jPanVarios.setBackground(new java.awt.Color(255, 255, 255));
@@ -4661,6 +4801,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
 
     jButton23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/goma-de-borrar.png"))); // NOI18N
 
+    jTabInfraccView.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jTabInfraccView.setModel(new javax.swing.table.DefaultTableModel(
         new Object [][] {
             {"2572", "14-12-2018", "LRL-73-7", null, "300.00"},
@@ -4672,9 +4813,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
             "Folio", "Fecha", "Placa / Licencia", "Vehículo", "Importe"
         }
     ));
-    jTabInfraccView.setColumnSelectionAllowed(true);
-    jTabInfraccView.setRowHeight(20);
-    jTabInfraccView.setRowMargin(2);
+    jTabInfraccView.setRowHeight(23);
     jScrollPane4.setViewportView(jTabInfraccView);
     if (jTabInfraccView.getColumnModel().getColumnCount() > 0) {
         jTabInfraccView.getColumnModel().getColumn(0).setMinWidth(80);
@@ -5298,6 +5437,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
             jChecPoliciaActionPerformed(evt);
         }
     });
+    jChecPolicia.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jChecPoliciaKeyReleased(evt);
+        }
+    });
 
     jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel24.setText("Ultimo Pago: -");
@@ -5505,6 +5649,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
     jChecResguardo.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jChecResguardoActionPerformed(evt);
+        }
+    });
+    jChecResguardo.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jChecResguardoKeyReleased(evt);
         }
     });
 
@@ -5801,7 +5950,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(jPanambulantes, javax.swing.GroupLayout.PREFERRED_SIZE, 648, Short.MAX_VALUE)
+                .addComponent(jPanambulantes, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -5811,7 +5960,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanCargadores, javax.swing.GroupLayout.PREFERRED_SIZE, 638, Short.MAX_VALUE)
+                .addComponent(jPanCargadores, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                 .addContainerGap()))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -5856,7 +6005,7 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
             .addGap(0, 0, 0)
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addContainerGap())
@@ -6601,23 +6750,19 @@ else{
            case "Areas":
                cobraAreas();
            break;
-           
            case "Ambulantes":
                cobraAmbulantes();
            break;
-           
            case "Cargadores":
                cobraCargadores();
                jPanDataambView2.setVisible(false);
-               
            break;
-
             case "Otros":
                cobraOtrosPays();
            break;
            case "Cargadores Renta":
                cobraRentCarg();
-                   jButton40.doClick();
+               jButton40.doClick();
           jPanDataambView2.setVisible(false);
           txtBuscCargadores.requestFocus(true);
            break;
@@ -7269,6 +7414,23 @@ txtTotalCarg.setText( func.getSum(totalAll, auxBig).toString() );
 
     private void jButton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton37ActionPerformed
        if(jPanRentCargador.isVisible()){
+           
+           int contadorGuard =Integer.parseInt(txtnumDaysrentdiab.getText());
+           String startDat = datCtrl.volteaFecha(dCCFechIniRentCarg.getText(),0),
+                 numDiab = txtNumDiabRent.getText(),auxF="";
+           
+         for(int i = 1;i <= contadorGuard; i++){
+               System.out.println("Fecha Renta: "+startDat+" #Diablo: "+numDiab);
+               if(contrl.validaRentaDiablo(startDat,numDiab)){
+                   JOptionPane.showMessageDialog(null, "Diablito #"+numDiab+" ya fue rentado para la fecha: "+startDat+"\nVerifique porfavor.");
+                   break;
+               }else{
+                     auxF = startDat;
+                    startDat = datCtrl.getSumFechDay(auxF,1);//Le suma un dia a la fecha recibida
+               }
+           }
+           
+           
             jFramePays.setLocationRelativeTo(null);
             jFramePays.setVisible(true);
             jFramePays.setEnabled(true);
@@ -7486,7 +7648,6 @@ if(!dto.isEmpty() && !toI.isEmpty()){
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void txtBusqOtrosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusqOtrosKeyReleased
-        
         int oprime = evt.getKeyCode();
          String var = txtBusqOtros.getText();
         if(!var.isEmpty()){
@@ -7672,7 +7833,6 @@ if(selec > -1){
 
     private void jButton49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton49ActionPerformed
      int fila = jTabVistaVentaOthers.getRowCount();
-      
         if(fila > 0){   
             jFramePays.setLocationRelativeTo(null);
             jFramePays.setVisible(true);
@@ -7916,7 +8076,6 @@ if(selec > -1){
                         arrCancInfracc[4] = ora;
                         arrCancInfracc[5] = desc;
                         arrCancInfracc[6] = aux;
-                        
                         contrl.guardInCancelInfracc(arrCancInfracc);
                         contrl.f5CancelTypesFolio("pagos_infrac","idTurno",mostTic,"0");//actualizamos para que vuelva a aparecer en la busqueda
                     }
@@ -7928,7 +8087,6 @@ if(selec > -1){
                         contrl.guardInCancelaciones(arregCan);
                         contrl.f5CancelTypesAll("pagos_cargrenta","idCancelacion",mostTic,arregCan[0]);
                     }
-                    
             }else{
                 JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.");
             }//IS ISEMPTY
@@ -7943,7 +8101,6 @@ if(selec > -1){
         jDialCancelaciones.setLocationRelativeTo(null);
         jDialCancelaciones.setVisible(true);
         jDialCancelaciones.setEnabled(true);
-    //    jDialCancelaciones.setTitle("Cancelacion de Renta cargador");
         txtCancelTick.setText("");
     }//GEN-LAST:event_jButton18ActionPerformed
 
@@ -8197,9 +8354,12 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
     }//GEN-LAST:event_formKeyReleased
 
     private void txtBuscAmbulanteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscAmbulanteKeyReleased
-         if(evt.getKeyCode()==KeyEvent.VK_F5){
-                    jButton22.doClick();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            jButton22.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton27.doClick();
+        }
     }//GEN-LAST:event_txtBuscAmbulanteKeyReleased
 
     private void jCheckResguardAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCheckResguardAmbKeyReleased
@@ -8209,9 +8369,12 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
     }//GEN-LAST:event_jCheckResguardAmbKeyReleased
 
     private void jButMinusSemsPaysAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMinusSemsPaysAmbKeyReleased
-         if(evt.getKeyCode()==KeyEvent.VK_F5){
-                    jButton22.doClick();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            jButton22.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton27.doClick();
+        }
     }//GEN-LAST:event_jButMinusSemsPaysAmbKeyReleased
 
     private void jButMostSemsPaysAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMostSemsPaysAmbKeyReleased
@@ -8221,9 +8384,12 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
     }//GEN-LAST:event_jButMostSemsPaysAmbKeyReleased
 
     private void jCheckSemPaysAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCheckSemPaysAmbKeyReleased
-         if(evt.getKeyCode()==KeyEvent.VK_F5){
-                    jButton22.doClick();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            jButton22.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton27.doClick();
+        }
     }//GEN-LAST:event_jCheckSemPaysAmbKeyReleased
 
     private void jButMinusResgPaysAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMinusResgPaysAmbKeyReleased
@@ -8257,22 +8423,30 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
     }//GEN-LAST:event_jCBoxResguardosOpcKeyReleased
 
     private void jCheckInscripPaysAmbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCheckInscripPaysAmbKeyReleased
-                if(evt.getKeyCode()==KeyEvent.VK_F5){
-                    jButton22.doClick();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            jButton22.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton27.doClick();
+        }
     }//GEN-LAST:event_jCheckInscripPaysAmbKeyReleased
 
     private void jDateChoInscripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDateChoInscripcionKeyReleased
-                if(evt.getKeyCode()==KeyEvent.VK_F5){
-                    jButton22.doClick();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            jButton22.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton27.doClick();
+        }
     }//GEN-LAST:event_jDateChoInscripcionKeyReleased
 
     private void jCBoxDuracInscripcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCBoxDuracInscripcKeyReleased
-                if(evt.getKeyCode()==KeyEvent.VK_F5){
-                    jButton22.doClick();
-                }
-              
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            jButton22.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton27.doClick();
+        }
     }//GEN-LAST:event_jCBoxDuracInscripcKeyReleased
 
     private void jCmBxgetAreasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCmBxgetAreasKeyReleased
@@ -8281,15 +8455,21 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
     }//GEN-LAST:event_jCmBxgetAreasKeyReleased
 
     private void jChecMantSemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jChecMantSemKeyReleased
-       if(evt.getKeyCode()==KeyEvent.VK_F5){
+       if(evt.getKeyCode() ==KeyEvent.VK_F5){
                     jButton15.doClick();
-                }
+       }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton45.doClick();
+        }
     }//GEN-LAST:event_jChecMantSemKeyReleased
 
     private void jChecBasuraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jChecBasuraKeyReleased
-        if(evt.getKeyCode()==KeyEvent.VK_F5){
-                    jButton15.doClick();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            jButton15.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton45.doClick();
+        }
     }//GEN-LAST:event_jChecBasuraKeyReleased
 
     private void jButMantenSubstractKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMantenSubstractKeyReleased
@@ -8317,15 +8497,21 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
     }//GEN-LAST:event_jButBasuraMooreKeyReleased
 
     private void txtBuscCargadoresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscCargadoresKeyReleased
-      if(evt.getKeyCode()==KeyEvent.VK_F5){
-                    jButton37.doClick();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            jButton37.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton36.doClick();
+        }
     }//GEN-LAST:event_txtBuscCargadoresKeyReleased
 
     private void jCkBoxSemanasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCkBoxSemanasKeyReleased
-              if(evt.getKeyCode()==KeyEvent.VK_F5){
-                    jButton37.doClick();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            jButton37.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton36.doClick();
+        }
     }//GEN-LAST:event_jCkBoxSemanasKeyReleased
 
     private void jButMinusSemsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButMinusSemsKeyReleased
@@ -8341,9 +8527,12 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
     }//GEN-LAST:event_jButMooreSemsKeyReleased
 
     private void jCkBoxInscripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCkBoxInscripcionKeyReleased
-              if(evt.getKeyCode()==KeyEvent.VK_F5){
-                    jButton37.doClick();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            jButton37.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton36.doClick();
+        }
     }//GEN-LAST:event_jCkBoxInscripcionKeyReleased
 
     private void jComBInscripcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComBInscripcKeyReleased
@@ -8353,15 +8542,21 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
     }//GEN-LAST:event_jComBInscripcKeyReleased
 
     private void jDatChoIncripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDatChoIncripcionKeyReleased
-              if(evt.getKeyCode()==KeyEvent.VK_F5){
-                    jButton37.doClick();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            jButton37.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton36.doClick();
+        }
     }//GEN-LAST:event_jDatChoIncripcionKeyReleased
 
     private void txtNumDiabRentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumDiabRentKeyReleased
-             if(evt.getKeyCode()==KeyEvent.VK_F5){
-                    jButton37.doClick();
-                }
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            jButton37.doClick();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton36.doClick();
+        }
     }//GEN-LAST:event_txtNumDiabRentKeyReleased
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
@@ -8544,6 +8739,41 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
         jDialCalendarMantenim.setLocationRelativeTo(null);
         jCalendar1.setDate(datCtrl.cargafecha());
     }//GEN-LAST:event_jLaFechIniResguardMouseReleased
+
+    private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
+        rentasDiab.setLocationRelativeTo(this);
+        rentasDiab.setVisible(true);
+        rentasDiab.setEnabled(true);
+        rentasDiab.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButton46ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (evt.getClickCount() > 1) {
+                int vari = jTable1.getSelectedRow();
+                if(vari >= 0){
+                    String mostTic = jTable1.getValueAt(vari, 0).toString();
+                    if(mostTic.equals("NO DATA")){
+                        JOptionPane.showMessageDialog(null, "Dato no valido: "+mostTic);
+                    }else{
+                        rP.imprim80MM_CargRent(mostTic,false);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe elegir ");
+                }
+         }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jChecPoliciaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jChecPoliciaKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton45.doClick();
+        }
+    }//GEN-LAST:event_jChecPoliciaKeyReleased
+
+    private void jChecResguardoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jChecResguardoKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_F2) {
+            jButton45.doClick();
+        }
+    }//GEN-LAST:event_jChecResguardoKeyReleased
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -9018,12 +9248,6 @@ if(queResguar > 0){
               jButton40.setVisible(false);
               jButton41.doClick();
           }
-
- /*         for (int i = 0; i < datAMB.length; i++) {
-              System.err.print("["+datAMB[i]+"]");
-          }
-          System.out.println("");
-            */
           }//@endmostrarJpanCargadores
 
       
@@ -9602,12 +9826,19 @@ protected void cobraRentCarg(){
            arr[8] = percnt;
            
            for(int i = 1;i <= contadorGuard; i++){
-                contrl.guardTickRentCarg(arr);//despues de guardar hay que refrescar todo y mostar el ultimo ticket
-                auxFech = arr[6];auxIdTic=Integer.parseInt(arr[0]);
-                arr[0] = Integer.toString(auxIdTic+1);
-                arr[6] = datCtrl.getSumFechDay(auxFech,1);
-                
-                 rP.imprim80MM_CargRent(Integer.toString(auxIdTic),true);
+            //   System.out.println("Fecha Renta: "+arr[6]+" #Diablo: "+arr[7]);
+               if(contrl.validaRentaDiablo(arr[6],arr[7])){
+                   JOptionPane.showMessageDialog(null, "Diablito #"+arr[7]+" ya fue rentado para la fecha: "+arr[6]+"\nVerifique porfavor.");
+                   break;
+               }else{
+                    contrl.guardTickRentCarg(arr);//despues de guardar hay que refrescar todo y mostar el ultimo ticket
+                    auxFech = arr[6];
+                    auxIdTic=Integer.parseInt(arr[0]);
+                    arr[0] = Integer.toString(auxIdTic+1);
+                    arr[6] = datCtrl.getSumFechDay(auxFech,1);//Le suma un dia a la fecha recibida
+
+                     rP.imprim80MM_CargRent(Integer.toString(auxIdTic),true);
+               }
            }
            comoNewRentCarg();
           String[][] mat = contrl.matrizgetTicketsDia("",infoUser[6]);
@@ -9773,8 +10004,6 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
           jLabTarifRentCarg.setText(coastRentCarg[3]);
           jLabCondonacRentDiab.setText("0.00");
           jLabImportRentDiab.setText(coastRentCarg[3]);
-          
-
       }
       
              //funcion para busqueda automatica ambulantes
@@ -9792,15 +10021,15 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
          //   if(atributo.equals("nombre") || atributo.equals("")){
            consul ="(SELECT clientes.id,clientes.nombre,\"Cliente\" as Iss\n" +
                         "FROM clientes \n" +
-                        "WHERE (clientes.id LIKE '"+var+"%'  OR clientes.nombre LIKE '%"+var+"%') ORDER BY clientes.id)\n" +
+                        "WHERE clientes.activo = 1 AND (clientes.id LIKE '"+var+"%'  OR clientes.nombre LIKE '%"+var+"%') ORDER BY clientes.id)\n" +
                         "UNION\n" +
                         "(SELECT ambulantes.id,ambulantes.nombre,\"Ambulante\" as Iss \n" +
                         "FROM ambulantes\n" +
-                        "WHERE (ambulantes.id LIKE '"+var+"%'  OR ambulantes.nombre LIKE '%"+var+"%') ORDER BY ambulantes.id)\n" +
+                        "WHERE ambulantes.activo = 1 AND (ambulantes.id LIKE '"+var+"%'  OR ambulantes.nombre LIKE '%"+var+"%') ORDER BY ambulantes.id)\n" +
                         "union\n" +
                         "(SELECT cargadores.id,cargadores.nombre,\"Cargador\" as Iss\n" +
                         "FROM cargadores\n" +
-                        "WHERE (cargadores.id LIKE '"+var+"%'  OR cargadores.nombre LIKE '%"+var+"%') ORDER BY cargadores.id);";   
+                        "WHERE cargadores.activo = 1 AND (cargadores.id LIKE '"+var+"%'  OR cargadores.nombre LIKE '%"+var+"%') ORDER BY cargadores.id);";   
          //consul = "SELECT id, nombre from ambulantes WHERE id LIKE '"+var+"%'  OR nombre LIKE '"+var+"%' ORDER BY id";
                 modelo.addColumn("Número");
                 modelo.addColumn("Nombre");
@@ -9923,7 +10152,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
                 "INNER JOIN central.rubroscaja\n" +
                 "ON gastos_caja.idRubrocaja = rubroscaja.id AND gastos_caja.idTurno = '"+idTurn+"';";            
         }
-            modelo.addColumn("Folio");
+        modelo.addColumn("Folio");
         modelo.addColumn("Hora");
         modelo.addColumn("Concepto");    
         modelo.addColumn("Importe");    
@@ -9938,7 +10167,7 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
        
         jTabViewGastos.getColumnModel().getColumn(3).setMaxWidth(60);
         jTabViewGastos.getColumnModel().getColumn(3).setMinWidth(60);
-       jTabViewGastos.getColumnModel().getColumn(3).setPreferredWidth(60);
+        jTabViewGastos.getColumnModel().getColumn(3).setPreferredWidth(60);
 
         String datos[] =  new String[4];//tenia 4
         Statement st = null;
@@ -9990,8 +10219,6 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
               BigDecimal totOthsVenta = new BigDecimal(func.totalturno(5, idTurnon));
 return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, func.getSum(totCargRent, func.getSum(totInfrc, totOthsVenta))))).toString();
           }
-
-
       
       public void desplazaCursorTab(){
           int rosN = jTabviewPays.getRowCount();
@@ -10005,8 +10232,64 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
           }
     }
 
- 
+/***************** *
+ *   CODIGO PARA MODIFICACIONES/MEJPORAS DE OCTUBRE *
+ *******************/ 
+        private void agregarOyente() {
+        jCalendar2.getDayChooser().addPropertyChangeListener(
+                new java.beans.PropertyChangeListener() {
+                    @Override
+                    public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                        if (evt.getPropertyName().compareTo("day") == 0 || evt.getPropertyName().compareTo("year") == 0 || evt.getPropertyName().compareTo("month") == 0) {
+                            SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
+                                fech=formatoDeFecha.format(jCalendar2.getDate());
+                                
+    DefaultTableModel modelo = new TModel(contrl.regDiablitosRentados(fech,jComboBox1.getSelectedIndex()), cabRentaDiab);
+jTable1.setModel(modelo);
+jLabel108.setText(fech+" # "+Integer.toString(jTable1.getRowCount()));
+    if(jTable1.getRowCount() > 0){
+        fech = jTable1.getValueAt(0, 0).toString();
+        if(!fech.equals("NO DATA")){
+            jLabel116.setText(totalon(jTable1,5));
+        }else{
+            jLabel116.setText("0.0");
+        }
+    }  
+                        }
+                    }
+                });
+    }
 
+    private String totalon(JTable tablon,int colsum){
+        String sumon ="",dat;
+        double t = 0, p = 0;
+        for (int i = 0; i < tablon.getRowCount(); i++) {
+            p = Double.parseDouble(tablon.getValueAt(i,colsum).toString());
+            t += p;
+        }
+            sumon = Double.toString(t);
+            return sumon;
+    }
+    
+        private String totalonNull(JTable tablon,int colsum){
+            String sumon ="",dat;
+            double t = 0, p = 0;
+            int res =0;
+            Object var = null;
+            for (int i = 0; i < tablon.getRowCount(); i++) {
+                var = tablon.getValueAt(i,colsum);
+                if (var != null && !var.toString().isEmpty()) {
+                    p = Double.parseDouble(var.toString());
+                }else{
+                    p = 0;
+                }
+                t += p;
+            }
+            res = (int) t;
+            sumon = Double.toString(t);
+            return sumon;
+    }
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public datechooser.beans.DateChooserCombo dCCFechFinRentCarg;
     public datechooser.beans.DateChooserCombo dCCFechIniRentCarg;
@@ -10066,6 +10349,7 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JButton jButton43;
     private javax.swing.JButton jButton44;
     private javax.swing.JButton jButton45;
+    private javax.swing.JButton jButton46;
     private javax.swing.JButton jButton47;
     private javax.swing.JButton jButton48;
     private javax.swing.JButton jButton49;
@@ -10082,6 +10366,7 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JComboBox<String> jCBoxFilterBusq;
     private javax.swing.JComboBox<String> jCBoxResguardosOpc;
     private com.toedter.calendar.JCalendar jCalendar1;
+    private com.toedter.calendar.JCalendar jCalendar2;
     private javax.swing.JCheckBox jChecBasura;
     private javax.swing.JCheckBox jChecMantSem;
     private javax.swing.JCheckBox jChecPolicia;
@@ -10095,6 +10380,7 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JComboBox<String> jComBInscripc;
     private javax.swing.JComboBox<String> jCombBOpcBusqGastos;
     private javax.swing.JComboBox<String> jCombBTypeRubros;
+    private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDatChoFechBusqtick;
     private com.toedter.calendar.JDateChooser jDatChoIncripcion;
     private com.toedter.calendar.JDateChooser jDateChoGastos;
@@ -10184,12 +10470,17 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JLabel jLabel104;
     private javax.swing.JLabel jLabel105;
     private javax.swing.JLabel jLabel106;
+    private javax.swing.JLabel jLabel107;
+    private javax.swing.JLabel jLabel108;
     private javax.swing.JLabel jLabel109;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel110;
     private javax.swing.JLabel jLabel111;
     private javax.swing.JLabel jLabel112;
     private javax.swing.JLabel jLabel113;
     private javax.swing.JLabel jLabel114;
+    private javax.swing.JLabel jLabel115;
+    private javax.swing.JLabel jLabel116;
     private javax.swing.JLabel jLabel118;
     private javax.swing.JLabel jLabel119;
     private javax.swing.JLabel jLabel12;
@@ -10289,6 +10580,7 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
+    private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
     private javax.swing.JLabel jLabel88;
@@ -10370,6 +10662,7 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanvIEWcOAST;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
@@ -10399,6 +10692,7 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JTable jTabViewOtherProd;
     private javax.swing.JTable jTabVistaVentaOthers;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTabviewPays;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel jlabIdCargador;
@@ -10406,6 +10700,7 @@ return most = func.getSum(totAreas, func.getSum(totAmbus, func.getSum(totCarg, f
     private javax.swing.JLabel jlabImportMantenim;
     private javax.swing.JLabel jlabImportPolicia;
     private javax.swing.JLabel jlabImportResguard;
+    private javax.swing.JFrame rentasDiab;
     private javax.swing.JTextField txtBasurIdSem;
     private javax.swing.JTextField txtBusGasto;
     private javax.swing.JTextField txtBuscAmbulante;

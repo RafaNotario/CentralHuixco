@@ -4,6 +4,7 @@ package Controller;
 import conexion.ConexionDBOriginal;
 import java.math.BigDecimal;
 import Controller.datesControl;
+import Interfaz.altaAmbulantes;
 import Interfaz.internos.jpanels.internoCaja;
 import java.io.BufferedReader;
 import java.io.File;
@@ -948,6 +949,35 @@ public class funciones {
                     }
            return lapso;
     }//@endgetOtros_catalogId
+       
+            public int getIdRubGastos(){
+            Connection cn = con2.conexion();
+            int idUser= -1;
+            String sql = "";
+            sql = "SELECT id FROM rubroscaja ORDER BY id DESC LIMIT 1";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        idUser=rs.getInt(1);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return idUser;
+    }//@end getIdOthsCatalog
           
           public String[] getAllDataAmb(String id){
             Connection cn = con2.conexion();
@@ -1991,8 +2021,166 @@ public class funciones {
            return idUser;
     }//@end getUltTarifResg
         
+            public String[] getAllDataClis(String id){
+                    Connection cn = con2.conexion();
+                    String[] idUser = new String[8];
+                    String sql = "";
+                    sql = "SELECT * FROM clientes WHERE id = '"+id+"'; ";
+                    Statement st = null;
+                    ResultSet rs= null;
+                    try {
+                        st = cn.createStatement();
+                        rs = st.executeQuery(sql);
+                        rs.beforeFirst();
+                        if(rs.next())
+                        {
+                            if(rs.getRow() > 0){
+                                idUser[0]=rs.getString(1);
+                                idUser[1]=rs.getString(2);
+                                idUser[2]=rs.getString(3);
+                                idUser[3]=rs.getString(4);
+                                idUser[4]=rs.getString(5);
+                                idUser[5]=rs.getString(6);
+                                idUser[6]=rs.getString(7);
+                                idUser[7]=rs.getString(8);
+                            }else{
+                                for (int j = 0; j < idUser.length; j++) {
+                                    idUser[j] = "NO-DATA";
+                                }
+                            }
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }finally{
+                                try {
+                                    if(cn != null) cn.close();
+                                } catch (SQLException ex) {
+                                    System.err.println( ex.getMessage() );    
+                                }
+                            }
+                   return idUser;
+    }//@endgetnombreUsuario
         
+                      //metodo para llenar las tablas deCONFIGURACION > 
+         public String[][] getOthsRub(int opc,String stat,String param) {//if(opc), stat=0||1,param=id&otros_rubros
+            Connection cn = con2.conexion();
+            int i =0,cantFilas=0, cont=1,cantColumnas=0;
+             String[][] mat=null;
+            String consul = "";
+        if(opc == 0){
+            consul = "SELECT * FROM otros_rubros ;";
+        }
+        if(opc == 1){
+            consul = "SELECT otros_catalogo.id,otros_rubros.nombre,otros_catalogo.descrip,otros_catalogo.precio,IF(otros_catalogo.activo = 1,'activo','Inactivo') AS st"
+                    + " FROM otros_catalogo"
+                    + " INNER JOIN otros_rubros"
+                    + " ON otros_rubros.id = otros_catalogo.idrubro";            
+        }
+        if(opc == 2){
+            consul = "SELECT otros_catalogo.id,otros_rubros.nombre,otros_catalogo.descrip,otros_catalogo.precio,IF(otros_catalogo.activo = 1,'activo','Inactivo') AS st"
+                    + " FROM otros_catalogo"
+                    + " INNER JOIN otros_rubros"
+                    + " ON otros_rubros.id = otros_catalogo.idrubro AND otros_rubros.id = '"+param+"' ";            
+        }
+        if(opc == 3){//busca por eventKeyUp
+            consul = "SELECT otros_catalogo.id,otros_rubros.nombre,otros_catalogo.descrip,otros_catalogo.precio,IF(otros_catalogo.activo = 1,'activo','Inactivo') AS st"
+                    + " FROM otros_catalogo"
+                    + " INNER JOIN otros_rubros"
+                    + " ON otros_rubros.id = otros_catalogo.idrubro AND (otros_catalogo.descrip LIKE '"+stat+"%' OR  otros_catalogo.id LIKE '"+stat+"%'); ";       
+        }
+            Statement st = null;
+            ResultSet rs = null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(consul);
+                cantColumnas = rs.getMetaData().getColumnCount();
+               if(rs.last()){//Nos posicionamos al final
+                    cantFilas = rs.getRow();//sacamos la cantidad de filas/registros
+                    rs.beforeFirst();//nos posicionamos antes del inicio (como viene por defecto)
+                }
+                mat = new String[cantFilas][cantColumnas];
+            while(rs.next())
+                {//es necesario el for para llenar dinamicamente la lista, ya que varia el numero de columnas de las tablas
+                      for (int x=1;x<= rs.getMetaData().getColumnCount();x++) {
+                             mat[i][x-1]=rs.getString(x);
+                      }//for
+                       i++;
+                }//whilE
+            } catch (SQLException ex) {
+                Logger.getLogger(internoCaja.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    if (st != null) {st.close(); }
+                    if (cn != null) { cn.close(); }
+                } catch (SQLException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }//finally
+           if (cantFilas == 0){
+                mat=null;
+                mat = new String[1][cantColumnas];
+                for (int j = 0; j < mat[0].length; j++) {
+                     mat[0][j]="NO DATA";
+                }
+           }
+        return mat;
+        }//Llena getResgVehiculo
+          
+                               //metodo para llenar las tablas deCONFIGURACION > Rubros Gastos
+         public String[][] getRubGastos(int opc,String stat,String param) {//if(opc), stat=0||1,param=id&otros_rubros
+            Connection cn = con2.conexion();
+            int i =0,cantFilas=0, cont=1,cantColumnas=0;
+            String[][] mat=null;
+            String consul = "";
+
+            if(opc == 0){
+                consul = "SELECT id, concepto FROM rubroscaja ;";
+            }
+
+            Statement st = null;
+            ResultSet rs = null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(consul);
+                cantColumnas = rs.getMetaData().getColumnCount();
+               if(rs.last()){//Nos posicionamos al final
+                    cantFilas = rs.getRow();//sacamos la cantidad de filas/registros
+                    rs.beforeFirst();//nos posicionamos antes del inicio (como viene por defecto)
+                }
+                mat = new String[cantFilas][cantColumnas];
+            while(rs.next())
+                {//es necesario el for para llenar dinamicamente la lista, ya que varia el numero de columnas de las tablas
+                      for (int x=1;x<= rs.getMetaData().getColumnCount();x++) {
+                             mat[i][x-1]=rs.getString(x);
+                      }//for
+                       i++;
+                }//whilE
+            } catch (SQLException ex) {
+                Logger.getLogger(internoCaja.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    if (st != null) {st.close(); }
+                    if (cn != null) { cn.close(); }
+                } catch (SQLException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }//finally
+           if (cantFilas == 0){
+                mat=null;
+                mat = new String[1][cantColumnas];
+                for (int j = 0; j < mat[0].length; j++) {
+                     mat[0][j]="NO DATA";
+                }
+           }
+        return mat;
+        }//Llena getResgVehiculo
+         
        public static void main(String args[]){
+           funciones aA =  new funciones();
+           String[] var = aA.getAllDataClis("1");
+           for (int i = 0; i < var.length; i++) {
+           //    System.out.println("Valores"+var[i]);
+           }
        }
            
 }

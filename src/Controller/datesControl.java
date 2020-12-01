@@ -390,7 +390,7 @@ public String getsumaFecha(JDateChooser jd,int monts){
         
 //        System.out.println("Semana del año es: "+dC.semanYear("2020/04/13",0)+"\t dia de la semana: "+dC.semanYear("2020/04/13",1));
           
-    //    dC.jLocalFechas("2020/04/13");
+     System.out.println(dC.getSumFechDay("2020/04/1",-1));
         System.out.println("PRUEBAS DE STACKOVERFLOW");
         
         //System.out.println("La hora es : "+dC.getsumaFecha("2020/06/05",-1));

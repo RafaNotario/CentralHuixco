@@ -113,10 +113,8 @@ void imprim() throws JRException{
                 parametro.put("nombAtendio",datas[3]);
                 parametro.put("fechHorTicAmb",datas[6]);
                 parametro.put("numAmbu",datas[4]);
-                
                 reporte = (JasperReport) JRLoader.loadObjectFromFile(var);
                 JasperPrint jp = JasperFillManager.fillReport(reporte, parametro, cn);
-
                 //linea para mandar a imprimir
                 if(print){
                     JasperPrintManager.printReport(jp, false);
@@ -126,7 +124,6 @@ void imprim() throws JRException{
                    jv.setVisible(true);
                    jv.setTitle("Central Huixcolotla \t Pago ambulantes.");
                 }
-            
             }  catch (JRException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
@@ -207,7 +204,6 @@ void imprim() throws JRException{
                    jv.setVisible(true);
                    jv.setTitle("Central Huixcolotla \t Pago otros rubros.");
                 }
-            
             }  catch (JRException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
@@ -309,11 +305,9 @@ void imprim() throws JRException{
                 }else{
                 net.sf.jasperreports.swing.JRViewer jv = new net.sf.jasperreports.swing.JRViewer(jp);
                 JFrame  jf = new JFrame();
-                
                 jf.getContentPane().setLayout(new BorderLayout());//FlowLayout()
                 jf.getContentPane().add(jv,BorderLayout.CENTER);
 //           jf.getContentPane().setSize();
-
                     jf.add(b1,BorderLayout.SOUTH);
                    b1.setBounds(0,0, 97, 50);
                    b1.setBackground(Color.CYAN);
@@ -324,7 +318,6 @@ void imprim() throws JRException{
                     jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     jf.setTitle("CORTE DE CAJA");
                 }
-           
             }  catch (JRException ex) {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
@@ -516,11 +509,8 @@ void imprim() throws JRException{
                     String timeDate = new java.sql.Timestamp(date.getTime()).toString();
                     contrR.f5CancelTypesAll("turnos", "ffinal", Integer.toString(idTurno), timeDate);
                     contrR.f5CancelTypesAll("usuarios", "turno", idUS, "0");
-                    
                     String[] turns = funcRep.getTurnoData(idTurno);
-                    
                      String[] paramDats = new String[7];
-        
         paramDats[0] = infoUser[1];
         paramDats[1] = turns[3];
         paramDats[2] = turns[4];
@@ -531,9 +521,7 @@ void imprim() throws JRException{
         BigDecimal salInic = new BigDecimal(turns[2]);
         BigDecimal Cobros = new BigDecimal(paramDats[4]);
         BigDecimal gastosCaj = new BigDecimal(paramDats[5]);
-        
         paramDats[6] = funcRep.getDifference(funcRep.getSum(Cobros, salInic), gastosCaj).toString();
-        
         imprim80MM_corteCaja(infoUser[6],true,paramDats);
                     JOptionPane.showMessageDialog(null, "turno cerrado correctamente");
                     System.exit(0);
