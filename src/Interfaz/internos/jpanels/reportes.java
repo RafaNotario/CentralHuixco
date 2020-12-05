@@ -46,8 +46,8 @@ public class reportes extends javax.swing.JPanel {
     String[] arrAreas = {"Mant. semanal","Basura semanal","Policia semanal","Resguardo semanal"};//2,3,4,5
     String[] arrAmbus = {"Semana Ambulantes","Resguardo Ambulantes","Inscripcion Ambulantes"};// 6,7,8,9
     String[] arrCargad = {"Semana cargadores","Inscripción Anual","Renta diaria de diablo"};// 8,9,11,12
-    String[] arrOtros = {"VARIOS","FERTILIZANTE","RENTA DE ESPACIOS","EXPLANADA","BAÑOS","CREDENCIALES"};// 1,2,3,4,5,6 otros_rubros
-    
+    String[] arrOtros = func.getOthsRubs();
+    //{"VARIOS","FERTILIZANTE","RENTA DE ESPACIOS","EXPLANADA","BAÑOS","CREDENCIALES"};// 1,2,3,4,5,6 otros_rubros
     List<String> idCajeros = new ArrayList<String>();
     List<String> idGastosEg = new ArrayList<String>();
 
@@ -56,7 +56,7 @@ public class reportes extends javax.swing.JPanel {
     String buscarTurn ="0";
     public reportes() {
         initComponents();
-        
+        System.out.println(arrOtros.length);
         llenacombCajeros();//llenamos el combo con nombre de cajeros 
         jCalendar1.setMaxSelectableDate(datCtrl.cargafecha());
         llenacombEgresos();

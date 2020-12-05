@@ -2132,11 +2132,9 @@ public class funciones {
             int i =0,cantFilas=0, cont=1,cantColumnas=0;
             String[][] mat=null;
             String consul = "";
-
             if(opc == 0){
                 consul = "SELECT id, concepto FROM rubroscaja ;";
             }
-
             Statement st = null;
             ResultSet rs = null;
             try {
@@ -2175,12 +2173,93 @@ public class funciones {
         return mat;
         }//Llena getResgVehiculo
          
+         
+    public String[] getOthsRubs(){
+            Connection cn = con2.conexion();
+             int i =0,cantFilas=0, cont=1,cantColumnas=0;
+             String[] idUser = null;
+            String sql = "";
+            sql = "SELECT nombre FROM otros_rubros;";
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+               if(rs.last()){//Nos posicionamos al final
+                    cantFilas = rs.getRow();//sacamos la cantidad de filas/registros
+                    rs.beforeFirst();//nos posicionamos antes del inicio (como viene por defecto)
+                }
+                 idUser = new String[cantFilas];
+                while(rs.next() && i < cantFilas)
+                {
+                        idUser[i] = rs.getString(1);
+                     i++;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+            return idUser;
+    }//@endgetnombreUsuario
+         
+         //valida si existe ese id en alguna tabla Aun no se usa
+         public boolean validaMembresiaInTick(int opc,String idTick,String rub){
+            Connection cn = con2.conexion();
+            boolean existe =false;
+            int num=0,i=1;
+            String sql = "";
+            switch(opc){
+                case 0://cargador
+                    sql = "SELECT 1\n" +
+                            "FROM pagos_carg\n" +
+                            "INNER JOIN pagos_cargdet\n" +
+                            "ON pagos_carg.id = pagos_cargdet.idTicket  AND pagos_carg.id = '"+idTick+"'\n" +
+                            "AND pagos_cargdet.idRubropago = '"+rub+"'\n" +
+                            ";";
+                break;
+                case 1://ambulante
+                    sql = "SELECT 1\n" +
+                             "FROM pagos_amb\n"
+                            + "INNER JOIN pagos_ambdet\n"
+                            + "ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_amb.id = '"+idTick+"'\n"
+                            + "AND pagos_ambdet.idRubropago = '"+rub+"';";
+                break;
+            };
+            Statement st = null;
+            ResultSet rs= null;
+            try {
+                st = cn.createStatement();
+                rs = st.executeQuery(sql);
+                rs.beforeFirst();
+                if(rs.next())
+                {
+                    if(rs.getRow() > 0){
+                        existe =true;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(funciones.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                        try {
+                            if(cn != null) cn.close();
+                        } catch (SQLException ex) {
+                            System.err.println( ex.getMessage() );    
+                        }
+                    }
+           return existe;
+    }
+    
        public static void main(String args[]){
            funciones aA =  new funciones();
-           String[] var = aA.getAllDataClis("1");
-           for (int i = 0; i < var.length; i++) {
-           //    System.out.println("Valores"+var[i]);
-           }
+           String[] var = aA.getOthsRubs();
+
+               System.out.println("Valores "+aA.validaMembresiaInTick(0, "108686", "11"));
+
        }
            
 }

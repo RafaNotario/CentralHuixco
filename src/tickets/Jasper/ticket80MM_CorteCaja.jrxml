@@ -11,8 +11,23 @@
 	<parameter name="totCobros" class="java.lang.String"/>
 	<parameter name="totGastos" class="java.lang.String"/>
 	<parameter name="totCajaAll" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\central\\src\\tickets\\Jasper\\"]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[(SELECT count(pagos_areasdet.idTicket) AS numera,rubrospago.descripcion AS descrip,sum(pagos_areasdet.importe) AS totl
+		<![CDATA[-- corte de pago_amb
+(SELECT count(pagos_ambdet.idRubropago) AS numera,rubrospago.descripcion AS descrip,sum(pagos_ambdet.importe - pagos_ambdet.descuento) AS totl
+FROM pagos_amb
+INNER JOIN pagos_ambdet
+ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_amb.idCancelacion = 0 AND pagos_amb.idTurno = $P{fechCorte}
+INNER JOIN rubrospago
+ON pagos_ambdet.idRubropago = rubrospago.id
+ GROUP BY pagos_ambdet.idRubropago)
+UNION
+-- qwery para mostrar pagos de areas
+(SELECT 0,'-------AREAS--------',0)
+UNION
+(SELECT count(pagos_areasdet.idTicket),rubrospago.descripcion,sum(pagos_areasdet.importe)
 FROM pagos_areas
 INNER JOIN pagos_areasdet
 ON pagos_areas.id = pagos_areasdet.idTicket AND pagos_areas.idCancelacion = 0 AND pagos_areas.idTurno = $P{fechCorte}
@@ -20,33 +35,6 @@ INNER JOIN rubrospago
 ON pagos_areasdet.idRubroPago = rubrospago.id
 GROUP BY pagos_areasdet.idRubroPago)
 UNION
--- corte de pago_amb
-(SELECT 0,'---------ABULANTES---------',0)
-union
-(SELECT count(pagos_ambdet.idTicket) AS numera,rubrospago.descripcion,sum(pagos_ambdet.importe - pagos_ambdet.descuento) AS totl
-FROM pagos_amb
-INNER JOIN pagos_ambdet
-ON pagos_amb.id = pagos_ambdet.idTicket AND pagos_amb.idCancelacion = 0 AND pagos_amb.idTurno = $P{fechCorte}
-INNER JOIN rubrospago
-ON pagos_ambdet.idRubropago = rubrospago.id
-GROUP BY pagos_ambdet.idRubropago) 
-UNION 
--- qwery para mostrar pagos de cargadores
-(SELECT 0,'---------CARGADORES---------',0)
-UNION
-(SELECT count(pagos_cargdet.idTicket) AS numCarg,rubrospago.descripcion,sum(pagos_cargdet.importe - pagos_cargdet.descuento) AS totCarg
-FROM pagos_carg
-INNER JOIN pagos_cargdet
-ON pagos_carg.id = pagos_cargdet.idTicket AND pagos_carg.idCancelacion = 0 AND pagos_carg.idTurno = $P{fechCorte}
-INNER JOIN rubrospago
-ON pagos_cargdet.idRubropago = rubrospago.id
-GROUP BY pagos_cargdet.idRubropago)
-UNION -- qwery para mostrar cobro de rentas diablo cargador
-(SELECT count(pagos_cargrenta.id) AS numCargR, rubrospago.descripcion,sum(pagos_cargrenta.importe) AS totCargR
-FROM pagos_cargrenta
-INNER JOIN rubrospago
-ON pagos_cargrenta.idRubropago = rubrospago.id AND pagos_cargrenta.idCancelacion = 0 AND pagos_cargrenta.idTurno = $P{fechCorte}
-)UNION
  -- qwery para mostrar cobros infracciones
 (SELECT 0,'-------INFRACCIONES-------',0)
 UNION 
@@ -80,7 +68,7 @@ WHERE idTurno = $P{fechCorte})
 	<field name="descrip" class="java.lang.String"/>
 	<field name="totl" class="java.math.BigDecimal"/>
 	<title>
-		<band height="226">
+		<band height="212">
 			<image scaleImage="FillFrame">
 				<reportElement x="20" y="0" width="165" height="109" uuid="cc72f805-c20d-44d2-9148-17a12891ca0d"/>
 				<imageExpression><![CDATA["C:\\central\\src\\images\\logo80MM.jpg"]]></imageExpression>
@@ -167,13 +155,6 @@ WHERE idTurno = $P{fechCorte})
 					<pen lineStyle="Dotted" lineColor="#999999"/>
 				</graphicElement>
 			</line>
-			<staticText>
-				<reportElement x="20" y="211" width="155" height="12" uuid="1ba00aff-f078-48b5-afdc-43db1ed31cf9"/>
-				<textElement textAlignment="Center">
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[----PAGOS DE AREAS(GIROS)----]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="59" y="173" width="145" height="12" uuid="58821c5f-bd35-4361-8eb5-1547b04fc9e4"/>
 				<textElement>
@@ -190,10 +171,22 @@ WHERE idTurno = $P{fechCorte})
 			</staticText>
 		</band>
 	</title>
+	<pageHeader>
+		<band height="54">
+			<subreport>
+				<reportElement x="0" y="0" width="204" height="52" uuid="9c18def9-24b9-4b5a-93a0-f80db6faf9b9"/>
+				<subreportParameter name="parameter1">
+					<subreportParameterExpression><![CDATA[$P{fechCorte}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subReporteCarg.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</pageHeader>
 	<detail>
-		<band height="15" splitType="Immediate">
+		<band height="16" splitType="Immediate">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="166" y="0" width="38" height="14" uuid="44867bc4-218f-466c-bdc1-03811223a379">
+				<reportElement x="166" y="0" width="38" height="15" uuid="44867bc4-218f-466c-bdc1-03811223a379">
 					<printWhenExpression><![CDATA[!$F{totl}.toString().equals("0.00")]]></printWhenExpression>
 				</reportElement>
 				<textElement>
@@ -202,7 +195,7 @@ WHERE idTurno = $P{fechCorte})
 				<textFieldExpression><![CDATA[$F{totl}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
-				<reportElement stretchType="RelativeToTallestObject" x="20" y="0" width="138" height="15" isPrintWhenDetailOverflows="true" uuid="9697b157-efd2-4c20-bcfa-5d4de5461361"/>
+				<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="20" y="0" width="138" height="15" isPrintWhenDetailOverflows="true" uuid="9697b157-efd2-4c20-bcfa-5d4de5461361"/>
 				<textElement>
 					<font size="9"/>
 					<paragraph tabStopWidth="100"/>
@@ -210,7 +203,7 @@ WHERE idTurno = $P{fechCorte})
 				<textFieldExpression><![CDATA[$F{descrip}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="0" y="0" width="20" height="14" uuid="db402ed8-12b7-4553-b5fc-45f3ad1ecd11">
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="20" height="15" uuid="db402ed8-12b7-4553-b5fc-45f3ad1ecd11">
 					<printWhenExpression><![CDATA[!$F{numera}.toString().equals("0")]]></printWhenExpression>
 				</reportElement>
 				<textElement>

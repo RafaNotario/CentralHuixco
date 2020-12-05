@@ -137,7 +137,6 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
         } );
 
  }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -2070,13 +2069,13 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanInterncoborstivkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                     .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addGap(210, 210, 210))
         );
 
         jTabbedPane1.addTab("Cobros", jPanInterncoborstivk);
@@ -2183,9 +2182,9 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(5, 5, 5))
             .addGroup(jPanInternGastosLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanInternGastosLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel81, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCombBOpcBusqGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2211,14 +2210,14 @@ jCmBxgetAreas.getEditor().getEditorComponent().addKeyListener(
                     .addComponent(jCombBOpcBusqGastos)
                     .addComponent(jLabel81, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanInternGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addGap(210, 210, 210))
         );
 
         jTabbedPane1.addTab("Gastos", jPanInternGastos);
@@ -4305,6 +4304,11 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
     });
 
     txtImportOths.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    txtImportOths.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            txtImportOthsKeyReleased(evt);
+        }
+    });
 
     javax.swing.GroupLayout jPanvIEWcOASTLayout = new javax.swing.GroupLayout(jPanvIEWcOAST);
     jPanvIEWcOAST.setLayout(jPanvIEWcOASTLayout);
@@ -4644,6 +4648,9 @@ dCCFechFinRentCarg.addCommitListener(new datechooser.events.CommitListener() {
     jTabVistaVentaOthers.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyPressed(java.awt.event.KeyEvent evt) {
             jTabVistaVentaOthersKeyPressed(evt);
+        }
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jTabVistaVentaOthersKeyReleased(evt);
         }
     });
     jScrollPane7.setViewportView(jTabVistaVentaOthers);
@@ -6129,8 +6136,6 @@ txtResultAmbu.setText(aux);
             auxD = func.percentage(tari, condo).toString();
         jLabImportRentDiab.setText(func.getDifference(tari,new BigDecimal(auxD)).toString());
         txtTotalCarg.setText(jLabImportRentDiab.getText());
-        
-
     }//GEN-LAST:event_jButton41ActionPerformed
 
     private void jLaFechFinMantenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLaFechFinMantenMousePressed
@@ -7655,11 +7660,18 @@ if(!dto.isEmpty() && !toI.isEmpty()){
             jPanTableBusqView2.setVisible(true);
             jPanDataambView3.setVisible(false);
             
-            if(oprime == KeyEvent.VK_ENTER){
-             jTabVariosView.requestFocus(true);
+            if (oprime == KeyEvent.VK_ENTER) {
+                jTabVariosView.requestFocus(true);
+            }
+
+            if (oprime == KeyEvent.VK_F5) {
+                jButton49.doClick();
             }
         }else{
             jPanTableBusqView2.setVisible(false);
+            if (oprime == KeyEvent.VK_F5) {
+                jButton49.doClick();
+            }
         }
         
     }//GEN-LAST:event_txtBusqOtrosKeyReleased
@@ -7698,8 +7710,14 @@ if(!dto.isEmpty() && !toI.isEmpty()){
             if(oprime == KeyEvent.VK_ENTER){
              jTabViewOtherProd.requestFocus(true);
             }
+            if (oprime == KeyEvent.VK_F5) {
+                jButton49.doClick();
+            }
         }else{
             jPanTableBusqView3.setVisible(false);
+            if (oprime == KeyEvent.VK_F5) {
+                jButton49.doClick();
+            }
         }
     }//GEN-LAST:event_txtBusqConceptKeyReleased
 
@@ -7727,7 +7745,6 @@ if(!dto.isEmpty() && !toI.isEmpty()){
     }//GEN-LAST:event_jTabViewOtherProdKeyPressed
 
     private void txtCantidadOthsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadOthsKeyReleased
-  
        String cant = txtCantidadOths.getText(),
                 cos = txtPreciooths.getText();
                   int oprime = evt.getKeyCode();
@@ -7739,10 +7756,12 @@ if(!dto.isEmpty() && !toI.isEmpty()){
             BigDecimal amountOne = new BigDecimal(cant);//monto a cobrar
             BigDecimal amountTwo = new BigDecimal(cos);//cantidad recivida
             txtImportOths.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
-            
             if(oprime == KeyEvent.VK_ENTER){
                 jButton34.doClick();
-            }       
+            }   
+            if (oprime == KeyEvent.VK_F5) {
+                jButton49.requestFocus(true);
+            }
         }
     }//GEN-LAST:event_txtCantidadOthsKeyReleased
 
@@ -7777,9 +7796,9 @@ if(!dto.isEmpty() && !toI.isEmpty()){
             dtm.addRow(new Object[]{codPro, cantidad, descrip, costUnit, costProdtot});
             jTabVistaVentaOthers.setModel(dtm);
             txtTotOthers.setText(func.getSum(totAl, totProd).toString());
-            
             limpiaConcept();
             jButton34.setEnabled(false);
+            txtBusqConcept.requestFocus(true);
         }//else vacio
 
     }//GEN-LAST:event_jButton34ActionPerformed
@@ -7789,7 +7808,6 @@ if(!dto.isEmpty() && !toI.isEmpty()){
             jDialresProdOther.setVisible(true);
             jDialresProdOther.setEnabled(true);
             llenaCBRubrosOths();
-            
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jTabVistaVentaOthersKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTabVistaVentaOthersKeyPressed
@@ -7798,19 +7816,16 @@ if(!dto.isEmpty() && !toI.isEmpty()){
                 selec = jTabVistaVentaOthers.getSelectedRow();
 //obtenemos modelo de tablaVista Compra a Mayorista
 if(selec > -1){     
-    
         if(oprime == KeyEvent.VK_DELETE){
             DefaultTableModel dtmAux = (DefaultTableModel) jTabVistaVentaOthers.getModel();
                String importelim = jTabVistaVentaOthers.getValueAt(selec, 4).toString(),
                totAllA = txtTotOthers.getText();
-               
                BigDecimal totAl = new BigDecimal(totAllA);
                BigDecimal totProd = new BigDecimal(importelim);
                txtTotOthers.setText(func.getDifference(totAl, totProd).toString());
-   
             dtmAux.removeRow(selec);
         }
-        
+
 }else{
     JOptionPane.showMessageDialog(null, "Debe existir almenos un poducto agregado");
 }
@@ -7864,7 +7879,11 @@ if(selec > -1){
             txtImportOths.setText(func.multiplicaAmount(amountOne, amountTwo).toString());
             if(oprime == KeyEvent.VK_ENTER){
                 jButton34.doClick();
-            }       
+            }    
+            
+            if (oprime == KeyEvent.VK_F5) {
+                jButton49.requestFocus(true);
+            }
         }
     }//GEN-LAST:event_txtPrecioothsKeyReleased
 
@@ -8050,21 +8069,32 @@ if(selec > -1){
                     }
 
                     if(concepto.equals("Pago Ambulantes")){
-                        contrl.guardInCancelaciones(arregCan);
+                        contrl.guardInCancelaciones(arregCan);//crea cancelacion
                         contrl.f5CancelTypesAll("pagos_amb","idCancelacion",mostTic,arregCan[0]);
                                 // BLOQUE PARA ACTUALIZAR  ambulantes.ultimaSem
                         String idambB = func.getidUserConTicket("idAmb", "pagos_amb", mostTic);
-                        String[] arR = contrl.regpagosambdet(0,Integer.parseInt(contrl.getpagosAmbulante(0,idambB, "6")), 6);
-                        contrl.f5CancelTypesAll("ambulantes","ultimaSem",idambB,arR[3]);
+                         if(func.validaMembresiaInTick(1, mostTic, "6")){//Semana ambulante
+                            String[] arR = contrl.regpagosambdet(0,Integer.parseInt(contrl.getpagosAmbulante(0,idambB, "6")), 6);
+                            contrl.f5CancelTypesAll("ambulantes","ultimaSem",idambB,arR[3]);
+                         }
+                        if (func.validaMembresiaInTick(1, mostTic, "8") || func.validaMembresiaInTick(1, mostTic, "9") || func.validaMembresiaInTick(1, mostTic, "10")) {
+                            contrl.f5CancelTypesAll("ambulantes","vigMembresia",idambB,null);
+                        }
                     }
 
                     if(concepto.equals("Pago Cargadores")){     
-                        contrl.guardInCancelaciones(arregCan);
-                        contrl.f5CancelTypesAll("pagos_carg","idCancelacion",mostTic,arregCan[0]);
+                       contrl.guardInCancelaciones(arregCan);//crea cancelacion
+contrl.f5CancelTypesAll("pagos_carg","idCancelacion",mostTic,arregCan[0]);//F5 idCancel = mostTic 
                         //bloque para actualizar cargadores.ultimaSem
-                    String idcargs = func.getidUserConTicket("idcarg","pagos_carg",mostTic);//get idcarg de ticket seleccionado
-                    String[] arRC = contrl.regpagosambdet(1,Integer.parseInt(contrl.getpagosAmbulante(1,idcargs, "11")), 11);
-                    contrl.f5CancelTypesAll("cargadores","ultimaSem",idcargs,arRC[3]);
+          String idcargs = func.getidUserConTicket("idcarg","pagos_carg",mostTic);//get idcarg de ticket seleccionado
+                    if(func.validaMembresiaInTick(0, mostTic, "11")){
+                        String[] arRC = contrl.regpagosambdet(1,Integer.parseInt(contrl.getpagosAmbulante(1,idcargs, "11")), 11);
+                        contrl.f5CancelTypesAll("cargadores","ultimaSem",idcargs,arRC[3]);
+                    }
+//actualizar vig membresia saber si tiene pago de membresia en ese ticket para 
+                    if(func.validaMembresiaInTick(0, mostTic, "8") || func.validaMembresiaInTick(0, mostTic, "9") || func.validaMembresiaInTick(0, mostTic, "10")){
+                        contrl.f5CancelTypesAll("cargadores","vigMembresia",idcargs,null);
+                    }
                     }
 
                     if(concepto.equals("Pago Infraccion")){   
@@ -8774,6 +8804,18 @@ txtTotalCarg.setText(jLabImportRentDiab.getText());
             jButton45.doClick();
         }
     }//GEN-LAST:event_jChecResguardoKeyReleased
+
+    private void txtImportOthsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImportOthsKeyReleased
+              if (evt.getKeyCode() == KeyEvent.VK_F5) {
+                jButton49.requestFocus(true);
+            }
+    }//GEN-LAST:event_txtImportOthsKeyReleased
+
+    private void jTabVistaVentaOthersKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTabVistaVentaOthersKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_F5) {
+            jButton49.doClick();
+        }
+    }//GEN-LAST:event_jTabVistaVentaOthersKeyReleased
 
     //metodo para llenar combo de areas
         private void llenacombogetAreas() {
@@ -10196,9 +10238,9 @@ consul = "SELECT folio, date_format(fecha,'%d - %m - %Y') AS fech,documento,vehi
     }    //@end mostrarGastosDia
       
       public void tamColViwePays(){
-        jTabviewPays.getColumnModel().getColumn(0).setMaxWidth(55);
+        jTabviewPays.getColumnModel().getColumn(0).setMaxWidth(115);
         jTabviewPays.getColumnModel().getColumn(0).setMinWidth(55);
-        jTabviewPays.getColumnModel().getColumn(0).setPreferredWidth(55);
+        jTabviewPays.getColumnModel().getColumn(0).setPreferredWidth(75);
        
         jTabviewPays.getColumnModel().getColumn(1).setMaxWidth(60);
         jTabviewPays.getColumnModel().getColumn(1).setMinWidth(60);
